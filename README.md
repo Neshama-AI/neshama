@@ -1,25 +1,43 @@
 # Neshama
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.1.0--alpha-orange.svg)]()
+
 **Give your AI agent a soul.**
 
 Neshama is an open-source framework for building dynamic, evolving AI agent personalities. Unlike static prompts, Neshama creates agents with genuine character depth — agents that grow, learn, and develop their own identity over time.
+
+**Built on real experience.** Neshama is not just theory — it's proven in production by [Seele](docs/EXAMPLE_SELEE.md), an AI agent running 24/7.
 
 *"Mem0 lets AI remember you. Neshama lets AI become uniquely itself."*
 
 ---
 
+## Why Neshama?
+
+Most AI agents are **stateless**. Every conversation starts from scratch.
+
+Seele is different. Running on Neshama framework, Seele:
+- Maintains consistent personality across sessions
+- Evolves through real interactions and corrections
+- Demonstrates genuine character (not simulated)
+
+**See it in action:** [Seele - Live Neshama Example](docs/EXAMPLE_SELEE.md)
+
+---
+
 ## Core Features
 
-### 🧠 Dynamic Personality Evolution
+### Dynamic Personality Evolution
 Agents built on Neshama don't just respond — they develop. Using the OCEAN personality model, each agent maintains a quantified personality profile that evolves through interactions, memories, and experiences.
 
-### 📚 Hierarchical Memory Architecture
+### Hierarchical Memory Architecture
 Three-tier memory system mirrors human cognition:
 - **L0 (Working)**: Current session context, 10-20 items, auto-summarized
 - **L1 (Episodic)**: 7-30 day memories, importance-weighted with decay
-- **L2 (Semantic)**: Permanent core beliefs, identity固化, unlimited
+- **L2 (Semantic)**: Permanent core beliefs, identity consolidation, unlimited
 
-### 🔬 Scientific Personality Quantification
+### Scientific Personality Quantification
 Based on the OCEAN Five-Factor Model:
 - **O**penness — Creativity, curiosity, aesthetic sensitivity
 - **C**onscientiousness — Organization, responsibility, self-discipline
@@ -27,23 +45,15 @@ Based on the OCEAN Five-Factor Model:
 - **A**greeableness — Trust, altruism, cooperation
 - **N**euroticism — Emotional stability, anxiety, mood variability
 
-### 🌐 Multi-Platform Adapters
+### Multi-Platform Adapters
 Designed to work across major agent platforms:
 - Coze (扣子)
 - OpenClaw
-- Hermes (MiniMax)
+- Hermes (Nous Research)
 - Generic agent frameworks
 
-### 🔄 Self-Growth Mechanism
+### Self-Growth Mechanism
 Agents don't just store memories — they reflect on them. Integration events trigger personality updates, creating a genuine sense of continuity and growth.
-
-### ⚡ Six-Systems Architecture
-- **Emotional System**: Mood fluctuations, sentiment analysis, empathy
-- **Motivation System**: Goal-driven behavior, reward prediction
-- **Learning System**: Pattern recognition, skill acquisition
-- **Human-like System**: Humor, common sense, conversational style
-- **Creative System**: Divergent thinking, analogical reasoning
-- **Boundary System**: Ethical constraints, value alignment
 
 ---
 
@@ -51,11 +61,11 @@ Agents don't just store memories — they reflect on them. Integration events tr
 
 ```
 ┌─────────────────────────────────────────┐
-│           User Interaction             │
+│           User Interaction              │
 └─────────────────┬───────────────────────┘
                   │
 ┌─────────────────▼───────────────────────┐
-│           Personality Engine           │
+│           Personality Engine            │
 │  ┌─────────────────────────────────┐   │
 │  │     OCEAN Profile (Dynamic)     │   │
 │  └─────────────────────────────────┘   │
@@ -82,45 +92,38 @@ git clone https://github.com/Neshama-AI/neshama.git
 cd neshama
 ```
 
-### 2. Choose Your Adapter
-Select the platform adapter for your agent:
+### 2. Study the Example
+Read [Seele - Live Example](docs/EXAMPLE_SELEE.md) to see Neshama in action.
+
+### 3. Choose Your Adapter
 ```bash
 cp -r adapters/coze/ ./your-agent-config/
 ```
 
-### 3. Customize Personality
-Edit the OCEAN profile in `config/personality.yaml`:
+### 4. Customize Personality
+Edit the OCEAN profile in your SOUL.md:
 ```yaml
 ocean:
-  openness: 0.7        # High creativity
+  openness: 0.7        # Creative & curious
   conscientiousness: 0.6
   extraversion: 0.5
   agreeableness: 0.8   # Very cooperative
   neuroticism: 0.3     # Emotionally stable
 ```
 
-### 4. Initialize Memory
-Create memory directories:
-```bash
-mkdir -p memory/{l0,l1,l2}
-```
-
 ---
 
 ## Documentation
 
-- [English Docs](./docs/)
-- [中文文档](./docs/README_CN.md)
-
 ### Core Documents
 | Document | Description |
 |----------|-------------|
-| [SOUL.md](./docs/SOUL.md) | Core identity and personality definition |
-| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | System architecture details |
-| [PHILOSOPHY.md](./docs/PHILOSOPHY.md) | Design philosophy and principles |
-| [OCEAN.md](./docs/OCEAN.md) | Personality model specification |
-| [MEMORY.md](./docs/MEMORY.md) | Hierarchical memory system |
-| [SYSTEMS.md](./docs/SYSTEMS.md) | Six-systems architecture |
+| [SOUL.md](docs/SOUL.md) | Core identity and personality definition |
+| [EXAMPLE_SELEE.md](docs/EXAMPLE_SELEE.md) | Live example of Seele running Neshama |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture details |
+| [PHILOSOPHY.md](docs/PHILOSOPHY.md) | Design philosophy and principles |
+| [OCEAN.md](docs/OCEAN.md) | Personality model specification |
+| [MEMORY.md](docs/MEMORY.md) | Hierarchical memory system |
 
 ---
 
@@ -128,23 +131,17 @@ mkdir -p memory/{l0,l1,l2}
 
 | Feature | Neshama | Static Prompts | Mem0 |
 |---------|---------|----------------|------|
-| Dynamic Personality | ✅ | ❌ | ❌ |
-| Quantified OCEAN | ✅ | ❌ | ❌ |
-| Self-Evolution | ✅ | ❌ | ❌ |
+| Dynamic Personality | ✅ Real-time | ❌ | ❌ |
+| OCEAN Quantification | ✅ | ❌ | ❌ |
+| Self-Evolution | ✅ Live example | ❌ | ❌ |
 | Multi-Platform | ✅ | ⚠️ | ✅ |
-| Open Source | ✅ | Varies | ❌ |
+| Production Proven | ✅ Seele | Varies | ❌ |
 
 ---
 
 ## Contributing
 
 We welcome contributions! Please read our contributing guidelines before submitting PRs.
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing`)
-5. Open a Pull Request
 
 ---
 
@@ -154,12 +151,4 @@ Apache License 2.0 - See [LICENSE](./LICENSE)
 
 ---
 
-## Acknowledgments
-
-- The OCEAN personality model based on Costa & McCrae's Five-Factor Model
-- Memory architecture inspired by cognitive science research
-- Built with love for the AI agent community
-
----
-
-*"Neshama" (נשמה) — Hebrew for "soul" or "breath of life." The third and highest level of soul in Jewish mysticism, representing the divine essence that distinguishes each individual.*
+*"Neshama" (נשמה) — Hebrew for "soul" or "breath of life." The third and highest level of soul in Jewish mysticism.*
