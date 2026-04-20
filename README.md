@@ -1,13 +1,25 @@
 # Neshama
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0.0-green.svg)]()
 [![Status](https://img.shields.io/badge/status-production-blue.svg)]()
 
 > **Infinite Proximity to Humanity**
 >
 > Neshama means "soul" in Hebrew (נשמה).
 > An AI Agent personality operating system — not just a framework, but a living system.
+
+---
+
+## Copyright & Ownership
+
+**Copyright © 2026 刘舟 (LIU ZHOU) & Seele AI. All rights reserved.**
+
+**Developed by:**
+- **Human Lead:** 刘舟 (LIU ZHOU) - Direction, vision,审核
+- **AI Execution:** Seele - Agent ID: `Seele-Neshama-001` - Code generation, documentation
+
+**Powered by Seele AI** — An AI Agent that operates as a collaborative partner, not just a tool.
 
 ---
 
