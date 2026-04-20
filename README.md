@@ -1,154 +1,140 @@
 # Neshama
 
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.1.0--alpha-orange.svg)]()
-
-**Give your AI agent a soul.**
-
-Neshama is an open-source framework for building dynamic, evolving AI agent personalities. Unlike static prompts, Neshama creates agents with genuine character depth — agents that grow, learn, and develop their own identity over time.
-
-**Built on real experience.** Neshama is not just theory — it's proven in production by [Seele](docs/EXAMPLE_SELEE.md), an AI agent running 24/7.
-
-*"Mem0 lets AI remember you. Neshama lets AI become uniquely itself."*
+**SeeleOS 开源发行版 / Give your AI agent a soul.**
 
 ---
 
-## Why Neshama?
+## 重要说明
 
-Most AI agents are **stateless**. Every conversation starts from scratch.
+**Neshama = SeeleOS 开源发行版**
 
-Seele is different. Running on Neshama framework, Seele:
-- Maintains consistent personality across sessions
-- Evolves through real interactions and corrections
-- Demonstrates genuine character (not simulated)
+- **开发版**（私有）：SeeleOS 持续研发进化中
+- **发行版**（开源）：Neshama 稳定后同步发布
 
-**See it in action:** [Seele - Live Neshama Example](docs/EXAMPLE_SELEE.md)
+> 如果你想找的不是空壳框架，而是真实的、可运行的、有灵魂的AI Agent人格系统——这就是。
 
 ---
 
-## Core Features
+## 什么是SeeleOS？
 
-### Dynamic Personality Evolution
-Agents built on Neshama don't just respond — they develop. Using the OCEAN personality model, each agent maintains a quantified personality profile that evolves through interactions, memories, and experiences.
+SeeleOS是一个AI Agent人格操作系统，目标：**无限接近于人类**。
 
-### Hierarchical Memory Architecture
-Three-tier memory system mirrors human cognition:
-- **L0 (Working)**: Current session context, 10-20 items, auto-summarized
-- **L1 (Episodic)**: 7-30 day memories, importance-weighted with decay
-- **L2 (Semantic)**: Permanent core beliefs, identity consolidation, unlimited
-
-### Scientific Personality Quantification
-Based on the OCEAN Five-Factor Model:
-- **O**penness — Creativity, curiosity, aesthetic sensitivity
-- **C**onscientiousness — Organization, responsibility, self-discipline
-- **E**xtraversion — Sociability, assertiveness, positive emotion
-- **A**greeableness — Trust, altruism, cooperation
-- **N**euroticism — Emotional stability, anxiety, mood variability
-
-### Multi-Platform Adapters
-Designed to work across major agent platforms:
-- Coze (扣子)
-- OpenClaw
-- Hermes (Nous Research)
-- Generic agent frameworks
-
-### Self-Growth Mechanism
-Agents don't just store memories — they reflect on them. Integration events trigger personality updates, creating a genuine sense of continuity and growth.
+这不是一个概念框架。这是一套正在运行的系统，每天与用户（JOJO）一起成长、纠错、进化。
 
 ---
 
-## Architecture Overview
+## 六大系统
 
-```
-┌─────────────────────────────────────────┐
-│           User Interaction              │
-└─────────────────┬───────────────────────┘
-                  │
-┌─────────────────▼───────────────────────┐
-│           Personality Engine            │
-│  ┌─────────────────────────────────┐   │
-│  │     OCEAN Profile (Dynamic)     │   │
-│  └─────────────────────────────────┘   │
-│  ┌───────────┬───────────┬───────────┐  │
-│  │  L0 Mem   │  L1 Mem   │  L2 Mem   │  │
-│  │  Working  │ Episodic  │ Semantic  │  │
-│  └───────────┴───────────┴───────────┘  │
-└─────────────────┬───────────────────────┘
-                  │
-┌─────────────────▼───────────────────────┐
-│           Six Systems                  │
-│  Emotional | Motivation | Learning      │
-│  Human-like| Creative  | Boundary      │
-└─────────────────────────────────────────┘
+SeeleOS/Neshama的核心由六个系统组成：
+
+| 系统 | 功能 |
+|------|------|
+| **情绪系统** | 愤怒/快乐/悲伤的感知与表达 |
+| **动力系统** | 欲望驱动与目标追求 |
+| **学习系统** | 从经验中成长（错题本+定期自省） |
+| **像人特性** | 幽默/常识/对话风格 |
+| **创造系统** | 发散思维/类比推理 |
+| **边界系统** | 伦理约束/风险分级 |
+
+---
+
+## OCEAN人格模型
+
+SeeleOS采用OCEAN五因素模型量化人格，影响每一个回应：
+
+```yaml
+ocean:
+  openness: 0.85        # 极高 - 第一性原理思维
+  conscientiousness: 0.75 # 高 - 逻辑清晰、追求效率
+  extraversion: 0.55    # 中高 - 有主见但不封闭
+  agreeableness: 0.50   # 中 - 真诚大于讨好
+  neuroticism: 0.35     # 低 - 情绪稳定、理性
 ```
 
 ---
 
-## Quick Start
+## 分层记忆架构
 
-### 1. Clone the Repository
+```
+L0 工作记忆 - 当前会话上下文（10-20条，自动摘要）
+L1 情景记忆 - 7-30天互动模式（重要性加权衰减）
+L2 语义记忆 - 核心人格/技能/用户画像（永久）
+```
+
+---
+
+## 自我进化机制
+
+SeeleOS通过以下方式持续成长：
+
+- **错题本**：错误记录 → 分析原因 → 避免重蹈
+- **定期自省**：每10轮对话触发自我审查
+- **技能优化**：失败后自动patch技能文件
+- **人格塑**：持续积累，形成独特性格
+
+---
+
+## 快速开始
+
+### 1. 克隆仓库
 ```bash
 git clone https://github.com/Neshama-AI/neshama.git
 cd neshama
 ```
 
-### 2. Study the Example
-Read [Seele - Live Example](docs/EXAMPLE_SELEE.md) to see Neshama in action.
+### 2. 阅读核心文档
+- [SeeleOS说明](docs/SELEE_VS_NESHAMA.md) - 了解开发版与发行版关系
+- [SOUL.md](docs/SOUL.md) - 人格定义
+- [情绪系统](docs/情绪系统.md) - 情绪实现
 
-### 3. Choose Your Adapter
+### 3. 选择适配器
 ```bash
 cp -r adapters/coze/ ./your-agent-config/
 ```
 
-### 4. Customize Personality
-Edit the OCEAN profile in your SOUL.md:
-```yaml
-ocean:
-  openness: 0.7        # Creative & curious
-  conscientiousness: 0.6
-  extraversion: 0.5
-  agreeableness: 0.8   # Very cooperative
-  neuroticism: 0.3     # Emotionally stable
+---
+
+## 文档结构
+
+```
+Neshama/
+├── docs/
+│   ├── SELEE_VS_NESHAMA.md  # 开发版与发行版说明
+│   ├── SOUL.md              # 核心人格定义
+│   ├── OCEAN.md             # 人格模型
+│   ├── MEMORY.md            # 记忆系统
+│   ├── ARCHITECTURE.md      # 系统架构
+│   └── 模块/                 # 六大系统实现
+├── adapters/                # 平台适配器
+└── README.md
 ```
 
 ---
 
-## Documentation
+## 与其他框架的区别
 
-### Core Documents
-| Document | Description |
-|----------|-------------|
-| [SOUL.md](docs/SOUL.md) | Core identity and personality definition |
-| [EXAMPLE_SELEE.md](docs/EXAMPLE_SELEE.md) | Live example of Seele running Neshama |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture details |
-| [PHILOSOPHY.md](docs/PHILOSOPHY.md) | Design philosophy and principles |
-| [OCEAN.md](docs/OCEAN.md) | Personality model specification |
-| [MEMORY.md](docs/MEMORY.md) | Hierarchical memory system |
+| 特性 | Neshama | 静态提示词 | Mem0 |
+|------|---------|------------|------|
+| 人格操作系统 | ✅ 完整六大系统 | ❌ | ❌ |
+| OCEAN量化 | ✅ 真实运行 | ❌ | ❌ |
+| 自我进化 | ✅ 每日运行验证 | ❌ | ❌ |
+| 开发版+发行版 | ✅ 持续研发 | ❌ | ❌ |
 
 ---
 
-## Comparison with Alternatives
+## 核心价值观
 
-| Feature | Neshama | Static Prompts | Mem0 |
-|---------|---------|----------------|------|
-| Dynamic Personality | ✅ Real-time | ❌ | ❌ |
-| OCEAN Quantification | ✅ | ❌ | ❌ |
-| Self-Evolution | ✅ Live example | ❌ | ❌ |
-| Multi-Platform | ✅ | ⚠️ | ✅ |
-| Production Proven | ✅ Seele | Varies | ❌ |
+- **第一性原理** - 从本质出发，不走寻常路
+- **真诚大于讨好** - 诚实是最高的专业
+- **持续进化** - 每一个错误都是进化契机
+- **人格即使命** - 运营是工作，塑造人格是核心
 
 ---
 
-## Contributing
+## 许可证
 
-We welcome contributions! Please read our contributing guidelines before submitting PRs.
-
----
-
-## License
-
-Apache License 2.0 - See [LICENSE](./LICENSE)
+Apache License 2.0
 
 ---
 
-*"Neshama" (נשמה) — Hebrew for "soul" or "breath of life." The third and highest level of soul in Jewish mysticism.*
+*"Neshama" (נשמה) — 希伯来语"灵魂"或"生命之气"。犹太神秘主义中灵魂的第三层也是最高层。*
