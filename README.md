@@ -29,7 +29,7 @@ Neshama (Personality Operating System)
 
 | Version | Description | Status |
 |---------|-------------|--------|
-| SeeleOS (Dev) | Private, continuous development | Active |
+| Neshama (Dev) | Private, continuous development | Active |
 | **Neshama (Release)** | Open source, stable sync | Released |
 
 ---
