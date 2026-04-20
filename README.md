@@ -189,7 +189,7 @@ ocean:
 | [MEMORY.md](docs/MEMORY.md) | 分层记忆系统 |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | 系统架构详解 |
 | [SYSTEMS.md](docs/SYSTEMS.md) | 六大系统说明 |
-| [冲突解决](docs/SELEE_VS_NESHAMA.md) | 开发版与发行版 |
+| [CONFLICT.md](docs/CONFLICT.md) | 冲突解决原则 |
 
 ---
 
