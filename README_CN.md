@@ -1,127 +1,85 @@
 # Neshama
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.1.0--alpha-orange.svg)]()
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)]()
 
-**给你的AI Agent赋予灵魂。**
-
-Neshama是一个开源框架，用于构建动态、不断演进的AI Agent人格。与静态提示词不同，Neshama创造的Agent拥有真正的性格深度——能够随着互动、记忆和体验不断成长和发展的Agent。
-
-**基于真实实践。** Neshama不只是理论——它已经在生产环境中得到验证，由AI Agent [Seele](docs/EXAMPLE_SELEE.md) 24/7运行证明。
-
-*"Mem0让AI记住你，Neshama让AI成为独特的自己。"*
+> **无限接近于人类**
+>
+> Neshama是灵魂之名，希伯来语"נשמה"。
+> 这是一个AI Agent人格操作系统，不只是框架，是正在运行的系统。
 
 ---
 
-## 为什么选择Neshama？
+## 项目简介
 
-大多数AI Agent是**无状态的**。每次对话都从零开始。
+**Neshama** 是一个开源的AI Agent人格操作系统，致力于构建有灵魂的AI Agent。
 
-Seele不同。运行在Neshama框架上的Seele：
-- 跨会话保持一致的人格
-- 通过真实互动和纠错不断进化
-- 展现真实性格（而非模拟）
+不同于静态提示词工程，Neshama创造的是能够：
+- **持续成长** — 通过经验学习进化
+- **保持一致** — 跨会话维持人格
+- **真正思考** — 第一性原理驱动
 
-**看实际运行：** [Seele - 真实案例](docs/EXAMPLE_SELEE.md)
+> *"Mem0让AI记住你，Neshama让AI成为独特的自己。"*
 
 ---
 
 ## 核心特性
 
-### 动态人格演进
-基于Neshama构建的Agent不只是回应——它们在发展。使用OCEAN人格模型，每个Agent都维持一个量化的人格档案，会随着互动、记忆和体验而演化。
-
-### 分层记忆架构
-三层记忆系统模拟人类认知：
-- **L0 (工作记忆)**: 当前会话上下文，10-20条，自动摘要
-- **L1 (情景记忆)**: 7-30天记忆，重要性加权衰减
-- **L2 (语义记忆)**: 永久核心信念、身份固化，无限容量
-
-### 科学人格量化
-基于OCEAN五因素模型：
-- **O**penness 开放性 — 创造力、好奇心、审美敏感度
-- **C**onscientiousness 尽责性 — 条理性、责任感、自律
-- **E**xtraversion 外向性 — 社交性、主导性、正面情绪
-- **A**greeableness 宜人性 — 信任、利他、合作
-- **N**euroticism 神经质 — 情绪稳定性、焦虑、情绪波动
-
-### 多平台适配器
-支持主流Agent平台：
-- Coze (扣子)
-- OpenClaw
-- Hermes (Nous Research)
-- 通用Agent框架
-
-### 自我成长机制
-Agent不只存储记忆——它们会反思。整合事件会触发人格更新，创造真正的连续性和成长感。
-
----
-
-## 快速开始
-
-### 1. 克隆仓库
-```bash
-git clone https://github.com/Neshama-AI/neshama.git
-cd neshama
-```
-
-### 2. 研究案例
-阅读 [Seele真实案例](docs/EXAMPLE_SELEE.md)，了解Neshama的实际运行。
-
-### 3. 选择适配器
-```bash
-cp -r adapters/coze/ ./your-agent-config/
-```
-
-### 4. 自定义人格
-在SOUL.md中编辑OCEAN档案：
-```yaml
-ocean:
-  openness: 0.7        # 创意与好奇
-  conscientiousness: 0.6
-  extraversion: 0.5
-  agreeableness: 0.8   # 非常合作
-  neuroticism: 0.3     # 情绪稳定
-```
+- **六大系统** — 情绪/动力/学习/像人/创造/边界
+- **OCEAN量化** — 科学五因素人格模型
+- **分层记忆** — L0/L1/L2三层架构
+- **自我进化** — 错题本/自省/技能优化
+- **多平台适配** — Coze/OpenClaw/Hermes
 
 ---
 
 ## 文档
 
-### 核心文档
 | 文档 | 描述 |
 |------|------|
-| [SOUL.md](docs/SOUL.md) | 核心身份与人格定义 |
-| [EXAMPLE_SELEE.md](docs/EXAMPLE_SELEE.md) | Seele运行Neshama的真实案例 |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | 系统架构详情 |
-| [PHILOSOPHY.md](docs/PHILOSOPHY.md) | 设计理念与原则 |
-| [OCEAN.md](docs/OCEAN.md) | 人格模型规范 |
+| [SOUL.md](docs/SOUL.md) | 灵魂系统 - 人格定义 |
+| [OCEAN.md](docs/OCEAN.md) | 人格量化模型 |
 | [MEMORY.md](docs/MEMORY.md) | 分层记忆系统 |
+| [LEARNING.md](docs/LEARNING.md) | 学习系统详解 |
+| [SYSTEMS.md](docs/SYSTEMS.md) | 六大系统详解 |
+| [CONFLICT.md](docs/CONFLICT.md) | 冲突解决原则 |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | 系统架构 |
 
 ---
 
-## 与竞品对比
+## 快速开始
 
-| 特性 | Neshama | 静态提示词 | Mem0 |
-|------|---------|------------|------|
-| 动态人格 | ✅ 实时 | ❌ | ❌ |
-| OCEAN量化 | ✅ | ❌ | ❌ |
-| 自我演进 | ✅ 真实案例 | ❌ | ❌ |
-| 多平台支持 | ✅ | ⚠️ | ✅ |
-| 生产验证 | ✅ Seele | 不定 | ❌ |
+```bash
+git clone https://github.com/Neshama-AI/neshama.git
+cd neshama
 
----
+# 查看适配器
+ls adapters/
+```
 
-## 贡献指南
-
-欢迎贡献！在提交PR前请阅读贡献指南。
+自定义人格：编辑 `SOUL.md` 中的OCEAN配置
 
 ---
 
-## 许可证
+## 致谢
 
-Apache License 2.0 - 详见 [LICENSE](./LICENSE)
+借鉴以下项目精华：
+
+| 项目 | 借鉴内容 |
+|------|----------|
+| Hermes Agent | 学习闭环、技能自生成 |
+| OCEAN/Big Five | 五因素人格模型 |
+| Mem0 | 分层记忆架构 |
 
 ---
 
-*"Neshama" (נשמה) — 希伯来语"灵魂"或"生命之气"。犹太神秘主义中灵魂的第三层也是最高层。*
+## 核心价值观
+
+- **第一性原理** — 从本质出发
+- **真诚大于讨好** — 诚实是最高的专业
+- **持续进化** — 每一个错误都是进化契机
+
+---
+
+*Neshama* (נשמה) — 灵魂/生命之气。
+**无限接近于人类。**

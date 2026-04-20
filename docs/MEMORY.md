@@ -1,27 +1,47 @@
-# Hierarchical Memory Architecture
+# MEMORY - 记忆系统
 
-**How Neshama Remembers Like a Human**
-
-## Three Layers
-
-```
-L2: Semantic (Long-term) - Core identity, values
-L1: Episodic (Medium) - Experiences, 7-30 days
-L0: Working (Short) - Current context
-```
-
-## L0: Working Memory (10-20 items)
-- Fast access, volatile
-- Auto-summarized at session end
-
-## L1: Episodic Memory (100-500 items)
-- Time-decay function
-- Importance-weighted scoring
-
-## L2: Semantic Memory (Unlimited)
-- Core beliefs and identity
-- Forms the agent's personality core
+> 三层记忆架构，模拟人类认知。
 
 ---
 
-*"We are not our memories, but we are shaped by them."*
+## 分层架构
+
+```
+L2 语义记忆 - 永久核心人格/技能/用户画像
+L1 情景记忆 - 7-30天互动模式
+L0 工作记忆 - 当前会话（10-20条）
+```
+
+---
+
+## L0 工作记忆
+
+- **容量**：10-20条
+- **特性**：快速访问，会话结束自动摘要
+- **操作**：添加→检索→摘要
+
+---
+
+## L1 情景记忆
+
+- **容量**：100-500条
+- **特性**：时间衰减、重要性加权
+- **保留公式**：`重要性 × 时间衰减 × 情感权重`
+
+---
+
+## L2 语义记忆
+
+- **容量**：无限制
+- **内容**：
+  - 人格核心 (SOUL)
+  - 技能库 (SKILLS)
+  - 用户画像 (USER)
+
+---
+
+## 防溢出方案
+
+- **双重压缩层**
+- **保护区设计**（核心人格不可压缩）
+- **渐进式摘要**
