@@ -1,0 +1,44 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Neshama SDK",
+	"Description": "Give your NPCs a soul - Unreal Engine 5 SDK for the Neshama AI Soul System.\nProvides NPC emotion engine, behavior suggestions, dialogue management, and memory features.\nNo registration required to try - get started in 3 steps!",
+	"Category": "Soul|AI|NPC",
+	"CreatedBy": "Neshama Team",
+	"CreatedByURL": "https://neshama.game",
+	"DocsURL": "https://docs.neshama.game/unreal",
+	"MarketplaceURL": "",
+	"SupportURL": "https://discord.gg/neshama",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "NeshamaSDK",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject",
+				"HTTP",
+				"Json",
+				"JsonUtilities",
+				"WebSocket"
+			]
+		},
+		{
+			"Name": "NeshamaSDKEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject",
+				"UnrealEd",
+				"PropertyEditor",
+				"NeshamaSDK"
+			]
+		}
+	]
+}

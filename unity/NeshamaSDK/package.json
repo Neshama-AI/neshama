@@ -1,0 +1,33 @@
+{
+  "name": "ai.neshama.sdk",
+  "version": "1.0.0",
+  "displayName": "Neshama Soul SDK",
+  "description": "Give your NPCs a soul - Emotion, Memory, Personality, Social",
+  "unity": "2022.3",
+  "dependencies": {},
+  "keywords": [
+    "npc",
+    "ai",
+    "soul",
+    "emotion",
+    "personality",
+    "game",
+    "behavior"
+  ],
+  "author": {
+    "name": "Neshama AI",
+    "url": "https://neshama.ai"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neshama/sdk"
+  },
+  "type": "library",
+  "samples": [
+    {
+      "displayName": "Quick Start",
+      "description": "Minimal example: create an NPC, chat, and listen to emotions",
+      "path": "Samples~/QuickStart"
+    }
+  ]
+}

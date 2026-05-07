@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — Neshama</title>
+  <meta name="description" content="Neshama pricing. Start free with 3 NPC souls. Scale when you're ready.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;650;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <div class="nav__logo-mark">N</div>
+          Neshama
+        </a>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="index.html#claims" data-i18n="nav.features">Features</a></li>
+          <li><a href="index.html#compare" data-i18n="nav.howItWorks">How it works</a></li>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
+        </ul>
+        <div class="nav__actions">
+          <button class="lang-toggle" onclick="toggleLang()">
+            <span class="lang-label">中文</span>
+          </button>
+          <a href="https://github.com/neshama/neshama" class="nav__github" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <a href="index.html#cta" class="btn btn--primary" data-i18n="nav.getStarted">Get Started</a>
+        </div>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="pricing-page__header">
+    <div class="container">
+      <p class="section__label" data-i18n="pricing.label">Pricing</p>
+      <h1 class="section__title" data-i18n="pricing.page.title">Free + BYOK = Unlimited dialogue.</h1>
+      <p class="section__desc" data-i18n="pricing.page.desc">
+        The soul engine is free to start. Bring your own LLM key and pay the provider directly — we don't add markup.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.free.name">Free</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="0">$0</span><span>/mo</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.page.free.desc">Prototype and learn. No credit card required.</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.page.free.f1">3 NPC souls</li>
+            <li data-i18n="pricing.page.free.f2">5,000 emotion calculations/mo</li>
+            <li data-i18n="pricing.page.free.f3">L0 working memory only</li>
+            <li data-i18n="pricing.page.free.f4">Static OCEAN traits (no evolution)</li>
+            <li data-i18n="pricing.page.free.f5">BYOK: unlimited dialogue</li>
+            <li data-i18n="pricing.page.free.f6">Community support</li>
+          </ul>
+          <a href="docs.html" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="nav.getStarted">Get Started</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.indie.name">Indie</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="19">$19</span><span>/mo</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.page.indie.desc">Ship your indie game with living NPCs.</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.page.indie.f1">10 NPC souls</li>
+            <li data-i18n="pricing.page.indie.f2">50,000 emotion calculations/mo</li>
+            <li data-i18n="pricing.page.indie.f3">L0 + L1 summarized memory</li>
+            <li data-i18n="pricing.page.indie.f4">Dynamic personality evolution</li>
+            <li data-i18n="pricing.page.indie.f5">BYOK: unlimited dialogue</li>
+            <li data-i18n="pricing.page.indie.f6">Community support</li>
+          </ul>
+          <a href="#" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="pricing.page.startTrial">Start Free Trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.studio.name">Studio</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="79">$79</span><span>/mo</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.page.studio.desc">For studios shipping multiple titles.</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.page.studio.f1">50 NPC souls</li>
+            <li data-i18n="pricing.page.studio.f2">500,000 emotion calculations/mo</li>
+            <li data-i18n="pricing.page.studio.f3">L0 + L1 + L2 full memory</li>
+            <li data-i18n="pricing.page.studio.f4">Entity graph & social engine</li>
+            <li data-i18n="pricing.page.studio.f5">NPC2NPC relationships</li>
+            <li data-i18n="pricing.page.studio.f6">Priority email support</li>
+          </ul>
+          <a href="#" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="pricing.page.startTrial">Start Free Trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.enterprise.name">Enterprise</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="-1">Custom</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.page.enterprise.desc">AAA studios and platforms.</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.page.enterprise.f1">Unlimited NPC souls</li>
+            <li data-i18n="pricing.page.enterprise.f2">Unlimited emotion calculations</li>
+            <li data-i18n="pricing.page.enterprise.f3">Custom memory hierarchies</li>
+            <li data-i18n="pricing.page.enterprise.f4">On-premise deployment</li>
+            <li data-i18n="pricing.page.enterprise.f5">Data residency options</li>
+            <li data-i18n="pricing.page.enterprise.f6">SLA & dedicated support</li>
+          </ul>
+          <a href="mailto:hello@neshama.ai" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="pricing.contactUs">Contact Us</a>
+        </div>
+      </div>
+
+      <p class="pricing-note" data-i18n-html="pricing.page.byokNote">
+        <code>BYOK</code> = Bring Your Own Key. Use any of 21 LLM providers (OpenAI, Anthropic, DeepSeek, etc.). You pay the model provider directly — zero markup from us.
+      </p>
+      <p class="pricing-note" style="margin-top:8px" data-i18n-html="pricing.page.emotionNote">
+        <code>Emotion calculation</code> = One emotion update cycle (stimulus → emotion evaluation → decay → conflict resolution). This is the core compute cost. Dialogue generation is separate and uses your own LLM key.
+      </p>
+      <p class="pricing-rate-note" id="rate-note" style="display:none"></p>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="section section--bordered section--gray">
+    <div class="container">
+      <h2 class="section__title" data-i18n="compare.table.title">What's in each tier.</h2>
+
+      <div style="overflow-x:auto;margin-top:32px">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border)">
+              <th style="text-align:left;padding:12px 16px;color:var(--text-secondary);font-weight:500" data-i18n="compare.table.feature">Feature</th>
+              <th style="text-align:center;padding:12px 16px;color:var(--text-secondary);font-weight:500" data-i18n="pricing.free.name">Free</th>
+              <th style="text-align:center;padding:12px 16px;color:var(--text-secondary);font-weight:500" data-i18n="pricing.indie.name">Indie</th>
+              <th style="text-align:center;padding:12px 16px;color:var(--text-secondary);font-weight:500" data-i18n="pricing.studio.name">Studio</th>
+              <th style="text-align:center;padding:12px 16px;color:var(--text-secondary);font-weight:500" data-i18n="pricing.enterprise.name">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.npcSouls">NPC Souls</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)">3</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)">10</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)">50</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)" data-i18n="compare.table.unlimited">Unlimited</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.emotionCalc">Emotion Calculations/mo</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)">5,000</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)">50,000</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)">500,000</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)" data-i18n="compare.table.unlimited">Unlimited</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.l0">L0 Working Memory</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.l1">L1 Summarized Memory</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.l2">L2 Core Memory</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.personality">Personality Evolution</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)" data-i18n="compare.table.static">Static</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)" data-i18n="compare.table.dynamic">Dynamic</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)" data-i18n="compare.table.dynamic">Dynamic</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)" data-i18n="compare.table.custom">Custom</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.entityGraph">Entity Graph</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.npc2npc">NPC2NPC Social Engine</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-tertiary)">&#8212;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.byok">BYOK Dialogue</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.selfHost">Self-hostable</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--accent)">&#10003;</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 16px;color:var(--text-primary)" data-i18n="compare.table.support">Support</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)" data-i18n="compare.table.community">Community</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)" data-i18n="compare.table.community">Community</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)" data-i18n="compare.table.priority">Priority</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-secondary)" data-i18n="compare.table.dedicated">Dedicated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--bordered">
+    <div class="container">
+      <h2 class="section__title" style="max-width:none" data-i18n="faq.title">Frequently asked questions.</h2>
+
+      <div class="pricing-faq">
+        <div class="pricing-faq__item">
+          <button class="pricing-faq__q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span data-i18n="faq.q1">What happens when I hit the emotion calculation limit?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="pricing-faq__a" aria-hidden="true">
+            <p data-i18n="faq.a1">The NPC still functions — it just stops updating emotions until the next billing cycle. Dialogue still works (since that uses your own LLM key). The NPC effectively "freezes" its emotional state.</p>
+          </div>
+        </div>
+
+        <div class="pricing-faq__item">
+          <button class="pricing-faq__q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span data-i18n="faq.q2">What does "BYOK" mean exactly?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="pricing-faq__a" aria-hidden="true">
+            <p data-i18n="faq.a2">Bring Your Own Key. You provide your own API key from OpenAI, Anthropic, DeepSeek, or any of our 21 supported providers. We never see your key, and we don't add any markup to the model provider's pricing. Dialogue costs are between you and the model provider.</p>
+          </div>
+        </div>
+
+        <div class="pricing-faq__item">
+          <button class="pricing-faq__q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span data-i18n="faq.q3">Can I self-host instead of using the cloud?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="pricing-faq__a" aria-hidden="true">
+            <p data-i18n="faq.a3">Yes. Neshama is Apache 2.0 licensed. You can run the entire engine locally or on your own infrastructure. The self-hosted version has no emotion calculation limits. Paid tiers add cloud convenience, managed updates, and support.</p>
+          </div>
+        </div>
+
+        <div class="pricing-faq__item">
+          <button class="pricing-faq__q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span data-i18n="faq.q4">Why price by "emotion calculations" instead of API calls?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="pricing-faq__a" aria-hidden="true">
+            <p data-i18n="faq.a4">Because the emotion engine is what we run on our servers. Each calculation involves: stimulus evaluation, emotion update, decay processing, conflict resolution, and threshold checks. This is the actual compute cost. Dialogue generation uses your own LLM key, so we don't charge for that.</p>
+          </div>
+        </div>
+
+        <div class="pricing-faq__item">
+          <button class="pricing-faq__q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span data-i18n="faq.q5">What's the difference between static and dynamic OCEAN traits?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="pricing-faq__a" aria-hidden="true">
+            <p data-i18n="faq.a5">Free tier NPCs have fixed personality traits — the OCEAN values you set at creation stay the same forever. Paid tiers unlock dynamic evolution: a repeatedly bullied NPC's agreeableness decreases, a praised NPC's extraversion increases. This makes NPCs feel alive across sessions.</p>
+          </div>
+        </div>
+
+        <div class="pricing-faq__item">
+          <button class="pricing-faq__q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span data-i18n="faq.q6">Do I need a separate soul for each NPC?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="pricing-faq__a" aria-hidden="true">
+            <p data-i18n="faq.a6">Yes. Each NPC soul has its own personality, emotions, memories, and entity graph. This is what makes each NPC unique. Two tavern keepers with the same preset will diverge over time based on their different experiences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--bordered">
+    <div class="container cta-section">
+      <h2 class="cta-section__title" data-i18n="pricing.cta.title">Start building souls today.</h2>
+      <p class="cta-section__desc" data-i18n="pricing.cta.desc">
+        3 NPC souls, free forever. No credit card required.
+      </p>
+      <div class="cta-section__actions">
+        <a href="docs.html" class="btn btn--primary btn--large" data-i18n="pricing.cta.primary">Get Started</a>
+        <a href="https://github.com/neshama/neshama" class="btn btn--secondary btn--large" target="_blank" rel="noopener" data-i18n="pricing.cta.secondary">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__brand-name">
+            <span style="display:inline-flex;width:20px;height:20px;background:var(--accent);border-radius:5px;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;font-family:var(--font-mono)">N</span>
+            Neshama
+          </span>
+          <p class="footer__brand-desc" data-i18n="footer.desc">
+            The soul engine for game NPCs. Open source under Apache 2.0.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4 data-i18n="footer.product">Product</h4>
+            <ul>
+              <li><a href="index.html#claims" data-i18n="footer.features">Features</a></li>
+              <li><a href="pricing.html" data-i18n="footer.pricing">Pricing</a></li>
+              <li><a href="docs.html" data-i18n="footer.documentation">Documentation</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="footer.developers">Developers</h4>
+            <ul>
+              <li><a href="docs.html" data-i18n="footer.quickStart">Quick Start</a></li>
+              <li><a href="docs.html" data-i18n="footer.apiReference">API Reference</a></li>
+              <li><a href="https://github.com/neshama/neshama" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="footer.community">Community</h4>
+            <ul>
+              <li><a href="https://discord.gg/neshama" target="_blank" rel="noopener">Discord</a></li>
+              <li><a href="https://github.com/neshama/neshama/issues" target="_blank" rel="noopener">Issues</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="footer.legal">Legal</h4>
+            <ul>
+              <li><a href="#" data-i18n="footer.privacyPolicy">Privacy Policy</a></li>
+              <li><a href="#" data-i18n="footer.termsOfService">Terms of Service</a></li>
+              <li><a href="https://github.com/neshama/neshama/blob/main/LICENSE" target="_blank" rel="noopener">License</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copyright" data-i18n="footer.copyright">&copy; 2026 Neshama. Built in the open.</span>
+        <div class="footer__social">
+          <a href="https://github.com/neshama/neshama" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a href="https://discord.gg/neshama" target="_blank" rel="noopener" aria-label="Discord">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.942 3.576A16.54 16.54 0 0012.87 2.5a.06.06 0 00-.064.03c-.175.313-.37.72-.506 1.04a15.27 15.27 0 00-4.6 0 10.54 10.54 0 00-.514-1.04.063.063 0 00-.064-.03 16.496 16.496 0 00-4.072 1.076.057.057 0 00-.026.023C1.008 7.284.562 10.862.784 14.393a.068.068 0 00.026.046 16.62 16.62 0 004.994 2.524.064.064 0 00.07-.023c.385-.526.728-1.08 1.023-1.662a.063.063 0 00-.035-.088 10.93 10.93 0 01-1.56-.744.064.064 0 01-.007-.107c.105-.079.21-.16.31-.243a.061.061 0 01.064-.009c3.273 1.494 6.817 1.494 10.051 0a.061.061 0 01.065.009c.1.083.204.165.31.243a.064.064 0 01-.005.107c-.499.291-1.017.537-1.561.744a.063.063 0 00-.034.088c.3.583.643 1.136 1.022 1.662a.063.063 0 00.07.023 16.568 16.568 0 005.003-2.524.064.064 0 00.025-.045c.254-4.153-.426-7.772-1.804-10.794a.05.05 0 00-.025-.023zM7.036 12.2c-.978 0-1.784-.9-1.784-2.005 0-1.105.79-2.005 1.784-2.005 1.002 0 1.8.909 1.784 2.005 0 1.104-.79 2.005-1.784 2.005zm6.593 0c-.978 0-1.784-.9-1.784-2.005 0-1.105.79-2.005 1.784-2.005 1.002 0 1.8.909 1.784 2.005 0 1.104-.782 2.005-1.784 2.005z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

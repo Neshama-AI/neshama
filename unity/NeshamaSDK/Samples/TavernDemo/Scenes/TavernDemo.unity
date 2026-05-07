@@ -1,0 +1,96 @@
+# TavernDemo Scene Description
+
+## Scene Overview
+
+This is a demonstration scene for the Neshama SDK, showcasing how to integrate soul-powered NPCs into a game environment.
+
+## Scene Structure
+
+### Environment
+
+- **Ground Plane**: 50x50 unit ground plane
+- **Tavern Building**: Simple tavern structure with walls, counter, tables, and barrels
+- **City Gate**: Part of the guard demonstration area
+
+### NPCs
+
+#### TavernKeeper
+- **Location**: Behind the tavern counter
+- **Components**: NPCSoul, TavernKeeperAI, SphereCollider (trigger)
+- **Interactions**:
+  - Player proximity triggers greeting
+  - Combat events trigger hostile response
+  - Gift-giving increases trust
+  - Chat system for conversation
+
+#### GuardCaptain  
+- **Location**: Near the city gate
+- **Components**: NPCSoul, GuardCaptainAI, NavMeshAgent, SphereCollider
+- **Behaviors**:
+  - Patrols the gate area
+  - Detects enemies in range
+  - Alert state when enemies approach
+  - Combat state during battle
+  - Post-combat recovery
+
+### Player
+
+- **Tag**: "Player"
+- **Required for**: NPC interaction triggers
+
+### UI
+
+- **Canvas**: Main UI canvas for dialogue display
+- **Dialogue Text**: TextMeshPro component for NPC speech
+
+## Setup Instructions
+
+1. **Import NeshamaSDK** package into Unity project
+2. **Start Backend Server** on localhost:8420
+3. **Open TavernDemo** scene in Unity Editor
+4. **Configure NPCSoul** components with correct NPC IDs
+5. **Build and Run** the scene
+6. **Test Interactions**:
+   - Enter TavernKeeper trigger zone
+   - Attack the keeper (if combat system available)
+   - Gift items to the keeper
+   - Chat with the keeper
+
+## Key Features Demonstrated
+
+1. **Automatic Connection**: NPCSoul auto-connects on Awake
+2. **Event System**: Game events trigger emotion changes
+3. **Behavior Modifiers**: NPC behavior adapts based on state
+4. **Dialogue Integration**: Real-time NPC responses
+5. **Memory System**: NPCs remember interactions
+
+## Expected Behavior
+
+### TavernKeeper
+
+| Event | Expected Response |
+|-------|-------------------|
+| Player enters | Friendly greeting (or emotion-based) |
+| Player attacks | Angry response, refusal of service |
+| Gift given | Gratitude, trust increase |
+| Help provided | Positive emotion, unlocked dialogue |
+| Quest completed | Praise, bonus rewards |
+
+### GuardCaptain
+
+| Event | Expected Response |
+|-------|------------------|
+| Enemy approaches | Alert state, warning |
+| Combat starts | Combat dialogue style |
+| Battle ends | Post-combat recovery |
+| Quest completed | Recognition, new quests unlocked |
+
+## File Location
+
+This is a TEXT DESCRIPTION file. The actual .unity scene file is binary and cannot be committed as text.
+
+To create the actual scene:
+1. Create a new scene in Unity
+2. Add the objects described above
+3. Configure components as specified
+4. Save the scene as TavernDemo.unity

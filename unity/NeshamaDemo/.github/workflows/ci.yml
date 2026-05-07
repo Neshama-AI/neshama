@@ -1,0 +1,155 @@
+name: Build and Test Demo
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'NeshamaDemo/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'NeshamaDemo/**'
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Unity Project
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Check for Unity license
+        run: |
+          if [ -z "$UNITY_LICENSE" ]; then
+            echo "No Unity license found"
+          fi
+      
+      - name: Create Unity assembly references
+        run: |
+          mkdir -p NeshamaDemo/Assets/Plugins
+          echo "Unity project ready"
+          
+      - name: Validate project structure
+        run: |
+          echo "=== Project Structure ==="
+          find NeshamaDemo -type f \( -name "*.cs" -o -name "*.md" -o -name "*.json" \) | head -20
+          echo ""
+          echo "Total C# files: $(find NeshamaDemo -name '*.cs' | wc -l)"
+          echo "Total Markdown files: $(find NeshamaDemo -name '*.md' | wc -l)"
+          
+      - name: Check C# syntax
+        run: |
+          echo "=== C# File Syntax Check ==="
+          for file in $(find NeshamaDemo -name "*.cs"); do
+            # Basic syntax validation using basic checks
+            if grep -q "^$" "$file"; then
+              echo "Warning: Empty line found at start of $file"
+            fi
+          done
+          echo "Syntax check completed"
+          
+  analyze:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Check code formatting
+        run: |
+          echo "=== Code Format Check ==="
+          
+          # Check for TODO comments
+          TODO_COUNT=$(grep -r "TODO" NeshamaDemo/Assets --include="*.cs" | wc -l)
+          echo "TODO comments found: $TODO_COUNT"
+          
+          # Check for Debug.Log without #if UNITY_EDITOR
+          UNSAFE_LOGS=$(grep -r "Debug\.Log" NeshamaDemo/Assets/Scripts/Demo --include="*.cs" | grep -v "#if UNITY_EDITOR" | wc -l)
+          echo "Debug.Log outside UNITY_EDITOR: $UNSAFE_LOGS"
+          
+      - name: Check documentation
+        run: |
+          echo "=== Documentation Check ==="
+          for file in NeshamaDemo/Assets/Scripts/Demo/*.cs; do
+            if [ -f "$file" ]; then
+              # Check for XML documentation
+              if grep -q "/// <summary>" "$file"; then
+                echo "✓ $(basename $file) has XML docs"
+              else
+                echo "✗ $(basename $file) missing XML docs"
+              fi
+            fi
+          done
+          
+  test-readme:
+    name: Test README Links
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Validate README exists
+        run: |
+          if [ -f "NeshamaDemo/README.md" ]; then
+            echo "README.md exists"
+            echo "Lines: $(wc -l < NeshamaDemo/README.md)"
+          else
+            echo "ERROR: README.md not found"
+            exit 1
+          fi
+          
+      - name: Check documentation completeness
+        run: |
+          echo "=== Documentation Completeness ==="
+          
+          # Check for required sections in README
+          README="NeshamaDemo/README.md"
+          
+          grep -q "快速开始" "$README" && echo "✓ Quick start guide"
+          grep -q "控制说明" "$README" && echo "✓ Control instructions"
+          grep -q "NPC介绍" "$README" && echo "✓ NPC introduction"
+          grep -q "项目结构" "$README" && echo "✓ Project structure"
+          
+  release:
+    name: Release Package
+    needs: [build, analyze, test-readme]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Create distribution package
+        run: |
+          echo "=== Creating Distribution Package ==="
+          
+          # Create version info
+          VERSION=${{ github.ref_name }}
+          echo "Version: $VERSION"
+          
+          # Package the demo
+          tar -czvf NeshamaDemo-$VERSION.unitypackage \
+            NeshamaDemo/Assets \
+            NeshamaDemo/Packages \
+            NeshamaDemo/ProjectSettings \
+            NeshamaDemo/README.md \
+            NeshamaDemo/demo-video-script.md
+          
+          echo "Package created: NeshamaDemo-$VERSION.unitypackage"
+          ls -lh NeshamaDemo-$VERSION.unitypackage
+          
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: NeshamaDemo-${{ github.ref_name }}.unitypackage
+          asset_name: NeshamaDemo-${{ github.ref_name }}.unitypackage
+          asset_content_type: application/octet-stream

@@ -1,0 +1,6 @@
+# Neshama Cloud API - Minimal Dependencies
+fastapi>=0.100.0
+uvicorn>=0.22.0
+pydantic>=2.0.0
+aiohttp>=3.8.0
+websockets>=11.0

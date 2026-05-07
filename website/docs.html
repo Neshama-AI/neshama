@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs — Neshama</title>
+  <meta name="description" content="Neshama documentation. Get started with the soul engine for game NPCs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;650;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <div class="nav__logo-mark">N</div>
+          Neshama
+        </a>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="index.html#claims" data-i18n="nav.features">Features</a></li>
+          <li><a href="index.html#compare" data-i18n="nav.howItWorks">How it works</a></li>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
+        </ul>
+        <div class="nav__actions">
+          <button class="lang-toggle" onclick="toggleLang()">
+            <span class="lang-label">中文</span>
+          </button>
+          <a href="https://github.com/neshama/neshama" class="nav__github" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <a href="index.html#cta" class="btn btn--primary" data-i18n="nav.getStarted">Get Started</a>
+        </div>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="docs-sidebar__search">
+        <input type="text" data-i18n-placeholder="docs.search" placeholder="Search docs..." id="docs-search">
+      </div>
+
+      <div class="docs-nav-group">
+        <p class="docs-nav-group__title" data-i18n="docs.gettingStarted">Getting Started</p>
+        <ul>
+          <li><a href="#quickstart" class="active" data-i18n="docs.quickStart">Quick Start</a></li>
+          <li><a href="#installation" data-i18n="docs.installation">Installation</a></li>
+          <li><a href="#unity-integration" data-i18n="docs.unityIntegration">Unity Integration</a></li>
+          <li><a href="#ue5-integration" data-i18n="docs.ue5Integration">UE5 Integration</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <p class="docs-nav-group__title" data-i18n="docs.coreSystems">Core Systems</p>
+        <ul>
+          <li><a href="#emotion-system" data-i18n="docs.emotionSystem">Emotion System</a></li>
+          <li><a href="#personality-system" data-i18n="docs.personalityOCEAN">Personality (OCEAN)</a></li>
+          <li><a href="#memory-system" data-i18n="docs.memorySystem">Memory System</a></li>
+          <li><a href="#social-engine" data-i18n="docs.socialEngine">Social Engine</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <p class="docs-nav-group__title" data-i18n="docs.apiReference">API Reference</p>
+        <ul>
+          <li><a href="#api-npcsoul" data-i18n="docs.apiNpcSoul">NPCSoul</a></li>
+          <li><a href="#api-emotion" data-i18n="docs.apiEmotion">CompositeEmotion</a></li>
+          <li><a href="#api-memory" data-i18n="docs.apiMemory">MemoryManager</a></li>
+          <li><a href="#api-entity" data-i18n="docs.apiEntity">EntityGraph</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <p class="docs-nav-group__title" data-i18n="docs.guides">Guides</p>
+        <ul>
+          <li><a href="#guide-presets" data-i18n="docs.soulPresets">Soul Presets</a></li>
+          <li><a href="#guide-llm" data-i18n="docs.llmSetup">LLM Provider Setup</a></li>
+          <li><a href="#guide-deploy" data-i18n="docs.selfHosting">Self-Hosting</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="docs-content">
+      <h1 data-i18n="docs.h1">Quick Start</h1>
+      <p data-i18n="docs.intro">
+        Get a soul running in under 5 minutes. No account needed. No credit card. Just Python.
+      </p>
+
+      <h2 id="installation" data-i18n="docs.installation">Installation</h2>
+      <pre><code>pip install neshama</code></pre>
+      <p data-i18n="docs.installOrWeb">
+        Or install with the web dashboard:
+      </p>
+      <pre><code>pip install neshama[web]</code></pre>
+
+      <h2 id="quickstart" data-i18n="docs.createSoul">Create your first soul</h2>
+      <pre><code>from neshama import NPCSoul
+
+# Create a soul from a preset
+soul = NPCSoul.create("tavern_keeper")
+
+# Subscribe to emotion changes
+soul.on_emotion_changed(lambda e: print(f"Emotion: {e.name} ({e.intensity:.2f})"))
+
+# Chat with the NPC
+response = await soul.chat("Hello, how's business?")
+print(response)
+
+# Check the soul state
+print(soul.emotions)       # Current emotion state
+print(soul.personality)    # OCEAN traits
+print(soul.memory.summary) # What the NPC remembers</code></pre>
+
+      <h2 id="unity-integration" data-i18n="docs.unityIntegration">Unity Integration</h2>
+      <p data-i18n="docs.unityInstall">
+        Install the Neshama Unity package from the Asset Store or via Git URL:
+      </p>
+      <pre><code>// Package Manager → Add from Git URL
+https://github.com/neshama/neshama-unity.git</code></pre>
+      <p data-i18n="docs.unityThen">
+        Then in your NPC MonoBehaviour:
+      </p>
+      <pre><code>using Neshama;
+
+public class TavernKeeper : MonoBehaviour
+{
+    private NPCSoul soul;
+
+    async void Start()
+    {
+        soul = NPCSoul.Create(preset: "tavern_keeper");
+        soul.OnEmotionChanged += OnEmotionChanged;
+    }
+
+    void OnEmotionChanged(EmotionChangeEvent e)
+    {
+        // Update NPC animation, dialogue tone, behavior
+        animator.SetFloat("Agitation", e.Intensity);
+    }
+
+    async void OnPlayerInteract()
+    {
+        var response = await soul.Chat(playerInput);
+        dialogueBox.Show(response);
+    }
+}</code></pre>
+
+      <h2 id="ue5-integration" data-i18n="docs.ue5Integration">UE5 Integration</h2>
+      <p data-i18n="docs.ue5Install">
+        The Neshama UE5 plugin is available on the Unreal Marketplace. Add it to your project, then:
+      </p>
+      <pre><code>// In your NPC Actor
+#include "NeshamaSoulComponent.h"
+
+UNeshamaSoulComponent* SoulComp = CreateDefaultSubobject&lt;UNeshamaSoulComponent&gt;(TEXT("Soul"));
+SoulComp-&gt;SetPreset(NSoulPreset::TavernKeeper);
+
+// Bind emotion changes
+SoulComp-&gt;OnEmotionChanged.AddDynamic(this, &amp;AMyNPC::HandleEmotionChange);
+
+// Chat
+FString Response = await SoulComp-&gt;Chat(PlayerInput);</code></pre>
+
+      <h2 id="emotion-system" data-i18n="docs.emotionSystem">Emotion System</h2>
+      <p data-i18n="docs.emotionIntro">
+        Neshama uses a composite emotion model based on 8 primary emotions and 15 composite recipes. All calculations are rule-based and deterministic — no LLM calls needed.
+      </p>
+      <h3 data-i18n="docs.primaryEmotions">Primary Emotions</h3>
+      <ul>
+        <li>Joy, Trust, Fear, Surprise</li>
+        <li>Sadness, Disgust, Anger, Anticipation</li>
+      </ul>
+      <h3 data-i18n="docs.compositeRecipes">Composite Recipes (examples)</h3>
+      <ul>
+        <li><strong>Euphoria</strong> = Joy + Trust + Surprise</li>
+        <li><strong>Melancholy</strong> = Sadness + Disgust + Fear</li>
+        <li><strong>Rage</strong> = Anger + Disgust + Anticipation</li>
+        <li><strong>Anxiety</strong> = Fear + Anticipation + Surprise</li>
+        <li><strong>Serenity</strong> = Joy + Calm</li>
+      </ul>
+      <p data-i18n="docs.emotionPerf">
+        Each emotion has decay curves, conflict resolution, and threshold-based behavior triggers. The entire calculation takes &lt;1ms per NPC per frame.
+      </p>
+
+      <h2 id="personality-system" data-i18n="docs.personalityOCEAN">Personality System (OCEAN)</h2>
+      <p data-i18n="docs.personalityIntro">
+        The Five-Factor personality model determines how each NPC responds to stimuli:
+      </p>
+      <ul>
+        <li><strong data-i18n="docs.openness">Openness</strong> — <span data-i18n="docs.opennessDesc">Creativity, curiosity, aesthetic sensitivity</span></li>
+        <li><strong data-i18n="docs.conscientiousness">Conscientiousness</strong> — <span data-i18n="docs.conscientiousnessDesc">Self-discipline, organization, reliability</span></li>
+        <li><strong data-i18n="docs.extraversion">Extraversion</strong> — <span data-i18n="docs.extraversionDesc">Sociability, assertiveness, positive emotions</span></li>
+        <li><strong data-i18n="docs.agreeableness">Agreeableness</strong> — <span data-i18n="docs.agreeablenessDesc">Cooperation, trust, altruism</span></li>
+        <li><strong data-i18n="docs.neuroticism">Neuroticism</strong> — <span data-i18n="docs.neuroticismDesc">Emotional instability, anxiety, moodiness</span></li>
+      </ul>
+      <p data-i18n="docs.oceanEvolve">
+        In paid tiers, OCEAN traits evolve dynamically based on the NPC's experiences. A repeatedly insulted NPC's agreeableness decreases over time.
+      </p>
+
+      <h2 id="memory-system" data-i18n="docs.memorySystem">Memory System</h2>
+      <p data-i18n="docs.memoryIntro">
+        Three-tier progressive summarization, inspired by human memory:
+      </p>
+      <ul>
+        <li><strong data-i18n="docs.l0">L0 — Working Memory</strong>: <span data-i18n="docs.l0Desc">The last N interactions. Available on Free tier.</span></li>
+        <li><strong data-i18n="docs.l1">L1 — Summarized Memory</strong>: <span data-i18n="docs.l1Desc">Automatic consolidation of L0 into summaries. Available on Indie tier.</span></li>
+        <li><strong data-i18n="docs.l2">L2 — Core Memory</strong>: <span data-i18n="docs.l2Desc">Permanent, identity-defining memories. Available on Studio tier.</span></li>
+      </ul>
+      <p data-i18n="docs.memoryGoldfish">
+        Without L2, NPCs are "goldfish" — they forget important events within a session. L2 memories persist across sessions and shape the NPC's personality.
+      </p>
+
+      <h2 id="social-engine" data-i18n="docs.socialEngine">Social Engine</h2>
+      <p data-i18n="docs.socialIntro">
+        The Entity Graph tracks relationships between NPCs and the world:
+      </p>
+      <ul>
+        <li><strong data-i18n="docs.entityTypes">8 entity types</strong>: <span data-i18n="docs.entityTypesDesc">Person, Organization, Location, Concept, Event, Object, Media, Topic</span></li>
+        <li><strong data-i18n="docs.relationTypes">15 relation types</strong>: <span data-i18n="docs.relationTypesDesc">KNOWS, WORKS_FOR, LOCATED_IN, PART_OF, SIMILAR_TO, etc.</span></li>
+      </ul>
+      <p data-i18n="docs.socialBehavior">
+        NPCs can form opinions about other NPCs, spread information through social networks, and modify their behavior based on group dynamics.
+      </p>
+
+      <h2 id="api-npcsoul" data-i18n="docs.apiNpcSoul">API: NPCSoul</h2>
+      <pre><code>class NPCSoul:
+    @staticmethod
+    def create(preset: str) -> "NPCSoul"
+    
+    async def chat(message: str) -> str
+    
+    def on_emotion_changed(callback: Callable[[EmotionEvent], None])
+    
+    @property
+    def emotions -> EmotionState
+    
+    @property
+    def personality -> OCEANTraits
+    
+    @property
+    def memory -> MemoryManager
+    
+    @property
+    def entity_graph -> EntityGraph</code></pre>
+
+      <h2 id="api-emotion" data-i18n="docs.apiEmotion">API: CompositeEmotion</h2>
+      <pre><code>class CompositeEmotion:
+    @staticmethod
+    def evaluate(
+        stimulus: str,
+        personality: OCEANTraits,
+        history: List[Event]
+    ) -> EmotionState
+    
+    def decay(dt: float) -> None
+    
+    def resolve_conflicts() -> None</code></pre>
+
+      <h2 id="api-memory" data-i18n="docs.apiMemory">API: MemoryManager</h2>
+      <pre><code>class MemoryManager:
+    def add(event: Event) -> None
+    def recall(query: str, top_k: int = 5) -> List[Memory]
+    def consolidate() -> None  # L0 → L1 → L2
+    
+    @property
+    def summary -> str</code></pre>
+
+      <h2 id="api-entity" data-i18n="docs.apiEntity">API: EntityGraph</h2>
+      <pre><code>class EntityGraph:
+    def add_entity(entity: Entity) -> None
+    def add_relation(from_id: str, relation: RelationType, to_id: str) -> None
+    def query(start: str, end: str, max_depth: int = 3) -> List[Path]
+    def get_related(entity_id: str, relation: RelationType) -> List[Entity]</code></pre>
+
+      <h2 id="guide-presets" data-i18n="docs.soulPresets">Soul Presets</h2>
+      <p data-i18n="docs.presetsIntro">
+        Neshama ships with built-in soul presets for common NPC archetypes:
+      </p>
+      <ul>
+        <li><code data-i18n="docs.preset.tavern">tavern_keeper</code> — <span data-i18n="docs.preset.tavernDesc">Gregarious, observant, loyal to regulars</span></li>
+        <li><code data-i18n="docs.preset.quest">quest_giver</code> — <span data-i18n="docs.preset.questDesc">Authoritative, mysterious, guarded</span></li>
+        <li><code data-i18n="docs.preset.merchant">merchant</code> — <span data-i18n="docs.preset.merchantDesc">Shrewd, persuasive, status-conscious</span></li>
+        <li><code data-i18n="docs.preset.guard">guard</code> — <span data-i18n="docs.preset.guardDesc">Rigid, suspicious, duty-bound</span></li>
+        <li><code data-i18n="docs.preset.healer">healer</code> — <span data-i18n="docs.preset.healerDesc">Compassionate, patient, wise</span></li>
+      </ul>
+      <p data-i18n="docs.customPreset">
+        You can also create custom presets:
+      </p>
+      <pre><code>soul = NPCSoul.create(
+    name="Elara",
+    personality=OCEANTraits(
+        openness=0.8,
+        conscientiousness=0.6,
+        extraversion=0.3,
+        agreeableness=0.7,
+        neuroticism=0.4
+    ),
+    background="A reclusive mage who lives in the northern tower"
+)</code></pre>
+
+      <h2 id="guide-llm" data-i18n="docs.llmSetup">LLM Provider Setup</h2>
+      <p data-i18n="docs.llmIntro">
+        Neshama supports 21 LLM providers with a unified API. Only dialogue generation uses the LLM — emotions are rule-based.
+      </p>
+      <pre><code>neshama init --config
+
+# Or set via environment variable
+export NESHAMA_LLM_PROVIDER=openai
+export NESHAMA_API_KEY=sk-...</code></pre>
+      <p data-i18n="docs.llmProviders">
+        Supported providers include: OpenAI, Anthropic, Google Gemini, DeepSeek, Groq, Mistral, and 15 more. See the full list on GitHub.
+      </p>
+
+      <h2 id="guide-deploy" data-i18n="docs.selfHosting">Self-Hosting</h2>
+      <p data-i18n="docs.selfhostIntro">
+        Neshama is Apache 2.0 licensed. Run it yourself:
+      </p>
+      <pre><code>pip install neshama
+neshama dashboard --host 0.0.0.0 --port 8000</code></pre>
+      <p data-i18n="docs.dockerDeploy">
+        Or deploy with Docker:
+      </p>
+      <pre><code>docker pull neshama/neshama:latest
+docker run -p 8000:8000 -e NESHAMA_API_KEY=sk-... neshama/neshama</code></pre>
+    </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

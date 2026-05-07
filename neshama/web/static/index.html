@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neshama - NPC Soul OS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🔮</span>
+                    <span class="logo-text">Neshama</span>
+                </div>
+            </div>
+            
+            <ul class="nav-list">
+                <li class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text" data-i18n="nav.dashboard">Dashboard</span>
+                </li>
+                <li class="nav-item" data-page="account">
+                    <span class="nav-icon">🔑</span>
+                    <span class="nav-text" data-i18n="nav.account">Account</span>
+                </li>
+                <li class="nav-item" data-page="billing">
+                    <span class="nav-icon">💳</span>
+                    <span class="nav-text" data-i18n="nav.billing">Billing</span>
+                </li>
+                <li class="nav-item" data-page="templates">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text" data-i18n="nav.templates">Templates</span>
+                </li>
+                <li class="nav-item" data-page="debug">
+                    <span class="nav-icon">🔬</span>
+                    <span class="nav-text" data-i18n="nav.debug">Debug</span>
+                </li>
+                <li class="nav-item" data-page="demo">
+                    <span class="nav-icon">🎮</span>
+                    <span class="nav-text" data-i18n="nav.demo">Demo</span>
+                </li>
+                <li class="nav-item" data-page="register">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-text" data-i18n="nav.register">Get Started</span>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <button id="lang-toggle-btn" class="lang-toggle-btn" onclick="toggleLang()">EN</button>
+                <div class="connection-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connected</span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div id="page-dashboard" class="page active">
+                <!-- Dashboard content loaded here -->
+            </div>
+            <div id="page-account" class="page">
+                <!-- Account content loaded here -->
+            </div>
+            <div id="page-billing" class="page">
+                <!-- Billing content loaded here -->
+            </div>
+            <div id="page-templates" class="page">
+                <!-- Templates content loaded here -->
+            </div>
+            <div id="page-debug" class="page">
+                <!-- Debug content loaded here -->
+            </div>
+            <div id="page-demo" class="page">
+                <!-- Demo content loaded here -->
+            </div>
+            <div id="page-register" class="page">
+                <!-- Register / Login content loaded here -->
+            </div>
+            
+            <!-- Legal Footer -->
+            <footer class="legal-footer">
+                <div class="footer-links">
+                    <a href="mailto:support@neshama.ai?subject=Privacy" class="footer-link">隐私政策</a>
+                    <span class="footer-separator">|</span>
+                    <a href="mailto:support@neshama.ai?subject=Terms" class="footer-link">服务条款</a>
+                    <span class="footer-separator">|</span>
+                    <a href="mailto:support@neshama.ai?subject=Refund" class="footer-link">退款政策</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 Neshama AI
+                </div>
+                <div class="footer-contact">
+                    联系邮箱: <a href="mailto:support@neshama.ai">support@neshama.ai</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="/static/js/i18n.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/pages/dashboard.js"></script>
+    <script src="/static/js/pages/account.js"></script>
+    <script src="/static/js/pages/billing.js"></script>
+    <script src="/static/js/pages/templates.js"></script>
+    <script src="/static/js/pages/debug.js"></script>
+    <script src="/static/js/pages/demo.js"></script>
+    <script src="/static/js/pages/register.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

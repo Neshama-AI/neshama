@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  neshama-api:
+    build:
+      context: ../..
+      dockerfile: deploy/cloud/Dockerfile
+    container_name: neshama-api
+    restart: unless-stopped
+    ports:
+      - "${NESHAMA_PORT:-8420}:8420"
+    environment:
+      - NESHAMA_HOST=0.0.0.0
+      - NESHAMA_PORT=8420
+      - NESHAMA_JWT_SECRET=${NESHAMA_JWT_SECRET:-change-me-in-production}
+      - NESHAMA_ADMIN_KEY=${NESHAMA_ADMIN_KEY:-admin-key-change-me}
+      - NESHAMA_LLM_PROVIDER=${NESHAMA_LLM_PROVIDER:-openai}
+      - NESHAMA_LLM_API_KEY=${NESHAMA_LLM_API_KEY:-}
+      - NESHAMA_LLM_MODEL=${NESHAMA_LLM_MODEL:-gpt-4o-mini}
+      - NESHAMA_REDIS_URL=${NESHAMA_REDIS_URL:-redis://redis:6379}
+      - NESHAMA_FREE_CONVERSATIONS=${NESHAMA_FREE_CONVERSATIONS:-1000}
+      - NESHAMA_TRIAL_CONVERSATIONS=${NESHAMA_TRIAL_CONVERSATIONS:-50}
+      - NESHAMA_TRIAL_EXPIRY_HOURS=${NESHAMA_TRIAL_EXPIRY_HOURS:-24}
+      - NESHAMA_CORS_ORIGINS=${NESHAMA_CORS_ORIGINS:-*}
+    volumes:
+      - neshama-data:/app/data
+      - neshama-billing:/app/billing_data
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8420/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  redis:
+    image: redis:7-alpine
+    container_name: neshama-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  neshama-data:
+  neshama-billing:
+  redis-data:

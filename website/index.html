@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neshama — Give your NPCs a soul. Not a script.</title>
+  <meta name="description" content="Neshama is a soul engine that runs inside your game. Emotions, memory, personality, social relationships — all local, all real-time.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;650;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo">
+          <div class="nav__logo-mark">N</div>
+          Neshama
+        </a>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#claims" data-i18n="nav.features">Features</a></li>
+          <li><a href="#compare" data-i18n="nav.howItWorks">How it works</a></li>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
+        </ul>
+        <div class="nav__actions">
+          <button class="lang-toggle" onclick="toggleLang()">
+            <span class="lang-label">中文</span>
+          </button>
+          <a href="https://github.com/neshama/neshama" class="nav__github" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <a href="#cta" class="btn btn--primary" data-i18n="nav.getStarted">Get Started</a>
+        </div>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        <span data-i18n="hero.badge">Apache 2.0 · Self-hostable</span>
+      </div>
+
+      <h1 class="hero__title" data-i18n-html="hero.title">Give your NPCs a soul.<br>Not a script.</h1>
+
+      <p class="hero__subtitle" data-i18n="hero.subtitle">
+        Neshama is a soul engine that runs inside your game. Emotions, memory, personality, social relationships — all local, all real-time.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#cta" class="btn btn--primary btn--large" data-i18n="hero.cta.primary">Get Started</a>
+        <a href="#compare" class="btn btn--secondary btn--large" data-i18n="hero.cta.secondary">See the difference</a>
+      </div>
+
+      <div class="hero__code">
+        <div class="hero__code-header">
+          <span class="hero__code-dot hero__code-dot--red"></span>
+          <span class="hero__code-dot hero__code-dot--yellow"></span>
+          <span class="hero__code-dot hero__code-dot--green"></span>
+          <span class="hero__code-filename">TavernKeeper.cs</span>
+        </div>
+        <pre><span class="kw">var</span> soul = <span class="type">NPCSoul</span>.<span class="fn">Create</span>(preset: <span class="str">"tavern_keeper"</span>);
+soul.<span class="fn">OnEmotionChanged</span> += e => { <span class="cm">/* update NPC behavior */</span> };
+<span class="kw">await</span> soul.<span class="fn">Chat</span>(<span class="str">"Hello, how's business?"</span>);
+
+<span class="cm">// Soul handles the rest:
+//   → Emotion: Content → Curious (joy +0.12, trust +0.08)
+//   → Memory: "Player asked about business"
+//   → Personality: OCEAN traits influence response tone</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Claims -->
+  <section class="section section--bordered" id="claims">
+    <div class="container">
+      <p class="section__label" data-i18n="claims.label">Core claims</p>
+      <h2 class="section__title" data-i18n="claims.title">Three things you can verify.</h2>
+      <p class="section__desc" data-i18n="claims.desc">
+        No marketing spin. Each claim is testable in under 5 minutes.
+      </p>
+
+      <div class="claims">
+        <!-- Claim 1 -->
+        <div class="claim">
+          <p class="claim__metric" data-i18n="claim1.metric">Runs in your game, not on our server</p>
+          <h3 class="claim__title" data-i18n="claim1.title">Local-first soul engine</h3>
+          <p class="claim__desc" data-i18n="claim1.desc">
+            The emotion engine runs in your game process. Emotions update every frame. No server dependency. Works offline. Your players never hit a cloud endpoint just to feel something.
+          </p>
+          <div class="claim__code"><span style="color:#9333EA">from</span> neshama.soul <span style="color:#9333EA">import</span> CompositeEmotion
+
+<span style="color:#C2410C">emotion</span> = CompositeEmotion.<span style="color:#C2410C">evaluate</span>(
+    stimulus=<span style="color:#16A34A">"player_insulted"</span>,
+    personality=ocean_traits,
+    history=recent_events
+)
+<span style="color:#A3A3A3"># No network call. Pure math. &lt;10ms.</span></div>
+        </div>
+
+        <!-- Claim 2 -->
+        <div class="claim">
+          <p class="claim__metric" data-i18n="claim2.metric">&lt; 10ms. Every frame.</p>
+          <h3 class="claim__title" data-i18n="claim2.title">Rule-based emotion calculation</h3>
+          <p class="claim__desc" data-i18n="claim2.desc">
+            Pure rule-based emotion engine. No LLM calls for emotions. Only dialogue generation needs AI. The math is deterministic, testable, and fast enough to run per-frame.
+          </p>
+          <div class="claim__code"><span style="color:#A3A3A3"># Benchmark: 10,000 emotion evaluations</span>
+<span style="color:#9333EA">import</span> time
+start = time.perf_counter()
+<span style="color:#9333EA">for</span> _ <span style="color:#9333EA">in</span> <span style="color:#2563EB">range</span>(<span style="color:#D97706">10000</span>):
+    engine.<span style="color:#C2410C">update</span>(stimulus)
+elapsed = time.perf_counter() - start
+<span style="color:#9333EA">print</span>(<span style="color:#16A34A">f"Avg: </span>{elapsed/<span style="color:#D97706">10000</span>*<span style="color:#D97706">1000</span>:.2f}<span style="color:#16A34A">ms"</span>)
+<span style="color:#A3A3A3"># → Avg: 0.34ms</span></div>
+        </div>
+
+        <!-- Claim 3 -->
+        <div class="claim">
+          <p class="claim__metric" data-i18n="claim3.metric">3 lines of code</p>
+          <h3 class="claim__title" data-i18n="claim3.title">Integration under 5 minutes</h3>
+          <p class="claim__desc" data-i18n="claim3.desc">
+            Create a soul, subscribe to emotion changes, start chatting. That's the entire API surface. No config files, no dashboards to configure, no schema to learn.
+          </p>
+          <div class="claim__code"><span style="color:#9333EA">pip install</span> neshama
+
+<span style="color:#9333EA">from</span> neshama <span style="color:#9333EA">import</span> NPCSoul
+soul = NPCSoul.<span style="color:#C2410C">create</span>(<span style="color:#16A34A">"tavern_keeper"</span>)
+response = <span style="color:#9333EA">await</span> soul.<span style="color:#C2410C">chat</span>(<span style="color:#16A34A">"Hello!"</span>)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compare -->
+  <section class="section section--bordered section--gray" id="compare">
+    <div class="container">
+      <p class="section__label" data-i18n="compare.label">Side by side</p>
+      <h2 class="section__title" data-i18n="compare.title">Same scene. Different soul.</h2>
+      <p class="section__desc" data-i18n="compare.desc">
+        Player insults the tavern keeper, then comes back 3 game-days later. Watch what happens.
+      </p>
+
+      <div class="compare">
+        <!-- Without Neshama -->
+        <div class="compare__panel">
+          <p class="compare__tag compare__tag--without" data-i18n="compare.without">Without Neshama</p>
+          <div class="compare__dialogue">
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--player">Player</span>
+              <p class="dialogue__text">"Your ale tastes like dishwater."</p>
+            </div>
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--npc-without">Tavern Keeper</span>
+              <p class="dialogue__text">"I'm sorry to hear that. Would you like something else?"</p>
+            </div>
+            <div class="dialogue__msg" style="margin-top:12px">
+              <span class="dialogue__sender" style="color:#A3A3A3;font-style:italic" data-i18n="compare.later">...3 game-days later...</span>
+            </div>
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--player">Player</span>
+              <p class="dialogue__text">"Hello there!"</p>
+            </div>
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--npc-without">Tavern Keeper</span>
+              <p class="dialogue__text">"Welcome, traveler! What can I get for you?"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- With Neshama -->
+        <div class="compare__panel compare__panel--with">
+          <p class="compare__tag compare__tag--with" data-i18n="compare.with">With Neshama</p>
+          <div class="compare__dialogue">
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--player">Player</span>
+              <p class="dialogue__text">"Your ale tastes like dishwater."</p>
+            </div>
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--npc-with">Tavern Keeper</span>
+              <p class="dialogue__text dialogue__text--highlight">"You got a lot of nerve saying that. Maybe try the place down the street."</p>
+              <span class="dialogue__emotion">Emotion: Anger +0.45, Disgust +0.30 | Agreeableness −0.12</span>
+            </div>
+            <div class="dialogue__msg" style="margin-top:12px">
+              <span class="dialogue__sender" style="color:#A3A3A3;font-style:italic" data-i18n="compare.later">...3 game-days later...</span>
+            </div>
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--player">Player</span>
+              <p class="dialogue__text">"Hello there!"</p>
+            </div>
+            <div class="dialogue__msg">
+              <span class="dialogue__sender dialogue__sender--npc-with">Tavern Keeper</span>
+              <p class="dialogue__text dialogue__text--highlight">"Oh. It's you. Last time you were here, you insulted my ale. What do you want?"</p>
+              <span class="dialogue__emotion">Memory: "Player insulted ale" retrieved | Emotion: Resentment +0.28</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section section--bordered" id="architecture">
+    <div class="container">
+      <p class="section__label" data-i18n="arch.label">Under the hood</p>
+      <h2 class="section__title" data-i18n="arch.title">How a soul is built.</h2>
+      <p class="section__desc" data-i18n="arch.desc">
+        Five subsystems. One deterministic core. Only dialogue generation touches an LLM.
+      </p>
+
+      <div class="arch">
+        <div class="arch__diagram"><pre>
+<span class="arch-label">NPCSoul</span>
+├── <span class="arch-label">OCEAN Personality</span>      <span class="arch-dim">← 5 factor traits, evolves over time</span>
+│   ├── Openness
+│   ├── Conscientiousness
+│   ├── Extraversion
+│   ├── Agreeableness         <span class="arch-dim">← this one just went down after the insult</span>
+│   └── Neuroticism
+│
+├── <span class="arch-label">Composite Emotion Engine</span>  <span class="arch-dim">← rule-based, &lt;10ms, no LLM</span>
+│   ├── 8 primary emotions
+│   ├── 15 composite recipes   <span class="arch-dim">← e.g. Rage = Anger + Disgust + Anticipation</span>
+│   ├── Decay curves
+│   └── Conflict resolution
+│
+├── <span class="arch-label">Progressive Memory</span>      <span class="arch-dim">← L0 → L1 → L2 consolidation</span>
+│   ├── L0: Working memory     <span class="arch-dim">← last N interactions</span>
+│   ├── L1: Summarized memory  <span class="arch-dim">← automatic consolidation</span>
+│   └── L2: Core memory        <span class="arch-dim">← permanent, identity-defining</span>
+│
+├── <span class="arch-label">Entity Graph</span>           <span class="arch-dim">← who knows whom, what, where</span>
+│   ├── 8 entity types
+│   └── 15 relation types
+│
+└── <span class="arch-highlight">Dialogue Generator</span>       <span class="arch-dim">← the ONLY part that uses an LLM</span>
+    └── 21 providers, 55+ models
+</pre></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section class="section section--bordered section--gray" id="integrations">
+    <div class="container">
+      <p class="section__label" data-i18n="integrations.label">Integrations</p>
+      <h2 class="section__title" data-i18n="integrations.title">Drop into your engine.</h2>
+      <p class="section__desc" data-i18n="integrations.desc">
+        Native packages for major game engines. REST API for everything else.
+      </p>
+
+      <div class="integrations">
+        <div class="integration">
+          <div class="integration__icon">U</div>
+          <span class="integration__name">Unity</span>
+        </div>
+        <div class="integration">
+          <div class="integration__icon">UE</div>
+          <span class="integration__name">Unreal Engine 5</span>
+        </div>
+        <div class="integration">
+          <div class="integration__icon">T</div>
+          <span class="integration__name">团结引擎</span>
+        </div>
+        <div class="integration">
+          <div class="integration__icon">{ }</div>
+          <span class="integration__name">REST API</span>
+        </div>
+        <div class="integration">
+          <div class="integration__icon">Py</div>
+          <span class="integration__name">Python SDK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing preview -->
+  <section class="section section--bordered" id="pricing">
+    <div class="container">
+      <p class="section__label" data-i18n="pricing.label">Pricing</p>
+      <h2 class="section__title" data-i18n="pricing.preview.title">Start free. Scale when ready.</h2>
+      <p class="section__desc" data-i18n="pricing.preview.desc">
+        Free tier includes 3 NPC souls. Bring your own LLM key, conversations are unlimited.
+      </p>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.free.name">Free</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="0">$0</span><span>/mo</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.free.desc">Prototype and learn</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.free.f1">3 NPC souls</li>
+            <li data-i18n="pricing.free.f2">5,000 emotion calculations/mo</li>
+            <li data-i18n="pricing.free.f3">L0 working memory</li>
+            <li data-i18n="pricing.free.f4">Static OCEAN traits</li>
+            <li data-i18n="pricing.free.f5">BYOK = unlimited dialogue</li>
+          </ul>
+          <a href="#cta" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="nav.getStarted">Get Started</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.indie.name">Indie</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="19">$19</span><span>/mo</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.indie.desc">Ship your indie game</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.indie.f1">10 NPC souls</li>
+            <li data-i18n="pricing.indie.f2">50,000 emotion calculations/mo</li>
+            <li data-i18n="pricing.indie.f3">L0 + L1 memory</li>
+            <li data-i18n="pricing.indie.f4">Dynamic personality evolution</li>
+            <li data-i18n="pricing.indie.f5">Community support</li>
+          </ul>
+          <a href="#cta" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="pricing.startTrial">Start Trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.studio.name">Studio</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="79">$79</span><span>/mo</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.studio.desc">Mid-size studios</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.studio.f1">50 NPC souls</li>
+            <li data-i18n="pricing.studio.f2">500,000 emotion calculations/mo</li>
+            <li data-i18n="pricing.studio.f3">L0 + L1 + L2 full memory</li>
+            <li data-i18n="pricing.studio.f4">Entity graph & social engine</li>
+            <li data-i18n="pricing.studio.f5">Priority support</li>
+          </ul>
+          <a href="#cta" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="pricing.startTrial">Start Trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name" data-i18n="pricing.enterprise.name">Enterprise</h3>
+          <p class="pricing-card__price"><span class="price-value" data-usd-price="-1">Custom</span></p>
+          <p class="pricing-card__desc" data-i18n="pricing.enterprise.desc">AAA & platforms</p>
+          <ul class="pricing-card__features">
+            <li data-i18n="pricing.enterprise.f1">Unlimited NPC souls</li>
+            <li data-i18n="pricing.enterprise.f2">Unlimited calculations</li>
+            <li data-i18n="pricing.enterprise.f3">Custom memory hierarchies</li>
+            <li data-i18n="pricing.enterprise.f4">On-premise deployment</li>
+            <li data-i18n="pricing.enterprise.f5">SLA & dedicated support</li>
+          </ul>
+          <a href="mailto:hello@neshama.ai" class="btn btn--secondary pricing-card__btn" style="width:100%;justify-content:center" data-i18n="pricing.contactUs">Contact Us</a>
+        </div>
+      </div>
+
+      <p class="pricing-note" data-i18n-html="pricing.byokNote">
+        <code>BYOK</code> = Bring Your Own Key. Use any of 21 LLM providers. You pay the model provider directly — we don't add markup.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--bordered" id="cta">
+    <div class="container cta-section">
+      <h2 class="cta-section__title" data-i18n="cta.title">Ship NPCs worth talking to.</h2>
+      <p class="cta-section__desc" data-i18n="cta.desc">
+        Open source. Self-hostable. Free to start. 3 lines of code.
+      </p>
+      <div class="cta-section__actions">
+        <a href="https://github.com/neshama/neshama" class="btn btn--primary btn--large" target="_blank" rel="noopener" data-i18n="cta.primary">Get Started</a>
+        <a href="docs.html" class="btn btn--secondary btn--large" data-i18n="cta.secondary">Read the Docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__brand-name">
+            <span style="display:inline-flex;width:20px;height:20px;background:var(--accent);border-radius:5px;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;font-family:var(--font-mono)">N</span>
+            Neshama
+          </span>
+          <p class="footer__brand-desc" data-i18n="footer.desc">
+            The soul engine for game NPCs. Open source under Apache 2.0.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4 data-i18n="footer.product">Product</h4>
+            <ul>
+              <li><a href="#claims" data-i18n="footer.features">Features</a></li>
+              <li><a href="pricing.html" data-i18n="footer.pricing">Pricing</a></li>
+              <li><a href="docs.html" data-i18n="footer.documentation">Documentation</a></li>
+              <li><a href="#compare" data-i18n="footer.howItWorks">How it works</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="footer.developers">Developers</h4>
+            <ul>
+              <li><a href="docs.html" data-i18n="footer.quickStart">Quick Start</a></li>
+              <li><a href="docs.html" data-i18n="footer.apiReference">API Reference</a></li>
+              <li><a href="https://github.com/neshama/neshama" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="footer.community">Community</h4>
+            <ul>
+              <li><a href="https://discord.gg/neshama" target="_blank" rel="noopener">Discord</a></li>
+              <li><a href="https://github.com/neshama/neshama/issues" target="_blank" rel="noopener">Issues</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="footer.legal">Legal</h4>
+            <ul>
+              <li><a href="#" data-i18n="footer.privacyPolicy">Privacy Policy</a></li>
+              <li><a href="#" data-i18n="footer.termsOfService">Terms of Service</a></li>
+              <li><a href="https://github.com/neshama/neshama/blob/main/LICENSE" target="_blank" rel="noopener">License</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copyright" data-i18n="footer.copyright">&copy; 2026 Neshama. Built in the open.</span>
+        <div class="footer__social">
+          <a href="https://github.com/neshama/neshama" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a href="https://discord.gg/neshama" target="_blank" rel="noopener" aria-label="Discord">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.942 3.576A16.54 16.54 0 0012.87 2.5a.06.06 0 00-.064.03c-.175.313-.37.72-.506 1.04a15.27 15.27 0 00-4.6 0 10.54 10.54 0 00-.514-1.04.063.063 0 00-.064-.03 16.496 16.496 0 00-4.072 1.076.057.057 0 00-.026.023C1.008 7.284.562 10.862.784 14.393a.068.068 0 00.026.046 16.62 16.62 0 004.994 2.524.064.064 0 00.07-.023c.385-.526.728-1.08 1.023-1.662a.063.063 0 00-.035-.088 10.93 10.93 0 01-1.56-.744.064.064 0 01-.007-.107c.105-.079.21-.16.31-.243a.061.061 0 01.064-.009c3.273 1.494 6.817 1.494 10.051 0a.061.061 0 01.065.009c.1.083.204.165.31.243a.064.064 0 01-.005.107c-.499.291-1.017.537-1.561.744a.063.063 0 00-.034.088c.3.583.643 1.136 1.022 1.662a.063.063 0 00.07.023 16.568 16.568 0 005.003-2.524.064.064 0 00.025-.045c.254-4.153-.426-7.772-1.804-10.794a.05.05 0 00-.025-.023zM7.036 12.2c-.978 0-1.784-.9-1.784-2.005 0-1.105.79-2.005 1.784-2.005 1.002 0 1.8.909 1.784 2.005 0 1.104-.79 2.005-1.784 2.005zm6.593 0c-.978 0-1.784-.9-1.784-2.005 0-1.105.79-2.005 1.784-2.005 1.002 0 1.8.909 1.784 2.005 0 1.104-.782 2.005-1.784 2.005z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

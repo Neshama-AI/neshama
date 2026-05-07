@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e0f8f0e4f84a4e8b0c9d7f6a5b4c3d, type: 3}
+  m_Name: NeshamaDemoConfig
+  m_EditorClassIdentifier: 
+  
+  # Server Configuration
+  serverUrl: http://localhost:8420
+  apiPrefix: /api/game
+  timeoutSeconds: 30
+  heartbeatInterval: 30
+  maxRetries: 3
+  
+  # Player Configuration
+  playerId: demo_player
+  playerName: "\u5192\u9669\u8005"
+  
+  # NPC Configuration
+  autoCreateNPCs: 1
+  tavernKeeperPreset: tavern_keeper
+  guardCaptainPreset: guard_captain
+  mysticTravelerPreset: mystic_traveler
+  npcInteractionDistance: 3
+  npcInteractionCooldown: 5
+  
+  # Connection Configuration
+  autoConnect: 1
+  enableWebSocket: 1
+  autoReconnect: 1
+  reconnectInterval: 5
+  
+  # Debug Configuration
+  showDebugInfo: 1
+  showEmotionPanel: 1
+  showQuickEventBar: 1
+  debugLogLevel: 1
+  
+  # Guided Mode Configuration
+  enableGuidedMode: 1
+  showControlsHelp: 1
+  showFirstMeetTips: 1
+  tipDisplayDelay: 2
+  
+  # Scene Configuration
+  tavernPosition: {x: 0, y: 0, z: 0}
+  gatePosition: {x: 8, y: 0, z: 0}
+  playerStartPosition: {x: 0, y: 1, z: 5}
