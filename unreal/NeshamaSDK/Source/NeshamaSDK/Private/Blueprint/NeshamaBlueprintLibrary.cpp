@@ -176,9 +176,9 @@ void UNeshamaBlueprintLibrary::TestConnection(const FString& ServerUrl, const FS
 		if (Config)
 		{
 			// 解析URL设置配置
-			if (ServerUrl.Contains(TEXT("api.neshama.ai")))
+			if (ServerUrl.Contains(TEXT("api.neshama.pw")))
 			{
-				Config->ServerUrl = TEXT("https://api.neshama.ai");
+				Config->ServerUrl = TEXT("https://api.neshama.pw");
 				Config->Port = 443;
 			}
 			else
@@ -217,9 +217,9 @@ void UNeshamaBlueprintLibrary::SetServerMode(ENeshamaServerMode Mode)
 		switch (Mode)
 		{
 		case ENeshamaServerMode::Cloud:
-			Config->ServerUrl = TEXT("https://api.neshama.ai");
+			Config->ServerUrl = TEXT("https://api.neshama.pw");
 			Config->Port = 443;
-			UE_LOG(LogTemp, Display, TEXT("[Neshama] Server mode set to Cloud (api.neshama.ai)"));
+			UE_LOG(LogTemp, Display, TEXT("[Neshama] Server mode set to Cloud (api.neshama.pw)"));
 			break;
 
 		case ENeshamaServerMode::Local:
@@ -238,7 +238,7 @@ ENeshamaServerMode UNeshamaBlueprintLibrary::GetServerMode()
 	UNeshamaConfig* Config = GetMutableDefault<UNeshamaConfig>();
 	if (Config)
 	{
-		if (Config->ServerUrl.Contains(TEXT("api.neshama.ai")) ||
+		if (Config->ServerUrl.Contains(TEXT("api.neshama.pw")) ||
 			Config->ServerUrl.Contains(TEXT("neshama.ai")))
 		{
 			return ENeshamaServerMode::Cloud;

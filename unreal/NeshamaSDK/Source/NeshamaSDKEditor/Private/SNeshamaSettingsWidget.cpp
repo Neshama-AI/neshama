@@ -182,7 +182,7 @@ FReply SNeshamaSettingsWidget::OnResetClicked()
 	// 重置为默认值
 	if (UNeshamaConfig* Config = GetConfig())
 	{
-		Config->ServerUrl = TEXT("https://api.neshama.ai");
+		Config->ServerUrl = TEXT("https://api.neshama.pw");
 		Config->BasePath = TEXT("/api");
 		Config->Port = 443;
 		Config->ServerMode = ENeshamaServerMode::Cloud;

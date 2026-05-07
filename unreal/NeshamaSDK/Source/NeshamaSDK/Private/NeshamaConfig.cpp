@@ -16,7 +16,7 @@ UNeshamaConfig::UNeshamaConfig(const FObjectInitializer& ObjectInitializer)
 	, ApiKey(TEXT(""))
 	, bTrialMode(false)
 	, TrialToken(TEXT(""))
-	, ServerUrl(TEXT("https://api.neshama.ai"))
+	, ServerUrl(TEXT("https://api.neshama.pw"))
 	, BasePath(TEXT("/api"))
 	, Port(8420)
 	, TimeoutSeconds(30)
@@ -36,7 +36,7 @@ UNeshamaConfig::UNeshamaConfig(const FObjectInitializer& ObjectInitializer)
 
 FString UNeshamaConfig::BuildUrl(const FString& Endpoint) const
 {
-	// 构建URL格式: https://api.neshama.ai/api/endpoint (Cloud)
+	// 构建URL格式: https://api.neshama.pw/api/endpoint (Cloud)
 	//              http://localhost:8420/api/endpoint (Local)
 	FString Url = ServerUrl;
 	

@@ -200,7 +200,7 @@ namespace Neshama.SDK.Editor
                     "Are you sure you want to reset all settings to defaults?", 
                     "Reset", "Cancel"))
                 {
-                    Settings.BaseUrl = "https://api.neshama.ai";
+                    Settings.BaseUrl = "https://api.neshama.pw";
                     Settings.CurrentServerMode = NeshamaConfig.ServerMode.Cloud;
                     Settings.ApiKey = "";
                     Settings.TrialMode = false;

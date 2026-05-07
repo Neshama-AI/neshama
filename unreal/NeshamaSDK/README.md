@@ -94,7 +94,7 @@ Register at https://neshama.game for:
 
 ### Cloud (Recommended)
 - **No setup** — just install and go
-- **Default**: `https://api.neshama.ai`
+- **Default**: `https://api.neshama.pw`
 - **Free tier**: 100 calls/day
 - Switch in Blueprint: `[Set Server Mode → Cloud]`
 

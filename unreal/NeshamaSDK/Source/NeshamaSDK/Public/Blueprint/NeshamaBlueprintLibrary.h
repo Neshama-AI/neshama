@@ -150,7 +150,7 @@ public:
 	 * @param ApiKey API Key (可选)
 	 * 
 	 * Blueprint示例：
-	 *   [Test Connection ("https://api.neshama.ai", "")] → [Print String: Result]
+	 *   [Test Connection ("https://api.neshama.pw", "")] → [Print String: Result]
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama",
 		meta = (DisplayName = "Test Connection",

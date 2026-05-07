@@ -60,7 +60,7 @@ namespace Neshama.SDK.Editor
         [MenuItem("Neshama/Open Dashboard", false, 100)]
         public static void OpenDashboard()
         {
-            Application.OpenURL("https://api.neshama.ai");
+            Application.OpenURL("https://api.neshama.pw");
         }
 
         void OnGUI()
@@ -639,7 +639,7 @@ npcSoul.OnEmotionChanged += (emotion) => {
             EditorGUILayout.LabelField("Next Steps:", EditorStyles.boldLabel);
             EditorGUILayout.LabelField("• Edit your NPC's OCEAN personality in the Inspector", bodyStyle);
             EditorGUILayout.LabelField("• Try sending different GameEventType values", bodyStyle);
-            EditorGUILayout.LabelField("• Check the Dashboard at api.neshama.ai", bodyStyle);
+            EditorGUILayout.LabelField("• Check the Dashboard at api.neshama.pw", bodyStyle);
             EditorGUILayout.LabelField("• Read the full docs: neshama.ai/docs", bodyStyle);
 
             EditorGUILayout.Space(16);
@@ -651,7 +651,7 @@ npcSoul.OnEmotionChanged += (emotion) => {
             }
             if (GUILayout.Button("Open Dashboard", GUILayout.Height(36)))
             {
-                Application.OpenURL("https://api.neshama.ai");
+                Application.OpenURL("https://api.neshama.pw");
             }
             if (GUILayout.Button("Close Wizard", GUILayout.Height(36)))
             {

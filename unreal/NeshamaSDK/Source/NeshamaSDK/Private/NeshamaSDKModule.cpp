@@ -56,7 +56,7 @@ void FNeshamaSDKModule::RegisterSettings()
 	GConfig->SetString(
 		TEXT("/Script/NeshamaSDK.NeshamaConfig"),
 		TEXT("ServerUrl"),
-		TEXT("https://api.neshama.ai"),
+		TEXT("https://api.neshama.pw"),
 		GEngineIni
 	);
 	

@@ -24,7 +24,7 @@ namespace Neshama.SDK
         /// <summary>
         /// 云端API地址
         /// </summary>
-        private const string CLOUD_BASE_URL = "https://api.neshama.ai";
+        private const string CLOUD_BASE_URL = "https://api.neshama.pw";
 
         /// <summary>
         /// 本地开发API地址

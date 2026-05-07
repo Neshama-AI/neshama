@@ -225,7 +225,7 @@ Or define custom templates through the Neshama Dashboard at https://neshama.game
 ### Cloud Mode (Recommended for Beginners)
 
 - **No setup required** — just install the plugin
-- **Default server**: `https://api.neshama.ai`
+- **Default server**: `https://api.neshama.pw`
 - **Free trial available** — 100 API calls/day
 - **Auto-scaling** — handles any load
 - **Persistent storage** — NPC memories saved in cloud

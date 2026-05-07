@@ -50,7 +50,7 @@ void SNeshamaSetupWizard::Construct(const FArguments& InArgs)
 	NPCName = TEXT("My First NPC");
 
 	// 默认配置
-	ServerUrl = TEXT("https://api.neshama.ai");
+	ServerUrl = TEXT("https://api.neshama.pw");
 	ApiKey.Empty();
 	VerifyMessage.Empty();
 
@@ -360,7 +360,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildConnectionConfigPage()
 					.OnCheckStateChanged(this, &SNeshamaSetupWizard::OnCloudModeSelected)
 					[
 						SNew(STextBlock)
-						.Text(LOCTEXT("CloudMode", "☁ Cloud (api.neshama.ai)"))
+						.Text(LOCTEXT("CloudMode", "☁ Cloud (api.neshama.pw)"))
 						.Padding(FMargin(8, 0, 0, 0))
 					]
 				]
@@ -815,7 +815,7 @@ FReply SNeshamaSetupWizard::OnRegisterClicked()
 FReply SNeshamaSetupWizard::OnTryWithoutAccountClicked()
 {
 	ServerMode = ENeshamaServerMode::Cloud;
-	ServerUrl = TEXT("https://api.neshama.ai");
+	ServerUrl = TEXT("https://api.neshama.pw");
 	GoToStep(ESetupWizardStep::ConnectionConfig);
 	return FReply::Handled();
 }
@@ -825,7 +825,7 @@ void SNeshamaSetupWizard::OnCloudModeSelected(ECheckBoxState NewState)
 	if (NewState == ECheckBoxState::Checked)
 	{
 		ServerMode = ENeshamaServerMode::Cloud;
-		ServerUrl = TEXT("https://api.neshama.ai");
+		ServerUrl = TEXT("https://api.neshama.pw");
 	}
 }
 
@@ -857,7 +857,7 @@ FReply SNeshamaSetupWizard::OnVerifyConnectionClicked()
 	UNeshamaConfig* TestConfig = NewObject<UNeshamaConfig>();
 	if (ServerMode == ENeshamaServerMode::Cloud)
 	{
-		TestConfig->ServerUrl = TEXT("https://api.neshama.ai");
+		TestConfig->ServerUrl = TEXT("https://api.neshama.pw");
 		TestConfig->Port = 443;
 	}
 	else
@@ -886,7 +886,7 @@ FReply SNeshamaSetupWizard::OnTryFreeClicked()
 {
 	// 免注册试用：获取临时Token
 	ServerMode = ENeshamaServerMode::Cloud;
-	ServerUrl = TEXT("https://api.neshama.ai");
+	ServerUrl = TEXT("https://api.neshama.pw");
 	ApiKey = TEXT("trial_token");
 	VerifyMessage = TEXT("✓ Free trial activated! Limited to 100 API calls/day.");
 	return FReply::Handled();
@@ -1003,7 +1003,7 @@ void SNeshamaSetupWizard::ApplyConnectionConfig()
 	{
 		if (ServerMode == ENeshamaServerMode::Cloud)
 		{
-			Config->ServerUrl = TEXT("https://api.neshama.ai");
+			Config->ServerUrl = TEXT("https://api.neshama.pw");
 			Config->Port = 443;
 		}
 		else

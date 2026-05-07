@@ -28,7 +28,7 @@
 ### Step 2: Get Your API Key
 
 **Free Account (1000 conversations/month):**
-- Visit [api.neshama.ai](https://api.neshama.ai) → Sign Up
+- Visit [api.neshama.pw](https://api.neshama.pw) → Sign Up
 - Or use the Setup Wizard inside Unity (`Neshama → Setup Wizard`)
 
 **Free Trial (No registration needed):**
@@ -86,7 +86,7 @@ config.ApiKey = "nsk_your_api_key_here";
 
 Or configure in `Edit → Project Settings → Neshama`:
 - **Server Mode**: Cloud
-- **API Key**: Paste your key from api.neshama.ai
+- **API Key**: Paste your key from api.neshama.pw
 
 ### Local Mode (Advanced — Self-hosted)
 
