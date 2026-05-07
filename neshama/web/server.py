@@ -29,7 +29,7 @@ from .api import (
     soul, emotion, memory, evolution, chat, config, 
     composite_emotion, entity_graph, progressive_summarization, 
     model_marketplace, coding_plans, game, provider, health as health_api,
-    gdpr, auth,
+    gdpr, auth, license as license_api,
 )
 
 # Import monitoring
@@ -420,6 +420,7 @@ def create_app() -> FastAPI:
     app.include_router(health_api.router, tags=["Health"])
     app.include_router(gdpr.router, prefix="/api/gdpr", tags=["GDPR"])
     app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
+    app.include_router(license_api.router, prefix="/api/license", tags=["License"])
     
     # SPA fallback
     @app.get("/{full_path:path}")

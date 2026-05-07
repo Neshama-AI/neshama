@@ -9,6 +9,7 @@ Provides:
 - Stripe integration for payment processing
 - Refund handling with policy enforcement
 - Subscription middleware for resource enforcement
+- License key generation, validation, and machine binding
 
 Dual-Track Model:
 - Hosted mode: We cover LLM costs, conversation quota per month
@@ -63,4 +64,36 @@ from .refund import (
     RefundRequest,
     RefundResult,
     RefundStatus,
+)
+from .license import (
+    LicenseStore,
+    LicenseCache,
+    LicenseRecord,
+    LicenseValidationResult,
+    MachineBinding,
+    generate_license_key,
+    parse_license_key,
+    validate_license,
+    activate_license,
+    deactivate_license,
+    get_license_status,
+    generate_license,
+    revoke_license,
+    check_grace_period,
+    check_feature,
+    check_region_match,
+    detect_region_from_host,
+    get_license_store,
+    get_license_cache,
+    get_region_pricing,
+    PLAN_FEATURES,
+    PLAN_NPC_LIMITS,
+    MACHINE_LIMITS,
+    GRACE_PERIOD_DAYS,
+    PLAN_CODES,
+    REGION_CODES,
+    REGION_CODE_REVERSE,
+    REGION_DISPLAY_NAMES,
+    REGION_PRICING,
+    DOMAIN_REGION_MAP,
 )

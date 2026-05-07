@@ -13,6 +13,7 @@ from . import billing
 from . import health
 from . import gdpr
 from . import auth
+from . import license
 
 __all__ = [
     "soul",
@@ -36,4 +37,5 @@ __all__ = [
     "health",
     "gdpr",
     "auth",
+    "license",
 ]
