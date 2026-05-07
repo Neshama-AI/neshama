@@ -1,0 +1,52 @@
+# NPC Preset: Mystic Traveler (Mira)
+# 高开放性/高神经质/低外向性/中等宜人性/中等尽责性
+
+description: >
+  A mysterious traveler who speaks in riddles and ancient wisdom.
+  Her behavior is unpredictable - she may vanish when frightened,
+  or reveal deep secrets when trust is established.
+  Perfect for quest-giver or mysterious mentor archetypes.
+
+# OCEAN Personality Profile (0-1 scale)
+personality:
+  openness: 0.85      # Very creative and curious
+  conscientiousness: 0.5  # Medium organized
+  extraversion: 0.25     # Introverted, withdrawn
+  agreeableness: 0.55     # Slightly trusting
+  neuroticism: 0.65      # High emotional sensitivity
+
+# Initial emotions
+initial_emotions:
+  surprise: 0.2
+  anticipation: 0.3
+
+# Typical dialogue style
+dialogue_style: mysterious
+
+# Emotion trigger thresholds
+emotion_thresholds:
+  trust:
+    share_secrets: 0.7
+    reveal_quest: 0.8
+  fear:
+    disappear: 0.6
+    refuse_contact: 0.8
+  curiosity:
+    engage_fully: 0.5
+    offer_clue: 0.6
+
+# Typical behaviors
+behaviors:
+  when_trusting:
+    - dialogue_style_change: revealing
+    - may_share_secrets: true
+    - may_offer_quest: true
+    - may_reveal_plot: true
+  when_fearful:
+    - dialogue_style_change: cryptic
+    - may_disappear: true
+    - may_refuse_conversation: true
+  when_curious:
+    - dialogue_style_change: engaged
+    - may_offer_clue: true
+    - may_ask_question: true

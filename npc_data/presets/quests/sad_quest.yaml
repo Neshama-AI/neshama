@@ -1,0 +1,50 @@
+# Quest Template: Sad Quest
+# NPC sadness triggers search for lost item
+
+template_id: sad_quest
+title: "寻找失落之物"
+description: "NPC因悲伤委托玩家寻找遗失的重要物品，或许这能让他好起来。"
+
+giver_npc: ""  # Set dynamically
+
+trigger:
+  emotion: sadness
+  threshold: 0.6
+  direction: any
+
+completion_conditions:
+  - condition_type: collect_item
+    target: lost_item
+    description: "找到NPC遗失的物品"
+  - condition_type: talk_to_npc
+    target: npc
+    description: "将物品交还给NPC"
+
+rewards:
+  - reward_type: item
+    target: consolation_gift
+    value: 1
+  - reward_type: gold
+    target: ""
+    value: 50
+  - reward_type: reputation
+    target: local
+    value: 5
+
+emotional_success:
+  - emotion: joy
+    value: 0.3
+  - emotion: gratitude
+    value: 0.2
+  - emotion: relief
+    value: 0.2
+
+emotional_failure:
+  - emotion: sadness
+    value: 0.1
+  - emotion: despair
+    value: 0.1
+
+related_triggers:
+  - sadness_relieved
+  - npc_comforted

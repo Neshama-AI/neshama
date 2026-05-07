@@ -1,0 +1,9 @@
+{
+  "npc_id": "test_npc_002",
+  "voice_id": "mock_voice_1",
+  "provider_name": "mock_provider",
+  "language": "en",
+  "emotion": "joy",
+  "speed": 1.0,
+  "pitch": 1.0
+}

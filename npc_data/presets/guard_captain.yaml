@@ -1,0 +1,60 @@
+# NPC Preset: Guard Captain
+# Low外向性/高尽责性/Low神经质
+
+description: >
+  A disciplined guard captain who speaks concisely.
+  Hostile to enemies, maintains order at all costs.
+  Default personality for city guard/military NPCs.
+
+# OCEAN Personality Profile (0-1 scale)
+personality:
+  openness: 0.3          # Traditional, follows rules
+  conscientiousness: 0.9  # Highly disciplined
+  extraversion: 0.3      # Reserved, stoic
+  agreeableness: 0.4    # Authoritative, not too friendly
+  neuroticism: 0.2       # Emotionally stable, calm under pressure
+
+# Initial emotions
+initial_emotions:
+  trust: 0.15
+  anticipation: 0.1
+
+# Typical dialogue style
+dialogue_style: neutral
+
+# Emotion trigger thresholds
+emotion_thresholds:
+  anger:
+    hostile: 0.4
+    may_detain: 0.6
+    may_attack: 0.8
+  fear:
+    defensive: 0.6
+    call_backup: 0.7
+  trust:
+    share_info: 0.7
+    lower_guard: 0.8
+
+# Typical behaviors
+behaviors:
+  when_hostile:
+    - dialogue_style_change: aggressive
+    - may_detain_player: true
+    - shop_markup: 0.2
+  when_calm:
+    - dialogue_style_change: neutral
+    - may_answer_questions: true
+  when_trusting:
+    - may_share_tactical_info: true
+    - may_ignore_minor_violations: true
+
+# Relationship modifiers
+relationship_effects:
+  player_criminal:
+    dialogue_hostile: true
+    may_detain: true
+    faction_shift: -0.3
+  player_hero:
+    dialogue_friendly: true
+    may_assist: true
+    faction_shift: 0.2

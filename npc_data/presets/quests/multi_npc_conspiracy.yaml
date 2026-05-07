@@ -1,0 +1,53 @@
+# Quest Template: Multi-NPC Conspiracy
+# Multiple NPCs conspire, player must choose side
+
+template_id: multi_npc_conspiracy
+title: "站队抉择"
+description: "多个NPC之间似乎有了合谋，他们各自拉拢你。你会站在哪一边？"
+
+giver_npc: ""  # Set dynamically
+
+trigger:
+  emotion: anger
+  threshold: 0.5
+  direction: any
+
+completion_conditions:
+  - condition_type: choose_side
+    target: faction
+    description: "选择支持某一派系"
+  - condition_type: defeat_npc
+    target: opposing_faction
+    description: "击败对立派系的NPC（可选）"
+
+rewards:
+  - reward_type: reputation
+    target: chosen_faction
+    value: 40
+  - reward_type: gold
+    target: ""
+    value: 150
+  - reward_type: item
+    target: faction_token
+    value: 1
+
+emotional_success:
+  - emotion: trust
+    value: 0.3
+  - emotion: respect
+    value: 0.2
+  - emotion: anticipation
+    value: 0.1
+
+emotional_failure:
+  - emotion: anger
+    value: 0.2
+  - emotion: hostility
+    value: 0.2
+  - emotion: distrust
+    value: 0.1
+
+related_triggers:
+  - conspiracy_revealed
+  - faction_war_begins
+  - alliance_formed

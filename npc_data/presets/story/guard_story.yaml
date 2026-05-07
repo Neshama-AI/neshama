@@ -1,0 +1,273 @@
+# Guard Story Presets
+# Complete story trigger chain for guard/soldier scenarios
+
+# Trigger 1: Guard captain angry -> city gate lockdown
+captain_angry_lockdown:
+  name: "城门戒严"
+  description: "守卫队长愤怒时城门戒严，影响所有进出城的NPC"
+  priority: 20
+  cooldown: 600.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: anger
+      threshold: 0.65
+      direction: rising
+  effects:
+    - effect_type: trigger_world_event
+      target: area_lockdown
+      params:
+        area_id: city_gate
+        reason: "守卫队长下令戒严"
+        blocked_npcs:
+          - merchant_001
+          - traveler_001
+    - effect_type: modify_npc
+      target: guard_captain
+      params:
+        dialogue_style: aggressive
+        movement_pattern: aggressive_patrol
+        will_talk: true
+
+# Trigger 2: Guard captain trusts player -> night passage allowed
+captain_trust_night:
+  name: "夜间通行"
+  description: "守卫队长信任玩家后允许夜间通行"
+  priority: 15
+  cooldown: 3600.0
+  one_shot: true
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: trust
+      threshold: 0.75
+      direction: rising
+  effects:
+    - effect_type: unlock_dialogue
+      target: guard_captain
+      params:
+        dialogue_id: night_passage_granted
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: night_passage_unlocked
+        milestone_type: unlock_area
+        target_id: city_exterior_night
+
+# Trigger 3: Guard captain and tavern keeper both angry -> town-wide alert
+multi_npc_anger_alert:
+  name: "全镇警戒"
+  description: "守卫队长和老板娘都愤怒时触发全镇警戒"
+  priority: 25
+  cooldown: 900.0
+  one_shot: false
+  conditions:
+    - condition_type: multi_npc_condition
+      emotion: anger
+      threshold: 0.5
+      min_npcs: 2
+  effects:
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: town_alert_mode
+        milestone_type: unlock_feature
+        target_id: enhanced_patrol
+        title: "全镇警戒"
+        description: "守卫增加巡逻频率，玩家行为需谨慎"
+    - effect_type: spawn_encounter
+      params:
+        spawn_location: city_center
+        enemy_type: patrol_guard
+        enemy_count: 2
+        behavior: defensive
+
+# Trigger 4: Guard captain sad -> compassionate player quest
+captain_sadness:
+  name: "队长心事"
+  description: "守卫队长悲伤时可能向玩家吐露心事"
+  priority: 12
+  cooldown: 1800.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: sadness
+      threshold: 0.5
+      direction: any
+  effects:
+    - effect_type: unlock_dialogue
+      target: guard_captain
+      params:
+        dialogue_id: captain_confession
+    - effect_type: spawn_quest
+      target: captain_sad_quest
+      params:
+        template_id: sad_quest
+        title: "倾听心事"
+        description: "队长似乎有心事，或许能帮上忙"
+
+# Trigger 5: Guard captain fear -> defensive mode
+captain_fear_defensive:
+  name: "恐惧防御"
+  description: "守卫队长恐惧时采取防御姿态"
+  priority: 18
+  cooldown: 600.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: fear
+      threshold: 0.6
+      direction: rising
+  effects:
+    - effect_type: modify_npc
+      target: guard_captain
+      params:
+        dialogue_style: cautious
+        movement_pattern: defensive
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: captain_defensive
+        milestone_type: unlock_feature
+        title: "防御姿态"
+        description: "队长似乎在防备什么..."
+
+# Trigger 6: Prolonged high trust + low anger -> promotion quest
+trustworthy_guard:
+  name: "可信赖的守卫"
+  description: "NPC长期信任玩家且不愤怒时，解锁晋升任务"
+  priority: 8
+  cooldown: 7200.0
+  one_shot: true
+  conditions:
+    - condition_type: time_based
+      npc_id: guard_captain
+      emotion: trust
+      threshold: 0.7
+      duration_seconds: 3600
+  effects:
+    - effect_type: spawn_quest
+      target: guard_promotion
+      params:
+        template_id: trust_secret
+        title: "晋升考验"
+        description: "队长认为你值得信赖，委托你执行一项重要任务"
+    - effect_type: trigger_world_event
+      target: faction_shift
+      params:
+        npc_id: guard_captain
+        npc_name: "守卫队长"
+        new_faction: trusted_allies
+        faction_change_type: bond
+
+# Trigger 7: Guard captain and tavern keeper conflict -> both sad -> mediation
+npc_conflict_sadness:
+  name: "NPC冲突调解"
+  description: "守卫队长和老板娘吵架后两人都悲伤，解锁调解任务"
+  priority: 16
+  cooldown: 1800.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_combo
+      npc_id: guard_captain
+      emotions:
+        sadness: 0.4
+        anger: 0.3
+    - condition_type: emotion_combo
+      npc_id: tavern_keeper
+      emotions:
+        sadness: 0.4
+        anger: 0.3
+      operator: and
+  effects:
+    - effect_type: spawn_quest
+      target: mediation_quest
+      params:
+        template_id: friend_favor
+        title: "调解纷争"
+        description: "两位老朋友之间似乎有了矛盾"
+    - effect_type: unlock_dialogue
+      target: guard_captain
+      params:
+        dialogue_id: conflict_intro
+
+# Trigger 8: Guard captain joy + anticipation -> festival mode
+captain_festive:
+  name: "节日模式"
+  description: "守卫队长开心且期待时，城镇进入节日模式"
+  priority: 10
+  cooldown: 3600.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_combo
+      npc_id: guard_captain
+      emotions:
+        joy: 0.7
+        anticipation: 0.5
+  effects:
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: festival_mode
+        milestone_type: unlock_feature
+        target_id: town_festival
+        title: "节日庆典"
+        description: "城镇举办节日庆典！"
+    - effect_type: price_change
+      params:
+        shop_id: town_general
+        price_multiplier: 0.85
+        duration_seconds: 7200
+
+# Trigger 9: Guard captain distrust player -> hostile treatment
+captain_distrust:
+  name: "不信任待遇"
+  description: "守卫队长对玩家不信任时态度冷淡"
+  priority: 14
+  cooldown: 600.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: disgust
+      threshold: 0.5
+      direction: rising
+  effects:
+    - effect_type: modify_npc
+      target: guard_captain
+      params:
+        dialogue_style: hostile
+        will_share_secrets: false
+        shop_price_multiplier: 1.2
+
+# Trigger 10: Time-based suspicion -> patrol increases
+prolonged_suspicion:
+  name: "持续怀疑"
+  description: "守卫队长怀疑状态持续10分钟后增加巡逻"
+  priority: 17
+  cooldown: 1200.0
+  one_shot: false
+  conditions:
+    - condition_type: time_based
+      npc_id: guard_captain
+      emotion: fear
+      threshold: 0.4
+      duration_seconds: 600
+  effects:
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: increased_patrol
+        milestone_type: unlock_feature
+        title: "加强巡逻"
+        description: "守卫们增加了巡逻频率"
+    - effect_type: spawn_encounter
+      params:
+        spawn_location: city_streets
+        enemy_type: alert_guard
+        enemy_count: 3
+        behavior: patrol
+        trigger_radius: 15.0

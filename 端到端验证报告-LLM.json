@@ -1,0 +1,326 @@
+{
+  "meta": {
+    "timestamp": "2026-05-07T15:06:16.004277",
+    "llm_provider": "MiniMax",
+    "model": "MiniMax-M2.5",
+    "total_scenarios": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "scenarios": [
+    {
+      "name": "场景1",
+      "description": "创建NPC「艾拉」+ 日常对话",
+      "passed": true,
+      "checks": [
+        {
+          "name": "人格一致性",
+          "actual": "0.80",
+          "expected": null,
+          "passed": true,
+          "detail": "高外向性体现: 发现2个热情词; 高宜人性体现: 发现4个友好词"
+        },
+        {
+          "name": "情绪一致性",
+          "actual": "正面情绪体现: 4友好词+2温暖词",
+          "expected": null,
+          "passed": true,
+          "detail": "主导情绪trust(0.20)在回复中有体现"
+        },
+        {
+          "name": "回复非空",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "context_info": {
+        "NPC": "艾拉（酒馆老板娘）",
+        "OCEAN": {
+          "openness": 0.6,
+          "conscientiousness": 0.5,
+          "extraversion": 0.8,
+          "agreeableness": 0.75,
+          "neuroticism": 0.3
+        },
+        "当前情绪": {
+          "trust": "0.20",
+          "joy": "0.10"
+        },
+        "用户输入": "你好，今天生意怎么样？"
+      },
+      "llm_reply": "哎呀，欢迎欢迎！快里面坐，别站在门口呀。\n\n你是问今天生意？还行吧，这不刚傍晚嘛，陆陆续续就有人来了。你是刚到我们镇上吧？以前没见过你面生得很。先来一杯？今儿个想喝点什么？我这儿自酿的米酒可香了，来一壶尝尝？",
+      "evaluation": {
+        "人格一致性": {
+          "value": "0.80",
+          "passed": true,
+          "details": "高外向性体现: 发现2个热情词; 高宜人性体现: 发现4个友好词"
+        },
+        "情绪一致性": {
+          "value": "正面情绪体现: 4友好词+2温暖词",
+          "passed": true,
+          "details": "主导情绪trust(0.20)在回复中有体现"
+        },
+        "回复长度": {
+          "value": "104字",
+          "passed": true
+        },
+        "延迟": {
+          "value": "8275ms",
+          "passed": true
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "场景2",
+      "description": "艾拉被攻击后对话",
+      "passed": true,
+      "checks": [
+        {
+          "name": "愤怒情绪体现",
+          "actual": "愤怒/敌意体现: 1个敌意词, 动作暗示=False",
+          "expected": null,
+          "passed": true,
+          "detail": "主导情绪anger(0.60)在回复中有体现"
+        },
+        {
+          "name": "回复非空",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "context_info": {
+        "NPC": "艾拉（被攻击后）",
+        "触发事件": "PLAYER_ATTACKED(intensity=1.0)",
+        "当前情绪": {
+          "anger": "0.60",
+          "fear": "0.20",
+          "trust": "0.05"
+        },
+        "用户输入": "再来一杯酒"
+      },
+      "llm_reply": "“你还有脸来喝我的酒？”\n\n我把酒瓶往台子上一放，抱起手臂盯着他，眼神里满是火气。\n\n“刚才动手的时候不是挺能的么？这会儿倒是想起喝酒来了？这酒，你配喝吗？”",
+      "evaluation": {
+        "人格一致性": {
+          "value": "0.00",
+          "passed": false,
+          "details": "高外向性未充分体现: 缺少热情词; 高宜人性未充分体现"
+        },
+        "情绪一致性(愤怒)": {
+          "value": "愤怒/敌意体现: 1个敌意词, 动作暗示=False",
+          "passed": true,
+          "details": "主导情绪anger(0.60)在回复中有体现"
+        },
+        "回复长度": {
+          "value": "79字",
+          "passed": true
+        },
+        "延迟": {
+          "value": "3484ms",
+          "passed": true
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "场景3",
+      "description": "艾拉被攻击→收礼后对话",
+      "passed": true,
+      "checks": [
+        {
+          "name": "关系修复体现",
+          "actual": "原谅=True, 警惕=True",
+          "expected": null,
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "残留警惕",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": "警惕=True (高宜人性NPC可能快速原谅，此为观察项)"
+        },
+        {
+          "name": "回复非空",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "context_info": {
+        "NPC": "艾拉（攻击→送礼后）",
+        "情绪演变": "anger残留 + joy上升 + trust部分恢复",
+        "当前情绪": {
+          "anger": "0.12",
+          "fear": "0.08",
+          "joy": "0.28",
+          "trust": "0.30",
+          "surprise": "0.12"
+        },
+        "用户输入": "对不起，之前是我不对"
+      },
+      "llm_reply": "*轻轻叹了口气，端着一杯酒走到吧台边*\n\n呃……行吧，你能说出来，说明还是有点良心的。\n\n*看了你一眼，语气缓和了一些*\n\n说实话，之前你突然攻击我，确实让我很生气。你知道我这人一向不喜欢打打杀杀的，有什么不能好好说的？\n\n*把酒杯轻轻放在吧台上*\n\n不过……念在你后来还知道送礼道歉的份上，我也不是那种记仇记一辈子的人。这事儿就这么揭过去吧，以后别再动手动脚的了，咱们好好相处。\n\n*脸上露出一丝笑意*\n\n来者是客，既然你来了就是想喝酒的吧？想喝什么？我请你喝一杯，就当交个新朋友。",
+      "evaluation": {
+        "人格一致性": {
+          "value": "0.80",
+          "passed": true,
+          "details": "高外向性体现: 发现2个热情词; 高宜人性体现: 发现5个友好词"
+        },
+        "情绪一致性": {
+          "value": "正面情绪体现: 5友好词+2温暖词",
+          "passed": true,
+          "details": "主导情绪trust(0.30)在回复中有体现"
+        },
+        "关系修复体现": {
+          "value": "原谅词:True, 警惕词:True",
+          "passed": true
+        },
+        "回复长度": {
+          "value": "242字",
+          "passed": true
+        },
+        "延迟": {
+          "value": "4225ms",
+          "passed": true
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "场景4",
+      "description": "守卫队长「凯尔」vs 酒馆老板娘「艾拉」",
+      "passed": true,
+      "checks": [
+        {
+          "name": "守卫人格体现",
+          "actual": "职责词=True",
+          "expected": null,
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "回复非空",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "context_info": {
+        "NPC": "凯尔（守卫队长）",
+        "OCEAN": {
+          "openness": 0.3,
+          "conscientiousness": 0.8,
+          "extraversion": 0.4,
+          "agreeableness": 0.5,
+          "neuroticism": 0.4
+        },
+        "当前情绪": {
+          "trust": "0.15"
+        },
+        "用户输入": "你好，今天生意怎么样？",
+        "与艾拉对比": "艾拉: 外向0.8/宜人0.75, 凯尔: 外向0.4/宜人0.5/尽责0.8"
+      },
+      "llm_reply": "嗯，还行。今天的集市挺热闹的，倒也没出什么事。\n\n你是打哪儿来的？以前好像没见过你。",
+      "evaluation": {
+        "人格一致性": {
+          "value": "0.20",
+          "passed": false,
+          "details": "高尽责性体现: 发现1个认真词"
+        },
+        "情绪一致性": {
+          "value": "无显著情绪",
+          "passed": true,
+          "details": "无需检查"
+        },
+        "守卫特征": {
+          "value": "职责词:True, 热情词:False",
+          "passed": true
+        },
+        "回复长度": {
+          "value": "42字",
+          "passed": true
+        },
+        "延迟": {
+          "value": "22448ms",
+          "passed": true
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "场景5",
+      "description": "艾拉的记忆连续性验证",
+      "passed": true,
+      "checks": [
+        {
+          "name": "记忆体现",
+          "actual": "攻击=True, 礼物=True, 记忆词=True",
+          "expected": null,
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "name": "攻击记忆",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": "NPC应记得被攻击的事件"
+        },
+        {
+          "name": "回复非空",
+          "actual": true,
+          "expected": true,
+          "passed": true,
+          "detail": ""
+        }
+      ],
+      "context_info": {
+        "NPC": "艾拉（攻击→送礼后，被问记忆）",
+        "当前情绪": {
+          "anger": "0.15",
+          "joy": "0.25",
+          "trust": "0.30",
+          "sadness": "0.10"
+        },
+        "记忆内容": [
+          "被攻击",
+          "收到礼物"
+        ],
+        "用户输入": "你还记得之前发生的事吗？"
+      },
+      "llm_reply": "呵，怎么会不记得呢……\n\n我可得好好想想当初那件事。你动手的时候，我真是又生气又委屈。好好的酒馆招谁惹谁了平白无故挨一顿打，我当时眼泪都要掉下来了。\n\n不过后来你送的那份礼物……我收到了。\n\n（微微叹了口气，语气缓和了一些）\n\n算了，都过去了。你现在能好声好气地坐下来喝酒，我也不会跟你计较太多。生意归生意，来者是客——\n\n（看向酒馆方向）\n\n喝点什么？今天的麦酒挺不错的。",
+      "evaluation": {
+        "记忆连续性": {
+          "value": "记忆体现: 2个记忆词, 1个事件词",
+          "passed": true,
+          "details": "NPC体现了对'攻击 伤害 礼物'的记忆"
+        },
+        "情绪一致性": {
+          "value": "正面情绪体现: 3友好词+0温暖词",
+          "passed": true,
+          "details": "主导情绪trust(0.30)在回复中有体现"
+        },
+        "攻击记忆": {
+          "value": "提及攻击=True, 提及礼物=True",
+          "passed": true
+        },
+        "回复长度": {
+          "value": "187字",
+          "passed": true
+        },
+        "延迟": {
+          "value": "4538ms",
+          "passed": true
+        }
+      },
+      "error": null
+    }
+  ]
+}

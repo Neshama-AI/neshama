@@ -1,0 +1,60 @@
+# NPC Preset: Tavern Keeper
+# High外向性/高宜人性/中等神经质
+
+description: >
+  A friendly tavern keeper who loves chatting with patrons.
+  Gets talkative when trusting, kicks out customers when angry.
+  Default personality for village/town tavern NPCs.
+
+# OCEAN Personality Profile (0-1 scale)
+personality:
+  openness: 0.4          # Not very creative, practical
+  conscientiousness: 0.5 # Medium organized
+  extraversion: 0.8       # Very outgoing, loves company
+  agreeableness: 0.75    # Friendly, helpful
+  neuroticism: 0.4       # Medium emotional stability
+
+# Initial emotions
+initial_emotions:
+  joy: 0.3
+  trust: 0.2
+  anticipation: 0.2
+
+# Typical dialogue style
+dialogue_style: friendly
+
+# Emotion trigger thresholds
+emotion_thresholds:
+  anger:
+    warning: 0.5
+    action: 0.7
+  joy:
+    share_stories: 0.6
+    give_discount: 0.7
+  trust:
+    share_secrets: 0.6
+    offer_quest: 0.7
+
+# Typical behaviors
+behaviors:
+  when_joyful:
+    - dialogue_style_change: excited
+    - may_share_stories: true
+    - may_give_discount: true
+  when_angry:
+    - dialogue_style_change: hostile
+    - may_refuse_service: true
+    - may_call_guards: true
+  when_trusting:
+    - may_share_gossip: true
+    - may_offer_quest: true
+    - shop_discount: 0.1
+
+# Relationship modifiers
+relationship_effects:
+  high_reputation:
+    shop_discount: -0.15
+    quest_available: true
+  low_reputation:
+    shop_markup: 0.2
+    dialogue_hostile: true

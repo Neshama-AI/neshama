@@ -1,0 +1,50 @@
+# Quest Template: Friend Favor
+# Friend NPC requests help
+
+template_id: friend_favor
+title: "朋友之请"
+description: "一位友好的NPC请求你帮忙。这是一个增进友谊的好机会。"
+
+giver_npc: ""  # Set dynamically
+
+trigger:
+  emotion: trust
+  threshold: 0.5
+  direction: any
+
+completion_conditions:
+  - condition_type: help_npc
+    target: friend_npc
+    description: "帮助朋友的NPC"
+  - condition_type: talk_to_npc
+    target: friend_npc
+    description: "向朋友汇报"
+
+rewards:
+  - reward_type: reputation
+    target: friends
+    value: 15
+  - reward_type: gold
+    target: ""
+    value: 30
+  - reward_type: item
+    target: friend_token
+    value: 1
+
+emotional_success:
+  - emotion: joy
+    value: 0.2
+  - emotion: trust
+    value: 0.1
+  - emotion: gratitude
+    value: 0.15
+
+emotional_failure:
+  - emotion: sadness
+    value: 0.1
+  - emotion: disappointment
+    value: 0.1
+
+related_triggers:
+  - friendship_deepened
+  - npc_bond_increased

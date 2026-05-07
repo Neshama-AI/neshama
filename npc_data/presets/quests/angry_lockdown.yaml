@@ -1,0 +1,48 @@
+# Quest Template: Angry Lockdown
+# NPC anger triggers lockdown quest
+
+template_id: angry_lockdown
+title: "打破封锁"
+description: "NPC因愤怒封锁了某个区域，玩家需要安抚NPC或找到其他方式通过。"
+
+giver_npc: ""  # Set dynamically
+
+trigger:
+  emotion: anger
+  threshold: 0.7
+  direction: rising
+
+completion_conditions:
+  - condition_type: emotion_state
+    target: anger
+    value: 0.4
+    description: "安抚NPC使其愤怒值降低到0.4以下"
+  - condition_type: alternative_path
+    target: ""
+    description: "找到其他方式绕过封锁"
+
+rewards:
+  - reward_type: reputation
+    target: town
+    value: 10
+  - reward_type: gold
+    target: ""
+    value: 30
+
+emotional_success:
+  - emotion: trust
+    value: 0.2
+  - emotion: joy
+    value: 0.1
+  - emotion: relief
+    value: 0.15
+
+emotional_failure:
+  - emotion: anger
+    value: 0.2
+  - emotion: contempt
+    value: 0.1
+
+related_triggers:
+  - anger_lockdown_resolved
+  - npc_calmed_down

@@ -1,0 +1,254 @@
+# Tavern Story Presets
+# Complete story trigger chain for tavern scenarios
+
+# Trigger 1: Tavern keeper trusts player -> secret quest unlocked
+trust_secret_trigger:
+  name: "信任解锁秘密"
+  description: "老板娘信任玩家后解锁秘密任务线"
+  priority: 10
+  cooldown: 300.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_combo
+      npc_id: tavern_keeper
+      emotions:
+        trust: 0.7
+        joy: 0.5
+  effects:
+    - effect_type: unlock_dialogue
+      target: tavern_keeper
+      params:
+        dialogue_id: secret_quest_intro
+    - effect_type: spawn_quest
+      target: trust_secret
+      params:
+        template_id: trust_secret
+
+# Trigger 2: Tavern keeper angry -> lockdown
+angry_lockdown_trigger:
+  name: "愤怒封锁酒馆"
+  description: "老板娘愤怒时封锁酒馆"
+  priority: 20
+  cooldown: 600.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: tavern_keeper
+      emotion: anger
+      threshold: 0.7
+      direction: rising
+  effects:
+    - effect_type: trigger_world_event
+      target: area_lockdown
+      params:
+        area_id: tavern_main
+        reason: "老板娘太生气了"
+        alternative_routes:
+          - side_door
+          - window
+    - effect_type: modify_npc
+      target: tavern_keeper
+      params:
+        dialogue_style: hostile
+        will_talk: true
+
+# Trigger 3: Tavern keeper attacked -> emergency lockdown
+attacked_lockdown_trigger:
+  name: "袭击后封锁"
+  description: "老板娘被攻击后封锁酒馆"
+  priority: 30
+  cooldown: 120.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_change
+      npc_id: tavern_keeper
+      emotion: fear
+      change_magnitude: 0.4
+      direction: rising
+  effects:
+    - effect_type: trigger_world_event
+      target: area_lockdown
+      params:
+        area_id: tavern_main
+        reason: "发生了袭击事件"
+        duration_seconds: 300
+    - effect_type: unlock_dialogue
+      target: tavern_keeper
+      params:
+        dialogue_id: attack_response
+
+# Trigger 4: Guard captain and tavern keeper both angry -> town alert
+town_alert_trigger:
+  name: "全镇警戒"
+  description: "老板娘和守卫队长都愤怒时全镇警戒"
+  priority: 25
+  cooldown: 900.0
+  one_shot: false
+  conditions:
+    - condition_type: multi_npc_condition
+      emotion: anger
+      threshold: 0.6
+      min_npcs: 2
+  effects:
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: town_alert
+        milestone_type: unlock_feature
+        title: "全镇警戒模式"
+        description: "守卫增加了巡逻，玩家需要谨慎行动"
+
+# Trigger 5: Guard captain trusts player -> night passage
+captain_trust_passage:
+  name: "夜间通行许可"
+  description: "守卫队长信任玩家后允许夜间通行"
+  priority: 15
+  cooldown: 3600.0
+  one_shot: true
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: trust
+      threshold: 0.75
+      direction: rising
+  effects:
+    - effect_type: unlock_dialogue
+      target: guard_captain
+      params:
+        dialogue_id: night_passage_intro
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: night_passage
+        milestone_type: unlock_area
+        target_id: town_night
+
+# Trigger 6: Guard captain angry -> city gate lockdown
+gate_lockdown_trigger:
+  name: "城门戒严"
+  description: "守卫队长愤怒时城门戒严"
+  priority: 20
+  cooldown: 600.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_threshold
+      npc_id: guard_captain
+      emotion: anger
+      threshold: 0.65
+      direction: rising
+  effects:
+    - effect_type: trigger_world_event
+      target: area_lockdown
+      params:
+        area_id: city_gate
+        reason: "城门戒严"
+    - effect_type: modify_npc
+      target: guard_captain
+      params:
+        dialogue_style: aggressive
+        movement_pattern: aggressive_patrol
+
+# Trigger 7: Captain and keeper both sad -> mediation quest
+sadness_mediation:
+  name: "调解任务"
+  description: "守卫队长和老板娘都悲伤时解锁调解任务"
+  priority: 18
+  cooldown: 1800.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_combo
+      npc_id: guard_captain
+      emotions:
+        sadness: 0.5
+    - condition_type: emotion_combo
+      npc_id: tavern_keeper
+      emotions:
+        sadness: 0.5
+      operator: and
+  effects:
+    - effect_type: spawn_quest
+      target: mediation_quest
+      params:
+        template_id: friend_favor
+        title: "调解纷争"
+        description: "帮助两位老朋友和解"
+    - effect_type: unlock_dialogue
+      target: guard_captain
+      params:
+        dialogue_id: mediation_intro
+
+# Trigger 8: Prolonged sadness -> NPC leaves post
+prolonged_sadness:
+  name: "悲伤离开"
+  description: "NPC悲伤超过5分钟后离开岗位"
+  priority: 22
+  cooldown: 600.0
+  one_shot: false
+  conditions:
+    - condition_type: time_based
+      npc_id: tavern_keeper
+      emotion: sadness
+      threshold: 0.6
+      duration_seconds: 300
+  effects:
+    - effect_type: modify_npc
+      target: tavern_keeper
+      params:
+        will_talk: false
+        location_change: true
+        new_location: tavern_back_room
+    - effect_type: trigger_world_event
+      target: story_milestone
+      params:
+        milestone_id: keeper_departed
+        milestone_type: unlock_npc
+        target_id: helper_npc
+        title: "临时帮手"
+        description: "老板娘离开后，临时帮手接管酒馆"
+
+# Trigger 9: High joy + trust -> special discount
+joyful_discount:
+  name: "开心打折"
+  description: "NPC非常开心且信任玩家时给予特殊折扣"
+  priority: 5
+  cooldown: 1800.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_combo
+      npc_id: tavern_keeper
+      emotions:
+        joy: 0.8
+        trust: 0.6
+  effects:
+    - effect_type: trigger_world_event
+      target: price_change
+      params:
+        shop_id: tavern_bar
+        price_multiplier: 0.7
+        duration_seconds: 600
+
+# Trigger 10: Trust dropped significantly -> betrayal feeling
+trust_dropped:
+  name: "被背叛感"
+  description: "NPC信任度急剧下降时感到被背叛"
+  priority: 25
+  cooldown: 300.0
+  one_shot: false
+  conditions:
+    - condition_type: emotion_change
+      npc_id: tavern_keeper
+      emotion: trust
+      change_magnitude: 0.4
+      direction: falling
+  effects:
+    - effect_type: modify_npc
+      target: tavern_keeper
+      params:
+        dialogue_style: hostile
+        will_share_secrets: false
+    - effect_type: spawn_quest
+      target: betrayal_revenge
+      params:
+        template_id: betrayal_revenge
+        title: "挽回信任?"
+        description: "你需要做些什么来挽回NPC的信任"
