@@ -45,6 +45,6 @@ public class NeshamaSDKEditor : ModuleRules
 		PrivateDefinitions.Add("WITH_EDITORONLY_DATA=1");
 
 		// 禁用某些警告
-		bTreatWarningsAsErrors = false;
+		bWarningsAsErrors = false;
 	}
 }

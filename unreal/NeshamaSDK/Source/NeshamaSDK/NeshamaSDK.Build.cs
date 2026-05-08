@@ -57,7 +57,7 @@ public class NeshamaSDK : ModuleRules
 		PublicDefinitions.Add("NESHAMA_LOG_LEVEL=2");
 
 		// 禁用某些警告
-		bTreatWarningsAsErrors = false;
+		bWarningsAsErrors = false;
 		
 		// 允许不安全的代码（如果需要）
 		bEnableExceptions = false;
