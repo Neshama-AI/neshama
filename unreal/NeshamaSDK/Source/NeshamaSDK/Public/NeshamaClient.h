@@ -205,7 +205,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama|Client|Chat")
 	void Chat(const FString& NpcId, const FString& Message, 
-		const FString& PlayerId, const FOnChatResponseDelegate& OnComplete);
+		const FString& PlayerId, const FOnChatResponse& OnComplete);
 
 	// ============================================================================
 	// 记忆API

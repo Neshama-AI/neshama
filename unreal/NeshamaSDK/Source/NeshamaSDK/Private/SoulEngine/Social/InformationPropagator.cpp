@@ -111,6 +111,13 @@ FSpreadResult UInformationPropagator::SpreadInformation(const FString& SourceNpc
 	return Result;
 }
 
+FSpreadResult UInformationPropagator::SpreadInformation(const FString& SourceNpcId, EInfoType InfoType,
+	const FString& Content, const TArray<FString>& Targets,
+	float Importance, const FString& ExistingInfoId)
+{
+	return SpreadInformation(SourceNpcId, InfoType, Content, Targets, Importance, TArray<FString>(), ExistingInfoId);
+}
+
 TArray<FInformation> UInformationPropagator::GetNPCKnowledge(const FString& NpcId, int32 Limit)
 {
 	TArray<FInformation> Result;

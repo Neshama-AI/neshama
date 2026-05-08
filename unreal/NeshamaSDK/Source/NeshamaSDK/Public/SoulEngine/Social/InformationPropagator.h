@@ -147,8 +147,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
 	FSpreadResult SpreadInformation(const FString& SourceNpcId, EInfoType InfoType,
 		const FString& Content, const TArray<FString>& Targets,
-		float Importance = 0.5f, const TArray<FString>& Tags = TArray<FString>(),
-		const FString& ExistingInfoId = TEXT(""));
+		float Importance, const TArray<FString>& Tags,
+		const FString& ExistingInfoId);
+
+	/** Spread information without tags. */
+	UFUNCTION(BlueprintCallable, Category = "Neshama")
+	FSpreadResult SpreadInformation(const FString& SourceNpcId, EInfoType InfoType,
+		const FString& Content, const TArray<FString>& Targets,
+		float Importance = 0.5f, const FString& ExistingInfoId = TEXT(""));
 
 	/** Get all information known by an NPC. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
