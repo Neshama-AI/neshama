@@ -178,13 +178,11 @@ class Toast {
             padding: 12px 20px;
             border-radius: 8px;
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-left: 3px solid ${colors[type] || colors.info};
             color: var(--text-primary);
             font-size: 14px;
             box-shadow: var(--shadow-md);
-            animation: fadeInUp 0.3s ease;
             max-width: 360px;
         `;
         toast.textContent = message;
