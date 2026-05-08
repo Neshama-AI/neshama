@@ -76,7 +76,7 @@ async function renderEvolution() {
     } catch (error) {
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">📈</div>
+                <div class="empty-state-icon">Trend</div>
                 <div class="empty-state-text">${t('evolution.failedLoad')}</div>
                 <button class="btn btn-primary mt-4" onclick="renderEvolution()">${t('common.retry')}</button>
             </div>
@@ -126,8 +126,8 @@ function renderSnapshots(snapshots) {
                 <div class="text-muted" style="font-size: 12px;">${snap.date} - ${snap.description || t('evolution.noDescription')}</div>
             </div>
             <div class="flex gap-2">
-                <button class="btn btn-icon btn-secondary btn-sm" onclick="compareSnapshots('${snap.id}')" title="Compare">📊</button>
-                <button class="btn btn-icon btn-secondary btn-sm" onclick="deleteSnapshot('${snap.id}')" title="${t('common.delete')}">🗑️</button>
+                <button class="btn btn-icon btn-secondary btn-sm" onclick="compareSnapshots('${snap.id}')" title="Compare">Stats</button>
+                <button class="btn btn-icon btn-secondary btn-sm" onclick="deleteSnapshot('${snap.id}')" title="${t('common.delete')}">Delete</button>
             </div>
         </div>
     `).join('');
@@ -156,7 +156,7 @@ function drawEvolutionChart(history) {
         'conscientiousness': '#22C55E',
         'extraversion': '#F59E0B',
         'agreeableness': '#EC4899',
-        'neuroticism': '#8B5CF6'
+        'neuroticism': '#7c5cff'
     };
     
     const labels = [t('ocean.openness'), t('ocean.conscientiousness'), t('ocean.extraversion'), t('ocean.agreeableness'), t('ocean.neuroticism')];
@@ -253,10 +253,10 @@ function renderEvolutionEvents() {
     ];
     
     const typeIcons = {
-        'interaction': '💬',
-        'learning': '📚',
-        'social': '🤝',
-        'challenge': '⚡'
+        'interaction': 'Chat',
+        'learning': 'Docs',
+        'social': 'Partner',
+        'challenge': 'Fast'
     };
     
     const typeColors = {
@@ -268,7 +268,7 @@ function renderEvolutionEvents() {
     
     return events.map(event => `
         <div class="flex items-center gap-4 mb-3" style="padding: 16px; background: var(--bg-tertiary); border-radius: 8px;">
-            <div style="font-size: 32px;">${typeIcons[event.type] || '📌'}</div>
+            <div style="font-size: 32px;">${typeIcons[event.type] || 'Pin'}</div>
             <div style="flex: 1;">
                 <div style="font-weight: 500;">${event.description}</div>
                 <div class="flex gap-2 mt-2">

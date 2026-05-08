@@ -50,7 +50,7 @@ async function renderAccount() {
         <!-- BYOK API Key Management -->
         <div class="card">
             <div class="card-header">
-                <span class="card-title">🔑 ${t('account.byokKeyManagement')}</span>
+                <span class="card-title">Key ${t('account.byokKeyManagement')}</span>
                 <button class="btn btn-primary btn-sm" onclick="showAddByokKeyModal()">+ ${t('account.addProviderKey')}</button>
             </div>
             <div id="byok-keys-section" class="mt-4">
@@ -150,7 +150,7 @@ async function loadLlmMode() {
         section.innerHTML = `
             <div class="llm-mode-display">
                 <div class="mode-indicator ${mode === 'byok' ? 'mode-byok' : 'mode-hosted'}">
-                    <span class="mode-icon">${mode === 'byok' ? '🔑' : '☁️'}</span>
+                    <span class="mode-icon">${mode === 'byok' ? 'Key' : 'Cloud'}</span>
                     <span class="mode-label">${mode === 'byok' ? t('account.byokMode') : t('account.hostedMode')}</span>
                 </div>
                 ${mode === 'byok' && activeProvider ? `
@@ -176,7 +176,7 @@ async function loadLlmMode() {
         section.innerHTML = `
             <div class="llm-mode-display">
                 <div class="mode-indicator mode-hosted">
-                    <span class="mode-icon">☁️</span>
+                    <span class="mode-icon">Cloud</span>
                     <span class="mode-label">${t('account.hostedMode')}</span>
                 </div>
                 <div class="mt-4">

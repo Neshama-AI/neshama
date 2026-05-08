@@ -107,7 +107,7 @@ async function renderModelMarketplace() {
                         <label class="form-label">${t('marketplace.priceRange')}</label>
                         <select id="filter-price" class="form-input" onchange="applyFilters()">
                             <option value="">${t('marketplace.allPrices')}</option>
-                            <option value="0" ${marketplaceData.filters.maxPrice === 0 ? 'selected' : ''}>🆓 ${t('marketplace.freeOnly')}</option>
+                            <option value="0" ${marketplaceData.filters.maxPrice === 0 ? 'selected' : ''}>Free ${t('marketplace.freeOnly')}</option>
                             <option value="0.5" ${marketplaceFilters.maxPrice === 0.5 ? 'selected' : ''}>≤ $0.5/M</option>
                             <option value="2" ${marketplaceFilters.maxPrice === 2 ? 'selected' : ''}>≤ $2/M</option>
                             <option value="5" ${marketplaceFilters.maxPrice === 5 ? 'selected' : ''}>≤ $5/M</option>
@@ -248,7 +248,7 @@ function renderModelRow(provider, model) {
             </div>
             <div class="model-pricing">
                 ${model.is_free 
-                    ? `<span class="price-free">🆓 ${t('marketplace.free')}</span>`
+                    ? `<span class="price-free">Free ${t('marketplace.free')}</span>`
                     : `<span class="price-input ${priceClass}">$${model.input_price}/M</span>
                        <span class="price-output ${priceClass}">$${model.output_price}/M</span>`
                 }

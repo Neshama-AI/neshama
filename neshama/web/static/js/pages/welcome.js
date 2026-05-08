@@ -24,7 +24,7 @@ function renderWelcome() {
     container.innerHTML = `
         <div class="welcome-container">
             <div class="welcome-header">
-                <div class="welcome-logo">🔮</div>
+                <div class="welcome-logo">NS</div>
                 <h1 class="welcome-title">${t('welcome.title')}</h1>
                 <p class="welcome-subtitle">${t('welcome.subtitle')}</p>
             </div>
@@ -108,13 +108,13 @@ async function loadWelcomeStep(stepIndex) {
  */
 function renderWelcomeStep1() {
     const providers = [
-        { id: 'openai', name: 'OpenAI', icon: '🤖', models: ['gpt-4', 'gpt-3.5-turbo'] },
-        { id: 'anthropic', name: 'Anthropic Claude', icon: '🧠', models: ['claude-3-opus', 'claude-3-sonnet'] },
-        { id: 'gemini', name: 'Google Gemini', icon: '✨', models: ['gemini-pro', 'gemini-flash'] },
-        { id: 'dashscope', name: 'DashScope (Qwen)', icon: '🌊', models: ['qwen-turbo', 'qwen-plus'] },
-        { id: 'zhipu', name: 'Zhipu GLM', icon: '📚', models: ['glm-4', 'glm-3-turbo'] },
-        { id: 'deepseek', name: 'DeepSeek', icon: '🔮', models: ['deepseek-chat', 'deepseek-coder'] },
-        { id: 'moonshot', name: 'Moonshot (Kimi)', icon: '🌙', models: ['moonshot-v1-8k', 'moonshot-v1-32k'] }
+        { id: 'openai', name: 'OpenAI', icon: 'AI', models: ['gpt-4', 'gpt-3.5-turbo'] },
+        { id: 'anthropic', name: 'Anthropic Claude', icon: 'Brain', models: ['claude-3-opus', 'claude-3-sonnet'] },
+        { id: 'gemini', name: 'Google Gemini', icon: 'Sparkle', models: ['gemini-pro', 'gemini-flash'] },
+        { id: 'dashscope', name: 'DashScope (Qwen)', icon: 'OCEAN', models: ['qwen-turbo', 'qwen-plus'] },
+        { id: 'zhipu', name: 'Zhipu GLM', icon: 'Docs', models: ['glm-4', 'glm-3-turbo'] },
+        { id: 'deepseek', name: 'DeepSeek', icon: 'NS', models: ['deepseek-chat', 'deepseek-coder'] },
+        { id: 'moonshot', name: 'Moonshot (Kimi)', icon: 'Moon', models: ['moonshot-v1-8k', 'moonshot-v1-32k'] }
     ];
     
     return `
@@ -212,12 +212,12 @@ async function renderWelcomeStep2() {
  */
 function getPersonalityIcon(presetId) {
     const icons = {
-        'neshama': '🔮',
-        'analyst': '📊',
-        'creative': '🎨',
-        'counselor': '💚',
-        'explorer': '🧭',
-        'default': '✨'
+        'neshama': 'NS',
+        'analyst': 'Stats',
+        'creative': 'Art',
+        'counselor': 'Heart',
+        'explorer': 'Compass',
+        'default': 'Sparkle'
     };
     return icons[presetId] || icons['default'];
 }
@@ -245,13 +245,13 @@ function renderWelcomeStep3() {
             
             <div class="start-options">
                 <div class="start-option" onclick="completeWelcome('dashboard')">
-                    <div class="option-icon">📊</div>
+                    <div class="option-icon">Stats</div>
                     <div class="option-title">${t('welcome.openDashboard')}</div>
                     <div class="option-desc">${t('welcome.openDashboardDesc')}</div>
                 </div>
                 
                 <div class="start-option" onclick="completeWelcome('chat')">
-                    <div class="option-icon">💬</div>
+                    <div class="option-icon">Chat</div>
                     <div class="option-title">${t('welcome.startChat')}</div>
                     <div class="option-desc">${t('welcome.startChatDesc')}</div>
                 </div>
@@ -261,16 +261,16 @@ function renderWelcomeStep3() {
                 <h3>${t('welcome.previewTheme')}</h3>
                 <div class="theme-options">
                     <div class="theme-option ${welcomeState.theme === 'ocean' ? 'selected' : ''}" onclick="welcomeState.theme = 'ocean'; renderWelcomeStep3();">
-                        🌊 Ocean
+                        OCEAN Ocean
                     </div>
                     <div class="theme-option ${welcomeState.theme === 'midnight' ? 'selected' : ''}" onclick="welcomeState.theme = 'midnight'; renderWelcomeStep3();">
-                        🌙 Midnight
+                        Moon Midnight
                     </div>
                     <div class="theme-option ${welcomeState.theme === 'cyberpunk' ? 'selected' : ''}" onclick="welcomeState.theme = 'cyberpunk'; renderWelcomeStep3();">
-                        🤖 Cyberpunk
+                        AI Cyberpunk
                     </div>
                     <div class="theme-option ${welcomeState.theme === 'sunset' ? 'selected' : ''}" onclick="welcomeState.theme = 'sunset'; renderWelcomeStep3();">
-                        🌅 Sunset
+                        Sunset Sunset
                     </div>
                 </div>
             </div>
@@ -367,7 +367,7 @@ function renderWelcomeInModal(container) {
     container.innerHTML = `
         <div class="welcome-container">
             <div class="welcome-header">
-                <div class="welcome-logo">🔮</div>
+                <div class="welcome-logo">NS</div>
                 <h1 class="welcome-title">${t('welcome.title')}</h1>
                 <p class="welcome-subtitle">${t('welcome.subtitle')}</p>
             </div>

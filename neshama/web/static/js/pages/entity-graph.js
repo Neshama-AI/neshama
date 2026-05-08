@@ -10,23 +10,23 @@ let entityGraphData = {
 
 // Entity type icons and colors
 const ENTITY_TYPES = [
-    { id: 'concept', label_zh: '概念', label_en: 'Concept', icon: '💡', color: '#4F46E5' },
-    { id: 'person', label_zh: '人物', label_en: 'Person', icon: '👤', color: '#EC4899' },
-    { id: 'place', label_zh: '地点', label_en: 'Place', icon: '📍', color: '#10B981' },
-    { id: 'event', label_zh: '事件', label_en: 'Event', icon: '📅', color: '#F59E0B' },
-    { id: 'object', label_zh: '物体', label_en: 'Object', icon: '📦', color: '#6366F1' },
-    { id: 'organization', label_zh: '组织', label_en: 'Organization', icon: '🏢', color: '#8B5CF6' }
+    { id: 'concept', label_zh: '概念', label_en: 'Concept', icon: 'Idea', color: '#4F46E5' },
+    { id: 'person', label_zh: '人物', label_en: 'Person', icon: 'User', color: '#EC4899' },
+    { id: 'place', label_zh: '地点', label_en: 'Place', icon: 'Location', color: '#10B981' },
+    { id: 'event', label_zh: '事件', label_en: 'Event', icon: 'Date', color: '#F59E0B' },
+    { id: 'object', label_zh: '物体', label_en: 'Object', icon: 'Package', color: '#7c5cff' },
+    { id: 'organization', label_zh: '组织', label_en: 'Organization', icon: 'Org', color: '#7c5cff' }
 ];
 
 // Relation types
 const RELATION_TYPES = [
-    { id: 'related_to', label_zh: '相关于', label_en: 'Related to', icon: '🔗' },
-    { id: 'part_of', label_zh: '是...的一部分', label_en: 'Part of', icon: '📂' },
-    { id: 'causes', label_zh: '导致', label_en: 'Causes', icon: '➡️' },
-    { id: 'located_in', label_zh: '位于', label_en: 'Located in', icon: '📍' },
-    { id: 'works_for', label_zh: '为...工作', label_en: 'Works for', icon: '💼' },
-    { id: 'knows', label_zh: '认识', label_en: 'Knows', icon: '🤝' },
-    { id: 'created_by', label_zh: '由...创建', label_en: 'Created by', icon: '✍️' },
+    { id: 'related_to', label_zh: '相关于', label_en: 'Related to', icon: 'Link' },
+    { id: 'part_of', label_zh: '是...的一部分', label_en: 'Part of', icon: 'Folder' },
+    { id: 'causes', label_zh: '导致', label_en: 'Causes', icon: '→' },
+    { id: 'located_in', label_zh: '位于', label_en: 'Located in', icon: 'Location' },
+    { id: 'works_for', label_zh: '为...工作', label_en: 'Works for', icon: 'Work' },
+    { id: 'knows', label_zh: '认识', label_en: 'Knows', icon: 'Partner' },
+    { id: 'created_by', label_zh: '由...创建', label_en: 'Created by', icon: 'Author' },
     { id: 'synonymous_to', label_zh: '同义于', label_en: 'Synonymous to', icon: '≈' }
 ];
 
@@ -155,7 +155,7 @@ async function renderEntityGraph() {
                 </div>
                 <div id="entity-details" class="mt-3">
                     <div class="empty-state">
-                        <div class="empty-state-icon">👆</div>
+                        <div class="empty-state-icon">Here</div>
                         <div class="empty-state-text">${t('entityGraph.selectEntityHint')}</div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ async function renderEntityGraph() {
             </div>
             <div class="card">
                 <div class="empty-state">
-                    <div class="empty-state-icon">🔍</div>
+                    <div class="empty-state-icon">Search</div>
                     <div class="empty-state-text">${t('entityGraph.failedLoad')}</div>
                     <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                     <button class="btn btn-primary mt-4" onclick="renderEntityGraph()">${t('common.retry')}</button>
@@ -208,7 +208,7 @@ function renderEntitiesList(entities = null) {
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-accent">${((entity.importance || 0.5) * 100).toFixed(0)}%</span>
-                        <button class="btn btn-icon btn-secondary btn-sm" onclick="event.stopPropagation(); deleteEntity('${entity.id}')" title="${t('common.delete')}">🗑️</button>
+                        <button class="btn btn-icon btn-secondary btn-sm" onclick="event.stopPropagation(); deleteEntity('${entity.id}')" title="${t('common.delete')}">Delete</button>
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@ function renderRelationsList(relations = null) {
                     </div>
                 ` : ''}
                 <div class="flex justify-end mt-2">
-                    <button class="btn btn-icon btn-secondary btn-sm" onclick="deleteRelation('${relation.id}')" title="${t('common.delete')}">🗑️</button>
+                    <button class="btn btn-icon btn-secondary btn-sm" onclick="deleteRelation('${relation.id}')" title="${t('common.delete')}">Delete</button>
                 </div>
             </div>
         `;
@@ -508,7 +508,7 @@ async function findPaths() {
         if (paths.length === 0) {
             resultContainer.innerHTML = `
                 <div class="empty-state" style="padding: 20px;">
-                    <div class="empty-state-icon">🔍</div>
+                    <div class="empty-state-icon">Search</div>
                     <div class="empty-state-text">${t('entityGraph.noPathFound')}</div>
                 </div>
             `;
@@ -544,7 +544,7 @@ async function findPaths() {
         console.error('Find paths error:', error);
         resultContainer.innerHTML = `
             <div class="empty-state" style="padding: 20px;">
-                <div class="empty-state-icon">❌</div>
+                <div class="empty-state-icon">×</div>
                 <div class="empty-state-text">${t('common.error')}</div>
             </div>
         `;
@@ -630,7 +630,7 @@ function showEditEntityModal(entityId) {
 // Get entity icon
 function getEntityIcon(entityType) {
     const typeInfo = ENTITY_TYPES.find(t => t.id === entityType);
-    return typeInfo?.icon || '💭';
+    return typeInfo?.icon || 'Thought';
 }
 
 // Escape HTML

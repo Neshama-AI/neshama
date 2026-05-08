@@ -94,7 +94,7 @@ async function renderSoulConfig() {
     } catch (error) {
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">⚙️</div>
+                <div class="empty-state-icon">Settings</div>
                 <div class="empty-state-text">${t('soulConfig.failedLoad')}</div>
                 <button class="btn btn-primary mt-4" onclick="renderSoulConfig()">${t('common.retry')}</button>
             </div>
@@ -339,7 +339,7 @@ function renderDesiresDraggable(desires) {
             style="padding: 12px 16px; background: var(--bg-tertiary); border-radius: 8px; cursor: grab;" 
             draggable="true" data-id="${d.id}">
             <div class="flex items-center gap-3">
-                <span style="color: var(--text-muted);">☰</span>
+                <span style="color: var(--text-muted);">≡</span>
                 <span style="font-weight: 500;">${d.name}</span>
             </div>
             <div class="flex items-center gap-2">

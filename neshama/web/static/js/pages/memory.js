@@ -51,7 +51,7 @@ async function renderMemory() {
     } catch (error) {
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">🧠</div>
+                <div class="empty-state-icon">Brain</div>
                 <div class="empty-state-text">${t('memory.failedLoad')}</div>
                 <button class="btn btn-primary mt-4" onclick="renderMemory()">${t('common.retry')}</button>
             </div>
@@ -110,7 +110,7 @@ async function loadLayerMemories(layer, search = '') {
         if (memoryData[layer].length === 0) {
             listContainer.innerHTML = `
                 <div class="empty-state">
-                    <div class="empty-state-icon">📭</div>
+                    <div class="empty-state-icon">Empty</div>
                     <div class="empty-state-text">${search ? t('memory.noMatch') : t('memory.noMemories')}</div>
                 </div>
             `;
@@ -135,8 +135,8 @@ async function loadLayerMemories(layer, search = '') {
                             <div class="text-accent">${((mem.importance || 0.5) * 100).toFixed(0)}%</div>
                             <div class="text-muted" style="font-size: 10px;">${t('memory.importance')}</div>
                         </div>
-                        <button class="btn btn-icon btn-secondary btn-sm" onclick="editMemory('${layer}', '${mem.id}')" title="${t('common.edit')}">✏️</button>
-                        <button class="btn btn-icon btn-secondary btn-sm" onclick="deleteMemory('${layer}', '${mem.id}')" title="${t('common.delete')}">🗑️</button>
+                        <button class="btn btn-icon btn-secondary btn-sm" onclick="editMemory('${layer}', '${mem.id}')" title="${t('common.edit')}">Edit</button>
+                        <button class="btn btn-icon btn-secondary btn-sm" onclick="deleteMemory('${layer}', '${mem.id}')" title="${t('common.delete')}">Delete</button>
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@ async function loadLayerMemories(layer, search = '') {
     } catch (error) {
         listContainer.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">❌</div>
+                <div class="empty-state-icon">×</div>
                 <div class="empty-state-text">${t('memory.addFailed')}</div>
             </div>
         `;

@@ -29,14 +29,14 @@ function renderRegister() {
         <div class="register-container">
             <div class="register-card">
                 <div class="register-header">
-                    <div class="register-logo">🔮</div>
+                    <div class="register-logo">NS</div>
                     <h1 class="register-title">${t('register.welcome')}</h1>
                     <p class="register-subtitle">${t('register.subtitle')}</p>
                 </div>
 
                 ${registerState.error ? `
                     <div class="register-error">
-                        <span class="error-icon">⚠️</span>
+                        <span class="error-icon">!</span>
                         ${registerState.error}
                     </div>
                 ` : ''}
@@ -49,7 +49,7 @@ function renderRegister() {
 
                 ${registerState.mode !== 'trial' ? `
                     <button class="register-btn register-btn-trial" onclick="startTrial()" ${registerState.loading ? 'disabled' : ''}>
-                        🚀 ${t('register.trialButton')}
+                        Go ${t('register.trialButton')}
                     </button>
                     <p class="register-hint">${t('register.trialHint')}</p>
                 ` : `
@@ -122,17 +122,17 @@ function renderAuthForm() {
 function renderTrialView() {
     return `
         <div class="register-trial-info">
-            <div class="trial-icon">🎮</div>
+            <div class="trial-icon">Game</div>
             <h3>${t('register.trialTitle')}</h3>
             <ul class="trial-features">
-                <li>✅ ${t('register.trialFeature1')}</li>
-                <li>✅ ${t('register.trialFeature2')}</li>
-                <li>✅ ${t('register.trialFeature3')}</li>
-                <li>✅ ${t('register.trialFeature4')}</li>
+                <li>✓ ${t('register.trialFeature1')}</li>
+                <li>✓ ${t('register.trialFeature2')}</li>
+                <li>✓ ${t('register.trialFeature3')}</li>
+                <li>✓ ${t('register.trialFeature4')}</li>
             </ul>
         </div>
         <button class="register-btn register-btn-trial" onclick="startTrial()" ${registerState.loading ? 'disabled' : ''}>
-            🚀 ${t('register.startTrialButton')}
+            Go ${t('register.startTrialButton')}
         </button>
     `;
 }
@@ -144,7 +144,7 @@ function renderSuccessView() {
     return `
         <div class="register-container">
             <div class="register-card register-success-card">
-                <div class="success-icon">🎉</div>
+                <div class="success-icon">✓</div>
                 <h1 class="register-title">${t('register.successTitle')}</h1>
                 <p class="register-subtitle">${t('register.successSubtitle')}</p>
 
@@ -153,7 +153,7 @@ function renderSuccessView() {
                     <div class="success-apikey-row">
                         <code class="success-apikey" id="success-token">${token}</code>
                         <button class="register-btn register-btn-small" onclick="copyToken()">
-                            📋 ${t('register.copyButton')}
+                            List ${t('register.copyButton')}
                         </button>
                     </div>
                     ${isTrial ? `<p class="success-hint">${t('register.trialExpiryHint')}</p>` : ''}
@@ -322,8 +322,8 @@ function copyToken() {
     if (token) {
         navigator.clipboard.writeText(token.textContent).then(() => {
             const btn = event.target;
-            btn.textContent = '✅';
-            setTimeout(() => btn.textContent = '📋 ' + t('register.copyButton'), 1500);
+            btn.textContent = '✓';
+            setTimeout(() => btn.textContent = 'List ' + t('register.copyButton'), 1500);
         });
     }
 }

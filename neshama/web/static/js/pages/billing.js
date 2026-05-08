@@ -13,7 +13,7 @@ const TIER_DETAILS = {
     free: {
         name: 'Free',
         price: 0,
-        emoji: '🆓',
+        emoji: 'Free',
         color: '#94a3b8',
         limits: { npcs: 3, interactions: 1000, tts_chars: 0, api_calls: 5000 },
         hosted_conversations: 1000,
@@ -102,7 +102,7 @@ async function renderBilling() {
             </div>
             <div class="subscription-info">
                 <div class="tier-badge" style="border-color: ${TIER_DETAILS[currentTier]?.color || '#94a3b8'}">
-                    <span class="tier-emoji">${TIER_DETAILS[currentTier]?.emoji || '🆓'}</span>
+                    <span class="tier-emoji">${TIER_DETAILS[currentTier]?.emoji || 'Free'}</span>
                     <span class="tier-name">${TIER_DETAILS[currentTier]?.name || currentTier}</span>
                 </div>
                 ${currentSubscription?.current_period_end ? `

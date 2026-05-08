@@ -115,7 +115,7 @@ async function renderProgressiveSummarization() {
             </div>
             <div class="card">
                 <div class="empty-state">
-                    <div class="empty-state-icon">📝</div>
+                    <div class="empty-state-icon">Note</div>
                     <div class="empty-state-text">${t('progressiveSumm.failedLoad')}</div>
                     <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                     <button class="btn btn-primary mt-4" onclick="renderProgressiveSummarization()">${t('common.retry')}</button>
@@ -158,7 +158,7 @@ function renderL0Entries() {
     if (summarizationData.l0.length === 0) {
         return `
             <div class="empty-state" style="padding: 20px;">
-                <div class="empty-state-icon">📝</div>
+                <div class="empty-state-icon">Note</div>
                 <div class="empty-state-text">${t('common.noData')}</div>
             </div>
         `;
@@ -168,7 +168,7 @@ function renderL0Entries() {
         <div style="padding: 10px; background: var(--bg-tertiary); border-radius: 6px; margin-bottom: 8px;">
             <div class="flex items-center gap-2 mb-2">
                 <span class="tag" style="font-size: 10px; padding: 2px 6px;">
-                    ${entry.role === 'user' ? '👤' : '🤖'} ${entry.role || 'user'}
+                    ${entry.role === 'user' ? 'User' : 'AI'} ${entry.role || 'user'}
                 </span>
                 ${entry.metadata?.importance ? `
                     <span class="text-accent" style="font-size: 10px;">
@@ -202,7 +202,7 @@ function renderL1Panel() {
             
             <div class="mb-3">
                 <button class="btn btn-sm btn-primary" onclick="summarizeL0()" style="width: 100%;">
-                    🔄 ${t('progressiveSumm.summarizeL0')}
+                    Sync ${t('progressiveSumm.summarizeL0')}
                 </button>
             </div>
             
@@ -218,7 +218,7 @@ function renderL1Entries() {
     if (summarizationData.l1.length === 0) {
         return `
             <div class="empty-state" style="padding: 20px;">
-                <div class="empty-state-icon">📖</div>
+                <div class="empty-state-icon">Guide</div>
                 <div class="empty-state-text">${t('common.noData')}</div>
                 <div class="text-muted mt-2" style="font-size: 11px;">
                     ${t('progressiveSumm.l1Hint')}
@@ -265,7 +265,7 @@ function renderL2Panel() {
             
             <div class="mb-3">
                 <button class="btn btn-sm btn-secondary" onclick="summarizeL1()" style="width: 100%; background: ${LAYER_CONFIG.L2.color};">
-                    🌟 ${t('progressiveSumm.summarizeL1')}
+                    Star ${t('progressiveSumm.summarizeL1')}
                 </button>
             </div>
             
@@ -281,7 +281,7 @@ function renderL2Entries() {
     if (summarizationData.l2.length === 0) {
         return `
             <div class="empty-state" style="padding: 20px;">
-                <div class="empty-state-icon">🧠</div>
+                <div class="empty-state-icon">Brain</div>
                 <div class="empty-state-text">${t('common.noData')}</div>
                 <div class="text-muted mt-2" style="font-size: 11px;">
                     ${t('progressiveSumm.l2Hint')}
@@ -338,9 +338,9 @@ function showAddL0Modal() {
                 <div class="form-group">
                     <label class="form-label">${t('progressiveSumm.role')}</label>
                     <select id="new-l0-role" class="form-input">
-                        <option value="user">👤 User</option>
-                        <option value="assistant">🤖 Assistant</option>
-                        <option value="system">⚙️ System</option>
+                        <option value="user">User User</option>
+                        <option value="assistant">AI Assistant</option>
+                        <option value="system">Settings System</option>
                     </select>
                 </div>
                 <div class="form-group">
