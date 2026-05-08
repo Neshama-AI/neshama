@@ -9,14 +9,14 @@ let currentConfig = null;
  */
 function renderThemeSelector(currentTheme) {
     const themes = [
-        { id: 'ocean', emoji: '🌊' },
-        { id: 'spring', emoji: '🌸' },
-        { id: 'midnight', emoji: '🌙' },
-        { id: 'cyberpunk', emoji: '🤖' },
-        { id: 'sunset', emoji: '🌅' },
-        { id: 'forest', emoji: '🌲' },
-        { id: 'slate', emoji: '🗿' },
-        { id: 'purple', emoji: '💜' }
+        { id: 'ocean', emoji: 'Ocean' },
+        { id: 'spring', emoji: 'Spring' },
+        { id: 'midnight', emoji: 'Midnight' },
+        { id: 'cyberpunk', emoji: 'Cyber' },
+        { id: 'sunset', emoji: 'Sunset' },
+        { id: 'forest', emoji: 'Forest' },
+        { id: 'slate', emoji: 'Slate' },
+        { id: 'purple', emoji: 'Purple' }
     ];
     
     return `
@@ -186,7 +186,7 @@ async function renderSettings() {
         console.error('Settings load error:', error);
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">🔧</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Settings</div>
                 <div class="empty-state-text">${t('settings.failedLoad')}</div>
                 <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                 <button class="btn btn-primary mt-4" onclick="renderSettings()">${t('common.retry')}</button>
@@ -201,16 +201,16 @@ async function renderSettings() {
  */
 function getThemeDisplayName(themeId) {
     const themeEmojis = {
-        'ocean': '🌊',
-        'spring': '🌸',
-        'midnight': '🌙',
-        'cyberpunk': '🤖',
-        'sunset': '🌅',
-        'forest': '🌲',
-        'slate': '🗿',
-        'purple': '💜'
+        'ocean': 'Ocean',
+        'spring': 'Spring',
+        'midnight': 'Midnight',
+        'cyberpunk': 'Cyber',
+        'sunset': 'Sunset',
+        'forest': 'Forest',
+        'slate': 'Slate',
+        'purple': 'Purple'
     };
-    const emoji = themeEmojis[themeId] || '🎨';
+    const emoji = themeEmojis[themeId] || 'Theme';
     return `${emoji} ${t('theme.' + themeId)}`;
 }
 
@@ -289,7 +289,7 @@ async function saveConfig() {
         },
         appearance: {
             theme: getCurrentTheme(),
-            accent_color: currentConfig?.appearance?.accent_color || '#4b93ff',
+            accent_color: currentConfig?.appearance?.accent_color || '#7c5cff',
             font_size: currentConfig?.appearance?.font_size || 14
         },
         behavior: {

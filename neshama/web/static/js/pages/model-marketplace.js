@@ -38,28 +38,28 @@ async function renderModelMarketplace() {
             <!-- Stats Bar -->
             <div class="grid-4 mb-4">
                 <div class="stat-card">
-                    <div class="stat-icon">🧩</div>
+                    <div class="stat-icon" style="color:#7c5cff;">Model</div>
                     <div class="stat-content">
                         <div class="stat-value">${marketplaceData.stats.total_providers}</div>
                         <div class="stat-label">${t('marketplace.providers')}</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">🤖</div>
+                    <div class="stat-icon" style="color:#00d4aa;">Online</div>
                     <div class="stat-content">
                         <div class="stat-value">${marketplaceData.stats.total_models}</div>
                         <div class="stat-label">${t('marketplace.models')}</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">🟢</div>
+                    <div class="stat-icon" style="color:#00d4aa;">OK</div>
                     <div class="stat-content">
                         <div class="stat-value">${marketplaceData.stats.free_models}</div>
                         <div class="stat-label">${t('marketplace.freeModels')}</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">✅</div>
+                    <div class="stat-icon" style="color:#00d4aa;">Ready</div>
                     <div class="stat-content">
                         <div class="stat-value">${marketplaceData.stats.connected_providers}</div>
                         <div class="stat-label">${t('marketplace.connected')}</div>
@@ -96,11 +96,11 @@ async function renderModelMarketplace() {
                         <label class="form-label">${t('marketplace.taskType')}</label>
                         <select id="filter-task" class="form-input" onchange="applyFilters()">
                             <option value="">${t('marketplace.allTasks')}</option>
-                            <option value="chat" ${marketplaceData.filters.taskType === 'chat' ? 'selected' : ''}>💬 ${t('marketplace.taskChat')}</option>
-                            <option value="coding" ${marketplaceData.filters.taskType === 'coding' ? 'selected' : ''}>💻 ${t('marketplace.taskCoding')}</option>
-                            <option value="reasoning" ${marketplaceData.filters.taskType === 'reasoning' ? 'selected' : ''}>🧠 ${t('marketplace.taskReasoning')}</option>
-                            <option value="vision" ${marketplaceData.filters.taskType === 'vision' ? 'selected' : ''}>👁️ ${t('marketplace.taskVision')}</option>
-                            <option value="long_context" ${marketplaceData.filters.taskType === 'long_context' ? 'selected' : ''}>📜 ${t('marketplace.taskLongContext')}</option>
+                            <option value="chat" ${marketplaceData.filters.taskType === 'chat' ? 'selected' : ''}>Chat ${t('marketplace.taskChat')}</option>
+                            <option value="coding" ${marketplaceData.filters.taskType === 'coding' ? 'selected' : ''}>Code ${t('marketplace.taskCoding')}</option>
+                            <option value="reasoning" ${marketplaceData.filters.taskType === 'reasoning' ? 'selected' : ''}>Reasoning ${t('marketplace.taskReasoning')}</option>
+                            <option value="vision" ${marketplaceData.filters.taskType === 'vision' ? 'selected' : ''}>Vision ${t('marketplace.taskVision')}</option>
+                            <option value="long_context" ${marketplaceData.filters.taskType === 'long_context' ? 'selected' : ''}>LongCtx ${t('marketplace.taskLongContext')}</option>
                         </select>
                     </div>
                     <div class="filter-group">
@@ -189,7 +189,7 @@ async function renderModelMarketplace() {
         console.error('Model marketplace load error:', error);
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">🤖</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Model</div>
                 <div class="empty-state-text">${t('marketplace.failedLoad')}</div>
                 <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                 <button class="btn btn-primary mt-4" onclick="renderModelMarketplace()">${t('common.retry')}</button>
@@ -217,7 +217,7 @@ function renderProviderCards() {
                 </div>
                 <button class="btn btn-sm ${provider.status === 'connected' ? 'btn-secondary' : 'btn-primary'}" 
                     onclick="openConfigModal('${provider.id}', '${provider.name}')">
-                    ${provider.status === 'connected' ? '⚙️ ' + t('marketplace.configure') : '🔑 ' + t('marketplace.setup')}
+                    ${provider.status === 'connected' ? t('marketplace.configure') : t('marketplace.setup')}
                 </button>
             </div>
             <div class="provider-models">
@@ -242,7 +242,7 @@ function renderModelRow(provider, model) {
             <div class="model-info">
                 <div class="model-name">${model.name}</div>
                 <div class="model-meta">
-                    <span class="tag tag-sm">📜 ${formatContextWindow(model.context_window)}</span>
+                    <span class="tag tag-sm">LongCtx ${formatContextWindow(model.context_window)}</span>
                     ${model.task_types.map(tt => `<span class="task-tag">${getTaskIcon(tt)}</span>`).join('')}
                 </div>
             </div>
@@ -268,13 +268,13 @@ function getPriceClass(price) {
 // Get Task Icon
 function getTaskIcon(taskType) {
     const icons = {
-        'chat': '💬',
-        'coding': '💻',
-        'reasoning': '🧠',
-        'vision': '👁️',
-        'long_context': '📜'
+        'chat': 'Chat',
+        'coding': 'Code',
+        'reasoning': 'Reason',
+        'vision': 'Vision',
+        'long_context': 'LongCtx'
     };
-    return icons[taskType] || '📝';
+    return icons[taskType] || 'Model';
 }
 
 // Format Context Window
@@ -442,7 +442,7 @@ async function showComparison() {
                             <td class="${getPriceClass(m.output_price)}">$${m.output_price}/M</td>
                             <td>${formatContextWindow(m.context_window)}</td>
                             <td>${m.task_types.map(tt => getTaskIcon(tt)).join(' ')}</td>
-                            <td><span class="status-badge ${m.status}">${m.status === 'connected' ? '✅' : '⚪'}</span></td>
+                            <td><span class="status-badge ${m.status}">${m.status === 'connected' ? 'OK' : '--'}</span></td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -523,11 +523,11 @@ function drawCostChart(estimates) {
         // Color based on rank
         let color;
         if (i < 3) {
-            color = '#22C55E'; // Green for cheap
+            color = '#00d4aa'; // Green for cheap
         } else if (model.estimated_monthly_cost < maxCost * 0.5) {
-            color = '#F59E0B'; // Yellow for medium
+            color = '#ff6b35'; // Yellow for medium
         } else {
-            color = '#EF4444'; // Red for expensive
+            color = '#ff6b35'; // Red for expensive
         }
         
         // Draw bar

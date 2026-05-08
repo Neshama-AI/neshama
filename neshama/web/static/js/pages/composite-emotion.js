@@ -10,14 +10,14 @@ let compositeEmotionData = {
 
 // Base emotion presets for synthesis
 const BASE_EMOTIONS = [
-    { id: 'joy', label_zh: '喜悦', label_en: 'Joy', emoji: '😊', color: '#00d4aa' },
-    { id: 'sadness', label_zh: '悲伤', label_en: 'Sadness', emoji: '😢', color: '#7c5cff' },
-    { id: 'anger', label_zh: '愤怒', label_en: 'Anger', emoji: '😠', color: '#ff6b35' },
-    { id: 'fear', label_zh: '恐惧', label_en: 'Fear', emoji: '😨', color: '#7c5cff' },
-    { id: 'surprise', label_zh: '惊讶', label_en: 'Surprise', emoji: '😮', color: '#ff6b35' },
-    { id: 'disgust', label_zh: '厌恶', label_en: 'Disgust', emoji: '🤢', color: '#00d4aa' },
-    { id: 'trust', label_zh: '信任', label_en: 'Trust', emoji: '🤝', color: '#7c5cff' },
-    { id: 'anticipation', label_zh: '期待', label_en: 'Anticipation', emoji: '🤔', color: '#00d4aa' }
+    { id: 'joy', label_zh: '喜悦', label_en: 'Joy', emoji: 'Joy', color: '#00d4aa' },
+    { id: 'sadness', label_zh: '悲伤', label_en: 'Sadness', emoji: 'Sad', color: '#7c5cff' },
+    { id: 'anger', label_zh: '愤怒', label_en: 'Anger', emoji: 'Anger', color: '#ff6b35' },
+    { id: 'fear', label_zh: '恐惧', label_en: 'Fear', emoji: 'Fear', color: '#7c5cff' },
+    { id: 'surprise', label_zh: '惊讶', label_en: 'Surprise', emoji: 'Surprise', color: '#ff6b35' },
+    { id: 'disgust', label_zh: '厌恶', label_en: 'Disgust', emoji: 'Disgust', color: '#00d4aa' },
+    { id: 'trust', label_zh: '信任', label_en: 'Trust', emoji: 'Trust', color: '#7c5cff' },
+    { id: 'anticipation', label_zh: '期待', label_en: 'Anticipation', emoji: 'Anticipation', color: '#00d4aa' }
 ];
 
 // Get localized label for base emotion
@@ -209,7 +209,7 @@ function renderEmotionsList() {
         return `
             <div class="flex items-center justify-between mb-2" style="padding: 10px; background: var(--bg-tertiary); border-radius: 8px;">
                 <div class="flex items-center gap-2">
-                    <span class="emotion-dot" style="background:${baseEmotion?.color || '#94a3b8'}"></span> <span>${baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion'}</span>
+                    <span class="emotion-dot-inline" style="background:${baseEmotion?.color || '#94a3b8'}"></span> <span>${baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion'}</span>
                     <span>${baseEmotion ? getBaseEmotionLabel(baseEmotion) : emotion}</span>
                 </div>
                 <div class="flex items-center gap-2">
@@ -439,7 +439,7 @@ function renderTriggeredList() {
         return `
             <div class="flex items-center justify-between mb-2" style="padding: 12px; background: var(--bg-tertiary); border-radius: 8px;">
                 <div class="flex items-center gap-3">
-                    <span class="emotion-dot" style="background:${baseEmotion?.color || '#94a3b8'};width:12px;height:12px;"></span> <span>${baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion'}</span>
+                    <span class="emotion-dot-inline" style="background:${baseEmotion?.color || '#94a3b8'};width:12px;height:12px;"></span> <span>${baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion'}</span>
                     <div>
                         <div style="font-weight: 500;">${item.behavior || item.emotion}</div>
                         <div class="text-muted" style="font-size: 12px;">${item.description || (baseEmotion ? getBaseEmotionLabel(baseEmotion) : item.emotion)}</div>

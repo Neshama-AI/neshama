@@ -217,5 +217,5 @@ function getEmotionDisplay(emotion) {
         curiosity: { label: 'Curiosity', color: '#7c5cff' }
     };
     const info = map[emotion] || { label: 'Neutral', color: '#94a3b8' };
-    return `<span class="emotion-dot" style="background:${info.color}"></span><span class="emotion-label">${info.label}</span>`;
+    return `<span class="emotion-dot-inline" style="background:${info.color}"></span><span class="emotion-label">${info.label}</span>`;
 }

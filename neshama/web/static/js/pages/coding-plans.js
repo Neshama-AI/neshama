@@ -31,21 +31,21 @@ async function renderCodingPlans() {
             <!-- Stats Bar -->
             <div class="grid-3 mb-4">
                 <div class="stat-card">
-                    <div class="stat-icon">📦</div>
+                    <div class="stat-icon" style="color:#7c5cff;">Plan</div>
                     <div class="stat-content">
                         <div class="stat-value">${codingPlansData.stats.total}</div>
                         <div class="stat-label">${t('codingPlans.totalPlans')}</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">✅</div>
+                    <div class="stat-icon" style="color:#00d4aa;">Active</div>
                     <div class="stat-content">
                         <div class="stat-value">${codingPlansData.stats.enabled}</div>
                         <div class="stat-label">${t('codingPlans.activePlans')}</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">🔑</div>
+                    <div class="stat-icon" style="color:#7c5cff;">Key</div>
                     <div class="stat-content">
                         <div class="stat-value">${codingPlansData.stats.configured}</div>
                         <div class="stat-label">${t('codingPlans.configuredPlans')}</div>
@@ -56,7 +56,7 @@ async function renderCodingPlans() {
             <!-- Add Plan Button -->
             <div class="flex gap-3 mb-4">
                 <button class="btn btn-primary" onclick="openAddPlanModal()">
-                    ➕ ${t('codingPlans.addPlan')}
+                    ${t('codingPlans.addPlan')}
                 </button>
             </div>
             
@@ -94,7 +94,7 @@ async function renderCodingPlans() {
         console.error('Coding plans load error:', error);
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">📦</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Plan</div>
                 <div class="empty-state-text">${t('codingPlans.failedLoad')}</div>
                 <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                 <button class="btn btn-primary mt-4" onclick="renderCodingPlans()">${t('common.retry')}</button>
@@ -109,7 +109,7 @@ function renderPlansList() {
     if (codingPlansData.plans.length === 0) {
         return `
             <div class="empty-state">
-                <div class="empty-state-icon">📦</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Plan</div>
                 <div class="empty-state-text">${t('codingPlans.noPlans')}</div>
                 <button class="btn btn-primary mt-4" onclick="openAddPlanModal()">
                     ${t('codingPlans.createFirst')}
@@ -146,7 +146,7 @@ function renderPlanCard(plan) {
                 <div class="form-label">${t('codingPlans.models')}</div>
                 <div class="model-tags">
                     ${plan.models.map(m => `
-                        <span class="model-tag">🤖 ${m.name}</span>
+                        <span class="model-tag">${m.name}</span>
                     `).join('')}
                 </div>
             </div>
@@ -156,7 +156,7 @@ function renderPlanCard(plan) {
                     <div class="form-label">${t('codingPlans.restrictions')}</div>
                     <div class="restriction-tags">
                         ${plan.restrictions.restriction_list.map(r => `
-                            <span class="restriction-tag warning">⚠️ ${getRestrictionLabel(r)}</span>
+                            <span class="restriction-tag warning">${getRestrictionLabel(r)}</span>
                         `).join('')}
                     </div>
                 </div>
@@ -164,21 +164,21 @@ function renderPlanCard(plan) {
             
             <div class="plan-rate-limits">
                 <div class="rate-limit-item">
-                    <span class="rate-icon">⏱️</span>
+                    <span class="rate-icon" style="color:#7c5cff;">RPM</span>
                     <span>${plan.rate_limits.rpm} RPM</span>
                 </div>
                 <div class="rate-limit-item">
-                    <span class="rate-icon">📅</span>
+                    <span class="rate-icon" style="color:#ff6b35;">Day</span>
                     <span>${plan.rate_limits.rpd} RPD</span>
                 </div>
             </div>
             
             <div class="plan-status">
                 <span class="status-badge ${configClass}">
-                    ${plan.configured ? '🔑 ' + t('codingPlans.configured') : '⚪ ' + t('codingPlans.notConfigured')}
+                    ${plan.configured ? t('codingPlans.configured') : t('codingPlans.notConfigured')}
                 </span>
                 <span class="usage-badge">
-                    📊 ${plan.session_stats.request_count} ${t('codingPlans.requests')}
+                    ${plan.session_stats.request_count} ${t('codingPlans.requests')}
                 </span>
             </div>
             
@@ -203,14 +203,14 @@ function renderPlanCard(plan) {
 // Get Provider Emoji
 function getProviderEmoji(provider) {
     const emojis = {
-        'zhipu': '🟢',
-        'dashscope': '☁️',
-        'minimax': '🧪',
-        'openai': '🤖',
-        'anthropic': '🧠',
-        'deepseek': '🔵',
+        'zhipu': 'Zhipu',
+        'dashscope': 'Dashscope',
+        'minimax': 'MiniMax',
+        'openai': 'OpenAI',
+        'anthropic': 'Anthropic',
+        'deepseek': 'DeepSeek',
     };
-    return emojis[provider] || '🔮';
+    return emojis[provider] || 'Model';
 }
 
 // Get Restriction Label
@@ -257,11 +257,11 @@ function openAddPlanModal() {
                     <label class="form-label">${t('codingPlans.provider')}</label>
                     <select id="plan-provider" class="form-input" required>
                         <option value="">${t('codingPlans.selectProvider')}</option>
-                        <option value="zhipu">🟢 智谱 GLM</option>
-                        <option value="dashscope">☁️ 阿里云百炼</option>
-                        <option value="minimax">🧪 MiniMax</option>
-                        <option value="openai">🤖 OpenAI</option>
-                        <option value="anthropic">🧠 Anthropic</option>
+                        <option value="zhipu">智谱 GLM</option>
+                        <option value="dashscope">阿里云百炼</option>
+                        <option value="minimax">MiniMax</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="anthropic">Anthropic</option>
                     </select>
                 </div>
             </div>
@@ -318,15 +318,15 @@ function openAddPlanModal() {
                 <div class="restriction-checkboxes">
                     <label class="checkbox-item">
                         <input type="checkbox" name="restrictions" value="interactive_coding_only">
-                        <span>⚠️ ${t('codingPlans.restrictionInteractive')}</span>
+                        <span>${t('codingPlans.restrictionInteractive')}</span>
                     </label>
                     <label class="checkbox-item">
                         <input type="checkbox" name="restrictions" value="no_backend">
-                        <span>⚠️ ${t('codingPlans.restrictionNoBackend')}</span>
+                        <span>${t('codingPlans.restrictionNoBackend')}</span>
                     </label>
                     <label class="checkbox-item">
                         <input type="checkbox" name="restrictions" value="no_automation">
-                        <span>⚠️ ${t('codingPlans.restrictionNoAutomation')}</span>
+                        <span>${t('codingPlans.restrictionNoAutomation')}</span>
                     </label>
                 </div>
             </div>
@@ -487,11 +487,11 @@ async function viewPlanDetails(planId) {
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">${t('codingPlans.status')}</span>
-                            <span class="detail-value">${plan.enabled ? '✅ ' + t('codingPlans.enabled') : '❌ ' + t('codingPlans.disabled')}</span>
+                            <span class="detail-value">${plan.enabled ? t('codingPlans.enabled') : t('codingPlans.disabled')}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">${t('codingPlans.configured')}</span>
-                            <span class="detail-value">${plan.configured ? '✅' : '❌'}</span>
+                            <span class="detail-value">${plan.configured ? 'Yes' : 'No'}</span>
                         </div>
                     </div>
                 </div>
@@ -501,13 +501,13 @@ async function viewPlanDetails(planId) {
                     <div class="model-tags">
                         ${plan.models.map(m => `
                             <div class="model-detail-card">
-                                <div class="model-name">🤖 ${m.name}</div>
+                                <div class="model-name">${m.name}</div>
                                 <div class="model-capabilities">
-                                    ${m.capabilities.supports_function_call ? '📞 ' : '➖ '}&nbsp;
-                                    ${m.capabilities.supports_streaming ? '⚡ ' : '➖ '}&nbsp;
-                                    ${m.capabilities.supports_vision ? '👁️ ' : '➖ '}&nbsp;
-                                    ${m.capabilities.supports_reasoning ? '🧠 ' : '➖ '}&nbsp;
-                                    📜 ${m.capabilities.context_size / 1000}K
+                                    ${m.capabilities.supports_function_call ? 'FC' : '--'}&nbsp;
+                                    ${m.capabilities.supports_streaming ? 'Stream' : '--'}&nbsp;
+                                    ${m.capabilities.supports_vision ? 'Vision' : '--'}&nbsp;
+                                    ${m.capabilities.supports_reasoning ? 'Reason' : '--'}&nbsp;
+                                    ${m.capabilities.context_size / 1000}K ctx
                                 </div>
                             </div>
                         `).join('')}
@@ -518,7 +518,7 @@ async function viewPlanDetails(planId) {
                     <h4>${t('codingPlans.restrictions')}</h4>
                     <div class="restriction-tags">
                         ${plan.restrictions.restriction_list.map(r => `
-                            <span class="restriction-tag warning">⚠️ ${getRestrictionLabel(r)}</span>
+                            <span class="restriction-tag warning">${getRestrictionLabel(r)}</span>
                         `).join('') || '<span class="text-muted">' + t('codingPlans.noRestrictions') + '</span>'}
                     </div>
                     <div class="detail-grid mt-3">

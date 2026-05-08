@@ -54,7 +54,7 @@ async function renderNPCList() {
                 <p class="page-subtitle">${t('npcList.subtitle')}</p>
             </div>
             <div class="empty-state">
-                <div class="empty-state-icon">🎭</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">NPC</div>
                 <div class="empty-state-text">${t('npcList.loadFailed')}</div>
                 <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                 <button class="btn btn-primary mt-4" onclick="renderNPCList()">${t('common.retry')}</button>
@@ -68,7 +68,7 @@ function renderNPCCards(npcs) {
     if (!npcs || npcs.length === 0) {
         return `
             <div class="empty-state">
-                <div class="empty-state-icon">🎭</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">NPC</div>
                 <div class="empty-state-text">${t('npcList.noNPCs')}</div>
                 <div class="text-muted mt-2">${t('npcList.createFirst')}</div>
                 <button class="btn btn-primary mt-4" onclick="showCreateNPCModal()">
@@ -88,7 +88,7 @@ function renderNPCCards(npcs) {
             <div class="npc-card" data-npc-id="${npc.id}" onclick="viewNPCDetail('${npc.id}')">
                 <div class="npc-card-header">
                     <div class="npc-avatar">
-                        ${npc.avatar || '🎭'}
+                        <span class="avatar-initial">${(npc.name || "N").charAt(0).toUpperCase()}</span>
                     </div>
                     <div class="npc-status ${isOnline ? 'online' : 'offline'}"></div>
                     <input type="checkbox" class="npc-checkbox" 
@@ -99,7 +99,7 @@ function renderNPCCards(npcs) {
                     <h3 class="npc-name">${escapeHtml(npc.name)}</h3>
                     <div class="npc-preset">${t(`npcList.preset.${npc.preset || 'custom'}`) || npc.preset}</div>
                     <div class="npc-emotion">
-                        <span class="emotion-dot" style="background:${EMOTION_COLORS[emotionLabel] || '#94a3b8'}"></span><span class="emotion-label">${emotionLabel}</span>
+                        <span class="emotion-dot-inline" style="background:${EMOTION_COLORS[emotionLabel] || '#94a3b8'}"></span><span class="emotion-label">${emotionLabel}</span>
                         <span class="emotion-name">${emotionName}</span>
                     </div>
                 </div>
@@ -123,7 +123,7 @@ function showCreateNPCModal() {
         <div class="modal-content" style="max-width: 500px;">
             <div class="modal-header">
                 <h3>${t('npcList.createNPC')}</h3>
-                <button class="btn btn-icon" onclick="closeCreateNPCModal()">✕</button>
+                <button class="btn btn-icon" onclick="closeCreateNPCModal()">×</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">

@@ -4,21 +4,21 @@
 
 // Event templates (15 types + custom)
 const EVENT_TEMPLATES = [
-    { type: 'gift', emoji: '🎁', defaultIntensity: 0.5 },
-    { type: 'attack', emoji: '⚔️', defaultIntensity: 0.8 },
-    { type: 'help', emoji: '🤝', defaultIntensity: 0.6 },
-    { type: 'insult', emoji: '💢', defaultIntensity: 0.7 },
-    { type: 'compliment', emoji: '✨', defaultIntensity: 0.5 },
-    { type: 'trade', emoji: '💰', defaultIntensity: 0.4 },
-    { type: 'join_battle', emoji: '⚔️', defaultIntensity: 0.7 },
-    { type: 'leave_battle', emoji: '🏃', defaultIntensity: 0.5 },
-    { type: 'meet', emoji: '👋', defaultIntensity: 0.4 },
-    { type: 'depart', emoji: '👋', defaultIntensity: 0.4 },
-    { type: 'heal', emoji: '💚', defaultIntensity: 0.6 },
-    { type: 'steal', emoji: '💰', defaultIntensity: 0.9 },
-    { type: 'promise', emoji: '🤝', defaultIntensity: 0.5 },
-    { type: 'betray', emoji: '💔', defaultIntensity: 0.9 },
-    { type: 'discover', emoji: '🔍', defaultIntensity: 0.6 }
+    { type: 'gift', emoji: 'Gift', defaultIntensity: 0.5 },
+    { type: 'attack', emoji: 'Attack', defaultIntensity: 0.8 },
+    { type: 'help', emoji: 'Help', defaultIntensity: 0.6 },
+    { type: 'insult', emoji: 'Insult', defaultIntensity: 0.7 },
+    { type: 'compliment', emoji: 'Praise', defaultIntensity: 0.5 },
+    { type: 'trade', emoji: 'Trade', defaultIntensity: 0.4 },
+    { type: 'join_battle', emoji: 'Battle', defaultIntensity: 0.7 },
+    { type: 'leave_battle', emoji: 'Retreat', defaultIntensity: 0.5 },
+    { type: 'meet', emoji: 'Meet', defaultIntensity: 0.4 },
+    { type: 'depart', emoji: 'Depart', defaultIntensity: 0.4 },
+    { type: 'heal', emoji: 'Heal', defaultIntensity: 0.6 },
+    { type: 'steal', emoji: 'Steal', defaultIntensity: 0.9 },
+    { type: 'promise', emoji: 'Promise', defaultIntensity: 0.5 },
+    { type: 'betray', emoji: 'Betray', defaultIntensity: 0.9 },
+    { type: 'discover', emoji: 'Discover', defaultIntensity: 0.6 }
 ];
 
 // Event sequence for batch replay
@@ -137,7 +137,7 @@ async function renderNPCEventTester() {
                         
                         <div id="emotion-change-display" class="emotion-change-display">
                             <div class="emotion-change-placeholder">
-                                <span class="placeholder-icon">📊</span>
+                                <span class="placeholder-icon" style="color:#7c5cff;">Chart</span>
                                 <span>${t('eventTester.noEvents')}</span>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ async function renderNPCEventTester() {
                 <p class="page-subtitle">${t('eventTester.subtitle')}</p>
             </div>
             <div class="empty-state">
-                <div class="empty-state-icon">🧪</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Test</div>
                 <div class="empty-state-text">${t('eventTester.loadFailed')}</div>
                 <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                 <button class="btn btn-primary mt-4" onclick="renderNPCEventTester()">${t('common.retry')}</button>
@@ -279,7 +279,7 @@ function updateEmotionChangeDisplay(before, after, delta) {
         <div class="emotion-comparison">
             <div class="emotion-state">
                 <span class="state-label">${t('eventTester.beforeEmotion')}</span>
-                <span class="emotion-emoji large">${before.primary?.emoji || '😐'}</span>
+                <span class="emotion-emoji large">${before.primary?.category || 'Neutral'}</span>
                 <span class="emotion-name">${before.primary?.category || 'Neutral'}</span>
                 <div class="emotion-bars">
                     <div class="emotion-bar-row">
@@ -301,7 +301,7 @@ function updateEmotionChangeDisplay(before, after, delta) {
             
             <div class="emotion-state">
                 <span class="state-label">${t('eventTester.afterEmotion')}</span>
-                <span class="emotion-emoji large">${after.primary?.emoji || '😐'}</span>
+                <span class="emotion-emoji large">${after.primary?.category || 'Neutral'}</span>
                 <span class="emotion-name">${after.primary?.category || 'Neutral'}</span>
                 <div class="emotion-bars">
                     <div class="emotion-bar-row">
@@ -328,7 +328,7 @@ function updateEmotionChangeDisplay(before, after, delta) {
         
         ${delta.primary ? `
             <div class="emotion-changed-badge">
-                <span class="badge-icon">🔄</span>
+                <span class="badge-icon" style="color:#7c5cff;">Reset</span>
                 <span>Emotion Changed!</span>
             </div>
         ` : ''}
@@ -348,10 +348,10 @@ function renderEventSequence() {
         return `
             <div class="sequence-item">
                 <span class="sequence-index">${i + 1}</span>
-                <span class="sequence-emoji">${template?.emoji || '📋'}</span>
+                <span class="sequence-emoji">${template?.emoji || 'Seq'}</span>
                 <span class="sequence-name">${t(`event.${event.type}`) || event.type}</span>
                 <span class="sequence-intensity">${(event.intensity * 100).toFixed(0)}%</span>
-                <button class="btn btn-icon btn-sm" onclick="removeFromSequence(${i})">✕</button>
+                <button class="btn btn-icon btn-sm" onclick="removeFromSequence(${i})">×</button>
             </div>
         `;
     }).join('');
@@ -441,7 +441,7 @@ function renderEventLog() {
     if (eventLog.length === 0) {
         return `
             <div class="empty-state">
-                <div class="empty-state-icon">📋</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">List</div>
                 <div class="empty-state-text">${t('eventTester.noEvents')}</div>
             </div>
         `;
@@ -453,7 +453,7 @@ function renderEventLog() {
             <div class="log-item">
                 <div class="log-header">
                     <span class="log-time">${formatDate(log.timestamp)}</span>
-                    <span class="log-emoji">${template?.emoji || '📋'}</span>
+                    <span class="log-emoji">${template?.emoji || 'Seq'}</span>
                     <span class="log-event">${t(`event.${log.eventType}`) || log.eventType}</span>
                 </div>
                 <div class="log-details">

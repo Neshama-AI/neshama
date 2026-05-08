@@ -312,7 +312,7 @@ function renderDemo() {
         <!-- NPC Interaction Modal -->
         <div class="demo-modal" id="demo-modal">
             <div class="demo-modal-content">
-                <button class="demo-modal-close" id="modal-close">✕</button>
+                <button class="demo-modal-close" id="modal-close">×</button>
                 ${renderNPCPanel()}
             </div>
         </div>
@@ -397,7 +397,7 @@ function renderEmotionGrid(emotions) {
         const info = EMOTIONS[emotion] || EMOTIONS.joy;
         const brightness = Math.max(0.2, value);
         return `
-            <div class="emotion-dot" 
+            <div class="emotion-dot-inline" 
                  data-emotion="${emotion}"
                  style="background-color: ${info.color}; opacity: ${brightness};"
                  title="${info.label_zh}: ${(value * 100).toFixed(0)}%">
@@ -536,21 +536,21 @@ function renderComparison() {
                 <div class="comparison-col ${DemoState.neshamaEnabled ? 'active' : ''}">
                     <h4>${isZh ? '有Neshama' : 'With Neshama'}</h4>
                     <ul>
-                        <li>${isZh ? '✓ 对话随情绪变化' : '✓ Dialogues change with emotions'}</li>
-                        <li>✓ ${isZh ? '情绪实时更新' : 'Real-time emotion updates'}</li>
-                        <li>✓ ${isZh ? '记住玩家行为' : 'Remembers player actions'}</li>
-                        <li>✓ ${isZh ? 'NPC之间传播信息' : 'NPCs share information'}</li>
-                        <li>✓ ${isZh ? '触发剧情分支' : 'Story branches triggered'}</li>
+                        <li>${isZh ? '对话随情绪变化' : 'Dialogues change with emotions'}</li>
+                        <li>${isZh ? '情绪实时更新' : 'Real-time emotion updates'}</li>
+                        <li>${isZh ? '记住玩家行为' : 'Remembers player actions'}</li>
+                        <li>${isZh ? 'NPC之间传播信息' : 'NPCs share information'}</li>
+                        <li>${isZh ? '触发剧情分支' : 'Story branches triggered'}</li>
                     </ul>
                 </div>
                 <div class="comparison-col ${!DemoState.neshamaEnabled ? 'active' : ''}">
                     <h4>${isZh ? '无Neshama' : 'Without Neshama'}</h4>
                     <ul>
-                        <li>${isZh ? '✗ 固定模板回复' : '✗ Fixed template responses'}</li>
-                        <li>✗ ${isZh ? '情绪永远不变' : 'Emotions never change'}</li>
-                        <li>✗ ${isZh ? '不记住玩家' : 'Does not remember player'}</li>
-                        <li>✗ ${isZh ? 'NPC之间无互动' : 'No NPC interactions'}</li>
-                        <li>✗ ${isZh ? '无法触发剧情' : 'Cannot trigger stories'}</li>
+                        <li>${isZh ? '固定模板回复' : 'Fixed template responses'}</li>
+                        <li>${isZh ? '情绪永远不变' : 'Emotions never change'}</li>
+                        <li>${isZh ? '不记住玩家' : 'Does not remember player'}</li>
+                        <li>${isZh ? 'NPC之间无互动' : 'No NPC interactions'}</li>
+                        <li>${isZh ? '无法触发剧情' : 'Cannot trigger stories'}</li>
                     </ul>
                 </div>
             </div>
@@ -660,7 +660,7 @@ function openNPCPanel(npcKey) {
         const content = modal.querySelector('.demo-modal-content');
         if (content) {
             content.innerHTML = `
-                <button class="demo-modal-close" id="modal-close">✕</button>
+                <button class="demo-modal-close" id="modal-close">×</button>
                 ${renderNPCPanel()}
             `;
             initDemoEventListeners();
@@ -949,7 +949,7 @@ function updatePanelUI() {
         const content = modal.querySelector('.demo-modal-content');
         if (content) {
             content.innerHTML = `
-                <button class="demo-modal-close" id="modal-close">✕</button>
+                <button class="demo-modal-close" id="modal-close">×</button>
                 ${renderNPCPanel()}
             `;
             initDemoEventListeners();

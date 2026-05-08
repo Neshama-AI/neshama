@@ -9,14 +9,14 @@ let templateCategory = '';
 
 // Preset categories with icons
 const PRESET_CATEGORIES = [
-    { id: '', label_zh: '全部', label_en: 'All', icon: '📚' },
-    { id: 'tavern', label_zh: '酒馆', label_en: 'Tavern', icon: '🍺' },
-    { id: 'guard', label_zh: '守卫', label_en: 'Guard', icon: '🛡️' },
-    { id: 'merchant', label_zh: '商人', label_en: 'Merchant', icon: '💰' },
-    { id: 'mage', label_zh: '法师', label_en: 'Mage', icon: '🧙' },
-    { id: 'quest', label_zh: '任务', label_en: 'Quest', icon: '📜' },
-    { id: 'story', label_zh: '剧情', label_en: 'Story', icon: '📖' },
-    { id: 'custom', label_zh: '自定义', label_en: 'Custom', icon: '✨' }
+    { id: '', label_zh: '全部', label_en: 'All', icon: 'All' },
+    { id: 'tavern', label_zh: '酒馆', label_en: 'Tavern', icon: 'Tavern' },
+    { id: 'guard', label_zh: '守卫', label_en: 'Guard', icon: 'Guard' },
+    { id: 'merchant', label_zh: '商人', label_en: 'Merchant', icon: 'Merchant' },
+    { id: 'mage', label_zh: '法师', label_en: 'Mage', icon: 'Mage' },
+    { id: 'quest', label_zh: '任务', label_en: 'Quest', icon: 'Quest' },
+    { id: 'story', label_zh: '剧情', label_en: 'Story', icon: 'Story' },
+    { id: 'custom', label_zh: '自定义', label_en: 'Custom', icon: 'Custom' }
 ];
 
 // Built-in presets (fallback when API unavailable)
@@ -25,7 +25,7 @@ const BUILTIN_PRESETS = [
         id: 'tavern_keeper',
         name: 'Tavern Keeper',
         name_zh: '酒馆老板娘',
-        emoji: '🍺',
+        emoji: 'Tavern',
         category: 'tavern',
         description: 'A friendly tavern keeper who loves chatting. Gets talkative when trusting, kicks out customers when angry.',
         description_zh: '友好的酒馆老板娘，喜欢和客人聊天。信任时话多，生气时赶人。',
@@ -37,7 +37,7 @@ const BUILTIN_PRESETS = [
         id: 'guard_captain',
         name: 'Guard Captain',
         name_zh: '守卫队长',
-        emoji: '🛡️',
+        emoji: 'Guard',
         category: 'guard',
         description: 'A disciplined guard captain who speaks concisely. Hostile to enemies, maintains order at all costs.',
         description_zh: '纪律严明的守卫队长，说话简洁。对敌人敌对，不惜一切代价维持秩序。',
@@ -49,7 +49,7 @@ const BUILTIN_PRESETS = [
         id: 'mystic_traveler',
         name: 'Mystic Traveler',
         name_zh: '神秘旅者',
-        emoji: '🧙',
+        emoji: 'Mage',
         category: 'mage',
         description: 'A mysterious traveler who speaks in riddles. May vanish when frightened, reveal deep secrets when trust is established.',
         description_zh: '神秘的旅者，说话谜语化。害怕时可能消失，信任后揭示深层秘密。',
@@ -61,7 +61,7 @@ const BUILTIN_PRESETS = [
         id: 'blacksmith',
         name: 'Blacksmith',
         name_zh: '铁匠',
-        emoji: '🔨',
+        emoji: 'Smith',
         category: 'merchant',
         description: 'A gruff but skilled blacksmith. Takes pride in work, skeptical of outsiders, loyal to regular customers.',
         description_zh: '粗犷但技艺高超的铁匠。以工作为傲，对外人持怀疑态度，对老主顾忠诚。',
@@ -73,7 +73,7 @@ const BUILTIN_PRESETS = [
         id: 'court_mage',
         name: 'Court Mage',
         name_zh: '宫廷法师',
-        emoji: '✨',
+        emoji: 'Custom',
         category: 'mage',
         description: 'An erudite court mage obsessed with magical theory. Dismissive of "practical" concerns, helpful when intrigued.',
         description_zh: '博学的宫廷法师，沉迷魔法理论。对"实际问题"不屑一顾，感兴趣时乐于助人。',
@@ -85,7 +85,7 @@ const BUILTIN_PRESETS = [
         id: 'street_urchin',
         name: 'Street Urchin',
         name_zh: '街头顽童',
-        emoji: '🧒',
+        emoji: 'Child',
         category: 'custom',
         description: 'A quick-witted street urchin who survives by charm and cunning. May steal from you, may save your life.',
         description_zh: '机灵的街头顽童，靠魅力和狡猾生存。可能偷你的东西，也可能救你的命。',
@@ -176,10 +176,10 @@ function normalizePreset(preset) {
 
 function getCategoryEmoji(category) {
     const map = {
-        tavern_keeper: '🍺', guard_captain: '🛡️', mystic_traveler: '🧙',
-        blacksmith: '🔨', merchant: '💰', mage: '✨', custom: '✨'
+        tavern_keeper: 'Tavern', guard_captain: 'Guard', mystic_traveler: 'Mage',
+        blacksmith: 'Smith', merchant: 'Merchant', mage: 'Mage', custom: 'Custom'
     };
-    return map[category] || '🎭';
+    return map[category] || 'Template';
 }
 
 function getCurrentLang() {
@@ -240,7 +240,7 @@ function renderTemplateGrid() {
     if (filtered.length === 0) {
         grid.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">📚</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Library</div>
                 <div class="empty-state-text">${t('templates.noTemplates')}</div>
             </div>
         `;
@@ -270,11 +270,11 @@ function renderTemplateGrid() {
 function renderOceanMini(ocean) {
     if (!ocean) return '';
     const traits = [
-        { key: 'O', value: ocean.openness, color: '#6366f1' },
-        { key: 'C', value: ocean.conscientiousness, color: '#22c55e' },
-        { key: 'E', value: ocean.extraversion, color: '#f59e0b' },
-        { key: 'A', value: ocean.agreeableness, color: '#ec4899' },
-        { key: 'N', value: ocean.neuroticism, color: '#ef4444' }
+        { key: 'O', value: ocean.openness, color: '#7c5cff' },
+        { key: 'C', value: ocean.conscientiousness, color: '#00d4aa' },
+        { key: 'E', value: ocean.extraversion, color: '#ff6b35' },
+        { key: 'A', value: ocean.agreeableness, color: '#e879a0' },
+        { key: 'N', value: ocean.neuroticism, color: '#ff6b35' }
     ];
     
     return `
@@ -367,11 +367,11 @@ function closeTemplateDetail() {
 function renderOceanDetail(ocean) {
     if (!ocean) return '<p class="text-muted">—</p>';
     const traits = [
-        { key: 'openness', label: t('ocean.openness'), value: ocean.openness, color: '#6366f1' },
-        { key: 'conscientiousness', label: t('ocean.conscientiousness'), value: ocean.conscientiousness, color: '#22c55e' },
-        { key: 'extraversion', label: t('ocean.extraversion'), value: ocean.extraversion, color: '#f59e0b' },
-        { key: 'agreeableness', label: t('ocean.agreeableness'), value: ocean.agreeableness, color: '#ec4899' },
-        { key: 'neuroticism', label: t('ocean.neuroticism'), value: ocean.neuroticism, color: '#ef4444' }
+        { key: 'openness', label: t('ocean.openness'), value: ocean.openness, color: '#7c5cff' },
+        { key: 'conscientiousness', label: t('ocean.conscientiousness'), value: ocean.conscientiousness, color: '#00d4aa' },
+        { key: 'extraversion', label: t('ocean.extraversion'), value: ocean.extraversion, color: '#ff6b35' },
+        { key: 'agreeableness', label: t('ocean.agreeableness'), value: ocean.agreeableness, color: '#e879a0' },
+        { key: 'neuroticism', label: t('ocean.neuroticism'), value: ocean.neuroticism, color: '#ff6b35' }
     ];
     
     return `

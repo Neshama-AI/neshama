@@ -41,8 +41,8 @@ public class NeshamaSDKEditor : ModuleRules
 		CppStandard = CppStandardVersion.Cpp17;
 
 		// 编辑器特定的定义
-		Definitions.Add("NESHAMA_SDK_EDITOR=1");
-		Definitions.Add("WITH_EDITORONLY_DATA=1");
+		PrivateDefinitions.Add("NESHAMA_SDK_EDITOR=1");
+		PrivateDefinitions.Add("WITH_EDITORONLY_DATA=1");
 
 		// 禁用某些警告
 		bTreatWarningsAsErrors = false;

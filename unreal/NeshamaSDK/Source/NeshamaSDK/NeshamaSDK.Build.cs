@@ -41,17 +41,17 @@ public class NeshamaSDK : ModuleRules
 		if (Target.bBuildEditor == false)
 		{
 			// 游戏Target配置
-			Definitions.Add("NESHAMA_SDK_VERSION=1");
+			PrivateDefinitions.Add("NESHAMA_SDK_VERSION=1");
 		}
 		else
 		{
 			// 编辑器Target配置
-			Definitions.Add("NESHAMA_SDK_VERSION=1");
-			Definitions.Add("WITH_EDITOR=1");
+			PrivateDefinitions.Add("NESHAMA_SDK_VERSION=1");
+			PrivateDefinitions.Add("WITH_EDITOR=1");
 		}
 
 		// 网络超时设置
-		Definitions.Add("NESHAMA_DEFAULT_TIMEOUT=30");
+		PrivateDefinitions.Add("NESHAMA_DEFAULT_TIMEOUT=30");
 
 		// 日志级别定义
 		PublicDefinitions.Add("NESHAMA_LOG_LEVEL=2");

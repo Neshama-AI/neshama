@@ -4913,3 +4913,58 @@ canvas {
         min-height: auto;
     }
 }
+
+/* ============================================================
+   Emoji Replacement Styles - Avatar Initial & Inline Emotion Dot
+   ============================================================ */
+
+.avatar-initial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #7c5cff;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.avatar-initial.npc-avatar-sm {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+}
+
+.avatar-initial.npc-avatar-chat {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+}
+
+/* Inline emotion dot (used in dashboard/NPC lists, different from grid emotion-dot) */
+.emotion-dot-inline {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.emotion-label-inline {
+    font-size: 12px;
+    vertical-align: middle;
+    color: var(--text-secondary);
+}
+
+/* Stat icon text replacements */
+.stat-icon[style*="color:#7c5cff"],
+.stat-icon[style*="color:#00d4aa"],
+.stat-icon[style*="color:#ff6b35"] {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
