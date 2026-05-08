@@ -278,7 +278,7 @@ void UNPCSoulComponent::SendGameEvent(EGameEventType EventType, float Intensity,
 	Client->SendGameEvent(NpcId, EventType, Intensity, Context, OnComplete);
 }
 
-void UNPCSoulComponent::SendGameEvent(EGameEventType EventType, float Intensity)
+void UNPCSoulComponent::SendGameEventSimple(EGameEventType EventType, float Intensity)
 {
 	SendGameEvent(EventType, Intensity, TMap<FString, FString>());
 }

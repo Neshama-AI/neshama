@@ -198,6 +198,12 @@ TArray<TArray<FPathStep>> UEntityGraph::FindPaths(const FString& SourceId, const
 	return AllPaths;
 }
 
+TArray<TArray<FPathStep>> UEntityGraph::FindPaths(const FString& SourceId, const FString& TargetId,
+	int32 MaxDepth)
+{
+	return FindPaths(SourceId, TargetId, MaxDepth, TArray<ERelationType>());
+}
+
 bool UEntityGraph::ShortestPath(const FString& SourceId, const FString& TargetId,
 	TArray<FPathStep>& OutPath, int32 MaxDepth)
 {

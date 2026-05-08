@@ -111,7 +111,7 @@ FSpreadResult UInformationPropagator::SpreadInformation(const FString& SourceNpc
 	return Result;
 }
 
-FSpreadResult UInformationPropagator::SpreadInformation(const FString& SourceNpcId, EInfoType InfoType,
+FSpreadResult UInformationPropagator::SpreadInformationSimple(const FString& SourceNpcId, EInfoType InfoType,
 	const FString& Content, const TArray<FString>& Targets,
 	float Importance, const FString& ExistingInfoId)
 {

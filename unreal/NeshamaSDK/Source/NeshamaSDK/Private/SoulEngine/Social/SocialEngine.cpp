@@ -12,7 +12,7 @@ void USocialEngine::RegisterNPC(const FString& NpcId, UOCEANPersonality* Persona
 	NpcEmotions.Add(NpcId, Emotions);
 }
 
-void USocialEngine::RegisterNPC(const FString& NpcId, UOCEANPersonality* Personality)
+void USocialEngine::RegisterNPCSimple(const FString& NpcId, UOCEANPersonality* Personality)
 {
 	RegisterNPC(NpcId, Personality, TMap<FString, float>());
 }

@@ -113,8 +113,9 @@ public:
 		const TMap<FString, float>& Emotions);
 
 	/** Register an NPC with the social engine (without initial emotions). */
-	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	void RegisterNPC(const FString& NpcId, UOCEANPersonality* Personality = nullptr);
+	UFUNCTION(BlueprintCallable, Category = "Neshama",
+		meta = (DisplayName = "Register NPC"))
+	void RegisterNPCSimple(const FString& NpcId, UOCEANPersonality* Personality = nullptr);
 
 	/** Update NPC emotion state. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")

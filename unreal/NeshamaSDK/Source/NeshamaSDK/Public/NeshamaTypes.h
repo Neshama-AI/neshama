@@ -834,29 +834,29 @@ struct NESHAMASDK_API FMemoryListResponse : public FTableRowBase
 /**
  * 连接状态变化委托
  */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnConnectionStateChanged, bool, bIsConnected);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConnectionStateChanged, bool, bIsConnected);
 
 /**
  * 情绪变化委托
  */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnEmotionChanged, FEmotionState, NewEmotion);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEmotionChanged, FEmotionState, NewEmotion);
 
 /**
  * 行为变化委托
  */
-DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnBehaviorChanged, FString, BehaviorType, FString, Value);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBehaviorChanged, FString, BehaviorType, FString, Value);
 
 /**
  * 对话响应委托
  */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnChatResponse, FChatResponse, Response);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChatResponse, FChatResponse, Response);
 
 /**
  * 错误回调委托
  */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnError, FString, ErrorMessage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnError, FString, ErrorMessage);
 
 /**
  * 日志回调委托
  */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnLog, FString, LogMessage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLog, FString, LogMessage);

@@ -119,8 +119,8 @@ public:
 
 	/** 发送游戏事件到服务器（简化版，无需上下文） */
 	UFUNCTION(BlueprintCallable, Category = "Neshama|Event",
-		meta = (DisplayName = "Send Game Event (Simple)", ToolTip = "发送游戏事件到服务器"))
-	void SendGameEvent(EGameEventType EventType, float Intensity = 1.0f);
+		meta = (DisplayName = "Send Game Event"))
+	void SendGameEventSimple(EGameEventType EventType, float Intensity = 1.0f);
 
 	/**
 	 * 与NPC对话

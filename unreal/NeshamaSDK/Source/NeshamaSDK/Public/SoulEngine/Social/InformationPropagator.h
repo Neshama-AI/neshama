@@ -151,8 +151,9 @@ public:
 		const FString& ExistingInfoId);
 
 	/** Spread information without tags. */
-	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	FSpreadResult SpreadInformation(const FString& SourceNpcId, EInfoType InfoType,
+	UFUNCTION(BlueprintCallable, Category = "Neshama",
+		meta = (DisplayName = "Spread Information"))
+	FSpreadResult SpreadInformationSimple(const FString& SourceNpcId, EInfoType InfoType,
 		const FString& Content, const TArray<FString>& Targets,
 		float Importance = 0.5f, const FString& ExistingInfoId = TEXT(""));
 

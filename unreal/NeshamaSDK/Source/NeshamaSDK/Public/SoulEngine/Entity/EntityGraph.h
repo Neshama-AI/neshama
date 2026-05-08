@@ -154,7 +154,11 @@ public:
 
 	/** Find all paths between two entities up to max depth (DFS). */
 	TArray<TArray<FPathStep>> FindPaths(const FString& SourceId, const FString& TargetId,
-		int32 MaxDepth = 3, const TArray<ERelationType>& RelationTypes = TArray<ERelationType>());
+		int32 MaxDepth, const TArray<ERelationType>& RelationTypes);
+
+	/** Find all paths without filtering by relation type. */
+	TArray<TArray<FPathStep>> FindPaths(const FString& SourceId, const FString& TargetId,
+		int32 MaxDepth = 3);
 
 	/** Find shortest path (BFS-like). */
 	bool ShortestPath(const FString& SourceId, const FString& TargetId,
