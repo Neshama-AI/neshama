@@ -353,7 +353,7 @@ void ULicenseManager::MakeLicenseRequest(
     // Serialize request body
     FString JsonStr;
     TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&JsonStr);
-    FJsonSerializer::Serialize(RequestBody, Writer);
+    FJsonSerializer::Serialize(RequestBody.ToSharedRef(), Writer);
 
     // Create HTTP request
     TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
