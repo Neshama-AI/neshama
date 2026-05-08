@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SoulEngine/Social/SocialTypes.h"
+#include "SoulEngine/Social/NeshamaSocialTypes.h"
 #include "SocialEngine.generated.h"
 
 // Forward declarations

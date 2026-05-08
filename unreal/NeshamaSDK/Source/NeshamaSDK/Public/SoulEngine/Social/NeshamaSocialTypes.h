@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SocialTypes.generated.h"
+#include "NeshamaSocialTypes.generated.h"
 
 /**
  * Types of social interactions between NPCs.
