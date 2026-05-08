@@ -279,12 +279,15 @@ async def status(license_key: str) -> Dict[str, Any]:
 
 
 @router.get("/pricing", response_model=PricingResponse)
-async def pricing(region: str = "global") -> Dict[str, Any]:
+async def pricing(region: str = None, request: Request = None) -> Dict[str, Any]:
     """
     Get pricing information for a specific region.
 
+    If region is not specified, it is auto-detected from the Host header.
     Returns prices in the local currency for the given region.
     """
+    if region is None:
+        region = _detect_request_region(request) if request else "global"
     if region not in REGION_PRICING:
         raise HTTPException(status_code=400, detail=f"Invalid region: {region}. Use 'cn' or 'global'")
 

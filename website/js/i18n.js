@@ -664,8 +664,30 @@
     return Math.round(usd * currentRate);
   };
 
-  // Regional pricing: CN-specific prices (PPP-adjusted)
-  var cnPrices = { 0: 0, 19: 49, 79: 199, 299: 799 };
+  // Regional pricing: will be populated from License API
+  var apiPrices = null; // { cn: {free:0, indie:4900, studio:19900, enterprise:79900}, global: {...} }
+
+  window.fetchApiPricing = function() {
+    var isCNSite = window.location.hostname === 'neshama.cn' || window.location.hostname.endsWith('.neshama.cn');
+    var apiBase = isCNSite ? 'https://api.neshama.cn' : 'https://api.neshama.pw';
+    var region = isCNSite ? 'cn' : 'global';
+    fetch(apiBase + '/api/license/pricing?region=' + region)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.plans) {
+          apiPrices = {};
+          data.plans.forEach(function(p) {
+            apiPrices[p.plan] = p.monthly_cents;
+          });
+          apiPrices._currency = data.currency || (isCNSite ? 'CNY' : 'USD');
+          apiPrices._symbol = data.symbol || (isCNSite ? '¥' : '$');
+          updatePrices();
+        }
+      })
+      .catch(function() {
+        // API failed, keep using hardcoded fallback
+      });
+  };
 
   window.updatePrices = function() {
     var lang = getCurrentLang();
@@ -674,12 +696,20 @@
     document.querySelectorAll('[data-usd-price]').forEach(function(el) {
       var usd = parseFloat(el.dataset.usdPrice);
       if (usd < 0) return; // Skip "Custom" etc.
-      if (isCNSite) {
-        // China site: always show CNY regional pricing
+      if (apiPrices) {
+        // Use API pricing
+        var planName = el.dataset.plan;
+        if (planName && apiPrices[planName] !== undefined) {
+          var cents = apiPrices[planName];
+          el.textContent = apiPrices._symbol + (cents / 100);
+        }
+      } else if (isCNSite) {
+        // Fallback: China site CNY regional pricing
+        var cnPrices = { 0: 0, 19: 49, 79: 199, 299: 799 };
         var cny = cnPrices[usd] !== undefined ? cnPrices[usd] : usdToCny(usd);
         el.textContent = '¥' + cny;
       } else {
-        // International site: always show USD
+        // Fallback: International site USD
         el.textContent = '$' + usd;
       }
     });
@@ -706,6 +736,8 @@
     applyTranslations(currentLang);
     // Try to refresh rate from API (async, will call updatePrices on success)
     fetchExchangeRate();
+    // Fetch pricing from License API (async, will call updatePrices on success)
+    fetchApiPricing();
   }
 
   if (document.readyState === 'loading') {
