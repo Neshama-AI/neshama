@@ -1,6 +1,7 @@
 // Copyright 2024 Neshama. All Rights Reserved.
 // Neshama SDK - Editor模块构建配置
 
+using System;
 using UnrealBuildTool;
 
 public class NeshamaSDKEditor : ModuleRules
@@ -8,6 +9,9 @@ public class NeshamaSDKEditor : ModuleRules
 	public NeshamaSDKEditor(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		// UE5.6 默认构建设置（消除升级警告）
+		DefaultBuildSettings = BuildSettingsVersion.Latest;
 
 		// 公共依赖
 		PublicDependencyModuleNames.AddRange(
@@ -37,7 +41,7 @@ public class NeshamaSDKEditor : ModuleRules
 			}
 		);
 
-		// C++标准设置
+		// C++标准设置（UE5.6起必须Cpp20，Cpp17已[Obsolete]）
 		CppStandard = CppStandardVersion.Cpp20;
 
 		// 编辑器特定的定义

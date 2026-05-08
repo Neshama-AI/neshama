@@ -1,6 +1,8 @@
 // Copyright 2024 Neshama. All Rights Reserved.
 // Neshama SDK - Runtime模块构建配置
 
+using System;
+using System.IO;
 using UnrealBuildTool;
 
 public class NeshamaSDK : ModuleRules
@@ -9,6 +11,9 @@ public class NeshamaSDK : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		
+		// UE5.6 默认构建设置（消除升级警告）
+		DefaultBuildSettings = BuildSettingsVersion.Latest;
+
 		// 公共依赖
 		PublicDependencyModuleNames.AddRange(
 			new string[]
@@ -31,10 +36,7 @@ public class NeshamaSDK : ModuleRules
 			}
 		);
 
-		// 动态加载的模块
-		// HTTP is already in PublicDependencyModuleNames, no need to dynamically load
-
-		// C++标准设置
+		// C++标准设置（UE5.6起必须Cpp20，Cpp17已[Obsolete]）
 		CppStandard = CppStandardVersion.Cpp20;
 
 		// 是否为Rocket编辑器构建
@@ -62,5 +64,41 @@ public class NeshamaSDK : ModuleRules
 		// 允许不安全的代码（如果需要）
 		bEnableExceptions = false;
 		bUseRTTI = false;
+
+		// 检测项目路径中的非ASCII字符（已知会导致MSVC PCH C1083错误）
+		CheckNonAsciiProjectPath();
+	}
+
+	/// <summary>
+	/// 检测项目路径是否包含非ASCII字符
+	/// MSVC c1xx编译器在处理含中文/日文/韩文等非ASCII路径时，
+	/// 无法正确访问PCH文件，导致 fatal error C1083: No such file or directory
+	/// 修复方法：将项目移至纯ASCII路径（如 C:\Projects\MyGame\）
+	/// </summary>
+	private void CheckNonAsciiProjectPath()
+	{
+		try
+		{
+			string ProjectPath = Target.ProjectFile != null 
+				? Target.ProjectFile.Directory.FullName 
+				: ModuleDirectory;
+
+			foreach (char c in ProjectPath)
+			{
+				if (c > 127)
+				{
+					System.Console.WriteLine(
+						"[NeshamaSDK] WARNING: Project path contains non-ASCII characters: " + ProjectPath + "\n" +
+						"[NeshamaSDK] This may cause MSVC PCH compilation error C1083 (file not found).\n" +
+						"[NeshamaSDK] Fix: Move your project to an ASCII-only path (e.g. C:\\Projects\\MyGame\\)"
+					);
+					break;
+				}
+			}
+		}
+		catch
+		{
+			// 如果无法检测路径，静默跳过
+		}
 	}
 }
