@@ -50,5 +50,48 @@ public class NeshamaSDKEditor : ModuleRules
 
 		// 禁用某些警告
 		bWarningsAsErrors = false;
+
+		// 检测项目路径中的非ASCII字符（已知会导致MSVC PCH C1083错误）
+		CheckNonAsciiProjectPath();
+	}
+
+	/// <summary>
+	/// 检测项目路径是否包含非ASCII字符（与NeshamaSDK.Build.cs保持一致）
+	/// </summary>
+	private void CheckNonAsciiProjectPath()
+	{
+		try
+		{
+			string ProjectPath = Target.ProjectFile != null 
+				? Target.ProjectFile.Directory.FullName 
+				: ModuleDirectory;
+
+			foreach (char c in ProjectPath)
+			{
+				if (c > 127)
+				{
+					throw new BuildException(
+						"[NeshamaSDK] FATAL: Project path contains non-ASCII characters!\n" +
+						"[NeshamaSDK] Path: " + ProjectPath + "\n" +
+						"[NeshamaSDK] MSVC c1xx cannot handle non-ASCII paths and will fail with C1083.\n" +
+						"[NeshamaSDK] Fix: Move your entire project to an ASCII-only path.\n" +
+						"[NeshamaSDK] Example: C:\\Projects\\MyGame\\\n" +
+						"[NeshamaSDK] Steps:\n" +
+						"[NeshamaSDK]   1. Close UE5 Editor\n" +
+						"[NeshamaSDK]   2. Move project folder to ASCII path (no Chinese/Japanese/Korean chars)\n" +
+						"[NeshamaSDK]   3. Delete Intermediate/ and Binaries/ folders\n" +
+						"[NeshamaSDK]   4. Right-click .uproject -> Generate Visual Studio project files\n" +
+						"[NeshamaSDK]   5. Reopen .uproject"
+					);
+				}
+			}
+		}
+		catch (BuildException)
+		{
+			throw;
+		}
+		catch
+		{
+		}
 	}
 }
