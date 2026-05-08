@@ -1,6 +1,6 @@
 #include "SoulEngine/Memory/EntityMemory.h"
 
-TArray<FString> FDialogueContext::ToPromptParts(int32 MaxMemories) const
+TArray<FString> FSoulDialogueContext::ToPromptParts(int32 MaxMemories) const
 {
 	TArray<FString> Parts;
 

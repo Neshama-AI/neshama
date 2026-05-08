@@ -88,7 +88,7 @@ struct FEntityRelation
  * Ported from Python/C# DialogueContext.
  */
 USTRUCT(BlueprintType)
-struct FDialogueContext
+struct FSoulDialogueContext
 {
 	GENERATED_BODY()
 

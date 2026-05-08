@@ -83,7 +83,7 @@ void UMemorySystem::OnGameEvent(ESoulEventType EventType, float Intensity,
 
 bool UMemorySystem::GetDialogueContext(const FString& NpcId, const FString& PlayerId,
 	const FString& PlayerName, const TMap<FString, float>& EmotionalState,
-	int32 MaxMemories, FDialogueContext& OutContext)
+	int32 MaxMemories, FSoulDialogueContext& OutContext)
 {
 	const FEntityRelation* RelPtr = Relations.Find(PlayerId);
 	if (!RelPtr) return false;

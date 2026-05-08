@@ -35,7 +35,7 @@ public:
 	/** Get dialogue context for NPC-Player interaction. */
 	bool GetDialogueContext(const FString& NpcId, const FString& PlayerId,
 		const FString& PlayerName, const TMap<FString, float>& EmotionalState,
-		int32 MaxMemories, FDialogueContext& OutContext);
+		int32 MaxMemories, FSoulDialogueContext& OutContext);
 
 	/** Get memories about a specific entity. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
