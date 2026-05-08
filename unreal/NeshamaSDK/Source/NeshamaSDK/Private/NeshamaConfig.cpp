@@ -246,7 +246,7 @@ namespace FNeshamaUtils
 			{
 				Output += TEXT(", ");
 			}
-			Output += TEXT("\"") + EscapeJsonString(Array[i]) + TEXT("\"");
+			Output += TEXT("\"") + FNeshamaUtils::EscapeJsonString(Array[i]) + TEXT("\"");
 		}
 		Output += TEXT("]");
 		
@@ -269,8 +269,8 @@ namespace FNeshamaUtils
 				Output += TEXT(", ");
 			}
 			bFirst = false;
-			Output += TEXT("\"") + EscapeJsonString(KVP.Key) + TEXT("\": \"") + 
-					  EscapeJsonString(KVP.Value) + TEXT("\"");
+			Output += TEXT("\"") + FNeshamaUtils::EscapeJsonString(KVP.Key) + TEXT("\": \"") + 
+					  FNeshamaUtils::EscapeJsonString(KVP.Value) + TEXT("\"");
 		}
 		Output += TEXT("}");
 		

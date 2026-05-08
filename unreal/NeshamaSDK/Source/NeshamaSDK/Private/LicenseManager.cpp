@@ -133,7 +133,7 @@ void ULicenseManager::ValidateLicenseWithCallback(
     const FString& MachineId,
     const FNeshamaLicenseValidated& OnComplete)
 {
-    auto RequestBody = MakeShareable(new FJsonObject());
+    TSharedPtr<FJsonObject> RequestBody = MakeShareable(new FJsonObject());
     RequestBody->SetStringField(TEXT("license_key"), LicenseKey);
     RequestBody->SetStringField(TEXT("machine_id"), MachineId);
 
@@ -203,7 +203,7 @@ void ULicenseManager::ActivateLicenseWithCallback(
     const FString& MachineId,
     const FNeshamaLicenseActivated& OnComplete)
 {
-    auto RequestBody = MakeShareable(new FJsonObject());
+    TSharedPtr<FJsonObject> RequestBody = MakeShareable(new FJsonObject());
     RequestBody->SetStringField(TEXT("license_key"), LicenseKey);
     RequestBody->SetStringField(TEXT("machine_id"), MachineId);
 
@@ -245,7 +245,7 @@ void ULicenseManager::DeactivateLicenseWithCallback(const FNeshamaLicenseActivat
     }
 
     FString MachineId = GetMachineId();
-    auto RequestBody = MakeShareable(new FJsonObject());
+    TSharedPtr<FJsonObject> RequestBody = MakeShareable(new FJsonObject());
     RequestBody->SetStringField(TEXT("license_key"), StoredKey);
     RequestBody->SetStringField(TEXT("machine_id"), MachineId);
 

@@ -181,13 +181,13 @@ const TMap<ESoulEmotionType, float>& UEmotionEngine::GetDefaultHalfLives()
 	return HalfLives;
 }
 
-const TArray<TPair<ESoulEmotionType, EEmotionType>>& UEmotionEngine::GetOpposingPairs()
+const TArray<TPair<ESoulEmotionType, ESoulEmotionType>>& UEmotionEngine::GetOpposingPairs()
 {
-	static TArray<TPair<ESoulEmotionType, EEmotionType>> Pairs = {
-		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Joy, ESoulEmotionType::Sadness),
-		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Trust, ESoulEmotionType::Disgust),
-		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Fear, ESoulEmotionType::Anger),
-		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Anticipation, ESoulEmotionType::Surprise)
+	static TArray<TPair<ESoulEmotionType, ESoulEmotionType>> Pairs = {
+		TPair<ESoulEmotionType, ESoulEmotionType>(ESoulEmotionType::Joy, ESoulEmotionType::Sadness),
+		TPair<ESoulEmotionType, ESoulEmotionType>(ESoulEmotionType::Trust, ESoulEmotionType::Disgust),
+		TPair<ESoulEmotionType, ESoulEmotionType>(ESoulEmotionType::Fear, ESoulEmotionType::Anger),
+		TPair<ESoulEmotionType, ESoulEmotionType>(ESoulEmotionType::Anticipation, ESoulEmotionType::Surprise)
 	};
 	return Pairs;
 }

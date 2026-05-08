@@ -409,6 +409,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildConnectionConfigPage()
 				.HintText(LOCTEXT("ServerUrlHint", "http://localhost:8420"))
 			]
 		]
+		]
 
 		// API Key输入
 		+ SVerticalBox::Slot()
@@ -748,9 +749,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildNavigationButtons()
 			.Text(CurrentStep == ESetupWizardStep::Complete
 				? LOCTEXT("Finish", "✦ Finish")
 				: LOCTEXT("Next", "Next →"))
-			.OnClicked(CurrentStep == ESetupWizardStep::Complete
-				? this, &SNeshamaSetupWizard::OnFinishClicked
-				: this, &SNeshamaSetupWizard::OnNextClicked)
+				.OnClicked(this, &SNeshamaSetupWizard::OnNextOrFinishClicked)
 			.IsEnabled(this, &SNeshamaSetupWizard::CanGoNext)
 			.HAlign(HAlign_Right)
 		];

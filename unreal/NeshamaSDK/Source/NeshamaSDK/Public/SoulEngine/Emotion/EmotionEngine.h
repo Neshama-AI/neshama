@@ -126,7 +126,7 @@ private:
 	float ApplyGrudgeFactor(ESoulEventType Type, float Delta, const FString& SourceId) const;
 
 	/** Opposing emotion pairs for conflict resolution. */
-	static const TArray<TPair<ESoulEmotionType, EEmotionType>>& GetOpposingPairs();
+	static const TArray<TPair<ESoulEmotionType, ESoulEmotionType>>& GetOpposingPairs();
 
 	/** Convert EmotionState to string→float map. */
 	TMap<FString, float> EmotionStateToMap() const;
