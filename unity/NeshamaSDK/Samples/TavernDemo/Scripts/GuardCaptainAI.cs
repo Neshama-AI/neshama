@@ -82,7 +82,7 @@ namespace Neshama.SDK.Samples
         /// <summary>
         /// 守卫状态
         /// </summary>
-        private enum GuardState
+        public enum GuardState
         {
             Idle,       // 空闲
             Alert,      // 戒备

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Neshama.SoulEngine.Core;
 using Neshama.SoulEngine.Emotion;
 using Neshama.SoulEngine.Personality;
 using Neshama.SoulEngine.Behavior;
@@ -8,6 +7,7 @@ using Neshama.SoulEngine.Memory;
 using Neshama.SoulEngine.Social;
 using Neshama.SoulEngine.Story;
 using Neshama.SoulEngine.Entity;
+using SoulEngineClass = Neshama.SoulEngine.Core.SoulEngine;
 
 namespace Neshama.SoulEngine.Tests
 {
@@ -376,7 +376,7 @@ namespace Neshama.SoulEngine.Tests
 
         static void TestSaveLoadState()
         {
-            var soul = new SoulEngine("npc_001", "Tavern Keeper");
+            var soul = new SoulEngineClass("npc_001", "Tavern Keeper");
             soul.ProcessEvent(GameEventType.PlayerHelped, 1.0f, "player_001");
 
             var saved = soul.SaveState();
@@ -384,7 +384,7 @@ namespace Neshama.SoulEngine.Tests
             Assert(saved.trust > 0f, "Trust should be > 0 after help event");
 
             // Load into new engine
-            var soul2 = new SoulEngine("npc_001", "Tavern Keeper");
+            var soul2 = new SoulEngineClass("npc_001", "Tavern Keeper");
             soul2.LoadState(saved);
             AssertApprox(soul2.Emotion.GetEmotionValue(EmotionType.Joy), saved.joy, 0.001f,
                 "Loaded joy should match saved");
@@ -396,7 +396,7 @@ namespace Neshama.SoulEngine.Tests
 
         static void TestSoulEngineTick()
         {
-            var soul = new SoulEngine("npc_001", "Test");
+            var soul = new SoulEngineClass("npc_001", "Test");
             soul.ProcessEvent(GameEventType.PlayerHelped, 1.0f, "player_001");
 
             float joyBefore = soul.Emotion.GetEmotionValue(EmotionType.Joy);

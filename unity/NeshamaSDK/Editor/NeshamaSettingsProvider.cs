@@ -173,7 +173,7 @@ namespace Neshama.SDK.Editor
             EditorGUI.indentLevel++;
             
             Settings.DebugMode = EditorGUILayout.Toggle("Debug Mode", Settings.DebugMode);
-            Settings.LogLevel = (NeshamaConfig.LogLevel)EditorGUILayout.EnumPopup("Log Level", Settings.LogLevel);
+            Settings.LogLevelValue = (NeshamaConfig.LogLevel)EditorGUILayout.EnumPopup("Log Level", Settings.LogLevelValue);
             
             EditorGUI.indentLevel--;
             EditorGUILayout.Space();
@@ -213,7 +213,7 @@ namespace Neshama.SDK.Editor
                     Settings.DefaultPlayerId = "player_001";
                     Settings.DefaultPreset = "default";
                     Settings.DebugMode = false;
-                    Settings.LogLevel = NeshamaConfig.LogLevel.Info;
+                    Settings.LogLevelValue = NeshamaConfig.LogLevel.Info;
                     SaveSettings();
                 }
             }
@@ -256,7 +256,7 @@ namespace Neshama.SDK.Editor
                 
                 // 清理
                 client.Dispose();
-                DestroyImmediate(testObj);
+                UnityEngine.Object.DestroyImmediate(testObj);
                 EditorUtility.ClearProgressBar();
                 
                 if (success)

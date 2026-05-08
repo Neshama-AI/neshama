@@ -4,6 +4,91 @@ using System.Collections.Generic;
 namespace Neshama.SoulEngine.Emotion
 {
     /// <summary>
+    /// Base emotion types. Ported from Python BaseEmotion enum.
+    /// 8 primary emotions + Neutral fallback.
+    /// </summary>
+    public enum EmotionType
+    {
+        Joy = 0,
+        Sadness,
+        Anger,
+        Fear,
+        Surprise,
+        Disgust,
+        Trust,
+        Anticipation,
+        Desire,
+        Neutral
+    }
+
+    /// <summary>
+    /// Extension methods for EmotionType.
+    /// Provides name conversion and base emotion enumeration.
+    /// </summary>
+    public static class EmotionTypeExtensions
+    {
+        /// <summary>
+        /// All base emotions (excluding Neutral).
+        /// Used for iteration in decay and other batch operations.
+        /// </summary>
+        public static readonly EmotionType[] BaseEmotions = new EmotionType[]
+        {
+            EmotionType.Joy,
+            EmotionType.Sadness,
+            EmotionType.Anger,
+            EmotionType.Fear,
+            EmotionType.Surprise,
+            EmotionType.Disgust,
+            EmotionType.Trust,
+            EmotionType.Anticipation,
+            EmotionType.Desire,
+        };
+
+        /// <summary>
+        /// Convert EmotionType to lowercase string name.
+        /// Matches Python BaseEmotion.value format (e.g. "joy", "anger").
+        /// </summary>
+        public static string ToName(this EmotionType type)
+        {
+            switch (type)
+            {
+                case EmotionType.Joy: return "joy";
+                case EmotionType.Sadness: return "sadness";
+                case EmotionType.Anger: return "anger";
+                case EmotionType.Fear: return "fear";
+                case EmotionType.Surprise: return "surprise";
+                case EmotionType.Disgust: return "disgust";
+                case EmotionType.Trust: return "trust";
+                case EmotionType.Anticipation: return "anticipation";
+                case EmotionType.Desire: return "desire";
+                case EmotionType.Neutral: return "neutral";
+                default: return "unknown";
+            }
+        }
+
+        /// <summary>
+        /// Parse a string name to EmotionType. Case-insensitive.
+        /// </summary>
+        public static EmotionType FromName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return EmotionType.Neutral;
+            switch (name.ToLower())
+            {
+                case "joy": return EmotionType.Joy;
+                case "sadness": return EmotionType.Sadness;
+                case "anger": return EmotionType.Anger;
+                case "fear": return EmotionType.Fear;
+                case "surprise": return EmotionType.Surprise;
+                case "disgust": return EmotionType.Disgust;
+                case "trust": return EmotionType.Trust;
+                case "anticipation": return EmotionType.Anticipation;
+                case "desire": return EmotionType.Desire;
+                default: return EmotionType.Neutral;
+            }
+        }
+    }
+
+    /// <summary>
     /// Response tone options for NPC dialogue hints.
     /// Ported from Python fast_path.py ResponseTone enum.
     /// </summary>
@@ -79,7 +164,7 @@ namespace Neshama.SoulEngine.Emotion
 
     /// <summary>
     /// Emotion state as a mutable struct for performance.
-    /// All 8 base emotions with values in [0, 1].
+    /// All 9 base emotions with values in [0, 1].
     /// </summary>
     [Serializable]
     public struct EmotionState
@@ -92,13 +177,15 @@ namespace Neshama.SoulEngine.Emotion
         public float disgust;
         public float trust;
         public float anticipation;
+        public float desire;
 
         public EmotionState Clone()
         {
             return new EmotionState
             {
                 joy = joy, sadness = sadness, anger = anger, fear = fear,
-                surprise = surprise, disgust = disgust, trust = trust, anticipation = anticipation
+                surprise = surprise, disgust = disgust, trust = trust, anticipation = anticipation,
+                desire = desire
             };
         }
 
@@ -117,6 +204,7 @@ namespace Neshama.SoulEngine.Emotion
                 case EmotionType.Disgust: return disgust;
                 case EmotionType.Trust: return trust;
                 case EmotionType.Anticipation: return anticipation;
+                case EmotionType.Desire: return desire;
                 default: return 0f;
             }
         }
@@ -137,6 +225,7 @@ namespace Neshama.SoulEngine.Emotion
                 case EmotionType.Disgust: disgust = value; break;
                 case EmotionType.Trust: trust = value; break;
                 case EmotionType.Anticipation: anticipation = value; break;
+                case EmotionType.Desire: desire = value; break;
             }
         }
 
@@ -164,6 +253,7 @@ namespace Neshama.SoulEngine.Emotion
             Check(ref maxVal, ref dom, EmotionType.Disgust, disgust);
             Check(ref maxVal, ref dom, EmotionType.Trust, trust);
             Check(ref maxVal, ref dom, EmotionType.Anticipation, anticipation);
+            Check(ref maxVal, ref dom, EmotionType.Desire, desire);
 
             dominantType = dom;
             dominantValue = maxVal < 0f ? 0f : maxVal;
@@ -183,6 +273,7 @@ namespace Neshama.SoulEngine.Emotion
             if (disgust > 0.001f) dict["disgust"] = disgust;
             if (trust > 0.001f) dict["trust"] = trust;
             if (anticipation > 0.001f) dict["anticipation"] = anticipation;
+            if (desire > 0.001f) dict["desire"] = desire;
             return dict;
         }
 
@@ -191,7 +282,7 @@ namespace Neshama.SoulEngine.Emotion
         /// </summary>
         public void Clear()
         {
-            joy = sadness = anger = fear = surprise = disgust = trust = anticipation = 0f;
+            joy = sadness = anger = fear = surprise = disgust = trust = anticipation = desire = 0f;
         }
 
         private void Check(ref float maxVal, ref EmotionType dom, EmotionType type, float val)

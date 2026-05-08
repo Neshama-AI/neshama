@@ -606,7 +606,6 @@ namespace Neshama.SDK.Editor
             var codeStyle = new GUIStyle(EditorStyles.textArea)
             {
                 fontSize = 11,
-                fontFamily = "Consolas",
                 wordWrap = true
             };
 

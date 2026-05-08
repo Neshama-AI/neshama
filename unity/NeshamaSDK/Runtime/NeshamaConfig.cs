@@ -223,13 +223,6 @@ namespace Neshama.SDK
             set => logLevel = value;
         }
 
-        // 兼容旧代码
-        public LogLevel LogLevel
-        {
-            get => logLevel;
-            set => logLevel = value;
-        }
-
         /// <summary>
         /// 获取认证头
         /// </summary>

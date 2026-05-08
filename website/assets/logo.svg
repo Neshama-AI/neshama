@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <g fill="#10B981">
+    <!-- N: Left Vertical -->
+    <rect x="100" y="80" width="48" height="352"/>
+    <!-- N: Right Vertical -->
+    <rect x="364" y="80" width="48" height="352"/>
+    <!-- N: Diagonal -->
+    <polygon points="100,80 148,80 412,432 364,432"/>
+    
+    <!-- Diamond: top of right vertical, pointing up -->
+    <polygon points="388,32 412,80 388,128 364,80"/>
+    <!-- Diamond: bottom of left vertical, pointing down -->
+    <polygon points="124,384 148,432 124,480 100,432"/>
+    
+    <!-- Diamond: inside top-left triangle, pointing left -->
+    <polygon points="172,180 220,220 172,260 124,220"/>
+    <!-- Diamond: inside bottom-right triangle, pointing right -->
+    <polygon points="340,252 388,292 340,332 292,292"/>
+  </g>
+</svg>

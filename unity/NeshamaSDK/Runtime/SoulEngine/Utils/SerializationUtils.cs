@@ -85,6 +85,88 @@ namespace Neshama.SoulEngine.Utils
             return dict;
         }
 
+        // --- EntityRelation serialization ---
+
+        /// <summary>
+        /// Serialize a list of EntityRelation objects to JSON.
+        /// JsonUtility can serialize EntityRelation directly (no Dictionary fields).
+        /// </summary>
+        public static string RelationListToJson(List<Memory.EntityRelation> relations)
+        {
+            var wrapper = new EntityRelationListWrapper { items = relations ?? new List<Memory.EntityRelation>() };
+            return JsonUtility.ToJson(wrapper);
+        }
+
+        /// <summary>
+        /// Deserialize JSON to a list of EntityRelation objects.
+        /// </summary>
+        public static List<Memory.EntityRelation> RelationListFromJson(string json)
+        {
+            if (string.IsNullOrEmpty(json)) return new List<Memory.EntityRelation>();
+            var wrapper = JsonUtility.FromJson<EntityRelationListWrapper>(json);
+            return wrapper?.items ?? new List<Memory.EntityRelation>();
+        }
+
+        // --- EntityMemory serialization ---
+
+        /// <summary>
+        /// Serialize a list of EntityMemory objects to JSON.
+        /// Converts emotionalContext Dictionary to JSON string for JsonUtility compat.
+        /// </summary>
+        public static string MemoryListToJson(List<Memory.EntityMemory> memories)
+        {
+            var serializable = new List<SerializableEntityMemory>();
+            if (memories != null)
+            {
+                foreach (var mem in memories)
+                {
+                    serializable.Add(new SerializableEntityMemory
+                    {
+                        memoryId = mem.memoryId,
+                        entityId = mem.entityId,
+                        entityName = mem.entityName,
+                        eventType = mem.eventType,
+                        description = mem.description,
+                        timestamp = mem.timestamp,
+                        emotionalContextJson = DictToJson(mem.emotionalContext),
+                        trustAtTime = mem.trustAtTime,
+                        importance = (int)mem.importance,
+                    });
+                }
+            }
+            var wrapper = new EntityMemoryListWrapper { items = serializable };
+            return JsonUtility.ToJson(wrapper);
+        }
+
+        /// <summary>
+        /// Deserialize JSON to a list of EntityMemory objects.
+        /// Restores emotionalContext Dictionary from JSON string.
+        /// </summary>
+        public static List<Memory.EntityMemory> MemoryListFromJson(string json)
+        {
+            var result = new List<Memory.EntityMemory>();
+            if (string.IsNullOrEmpty(json)) return result;
+            var wrapper = JsonUtility.FromJson<EntityMemoryListWrapper>(json);
+            if (wrapper?.items == null) return result;
+
+            foreach (var sm in wrapper.items)
+            {
+                result.Add(new Memory.EntityMemory
+                {
+                    memoryId = sm.memoryId,
+                    entityId = sm.entityId,
+                    entityName = sm.entityName,
+                    eventType = sm.eventType,
+                    description = sm.description,
+                    timestamp = sm.timestamp,
+                    emotionalContext = DictFromJson(sm.emotionalContextJson),
+                    trustAtTime = sm.trustAtTime,
+                    importance = (Memory.MemoryImportance)sm.importance,
+                });
+            }
+            return result;
+        }
+
         // --- Wrapper types for JsonUtility (which doesn't support Dictionary) ---
 
         [Serializable]
@@ -111,6 +193,32 @@ namespace Neshama.SoulEngine.Utils
         {
             public string key;
             public string value;
+        }
+
+        [Serializable]
+        private class EntityRelationListWrapper
+        {
+            public List<Memory.EntityRelation> items;
+        }
+
+        [Serializable]
+        private class SerializableEntityMemory
+        {
+            public string memoryId;
+            public string entityId;
+            public string entityName;
+            public string eventType;
+            public string description;
+            public float timestamp;
+            public string emotionalContextJson; // Dictionary serialized as JSON string
+            public float trustAtTime;
+            public int importance;
+        }
+
+        [Serializable]
+        private class EntityMemoryListWrapper
+        {
+            public List<SerializableEntityMemory> items;
         }
     }
 }

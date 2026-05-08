@@ -45,6 +45,7 @@ namespace Neshama.SoulEngine.Emotion
             { EmotionType.Disgust, 90f },
             { EmotionType.Trust, 240f },
             { EmotionType.Anticipation, 120f },
+            { EmotionType.Desire, 150f },
         };
 
         /// <summary>Base decay half-life fallback (seconds).</summary>
@@ -226,7 +227,7 @@ namespace Neshama.SoulEngine.Emotion
 
             // Try predefined recipes
             var composite = MatchRecipe(resolved);
-            if (composite != null) return composite;
+            if (composite.HasValue) return composite.Value;
 
             // Ad-hoc composite: top 2 base emotions
             if (sorted.Count >= 2)
@@ -304,9 +305,9 @@ namespace Neshama.SoulEngine.Emotion
         /// Match current emotions against predefined composite recipes.
         /// Ported from Python CompositeEmotion._match_recipe().
         /// </summary>
-        private CompositeEmotionResult MatchRecipe(Dictionary<string, float> emotions)
+        private CompositeEmotionResult? MatchRecipe(Dictionary<string, float> emotions)
         {
-            CompositeEmotionResult bestMatch = null;
+            CompositeEmotionResult? bestMatch = null;
             float bestScore = -1f;
 
             foreach (var recipe in CompositeRecipes.All)

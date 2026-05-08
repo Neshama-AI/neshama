@@ -1,7 +1,7 @@
 {
     "name": "NeshamaSDK",
     "rootNamespace": "Neshama.SDK",
-    "references": [],
+    "references": ["Neshama.SoulEngine"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

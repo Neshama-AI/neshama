@@ -5,8 +5,10 @@ LABEL description="Neshama Soul OS - Cloud Backend API"
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && \
+# Install system dependencies (Aliyun mirror for China servers)
+RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list.d/debian.sources 2>/dev/null || \
+    sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list 2>/dev/null || true && \
+    apt-get update && \
     apt-get install -y --no-install-recommends gcc && \
     rm -rf /var/lib/apt/lists/*
 
@@ -15,8 +17,8 @@ COPY pyproject.toml README.md ./
 COPY neshama/ neshama/
 COPY configs/ configs/
 
-# Install neshama with web dependencies
-RUN pip install --no-cache-dir -e ".[web]"
+# Install neshama with web dependencies (Tsinghua pip mirror for China servers)
+RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -e ".[web]"
 
 # Create data directories
 RUN mkdir -p /app/data /app/billing_data

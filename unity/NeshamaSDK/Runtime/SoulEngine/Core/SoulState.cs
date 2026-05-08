@@ -35,6 +35,7 @@ namespace Neshama.SoulEngine.Core
         public float disgust;
         public float trust;
         public float anticipation;
+        public float desire;
 
         // Memory (serialized as JSON strings for JsonUtility compat)
         public string relationsJson;
@@ -71,9 +72,12 @@ namespace Neshama.SoulEngine.Core
             state.disgust = emo.disgust;
             state.trust = emo.trust;
             state.anticipation = emo.anticipation;
+            state.desire = emo.desire;
 
             // Memory state captured as JSON
             state.gameTime = memory.GameTime;
+            state.relationsJson = SerializationUtils.RelationListToJson(memory.GetAllRelations());
+            state.memoriesJson = SerializationUtils.MemoryListToJson(memory.GetAllMemories());
 
             return state;
         }
@@ -91,6 +95,15 @@ namespace Neshama.SoulEngine.Core
             engine.SetEmotion(EmotionType.Disgust, disgust);
             engine.SetEmotion(EmotionType.Trust, trust);
             engine.SetEmotion(EmotionType.Anticipation, anticipation);
+            engine.SetEmotion(EmotionType.Desire, desire);
+        }
+
+        /// <summary>
+        /// Restore memory state from saved state.
+        /// </summary>
+        public void RestoreMemory(MemorySystem memory)
+        {
+            memory.RestoreFromSerialized(relationsJson, memoriesJson);
         }
 
         /// <summary>

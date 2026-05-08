@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using Neshama.SDK;
 using Neshama.SDK.Models;
+using Neshama.SDK.Enums;
 using System.Collections.Generic;
 
 namespace Neshama.SDK.Editor
@@ -255,7 +256,7 @@ namespace Neshama.SDK.Editor
 
             foreach (var behavior in behaviors)
             {
-                EditorGUILayout.BeginVertical(EditorStyles.miniBox);
+                EditorGUILayout.BeginVertical("HelpBox");
                 
                 EditorGUILayout.LabelField($"Type: {behavior.type}", EditorStyles.boldLabel);
                 EditorGUILayout.LabelField($"Value: {behavior.value}");

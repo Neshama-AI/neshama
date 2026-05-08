@@ -266,6 +266,14 @@ namespace Neshama.SoulEngine.Memory
         }
 
         /// <summary>
+        /// Get all memories for this NPC (for serialization).
+        /// </summary>
+        public List<EntityMemory> GetAllMemories()
+        {
+            return _memories.ToList();
+        }
+
+        /// <summary>
         /// Decay relations over time. Call in Tick().
         /// Ported from Python NPCMemoryBridge.decay_relations().
         /// </summary>
@@ -297,6 +305,38 @@ namespace Neshama.SoulEngine.Memory
             _relations.Clear();
             _memories.Clear();
             _memoryCounter = 0;
+        }
+
+        /// <summary>
+        /// Restore relations and memories from serialized JSON strings.
+        /// Used by SoulState.RestoreMemory() for game save/load.
+        /// </summary>
+        public void RestoreFromSerialized(string relationsJson, string memoriesJson)
+        {
+            _relations.Clear();
+            _memories.Clear();
+
+            // Restore relations
+            var relations = Utils.SerializationUtils.RelationListFromJson(relationsJson);
+            foreach (var rel in relations)
+            {
+                _relations[rel.entityId] = rel;
+            }
+
+            // Restore memories
+            var memories = Utils.SerializationUtils.MemoryListFromJson(memoriesJson);
+            _memories = memories;
+
+            // Update counter to avoid ID collisions
+            foreach (var mem in _memories)
+            {
+                if (mem.memoryId != null && mem.memoryId.StartsWith("mem_"))
+                {
+                    int idNum;
+                    if (int.TryParse(mem.memoryId.Substring(4), out idNum) && idNum > _memoryCounter)
+                        _memoryCounter = idNum;
+                }
+            }
         }
 
         // ── Memory Description Generation ────────────────────────────────────────
