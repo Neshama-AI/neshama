@@ -122,6 +122,7 @@ void FNeshamaSDKEditorModule::RegisterSettings()
 			ISettingsSectionPtr SettingsSection = SettingsModule->RegisterSettings(
 				"Project",
 				"NeshamaSDK",
+				"General",
 				LOCTEXT("NeshamaSDKSettings", "Neshama SDK Settings"),
 				LOCTEXT("NeshamaSDKSettingsDescription", "Configure the Neshama SDK connection and behavior settings"),
 				GetMutableDefault<UNeshamaConfig>()
@@ -195,9 +196,6 @@ void FNeshamaSDKEditorModule::RegisterSetupWizardTab()
 	// Neshama workspace group (UE5.6 simplified)
 	TSharedPtr<FWorkspaceItem> NeshamaWorkspaceGroup = FWorkspaceItem::NewGroup(
 		LOCTEXT("NeshamaWorkspaceGroup", "Neshama"));
-	NeshamaWorkspaceGroup->AddItem(
-		LOCTEXT("NeshamaWorkspaceGroupTooltip", "Neshama SDK Tools"),
-		FSlateIcon());
 
 	// 注册Nomad Tab Spawner
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(

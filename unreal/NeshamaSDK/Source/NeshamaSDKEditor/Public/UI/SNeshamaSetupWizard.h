@@ -120,7 +120,7 @@ private:
 	FReply OnTryFreeClicked();
 
 	/** 预设选择改变回调 */
-	void OnPresetChanged(FString SelectedItem, ESelectInfo::Type SelectInfo);
+	void OnPresetChanged(TSharedPtr<FString> SelectedItem, ESelectInfo::Type SelectInfo);
 
 	/** NPC名称改变回调 */
 	void OnNPCNameChanged(const FText& NewText);

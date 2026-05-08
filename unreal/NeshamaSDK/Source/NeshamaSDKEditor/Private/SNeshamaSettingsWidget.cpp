@@ -93,28 +93,18 @@ void SNeshamaSettingsWidget::Construct(const FArguments& InArgs)
 
 TSharedRef<SWidget> SNeshamaSettingsWidget::CreateConfigGroup(const FText& GroupName, const FText& GroupTooltip)
 {
-	return SNew(SExpanderArrow)
-		.IndentAmount(10.0f)
-		.HeaderContent()
+	return SNew(SBorder)
+		.BorderImage(FAppStyle::GetBrush("DetailsView.CategoryMiddle"))
+		.Padding(10.0f)
 		[
-			SNew(SHorizontalBox)
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
+			SNew(SVerticalBox)
+			+ SVerticalBox::Slot()
+			.AutoHeight()
 			[
 				SNew(STextBlock)
 				.Text(GroupName)
 				.ToolTipText(GroupTooltip)
-				.Font(FEditorStyle::GetFontStyle("DetailsView.CategoryTextStyle"))
-			]
-		]
-		.BodyContent()
-		[
-			SNew(SBorder)
-			.BorderImage(FAppStyle::GetBrush("DetailsView.CategoryMiddle"))
-			.Padding(10.0f)
-			[
-				SNew(SVerticalBox)
-				// 子项将在此处添加
+				.Font(FAppStyle::GetFontStyle("DetailsView.CategoryTextStyle"))
 			]
 		];
 }

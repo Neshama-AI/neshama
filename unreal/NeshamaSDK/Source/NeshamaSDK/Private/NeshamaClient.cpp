@@ -151,12 +151,12 @@ void UNeshamaClient::SendGetRequest(const FString& Endpoint, TFunction<void(bool
 	
 	TSharedRef<IHttpRequest> Request = CreateRequest(TEXT("GET"), FullUrl);
 	
-	Request->OnProcessRequestComplete().BindLambda([this, OnComplete, Endpoint](IHttpRequest* InRequest, 
-		IHttpResponse* InResponse, bool bInSuccess)
+	Request->OnProcessRequestComplete().BindLambda([this, OnComplete, Endpoint](FHttpRequestPtr InRequest, 
+		FHttpResponsePtr InResponse, bool bInSuccess)
 	{
 		ActiveRequestCount--;
 		
-		if (bInSuccess && InResponse)
+		if (bInSuccess && InResponse.IsValid())
 		{
 			int32 ResponseCode = InResponse->GetResponseCode();
 			FString ResponseBody = InResponse->GetContentAsString();
@@ -195,12 +195,12 @@ void UNeshamaClient::SendPostRequest(const FString& Endpoint, const FString& Bod
 	TSharedRef<IHttpRequest> Request = CreateRequest(TEXT("POST"), FullUrl);
 	Request->SetContentAsString(Body);
 	
-	Request->OnProcessRequestComplete().BindLambda([this, OnComplete, Endpoint](IHttpRequest* InRequest,
-		IHttpResponse* InResponse, bool bInSuccess)
+	Request->OnProcessRequestComplete().BindLambda([this, OnComplete, Endpoint](FHttpRequestPtr InRequest,
+		FHttpResponsePtr InResponse, bool bInSuccess)
 	{
 		ActiveRequestCount--;
 		
-		if (bInSuccess && InResponse)
+		if (bInSuccess && InResponse.IsValid())
 		{
 			int32 ResponseCode = InResponse->GetResponseCode();
 			FString ResponseBody = InResponse->GetContentAsString();

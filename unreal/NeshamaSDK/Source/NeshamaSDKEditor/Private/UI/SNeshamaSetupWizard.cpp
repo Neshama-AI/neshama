@@ -230,7 +230,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildWelcomePage()
 				.Cursor(EMouseCursor::Hand)
 				[
 					SNew(SButton)
-					.ButtonStyle(FEditorStyle::Get(), "NoBorder")
+					.ButtonStyle(FAppStyle::Get(), "NoBorder")
 					.Text(LOCTEXT("RegisterAccount", "🔑  Register Account"))
 					.TextStyle(FCoreStyle::Get(), "NormalText")
 					.HAlign(HAlign_Center)
@@ -247,7 +247,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildWelcomePage()
 				.Cursor(EMouseCursor::Hand)
 				[
 					SNew(SButton)
-					.ButtonStyle(FEditorStyle::Get(), "NoBorder")
+					.ButtonStyle(FAppStyle::Get(), "NoBorder")
 					.Text(LOCTEXT("TryFree", "⚡  Try Without Account"))
 					.TextStyle(FCoreStyle::Get(), "NormalText")
 					.HAlign(HAlign_Center)
@@ -361,7 +361,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildConnectionConfigPage()
 					[
 						SNew(STextBlock)
 						.Text(LOCTEXT("CloudMode", "☁ Cloud (api.neshama.pw)"))
-						.Padding(FMargin(8, 0, 0, 0))
+						
 					]
 				]
 				+ SHorizontalBox::Slot()
@@ -373,7 +373,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildConnectionConfigPage()
 					[
 						SNew(STextBlock)
 						.Text(LOCTEXT("LocalMode", "🖥 Local (localhost:8420)"))
-						.Padding(FMargin(8, 0, 0, 0))
+						
 					]
 				]
 			]
@@ -383,12 +383,15 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildConnectionConfigPage()
 		+ SVerticalBox::Slot()
 		.AutoHeight()
 		.Padding(0, 5)
-		.Visibility(MakeAttributeLambda([this]() -> EVisibility
-		{
-			return ServerMode == ENeshamaServerMode::Local ? EVisibility::Visible : EVisibility::Collapsed;
-		}))
 		[
-			SNew(SVerticalBox)
+			SNew(SBorder)
+			.Visibility(MakeAttributeLambda([this]() -> EVisibility
+			{
+				return ServerMode == ENeshamaServerMode::Local ? EVisibility::Visible : EVisibility::Collapsed;
+			}))
+			.BorderBackgroundColor(FSlateColor(FLinearColor::Transparent))
+			[
+				SNew(SVerticalBox)
 			+ SVerticalBox::Slot()
 			.AutoHeight()
 			[
@@ -892,9 +895,13 @@ FReply SNeshamaSetupWizard::OnTryFreeClicked()
 	return FReply::Handled();
 }
 
-void SNeshamaSetupWizard::OnPresetChanged(FString SelectedItem, ESelectInfo::Type SelectInfo)
+void SNeshamaSetupWizard::OnPresetChanged(TSharedPtr<FString> SelectedItem, ESelectInfo::Type SelectInfo)
 {
-	SelectedPreset = SelectedItem;
+	if (SelectedItem.IsValid())
+	{
+		SelectedPreset = *SelectedItem;
+		SelectedPresetPtr = SelectedItem;
+	}
 }
 
 void SNeshamaSetupWizard::OnNPCNameChanged(const FText& NewText)
@@ -942,6 +949,15 @@ FReply SNeshamaSetupWizard::OnNextClicked()
 		GoToStep(static_cast<ESetupWizardStep>(StepIdx + 1));
 	}
 	return FReply::Handled();
+}
+
+FReply SNeshamaSetupWizard::OnNextOrFinishClicked()
+{
+	if (CurrentStep == ESetupWizardStep::Complete)
+	{
+		return OnFinishClicked();
+	}
+	return OnNextClicked();
 }
 
 FReply SNeshamaSetupWizard::OnFinishClicked()

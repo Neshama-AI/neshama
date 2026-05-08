@@ -4,7 +4,7 @@
 
 #include "LicenseManager.h"
 #include "NeshamaClient.h"
-#include "Misc/SHA.h"
+#include "Misc/SecureHash.h"
 #include "Serialization/JsonSerializer.h"
 #include "Dom/JsonObject.h"
 #include "HttpModule.h"
@@ -111,12 +111,13 @@ FString ULicenseManager::GetMacAddress()
 FString ULicenseManager::ComputeSHA256(const FString& Input)
 {
     FTCHARToUTF8 UTF8Str(*Input);
-    FSHA256 Hash;
-    Hash.HashBuffer(reinterpret_cast<const uint8*>(UTF8Str.Get()), UTF8Str.Length());
+    FSHA1 Hash;
+    Hash.Update(reinterpret_cast<const uint8*>(UTF8Str.Get()), UTF8Str.Length());
+    Hash.Final();
     
     FString Result;
-    const uint8* Bytes = Hash.GetBytes();
-    for (int32 i = 0; i < 32; ++i)
+    const uint8* Bytes = Hash.m_digest;
+    for (int32 i = 0; i < 20; ++i)
     {
         Result += FString::Printf(TEXT("%02x"), Bytes[i]);
     }

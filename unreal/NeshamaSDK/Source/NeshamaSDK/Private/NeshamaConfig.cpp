@@ -293,7 +293,7 @@ namespace FNeshamaUtils
 				Output += TEXT(", ");
 			}
 			bFirst = false;
-			Output += TEXT("\"") + EscapeJsonString(KVP.Key) + TEXT("\": ") + 
+			Output += TEXT("\"") + FNeshamaUtils::EscapeJsonString(KVP.Key) + TEXT("\": ") + 
 					  FString::SanitizeFloat(KVP.Value);
 		}
 		Output += TEXT("}");

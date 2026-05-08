@@ -98,7 +98,7 @@ void UNPCSoulComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			TEXT("[%s]\nEmotion: %s\nState: %s"),
 			*NpcName,
 			*CurrentEmotion.Dominant,
-			*IsConnected() ? TEXT("Connected") : TEXT("Disconnected")
+			IsConnected() ? TEXT("Connected") : TEXT("Disconnected")
 		);
 
 		DrawDebugString(

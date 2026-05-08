@@ -42,7 +42,7 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 				[
 					SNew(STextBlock)
 					.Text(LOCTEXT("ConnectionStatus", "Connection:"))
-					.Font(FEditorStyle::GetFontStyle("BoldFont"))
+					.Font(FAppStyle::GetFontStyle("BoldFont"))
 				]
 				+ SHorizontalBox::Slot()
 				.AutoWidth()
@@ -69,7 +69,7 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 			[
 				SNew(STextBlock)
 				.Text(LOCTEXT("EmotionState", "Emotion State"))
-				.Font(FEditorStyle::GetFontStyle("BoldFont"))
+				.Font(FAppStyle::GetFontStyle("BoldFont"))
 			]
 
 			// 情绪条列表
@@ -105,13 +105,13 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 					.AutoHeight()
 					.Padding(2.0f)
 					[
-						CreateEmotionBar(LOCTEXT("Fear", "Fear"), CurrentEmotion.GetFear(), FLinearColor::Purple)
+						CreateEmotionBar(LOCTEXT("Fear", "Fear"), CurrentEmotion.GetFear(), FLinearColor(0.5f, 0.f, 0.5f))
 					]
 					+ SVerticalBox::Slot()
 					.AutoHeight()
 					.Padding(2.0f)
 					[
-						CreateEmotionBar(LOCTEXT("Trust", "Trust"), CurrentEmotion.GetTrust(), FLinearColor::Cyan)
+						CreateEmotionBar(LOCTEXT("Trust", "Trust"), CurrentEmotion.GetTrust(), FLinearColor(0.f, 1.f, 1.f))
 					]
 				]
 			]
@@ -131,7 +131,7 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 			[
 				SNew(STextBlock)
 				.Text(LOCTEXT("QuickTest", "Quick Test"))
-				.Font(FEditorStyle::GetFontStyle("BoldFont"))
+				.Font(FAppStyle::GetFontStyle("BoldFont"))
 			]
 
 			// 测试按钮行
@@ -144,19 +144,19 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 				.AutoWidth()
 				.Padding(2.0f)
 				[
-					CreateTestButton(LOCTEXT("Compliment", "✓ Compliment"), EGameEventType::NPCComplimented, 0.3f)
+					CreateTestButton(LOCTEXT("Compliment", "Compliment"), EGameEventType::NPCComplimented, 0.3f)
 				]
 				+ SHorizontalBox::Slot()
 				.AutoWidth()
 				.Padding(2.0f)
 				[
-					CreateTestButton(LOCTEXT("Insult", "✗ Insult"), EGameEventType::NPCInsulted, 0.6f)
+					CreateTestButton(LOCTEXT("Insult", "Insult"), EGameEventType::NPCInsulted, 0.6f)
 				]
 				+ SHorizontalBox::Slot()
 				.AutoWidth()
 				.Padding(2.0f)
 				[
-					CreateTestButton(LOCTEXT("Attack", "⚔ Attack"), EGameEventType::PlayerAttacked, 0.8f)
+					CreateTestButton(LOCTEXT("Attack", "Attack"), EGameEventType::PlayerAttacked, 0.8f)
 				]
 			]
 
@@ -170,20 +170,20 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 				.AutoWidth()
 				.Padding(2.0f)
 				[
-					CreateTestButton(LOCTEXT("Gift", "🎁 Gift"), EGameEventType::GiftGiven, 0.5f)
+					CreateTestButton(LOCTEXT("Gift", "Gift"), EGameEventType::GiftGiven, 0.5f)
 				]
 				+ SHorizontalBox::Slot()
 				.AutoWidth()
 				.Padding(2.0f)
 				[
-					CreateTestButton(LOCTEXT("Help", "🤝 Help"), EGameEventType::NPCHelped, 0.4f)
+					CreateTestButton(LOCTEXT("Help", "Help"), EGameEventType::NPCHelped, 0.4f)
 				]
 				+ SHorizontalBox::Slot()
 				.AutoWidth()
 				.Padding(2.0f)
 				[
 					SNew(SButton)
-					.Text(LOCTEXT("Refresh", "↻ Refresh"))
+					.Text(LOCTEXT("Refresh", "Refresh"))
 					.OnClicked(this, &SNPCSoulDetailsWidget::OnRefreshClicked)
 					.HAlign(HAlign_Center)
 				]
@@ -301,7 +301,7 @@ FText SNPCSoulDetailsWidget::GetConnectionStatusText() const
 	return LOCTEXT("Unknown", "Unknown");
 }
 
-FLinearColor SNPCSoulDetailsWidget::GetConnectionStatusColor() const
+FSlateColor SNPCSoulDetailsWidget::GetConnectionStatusColor() const
 {
 	if (UNPCSoulComponent* Soul = SoulComponent.Get())
 	{
@@ -349,13 +349,12 @@ TSharedRef<IPropertyTypeCustomization> FNPCSoulDetailsCustomization::MakeInstanc
 void FNPCSoulDetailsCustomization::CustomizeHeader(TSharedRef<IPropertyHandle> PropertyHandle,
 	FDetailWidgetRow& HeaderRow, IPropertyTypeCustomizationUtils& Utils)
 {
-	// 自定义标题行
 	HeaderRow
 		.NameContent()
 		[
 			SNew(STextBlock)
 			.Text(LOCTEXT("NPCSoulHeader", "NPC Soul"))
-			.Font(FEditorStyle::GetFontStyle("BoldFont"))
+			.Font(FAppStyle::GetFontStyle("BoldFont"))
 		]
 		.ValueContent()
 		[
@@ -368,14 +367,10 @@ void FNPCSoulDetailsCustomization::CustomizeChildren(TSharedRef<IPropertyHandle>
 	IDetailChildrenBuilder& ChildBuilder, IPropertyTypeCustomizationUtils& Utils)
 {
 	// 自定义子项（如果需要）
-	// 这里可以添加额外的配置项
 }
 
 UNPCSoulComponent* FNPCSoulDetailsCustomization::GetSoulComponent() const
 {
-	// 从属性句柄获取
-	TSharedPtr<IPropertyHandle> ParentHandle; // 需要实现获取逻辑
-	
 	return nullptr;
 }
 

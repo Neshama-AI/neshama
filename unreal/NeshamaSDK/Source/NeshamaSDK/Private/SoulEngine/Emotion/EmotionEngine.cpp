@@ -4,7 +4,7 @@
 #include "SoulEngine/Emotion/SentimentAnalyzer.h"
 #include "SoulEngine/Personality/OCEANPersonality.h"
 #include "SoulEngine/Emotion/EventMappings.h"
-#include "SoulEngine/Utils/SoulMathUtils.h"
+#include "Utils/SoulMathUtils.h"
 
 UEmotionEngine::UEmotionEngine()
 	: Personality(nullptr)

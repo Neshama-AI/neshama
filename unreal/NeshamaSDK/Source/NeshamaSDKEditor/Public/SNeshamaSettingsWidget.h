@@ -72,5 +72,5 @@ private:
 
 private:
 	/** 配置缓存 */
-	TWeakObjectPtr<class UNeshamaConfig> CachedConfig;
+	mutable TWeakObjectPtr<class UNeshamaConfig> CachedConfig;
 };
