@@ -325,7 +325,7 @@ private:
     /** Make HTTP POST request to the license server */
     void MakeLicenseRequest(
         const FString& Endpoint,
-        const TSharedRef<FJsonObject>& RequestBody,
+        const TSharedPtr<FJsonObject>& RequestBody,
         TFunction<void(bool, const TSharedPtr<FJsonObject>&)> OnResponse
     );
 

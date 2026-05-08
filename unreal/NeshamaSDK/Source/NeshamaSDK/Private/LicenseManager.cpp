@@ -336,9 +336,16 @@ void ULicenseManager::ClearStoredLicense()
 
 void ULicenseManager::MakeLicenseRequest(
     const FString& Endpoint,
-    const TSharedRef<FJsonObject>& RequestBody,
+    const TSharedPtr<FJsonObject>& RequestBody,
     TFunction<void(bool, const TSharedPtr<FJsonObject>&)> OnResponse)
 {
+    if (!RequestBody.IsValid())
+    {
+        UE_LOG(LogTemp, Error, TEXT("[NeshamaLicense] MakeLicenseRequest called with null RequestBody"));
+        OnResponse(false, nullptr);
+        return;
+    }
+
     UNeshamaConfig* Config = NewObject<UNeshamaConfig>();
     FString BaseUrl = Config->ServerUrl;
     FString Url = BaseUrl + Endpoint;
