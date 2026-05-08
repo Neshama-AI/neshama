@@ -203,28 +203,28 @@ public:
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Neshama|Events",
 		meta = (DisplayName = "On Behavior Changed", ToolTip = "行为建议变化时触发"))
-	void OnBehaviorChangedBP(FString BehaviorType, FString Value);
+	void OnBehaviorChangedBP(const FString& BehaviorType, const FString& Value);
 
 	/**
 	 * 收到对话回复时触发
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Neshama|Events",
 		meta = (DisplayName = "On Chat Response", ToolTip = "收到对话回复时触发"))
-	void OnChatResponseBP(FString Response);
+	void OnChatResponseBP(const FString& Response);
 
 	/**
 	 * 发生错误时触发
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Neshama|Events",
 		meta = (DisplayName = "On Error", ToolTip = "发生错误时触发"))
-	void OnErrorBP(FString ErrorMessage);
+	void OnErrorBP(const FString& ErrorMessage);
 
 	/**
 	 * 日志消息（用于调试）
 	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "Neshama|Events",
 		meta = (DisplayName = "On Log", ToolTip = "日志消息（用于调试）"))
-	void OnLogBP(FString LogMessage);
+	void OnLogBP(const FString& LogMessage);
 
 	// ============================================================================
 	// 属性访问器

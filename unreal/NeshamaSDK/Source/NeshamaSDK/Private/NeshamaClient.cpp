@@ -18,7 +18,7 @@
 
 UNeshamaClient::UNeshamaClient(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, ConnectionState(EConnectionState::Disconnected)
+	, ConnectionState(ENeshamaConnectionState::Disconnected)
 	, bIsConnected(false)
 	, ActiveRequestCount(0)
 	, ReconnectAttempts(0)
@@ -69,7 +69,7 @@ void UNeshamaClient::ConnectWithCallback(const FNeshamaConnectCompleteDelegate& 
 	}
 
 	Log(ENeshamaLogLevel::Info, TEXT("正在连接到Neshama服务器..."));
-	ConnectionState = EConnectionState::Connecting;
+	ConnectionState = ENeshamaConnectionState::Connecting;
 
 	// 发送健康检查请求来测试连接
 	const FString HealthUrl = Config->BuildUrl(TEXT("/health"));
@@ -79,7 +79,7 @@ void UNeshamaClient::ConnectWithCallback(const FNeshamaConnectCompleteDelegate& 
 		if (bSuccess)
 		{
 			bIsConnected = true;
-			ConnectionState = EConnectionState::Connected;
+			ConnectionState = ENeshamaConnectionState::Connected;
 			ReconnectAttempts = 0;
 			
 			Log(ENeshamaLogLevel::Info, TEXT("成功连接到Neshama服务器"));
@@ -92,7 +92,7 @@ void UNeshamaClient::ConnectWithCallback(const FNeshamaConnectCompleteDelegate& 
 		{
 			// 即使健康检查失败，也假设连接成功（服务器可能没有健康检查端点）
 			bIsConnected = true;
-			ConnectionState = EConnectionState::Connected;
+			ConnectionState = ENeshamaConnectionState::Connected;
 			
 			Log(ENeshamaLogLevel::Warning, TEXT("健康检查失败，但继续尝试使用API"));
 			
@@ -113,7 +113,7 @@ void UNeshamaClient::Disconnect()
 	
 	// 更新状态
 	bIsConnected = false;
-	ConnectionState = EConnectionState::Disconnected;
+	ConnectionState = ENeshamaConnectionState::Disconnected;
 	
 	// 触发事件
 	OnConnectionStateChanged.Broadcast(false);
@@ -129,9 +129,9 @@ void UNeshamaClient::CancelAllRequests()
 	Log(ENeshamaLogLevel::Debug, TEXT("已取消所有活跃请求"));
 }
 
-IHttpRequest* UNeshamaClient::CreateRequest(const FString& Verb, const FString& Url)
+TSharedRef<IHttpRequest> UNeshamaClient::CreateRequest(const FString& Verb, const FString& Url)
 {
-	IHttpRequest* Request = FHttpModule::Get().CreateRequest();
+	TSharedRef<IHttpRequest> Request = FHttpModule::Get().CreateRequest();
 	
 	Request->SetVerb(Verb);
 	Request->SetURL(Url);
@@ -149,9 +149,9 @@ void UNeshamaClient::SendGetRequest(const FString& Endpoint, TFunction<void(bool
 {
 	const FString FullUrl = Config->BuildUrl(Endpoint);
 	
-	IHttpRequest* Request = CreateRequest(TEXT("GET"), FullUrl);
+	TSharedRef<IHttpRequest> Request = CreateRequest(TEXT("GET"), FullUrl);
 	
-	Request->OnProcessRequestComplete().BindLambda([this, OnComplete](IHttpRequest* InRequest, 
+	Request->OnProcessRequestComplete().BindLambda([this, OnComplete, Endpoint](IHttpRequest* InRequest, 
 		IHttpResponse* InResponse, bool bInSuccess)
 	{
 		ActiveRequestCount--;
@@ -177,7 +177,7 @@ void UNeshamaClient::SendGetRequest(const FString& Endpoint, TFunction<void(bool
 		}
 		else
 		{
-			FString ErrorMsg = InRequest ? InRequest->GetError() : TEXT("Unknown error");
+			FString ErrorMsg = TEXT("Request failed");
 			Log(ENeshamaLogLevel::Error, 
 				FString::Printf(TEXT("GET请求错误: %s - %s"), *Endpoint, *ErrorMsg));
 			OnComplete(false, ErrorMsg);
@@ -192,10 +192,10 @@ void UNeshamaClient::SendPostRequest(const FString& Endpoint, const FString& Bod
 {
 	const FString FullUrl = Config->BuildUrl(Endpoint);
 	
-	IHttpRequest* Request = CreateRequest(TEXT("POST"), FullUrl);
+	TSharedRef<IHttpRequest> Request = CreateRequest(TEXT("POST"), FullUrl);
 	Request->SetContentAsString(Body);
 	
-	Request->OnProcessRequestComplete().BindLambda([this, OnComplete](IHttpRequest* InRequest,
+	Request->OnProcessRequestComplete().BindLambda([this, OnComplete, Endpoint](IHttpRequest* InRequest,
 		IHttpResponse* InResponse, bool bInSuccess)
 	{
 		ActiveRequestCount--;
@@ -221,7 +221,7 @@ void UNeshamaClient::SendPostRequest(const FString& Endpoint, const FString& Bod
 		}
 		else
 		{
-			FString ErrorMsg = InRequest ? InRequest->GetError() : TEXT("Unknown error");
+			FString ErrorMsg = TEXT("Request failed");
 			Log(ENeshamaLogLevel::Error,
 				FString::Printf(TEXT("POST请求错误: %s - %s"), *Endpoint, *ErrorMsg));
 			OnComplete(false, ErrorMsg);
@@ -295,8 +295,8 @@ void UNeshamaClient::CreateNPCWithCallback(const FString& Name, const FString& P
 	RequestJson->SetStringField(TEXT("preset"), Preset);
 
 	FString RequestBody;
-	TJsonWriter<>& Writer = TJsonWriterFactory<>::Create(RequestBody);
-	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer);
+	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&RequestBody);
+	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer, true);
 
 	SendPostRequest(TEXT("/npc"), RequestBody, [this, OnComplete](bool bSuccess, const FString& Response)
 	{
@@ -402,8 +402,8 @@ void UNeshamaClient::SendEventWithCallback(const FString& NpcId, const FGameEven
 	RequestJson->SetObjectField(TEXT("context"), ContextJson);
 
 	FString RequestBody;
-	TJsonWriter<>& Writer = TJsonWriterFactory<>::Create(RequestBody);
-	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer);
+	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&RequestBody);
+	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer, true);
 
 	SendPostRequest(FString::Printf(TEXT("/npc/%s/event"), *NpcId), RequestBody,
 		[this, OnComplete](bool bSuccess, const FString& Response)
@@ -482,7 +482,7 @@ void UNeshamaClient::SendGameEventWithCallback(const FString& NpcId, EGameEventT
 	FGameEvent GameEvent(EventType, Intensity);
 	GameEvent.Context = Context;
 	
-	SendEvent(NpcId, GameEvent, OnComplete);
+	SendEventWithCallback(NpcId, GameEvent, OnComplete);
 }
 
 // ============================================================================
@@ -622,8 +622,8 @@ void UNeshamaClient::ChatWithCallback(const FString& NpcId, const FString& Messa
 	RequestJson->SetStringField(TEXT("player_id"), EffectivePlayerId);
 
 	FString RequestBody;
-	TJsonWriter<>& Writer = TJsonWriterFactory<>::Create(RequestBody);
-	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer);
+	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&RequestBody);
+	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer, true);
 
 	SendPostRequest(FString::Printf(TEXT("/npc/%s/chat"), *NpcId), RequestBody,
 		[this, OnComplete](bool bSuccess, const FString& Response)
@@ -766,8 +766,8 @@ void UNeshamaClient::RememberWithCallback(const FString& NpcId, const FString& E
 	}
 
 	FString RequestBody;
-	TJsonWriter<>& Writer = TJsonWriterFactory<>::Create(RequestBody);
-	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer);
+	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&RequestBody);
+	FJsonSerializer::Serialize(RequestJson.ToSharedRef(), Writer, true);
 
 	SendPostRequest(FString::Printf(TEXT("/npc/%s/remember"), *NpcId), RequestBody,
 		[this, OnComplete](bool bSuccess, const FString& Response)
@@ -797,7 +797,7 @@ void UNeshamaClient::GetRelationsWithCallback(const FString& NpcId, const FNesha
 	}
 
 	SendGetRequest(FString::Printf(TEXT("/npc/%s/relations"), *NpcId),
-		[this, OnComplete](bool bSuccess, const FString& Response)
+		[this, OnComplete, NpcId](bool bSuccess, const FString& Response)
 	{
 		FRelationGraph Result;
 		Result.NpcId = NpcId;

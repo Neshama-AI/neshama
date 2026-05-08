@@ -14,7 +14,7 @@
 #include "Widgets/Input/SComboBox.h"
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Text/SMultiLineEditableText.h"
-#include "EditorStyleSet.h"
+#include "Styling/AppStyle.h"
 #include "Editor.h"
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
@@ -57,7 +57,7 @@ void SNeshamaSetupWizard::Construct(const FArguments& InArgs)
 	ChildSlot
 	[
 		SNew(SBorder)
-		.BorderImage(FEditorStyle::GetBrush("ToolPanel.GroupBorder"))
+		.BorderImage(FAppStyle::GetBrush("ToolPanel.GroupBorder"))
 		.Padding(0)
 		[
 			SNew(SVerticalBox)
@@ -109,7 +109,7 @@ void SNeshamaSetupWizard::Construct(const FArguments& InArgs)
 				SNew(SScrollBox)
 				+ SScrollBox::Slot()
 				[
-					SAssignNew(ContentWidget, SWidget)
+					SAssignNew(ContentWidget, SBox)
 					// 内容会根据步骤动态切换
 				]
 			]
@@ -262,7 +262,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildWelcomePage()
 		.Padding(0, 15)
 		[
 			SNew(SBorder)
-			.BorderImage(FEditorStyle::GetBrush("ToolPanel.DarkGroupBorder"))
+			.BorderImage(FAppStyle::GetBrush("ToolPanel.DarkGroupBorder"))
 			.Padding(15)
 			[
 				SNew(SVerticalBox)
@@ -556,7 +556,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildCreateNPCPage()
 		.Padding(5, 3)
 		[
 			SNew(SBorder)
-			.BorderImage(FEditorStyle::GetBrush("ToolPanel.DarkGroupBorder"))
+			.BorderImage(FAppStyle::GetBrush("ToolPanel.DarkGroupBorder"))
 			.Padding(10)
 			[
 				SNew(STextBlock)
@@ -652,7 +652,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildCompletePage()
 		.Padding(0, 10)
 		[
 			SNew(SBorder)
-			.BorderImage(FEditorStyle::GetBrush("ToolPanel.DarkGroupBorder"))
+			.BorderImage(FAppStyle::GetBrush("ToolPanel.DarkGroupBorder"))
 			.Padding(15)
 			[
 				SNew(SVerticalBox)
@@ -686,7 +686,7 @@ TSharedRef<SWidget> SNeshamaSetupWizard::BuildCompletePage()
 		.Padding(0, 10)
 		[
 			SNew(SBorder)
-			.BorderImage(FEditorStyle::GetBrush("ToolPanel.DarkGroupBorder"))
+			.BorderImage(FAppStyle::GetBrush("ToolPanel.DarkGroupBorder"))
 			.Padding(15)
 			[
 				SNew(SVerticalBox)

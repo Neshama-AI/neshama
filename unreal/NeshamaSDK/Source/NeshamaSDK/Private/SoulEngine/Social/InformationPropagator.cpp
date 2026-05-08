@@ -256,6 +256,6 @@ void UInformationPropagator::TriggerEmotionReaction(const FString& TargetNpcId, 
 
 	if (EmotionDeltas.Num() > 0)
 	{
-		OnEmotionCallback.ExecuteIfBound(TargetNpcId, EmotionDeltas);
+		OnEmotionCallback.ExecuteIfBound(TargetNpcId, static_cast<const FEmotionDeltas&>(EmotionDeltas));
 	}
 }

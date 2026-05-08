@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "SoulEngine/Emotion/EmotionTypes.h"
-#include "SentimentAnalyzer.generated.h"
 
 /**
  * Generates response hints from emotion state.

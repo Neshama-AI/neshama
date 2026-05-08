@@ -172,8 +172,11 @@ public:
 	/** Trust lookup function delegate. */
 	DECLARE_DELEGATE_RetVal_TwoParams(float, FOnTrustLookup, const FString& /*FromNpc*/, const FString& /*ToNpc*/);
 
+	/** Emotion deltas type alias (avoid comma in macro). */
+	using FEmotionDeltas = TMap<FString, float>;
+
 	/** Emotion callback delegate. */
-	DECLARE_DELEGATE_TwoParams(FOnEmotionCallback, const FString& /*NpcId*/, const TMap<FString, float>& /*EmotionDeltas*/);
+	DECLARE_DELEGATE_TwoParams(FOnEmotionCallback, const FString& /*NpcId*/, const FEmotionDeltas& /*EmotionDeltas*/);
 
 	/** Trust lookup delegate. */
 	FOnTrustLookup OnTrustLookup;

@@ -135,7 +135,7 @@ public:
 	 * 获取连接状态
 	 */
 	UFUNCTION(BlueprintPure, Category = "Neshama|Client|Connection")
-	EConnectionState GetConnectionState() const { return ConnectionState; }
+	ENeshamaConnectionState GetConnectionState() const { return ConnectionState; }
 
 	// ============================================================================
 	// NPC管理API
@@ -372,7 +372,7 @@ protected:
 	 * @param Url 完整URL
 	 * @return HTTP请求指针
 	 */
-	IHttpRequest* CreateRequest(const FString& Verb, const FString& Url);
+	TSharedRef<IHttpRequest> CreateRequest(const FString& Verb, const FString& Url);
 
 	/**
 	 * 发送GET请求
@@ -411,7 +411,7 @@ private:
 
 	/** 连接状态 */
 	UPROPERTY()
-	EConnectionState ConnectionState;
+	ENeshamaConnectionState ConnectionState;
 
 	/** 是否已连接 */
 	UPROPERTY()

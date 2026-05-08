@@ -44,7 +44,7 @@ ESoulEmotionType UEmotionEngine::GetDominantEmotion() const
 	return DomType;
 }
 
-void UEmotionEngine::ProcessEvent(ESoulEventType EventType, float Intensity, const FString& SourceId)
+void UEmotionEngine::HandleSoulEvent(ESoulEventType EventType, float Intensity, const FString& SourceId)
 {
 	TArray<FEmotionDelta> Deltas = FGameEventProcessor::ProcessEvent(EventType, Intensity, Personality, SourceId);
 	for (const FEmotionDelta& Delta : Deltas)

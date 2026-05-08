@@ -9,8 +9,8 @@
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Text/STextBlock.h"
-#include "Widgets/ProgressBar.h"
-#include "EditorStyleSet.h"
+#include "Widgets/Notifications/SProgressBar.h"
+#include "Styling/AppStyle.h"
 
 #define LOCTEXT_NAMESPACE "SNPCSoulDetailsWidget"
 
@@ -26,7 +26,7 @@ void SNPCSoulDetailsWidget::Construct(const FArguments& InArgs, UNPCSoulComponen
 	ChildSlot
 	[
 		SNew(SBorder)
-		.BorderImage(FEditorStyle::GetBrush("DetailsView.CategoryMiddle"))
+		.BorderImage(FAppStyle::GetBrush("DetailsView.CategoryMiddle"))
 		.Padding(5.0f)
 		[
 			SNew(SVerticalBox)

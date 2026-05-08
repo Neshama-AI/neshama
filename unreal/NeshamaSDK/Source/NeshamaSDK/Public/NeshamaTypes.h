@@ -130,7 +130,7 @@ enum class EBehaviorType : uint8
  * 连接状态枚举
  */
 UENUM(BlueprintType)
-enum class EConnectionState : uint8
+enum class ENeshamaConnectionState : uint8
 {
 	/** 未连接 */
 	Disconnected	UMETA(DisplayName = "Disconnected"),

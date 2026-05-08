@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "SoulEngine/Emotion/EmotionTypes.h"
+#include "NeshamaTypes.h"
 #include "EmotionEngine.generated.h"
 
 // Forward declarations
@@ -66,7 +67,7 @@ public:
 
 	/** Process a game event: apply emotion deltas. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	void ProcessEvent(ESoulEventType EventType, float Intensity, const FString& SourceId = TEXT(""));
+	void HandleSoulEvent(ESoulEventType EventType, float Intensity, const FString& SourceId = TEXT(""));
 
 	/** Apply emotion decay. Call every frame with DeltaTime. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")

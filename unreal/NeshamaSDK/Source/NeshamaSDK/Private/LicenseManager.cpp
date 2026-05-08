@@ -4,7 +4,7 @@
 
 #include "LicenseManager.h"
 #include "NeshamaClient.h"
-#include "Misc/SecureHash.h"
+#include "Misc/SHA.h"
 #include "Serialization/JsonSerializer.h"
 #include "Dom/JsonObject.h"
 #include "HttpModule.h"
@@ -60,7 +60,7 @@ FString ULicenseManager::DetectRegion() const
 {
     // Read the server URL from NeshamaConfig
     UNeshamaConfig* Config = NewObject<UNeshamaConfig>();
-    FString ServerUrl = Config->GetServerUrl();
+    FString ServerUrl = Config->ServerUrl;
 
     if (ServerUrl.Contains(TEXT("neshama.cn")))
     {
@@ -110,23 +110,29 @@ FString ULicenseManager::GetMacAddress()
 
 FString ULicenseManager::ComputeSHA256(const FString& Input)
 {
-    FSHA256Hash Hash = FSHA256Hash::HashBuffer(
-        reinterpret_cast<const uint8*>(TCHAR_TO_UTF8(*Input)),
-        Input.Len() * sizeof(TCHAR)
-    );
-    return BytesToHex(Hash.GetBytes(), Hash.GetHashSize());
+    FTCHARToUTF8 UTF8Str(*Input);
+    FSHA256 Hash;
+    Hash.HashBuffer(reinterpret_cast<const uint8*>(UTF8Str.Get()), UTF8Str.Length());
+    
+    FString Result;
+    const uint8* Bytes = Hash.GetBytes();
+    for (int32 i = 0; i < 32; ++i)
+    {
+        Result += FString::Printf(TEXT("%02x"), Bytes[i]);
+    }
+    return Result;
 }
 
 // ============================================================================
 // License Validation
 // ============================================================================
 
-void ULicenseManager::ValidateLicense(
+void ULicenseManager::ValidateLicenseWithCallback(
     const FString& LicenseKey,
     const FString& MachineId,
     const FNeshamaLicenseValidated& OnComplete)
 {
-    auto RequestBody = MakeShared<TJsonObject<>>();
+    auto RequestBody = MakeShareable(new FJsonObject());
     RequestBody->SetStringField(TEXT("license_key"), LicenseKey);
     RequestBody->SetStringField(TEXT("machine_id"), MachineId);
 
@@ -163,6 +169,7 @@ void ULicenseManager::ValidateLicense(
     );
 }
 
+
 void ULicenseManager::InitializeLicenseWithCallback(const FNeshamaLicenseValidated& OnComplete)
 {
     FString StoredKey = GetStoredLicenseKey();
@@ -190,12 +197,12 @@ void ULicenseManager::InitializeLicenseWithCallback(const FNeshamaLicenseValidat
     ));
 }
 
-void ULicenseManager::ActivateLicense(
+void ULicenseManager::ActivateLicenseWithCallback(
     const FString& LicenseKey,
     const FString& MachineId,
     const FNeshamaLicenseActivated& OnComplete)
 {
-    auto RequestBody = MakeShared<TJsonObject<>>();
+    auto RequestBody = MakeShareable(new FJsonObject());
     RequestBody->SetStringField(TEXT("license_key"), LicenseKey);
     RequestBody->SetStringField(TEXT("machine_id"), MachineId);
 
@@ -237,7 +244,7 @@ void ULicenseManager::DeactivateLicenseWithCallback(const FNeshamaLicenseActivat
     }
 
     FString MachineId = GetMachineId();
-    auto RequestBody = MakeShared<TJsonObject<>>();
+    auto RequestBody = MakeShareable(new FJsonObject());
     RequestBody->SetStringField(TEXT("license_key"), StoredKey);
     RequestBody->SetStringField(TEXT("machine_id"), MachineId);
 
@@ -318,7 +325,7 @@ FString ULicenseManager::GetStoredLicenseKey() const
 
 void ULicenseManager::ClearStoredLicense()
 {
-    GConfig->ClearSection(TEXT("NeshamaLicense"), GGameUserSettingsIni);
+    GConfig->EmptySection(TEXT("NeshamaLicense"), GGameUserSettingsIni);
     GConfig->Flush(false, GGameUserSettingsIni);
 }
 
@@ -328,11 +335,11 @@ void ULicenseManager::ClearStoredLicense()
 
 void ULicenseManager::MakeLicenseRequest(
     const FString& Endpoint,
-    const TSharedRef<TJsonObject<>>& RequestBody,
+    const TSharedRef<FJsonObject>& RequestBody,
     TFunction<void(bool, const TSharedPtr<FJsonObject>&)> OnResponse)
 {
     UNeshamaConfig* Config = NewObject<UNeshamaConfig>();
-    FString BaseUrl = Config->GetServerUrl();
+    FString BaseUrl = Config->ServerUrl;
     FString Url = BaseUrl + Endpoint;
 
     // Serialize request body
@@ -455,7 +462,7 @@ FLicenseInfo ULicenseManager::GetOfflineLicense() const
 void ULicenseManager::CacheLicenseLocally(const FLicenseInfo& Info)
 {
     // Serialize to JSON and store encrypted
-    TSharedPtr<FJsonObject> JsonObject = MakeShared<FJsonObject>();
+    TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
     JsonObject->SetBoolField(TEXT("valid"), Info.bValid);
     JsonObject->SetStringField(TEXT("plan"), Info.Plan);
     JsonObject->SetNumberField(TEXT("max_npcs"), Info.MaxNpcs);

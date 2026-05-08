@@ -1,6 +1,6 @@
 #include "SoulEngine/Behavior/BehaviorMapper.h"
 #include "SoulEngine/Personality/OCEANPersonality.h"
-#include "SoulEngine/Utils/SoulMathUtils.h"
+#include "Utils/SoulMathUtils.h"
 
 UBehaviorMapper::UBehaviorMapper()
 	: Personality(nullptr)

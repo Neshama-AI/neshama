@@ -7,6 +7,7 @@
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "PropertyCustomizationHelpers.h"
+#include "NeshamaTypes.h"
 
 /**
  * NPCSoulComponent的Details面板自定义Widget
@@ -56,7 +57,7 @@ private:
 	TWeakObjectPtr<class UNPCSoulComponent> SoulComponent;
 
 	/** 当前情绪状态 */
-	struct FEmotionState CurrentEmotion;
+	FEmotionState CurrentEmotion;
 };
 
 // ============================================================================

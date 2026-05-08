@@ -7,8 +7,6 @@
 #include "ISettingsModule.h"
 #include "ISettingsSection.h"
 #include "ISettingsContainer.h"
-#include "WorkspaceMenuStructure.h"
-#include "WorkspaceMenuStructureModule.h"
 #include "NeshamaConfig.h"
 #include "NPCSoulComponent.h"
 #include "SNeshamaSettingsWidget.h"
@@ -59,7 +57,6 @@ private:
 
 private:
 	/** Tab Spawner句柄 */
-	TSharedPtr<FWorkspaceItem> NeshamaWorkspaceGroup;
 };
 
 /** 插件模块实例 */
@@ -150,7 +147,7 @@ void FNeshamaSDKEditorModule::UnregisterSettings()
 		SettingsModule->UnregisterSettings(
 			"Project",
 			"NeshamaSDK",
-			"NeshamaSDK"
+			"General"
 		);
 	}
 
@@ -195,14 +192,12 @@ void FNeshamaSDKEditorModule::RegisterNPCSoulComponentDetails()
 void FNeshamaSDKEditorModule::RegisterSetupWizardTab()
 {
 	// 创建Workspace菜单分组
-	NeshamaWorkspaceGroup = WorkspaceMenuStructure::GetMenuStructure()
-		.GetGroup(WorkspaceMenuStructure::Get().GetDeveloperToolsMenuName())
-		->AddGroup(
-			LOCTEXT("NeshamaWorkspaceGroup", "Neshama"),
-			LOCTEXT("NeshamaWorkspaceGroupTooltip", "Neshama SDK Tools"),
-			FSlateIcon(),
-			true
-		);
+	// Neshama workspace group (UE5.6 simplified)
+	TSharedPtr<FWorkspaceItem> NeshamaWorkspaceGroup = FWorkspaceItem::NewGroup(
+		LOCTEXT("NeshamaWorkspaceGroup", "Neshama"));
+	NeshamaWorkspaceGroup->AddItem(
+		LOCTEXT("NeshamaWorkspaceGroupTooltip", "Neshama SDK Tools"),
+		FSlateIcon());
 
 	// 注册Nomad Tab Spawner
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(

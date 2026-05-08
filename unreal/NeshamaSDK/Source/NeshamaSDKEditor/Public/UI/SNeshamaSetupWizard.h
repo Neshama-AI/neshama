@@ -8,17 +8,7 @@
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/Input/SEditableTextBox.h"
-
-/**
- * 服务器模式枚举
- */
-enum class ENeshamaServerMode : uint8
-{
-	/** 云端模式 (api.neshama.ai) */
-	Cloud,
-	/** 本地模式 (localhost:8420) */
-	Local
-};
+#include "NeshamaConfig.h"
 
 /**
  * Setup Wizard步骤枚举

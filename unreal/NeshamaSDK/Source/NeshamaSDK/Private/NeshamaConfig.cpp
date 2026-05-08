@@ -2,7 +2,7 @@
 // Neshama SDK - 配置实现文件
 
 #include "NeshamaConfig.h"
-#include "GenericPlatform/GenericPlatform.ch"
+#include "GenericPlatform/GenericPlatform.h"
 
 #define LOCTEXT_NAMESPACE "NeshamaConfig"
 

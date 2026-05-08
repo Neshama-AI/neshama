@@ -5,7 +5,7 @@
 #include "NeshamaClient.h"
 #include "NeshamaConfig.h"
 #include "GameFramework/Actor.h"
-#include "Engine/DrawDebugUtils.h"
+#include "DrawDebugHelpers.h"
 
 #define LOCTEXT_NAMESPACE "NPCSoulComponent"
 

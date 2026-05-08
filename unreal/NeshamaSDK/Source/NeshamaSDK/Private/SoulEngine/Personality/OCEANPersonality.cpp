@@ -1,5 +1,5 @@
 #include "SoulEngine/Personality/OCEANPersonality.h"
-#include "SoulEngine/Utils/SoulMathUtils.h"
+#include "Utils/SoulMathUtils.h"
 
 UOCEANPersonality::UOCEANPersonality()
 {

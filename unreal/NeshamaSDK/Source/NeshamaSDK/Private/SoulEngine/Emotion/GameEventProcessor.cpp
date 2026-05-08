@@ -1,7 +1,7 @@
 #include "SoulEngine/Emotion/GameEventProcessor.h"
 #include "SoulEngine/Emotion/EventMappings.h"
 #include "SoulEngine/Personality/OCEANPersonality.h"
-#include "SoulEngine/Utils/SoulMathUtils.h"
+#include "Utils/SoulMathUtils.h"
 
 TArray<FEmotionDelta> FGameEventProcessor::ProcessEvent(
 	ESoulEventType EventType,

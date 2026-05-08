@@ -312,7 +312,7 @@ private:
     FString CachedMachineId;
 
     // Detected region from server URL
-    FString DetectedRegionCode;
+    mutable FString DetectedRegionCode;
 
     // Singleton instance
     static ULicenseManager* SingletonInstance;
@@ -325,7 +325,7 @@ private:
     /** Make HTTP POST request to the license server */
     void MakeLicenseRequest(
         const FString& Endpoint,
-        const TSharedRef<TJsonObject<>>& RequestBody,
+        const TSharedRef<FJsonObject>& RequestBody,
         TFunction<void(bool, const TSharedPtr<FJsonObject>&)> OnResponse
     );
 

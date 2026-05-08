@@ -8,8 +8,8 @@
 #include "Widgets/Input/SNumericEntryBox.h"
 #include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Text/STextBlock.h"
-#include "Widgets/Buttons/SButton.h"
-#include "EditorStyleSet.h"
+#include "Widgets/Input/SButton.h"
+#include "Styling/AppStyle.h"
 
 #define LOCTEXT_NAMESPACE "SNeshamaSettingsWidget"
 
@@ -110,7 +110,7 @@ TSharedRef<SWidget> SNeshamaSettingsWidget::CreateConfigGroup(const FText& Group
 		.BodyContent()
 		[
 			SNew(SBorder)
-			.BorderImage(FEditorStyle::GetBrush("DetailsView.CategoryMiddle"))
+			.BorderImage(FAppStyle::GetBrush("DetailsView.CategoryMiddle"))
 			.Padding(10.0f)
 			[
 				SNew(SVerticalBox)

@@ -63,40 +63,14 @@ private:
 	/** 创建配置分组 */
 	TSharedRef<SWidget> CreateConfigGroup(const FText& GroupName, const FText& GroupTooltip);
 
-	/** 创建输入框 */
-	template<typename T>
-	TSharedRef<SWidget> CreateInputField(
+	/** 创建整数输入框 */
+	TSharedRef<SWidget> CreateIntInputField(
 		const FText& Label,
 		const FText& Tooltip,
-		T& Value,
-		const FOnTextChanged& OnChanged,
-		const FOnIntegerChanged& OnIntegerChanged);
+		int32& Value,
+		const FOnTextChanged& OnChanged);
 
 private:
 	/** 配置缓存 */
 	TWeakObjectPtr<class UNeshamaConfig> CachedConfig;
 };
-
-
-// ============================================================================
-// 内联模板实现
-// ============================================================================
-
-template<typename T>
-TSharedRef<SWidget> SNeshamaSettingsWidget::CreateInputField(
-	const FText& Label,
-	const FText& Tooltip,
-	T& Value,
-	const FOnTextChanged& OnChanged,
-	const FOnIntegerChanged& OnIntegerChanged)
-{
-	return SNew(SHorizontalBox)
-		+ SHorizontalBox::Slot()
-		.AutoWidth()
-		.Padding(5.0f)
-		[
-			SNew(STextBlock)
-			.Text(Label)
-			.ToolTipText(Tooltip)
-		];
-}
