@@ -188,7 +188,7 @@ void UNeshamaBlueprintLibrary::TestConnection(const FString& ServerUrl, const FS
 			}
 		}
 
-		FOnConnectionStateChanged OnTestComplete;
+		FOnConnectCompleteDelegate OnTestComplete;
 		OnTestComplete.BindLambda([TestClient](bool bSuccess)
 		{
 			if (bSuccess)

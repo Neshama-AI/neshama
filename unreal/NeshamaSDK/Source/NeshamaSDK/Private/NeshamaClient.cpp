@@ -60,7 +60,7 @@ void UNeshamaClient::InitializeHttp()
 	}
 }
 
-void UNeshamaClient::Connect(const FOnConnectionStateChanged& OnComplete)
+void UNeshamaClient::Connect(const FOnConnectCompleteDelegate& OnComplete)
 {
 	if (bDisposed)
 	{
@@ -601,7 +601,7 @@ void UNeshamaClient::GetBehaviorHints(const FString& NpcId,
 // ============================================================================
 
 void UNeshamaClient::Chat(const FString& NpcId, const FString& Message,
-	const FString& PlayerId, const FOnChatResponseDelegate& OnComplete)
+	const FString& PlayerId, const FOnChatCompleteDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{

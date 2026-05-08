@@ -59,6 +59,16 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FOnRelationGraphDelegate, FRelationGraph, Rela
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnEventResponseDelegate, FEventResponse, Response);
 
 /**
+ * 连接完成回调委托（单播，用于函数参数）
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnConnectCompleteDelegate, bool, bIsConnected);
+
+/**
+ * 对话完成回调委托（单播，用于函数参数）
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnChatCompleteDelegate, FChatResponse, Response);
+
+/**
  * Neshama SDK 核心HTTP客户端
  * 基于 UE5 FHttpModule 的异步HTTP通信封装
  * 支持所有API端点的调用
@@ -93,7 +103,7 @@ public:
 	 * @param OnComplete 连接完成回调
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama|Client|Connection")
-	void Connect(const FOnConnectionStateChanged& OnComplete);
+	void Connect(const FOnConnectCompleteDelegate& OnComplete);
 
 	/**
 	 * 断开连接
@@ -205,7 +215,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama|Client|Chat")
 	void Chat(const FString& NpcId, const FString& Message, 
-		const FString& PlayerId, const FOnChatResponse& OnComplete);
+		const FString& PlayerId, const FOnChatCompleteDelegate& OnComplete);
 
 	// ============================================================================
 	// 记忆API

@@ -202,7 +202,7 @@ void UNPCSoulComponent::Connect()
 		Client->OnLog.AddDynamic(this, &UNPCSoulComponent::HandleLog);
 
 		// 调用连接
-		FOnConnectionStateChanged OnComplete;
+		FOnConnectCompleteDelegate OnComplete;
 		OnComplete.BindLambda([this](bool bSuccess)
 		{
 			if (bSuccess)
@@ -291,7 +291,7 @@ void UNPCSoulComponent::Chat(const FString& Message, const FString& PlayerId)
 		return;
 	}
 
-	FOnChatResponseDelegate OnComplete;
+	FOnChatCompleteDelegate OnComplete;
 	OnComplete.BindLambda([this](FChatResponse Response)
 	{
 		// 更新情绪状态
