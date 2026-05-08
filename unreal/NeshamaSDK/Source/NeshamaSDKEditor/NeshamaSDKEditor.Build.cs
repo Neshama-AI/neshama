@@ -38,7 +38,7 @@ public class NeshamaSDKEditor : ModuleRules
 		);
 
 		// C++标准设置
-		CppStandard = CppStandardVersion.Cpp17;
+		CppStandard = CppStandardVersion.Cpp20;
 
 		// 编辑器特定的定义
 		PrivateDefinitions.Add("NESHAMA_SDK_EDITOR=1");

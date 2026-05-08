@@ -202,7 +202,7 @@ void UNPCSoulComponent::Connect()
 		Client->OnLog.AddDynamic(this, &UNPCSoulComponent::HandleLog);
 
 		// 调用连接
-		FOnConnectCompleteDelegate OnComplete;
+		FNeshamaConnectCompleteDelegate OnComplete;
 		OnComplete.BindLambda([this](bool bSuccess)
 		{
 			if (bSuccess)
@@ -217,7 +217,7 @@ void UNPCSoulComponent::Connect()
 			}
 		});
 		
-		Client->Connect(OnComplete);
+		Client->ConnectWithCallback(OnComplete);
 	}
 }
 
@@ -250,7 +250,7 @@ void UNPCSoulComponent::SendGameEvent(EGameEventType EventType, float Intensity,
 		return;
 	}
 
-	FOnEventResponseDelegate OnComplete;
+	FNeshamaEventResponseDelegate OnComplete;
 	OnComplete.BindLambda([this](FEventResponse Response)
 	{
 		// 更新当前情绪状态
@@ -275,7 +275,7 @@ void UNPCSoulComponent::SendGameEvent(EGameEventType EventType, float Intensity,
 		}
 	});
 
-	Client->SendGameEvent(NpcId, EventType, Intensity, Context, OnComplete);
+	Client->SendGameEventWithCallback(NpcId, EventType, Intensity, Context, OnComplete);
 }
 
 void UNPCSoulComponent::SendGameEventSimple(EGameEventType EventType, float Intensity)
@@ -291,7 +291,7 @@ void UNPCSoulComponent::Chat(const FString& Message, const FString& PlayerId)
 		return;
 	}
 
-	FOnChatCompleteDelegate OnComplete;
+	FNeshamaChatCompleteDelegate OnComplete;
 	OnComplete.BindLambda([this](FChatResponse Response)
 	{
 		// 更新情绪状态
@@ -305,7 +305,7 @@ void UNPCSoulComponent::Chat(const FString& Message, const FString& PlayerId)
 		OnChatResponseBP(Response.Content);
 	});
 
-	Client->Chat(NpcId, Message, PlayerId, OnComplete);
+	Client->ChatWithCallback(NpcId, Message, PlayerId, OnComplete);
 }
 
 void UNPCSoulComponent::GetBehaviorHints()
@@ -316,7 +316,7 @@ void UNPCSoulComponent::GetBehaviorHints()
 		return;
 	}
 
-	FOnBehaviorResponseDelegate OnComplete;
+	FNeshamaBehaviorResponseDelegate OnComplete;
 	OnComplete.BindLambda([this](FBehaviorResponse Response)
 	{
 		CurrentBehaviors = Response.Modifiers;
@@ -328,7 +328,7 @@ void UNPCSoulComponent::GetBehaviorHints()
 		}
 	});
 
-	Client->GetBehaviorHints(NpcId, OnComplete);
+	Client->GetBehaviorHintsWithCallback(NpcId, OnComplete);
 }
 
 void UNPCSoulComponent::RememberEntity(const FString& EntityType, const FString& EntityName,
@@ -340,13 +340,13 @@ void UNPCSoulComponent::RememberEntity(const FString& EntityType, const FString&
 		return;
 	}
 
-	FOnRememberResponseDelegate OnComplete;
+	FNeshamaRememberResponseDelegate OnComplete;
 	OnComplete.BindLambda([this](FMemoryListResponse Response)
 	{
 		UE_LOG(LogTemp, Display, TEXT("[NPCSoul] Entity remembered successfully"));
 	});
 
-	Client->Remember(NpcId, EntityType, EntityName, Relation, Note, OnComplete);
+	Client->RememberWithCallback(NpcId, EntityType, EntityName, Relation, Note, OnComplete);
 }
 
 void UNPCSoulComponent::GetProfile()
@@ -357,14 +357,14 @@ void UNPCSoulComponent::GetProfile()
 		return;
 	}
 
-	FOnNPCProfileDelegate OnComplete;
+	FNeshamaNPCProfileDelegate OnComplete;
 	OnComplete.BindLambda([this](FNPCProfile Profile)
 	{
 		CurrentProfile = Profile;
 		UE_LOG(LogTemp, Display, TEXT("[NPCSoul] Profile retrieved: %s"), *Profile.Name);
 	});
 
-	Client->GetProfile(NpcId, OnComplete);
+	Client->GetProfileWithCallback(NpcId, OnComplete);
 }
 
 void UNPCSoulComponent::GetRelations()
@@ -375,14 +375,14 @@ void UNPCSoulComponent::GetRelations()
 		return;
 	}
 
-	FOnRelationGraphDelegate OnComplete;
+	FNeshamaRelationGraphDelegate OnComplete;
 	OnComplete.BindLambda([this](FRelationGraph Relations)
 	{
 		CurrentRelations = Relations;
 		UE_LOG(LogTemp, Display, TEXT("[NPCSoul] Relations retrieved: %d"), Relations.Relations.Num());
 	});
 
-	Client->GetRelations(NpcId, OnComplete);
+	Client->GetRelationsWithCallback(NpcId, OnComplete);
 }
 
 void UNPCSoulComponent::CreateNPC()
@@ -393,7 +393,7 @@ void UNPCSoulComponent::CreateNPC()
 		return;
 	}
 
-	FOnCreateNPCResponseDelegate OnComplete;
+	FNeshamaCreateNPCResponseDelegate OnComplete;
 	OnComplete.BindLambda([this](FCreateNPCResponse Response)
 	{
 		if (Response.Success)
@@ -407,7 +407,7 @@ void UNPCSoulComponent::CreateNPC()
 		}
 	});
 
-	Client->CreateNPC(NpcName, Preset, OnComplete);
+	Client->CreateNPCWithCallback(NpcName, Preset, OnComplete);
 }
 
 // ============================================================================

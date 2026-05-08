@@ -9,14 +9,14 @@
 #include "LicenseManager.generated.h"
 
 // ============================================================================
-// Delegates
+// Delegates（非动态，用于C++内部回调，支持BindLambda）
 // ============================================================================
 
 /** Callback when license validation completes */
-DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnLicenseValidated, bool, bSuccess, const FString&, ErrorMessage);
+DECLARE_DELEGATE_TwoParams(FNeshamaLicenseValidated, bool, const FString&);
 
 /** Callback when license activation completes */
-DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnLicenseActivated, bool, bSuccess, const FString&, Message);
+DECLARE_DELEGATE_TwoParams(FNeshamaLicenseActivated, bool, const FString&);
 
 // ============================================================================
 // FLicenseInfo - License information structure
@@ -110,7 +110,7 @@ struct NESHAMASDK_API FLicenseInfo
  *
  * Usage:
  *   ULicenseManager* LM = ULicenseManager::Get();
- *   LM->ValidateLicense(Key, MachineId, FOnLicenseValidated::CreateLambda(...));
+ *   LM->ValidateLicenseWithCallback(Key, MachineId, FNeshamaLicenseValidated::CreateLambda(...));
  *   if (LM->HasFeature("social_engine")) { ... }
  *   int32 MaxNPCs = LM->GetMaxNPCs();
  */
@@ -150,7 +150,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Neshama|License",
         meta = (DisplayName = "Validate License",
                 ToolTip = "Validate a license key with the Neshama server"))
-    void ValidateLicense(const FString& LicenseKey, const FString& MachineId, const FOnLicenseValidated& OnComplete);
+    void ValidateLicense(const FString& LicenseKey, const FString& MachineId);
+
+    /** Validate license (C++ callback version) */
+    void ValidateLicenseWithCallback(const FString& LicenseKey, const FString& MachineId, const FNeshamaLicenseValidated& OnComplete);
 
     /**
      * Initialize the license manager on startup.
@@ -161,7 +164,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Neshama|License",
         meta = (DisplayName = "Initialize License",
                 ToolTip = "Initialize license manager (auto-validates stored key)"))
-    void InitializeLicense(const FOnLicenseValidated& OnComplete);
+    void InitializeLicense();
+
+    /** Initialize license (C++ callback version) */
+    void InitializeLicenseWithCallback(const FNeshamaLicenseValidated& OnComplete);
 
     /**
      * Activate (bind) a license key to this machine.
@@ -175,7 +181,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Neshama|License",
         meta = (DisplayName = "Activate License",
                 ToolTip = "Activate a license key and bind it to this machine"))
-    void ActivateLicense(const FString& LicenseKey, const FString& MachineId, const FOnLicenseActivated& OnComplete);
+    void ActivateLicense(const FString& LicenseKey, const FString& MachineId);
+
+    /** Activate license (C++ callback version) */
+    void ActivateLicenseWithCallback(const FString& LicenseKey, const FString& MachineId, const FNeshamaLicenseActivated& OnComplete);
 
     /**
      * Deactivate (unbind) this machine from the current license.
@@ -185,7 +194,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Neshama|License",
         meta = (DisplayName = "Deactivate License",
                 ToolTip = "Deactivate the current license on this machine"))
-    void DeactivateLicense(const FOnLicenseActivated& OnComplete);
+    void DeactivateLicense();
+
+    /** Deactivate license (C++ callback version) */
+    void DeactivateLicenseWithCallback(const FNeshamaLicenseActivated& OnComplete);
 
     // ========================================================================
     // Feature & Plan Queries

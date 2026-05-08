@@ -35,7 +35,7 @@ public class NeshamaSDK : ModuleRules
 		// HTTP is already in PublicDependencyModuleNames, no need to dynamically load
 
 		// C++标准设置
-		CppStandard = CppStandardVersion.Cpp17;
+		CppStandard = CppStandardVersion.Cpp20;
 
 		// 是否为Rocket编辑器构建
 		if (Target.bBuildEditor == false)

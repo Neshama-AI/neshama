@@ -188,7 +188,7 @@ void UNeshamaBlueprintLibrary::TestConnection(const FString& ServerUrl, const FS
 			}
 		}
 
-		FOnConnectCompleteDelegate OnTestComplete;
+		FNeshamaConnectCompleteDelegate OnTestComplete;
 		OnTestComplete.BindLambda([TestClient](bool bSuccess)
 		{
 			if (bSuccess)
@@ -201,7 +201,7 @@ void UNeshamaBlueprintLibrary::TestConnection(const FString& ServerUrl, const FS
 			}
 		});
 
-		TestClient->Connect(OnTestComplete);
+		TestClient->ConnectWithCallback(OnTestComplete);
 	}
 }
 

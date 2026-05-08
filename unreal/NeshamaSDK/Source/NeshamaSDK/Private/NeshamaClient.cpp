@@ -60,7 +60,7 @@ void UNeshamaClient::InitializeHttp()
 	}
 }
 
-void UNeshamaClient::Connect(const FOnConnectCompleteDelegate& OnComplete)
+void UNeshamaClient::ConnectWithCallback(const FNeshamaConnectCompleteDelegate& OnComplete)
 {
 	if (bDisposed)
 	{
@@ -279,8 +279,8 @@ void UNeshamaClient::SetConfig(UNeshamaConfig* NewConfig)
 // NPC管理API实现
 // ============================================================================
 
-void UNeshamaClient::CreateNPC(const FString& Name, const FString& Preset,
-	const FOnCreateNPCResponseDelegate& OnComplete)
+void UNeshamaClient::CreateNPCWithCallback(const FString& Name, const FString& Preset,
+	const FNeshamaCreateNPCResponseDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -337,7 +337,7 @@ void UNeshamaClient::CreateNPC(const FString& Name, const FString& Preset,
 	});
 }
 
-void UNeshamaClient::GetProfile(const FString& NpcId, const FOnNPCProfileDelegate& OnComplete)
+void UNeshamaClient::GetProfileWithCallback(const FString& NpcId, const FNeshamaNPCProfileDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -378,8 +378,8 @@ void UNeshamaClient::GetProfile(const FString& NpcId, const FOnNPCProfileDelegat
 // 事件推送API实现
 // ============================================================================
 
-void UNeshamaClient::SendEvent(const FString& NpcId, const FGameEvent& GameEvent,
-	const FOnEventResponseDelegate& OnComplete)
+void UNeshamaClient::SendEventWithCallback(const FString& NpcId, const FGameEvent& GameEvent,
+	const FNeshamaEventResponseDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -475,9 +475,9 @@ void UNeshamaClient::SendEvent(const FString& NpcId, const FGameEvent& GameEvent
 	});
 }
 
-void UNeshamaClient::SendGameEvent(const FString& NpcId, EGameEventType EventType,
+void UNeshamaClient::SendGameEventWithCallback(const FString& NpcId, EGameEventType EventType,
 	float Intensity, const TMap<FString, FString>& Context,
-	const FOnEventResponseDelegate& OnComplete)
+	const FNeshamaEventResponseDelegate& OnComplete)
 {
 	FGameEvent GameEvent(EventType, Intensity);
 	GameEvent.Context = Context;
@@ -489,7 +489,7 @@ void UNeshamaClient::SendGameEvent(const FString& NpcId, EGameEventType EventTyp
 // 情绪状态API实现
 // ============================================================================
 
-void UNeshamaClient::GetEmotion(const FString& NpcId, const FOnEmotionStateDelegate& OnComplete)
+void UNeshamaClient::GetEmotionWithCallback(const FString& NpcId, const FNeshamaEmotionStateDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -543,8 +543,8 @@ void UNeshamaClient::GetEmotion(const FString& NpcId, const FOnEmotionStateDeleg
 // 行为建议API实现
 // ============================================================================
 
-void UNeshamaClient::GetBehaviorHints(const FString& NpcId,
-	const FOnBehaviorResponseDelegate& OnComplete)
+void UNeshamaClient::GetBehaviorHintsWithCallback(const FString& NpcId,
+	const FNeshamaBehaviorResponseDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -600,8 +600,8 @@ void UNeshamaClient::GetBehaviorHints(const FString& NpcId,
 // 对话API实现
 // ============================================================================
 
-void UNeshamaClient::Chat(const FString& NpcId, const FString& Message,
-	const FString& PlayerId, const FOnChatCompleteDelegate& OnComplete)
+void UNeshamaClient::ChatWithCallback(const FString& NpcId, const FString& Message,
+	const FString& PlayerId, const FNeshamaChatCompleteDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -679,8 +679,8 @@ void UNeshamaClient::Chat(const FString& NpcId, const FString& Message,
 // 记忆API实现
 // ============================================================================
 
-void UNeshamaClient::GetMemory(const FString& NpcId, const FString& Query,
-	const FOnMemoryListResponseDelegate& OnComplete)
+void UNeshamaClient::GetMemoryWithCallback(const FString& NpcId, const FString& Query,
+	const FNeshamaMemoryListResponseDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -739,9 +739,9 @@ void UNeshamaClient::GetMemory(const FString& NpcId, const FString& Query,
 	});
 }
 
-void UNeshamaClient::Remember(const FString& NpcId, const FString& EntityType,
+void UNeshamaClient::RememberWithCallback(const FString& NpcId, const FString& EntityType,
 	const FString& EntityName, const FString& Relation,
-	const FString& Note, const FOnRememberResponseDelegate& OnComplete)
+	const FString& Note, const FNeshamaRememberResponseDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -787,7 +787,7 @@ void UNeshamaClient::Remember(const FString& NpcId, const FString& EntityType,
 // 关系图谱API实现
 // ============================================================================
 
-void UNeshamaClient::GetRelations(const FString& NpcId, const FOnRelationGraphDelegate& OnComplete)
+void UNeshamaClient::GetRelationsWithCallback(const FString& NpcId, const FNeshamaRelationGraphDelegate& OnComplete)
 {
 	if (!bIsConnected)
 	{
@@ -835,5 +835,79 @@ void UNeshamaClient::GetRelations(const FString& NpcId, const FOnRelationGraphDe
 		OnComplete.ExecuteIfBound(Result);
 	});
 }
+
+
+// ============================================================================
+// Blueprint友好的无回调方法实现
+// ============================================================================
+
+void UNeshamaClient::Connect()
+{
+	FNeshamaConnectCompleteDelegate DummyCallback;
+	ConnectWithCallback(DummyCallback);
+}
+
+void UNeshamaClient::CreateNPC(const FString& Name, const FString& Preset)
+{
+	FNeshamaCreateNPCResponseDelegate DummyCallback;
+	CreateNPCWithCallback(Name, Preset, DummyCallback);
+}
+
+void UNeshamaClient::GetProfile(const FString& NpcId)
+{
+	FNeshamaNPCProfileDelegate DummyCallback;
+	GetProfileWithCallback(NpcId, DummyCallback);
+}
+
+void UNeshamaClient::SendEvent(const FString& NpcId, const FGameEvent& GameEvent)
+{
+	FNeshamaEventResponseDelegate DummyCallback;
+	SendEventWithCallback(NpcId, GameEvent, DummyCallback);
+}
+
+void UNeshamaClient::SendGameEvent(const FString& NpcId, EGameEventType EventType,
+	float Intensity, const TMap<FString, FString>& Context)
+{
+	FNeshamaEventResponseDelegate DummyCallback;
+	SendGameEventWithCallback(NpcId, EventType, Intensity, Context, DummyCallback);
+}
+
+void UNeshamaClient::GetEmotion(const FString& NpcId)
+{
+	FNeshamaEmotionStateDelegate DummyCallback;
+	GetEmotionWithCallback(NpcId, DummyCallback);
+}
+
+void UNeshamaClient::GetBehaviorHints(const FString& NpcId)
+{
+	FNeshamaBehaviorResponseDelegate DummyCallback;
+	GetBehaviorHintsWithCallback(NpcId, DummyCallback);
+}
+
+void UNeshamaClient::Chat(const FString& NpcId, const FString& Message, const FString& PlayerId)
+{
+	FNeshamaChatCompleteDelegate DummyCallback;
+	ChatWithCallback(NpcId, Message, PlayerId, DummyCallback);
+}
+
+void UNeshamaClient::GetMemory(const FString& NpcId, const FString& Query)
+{
+	FNeshamaMemoryListResponseDelegate DummyCallback;
+	GetMemoryWithCallback(NpcId, Query, DummyCallback);
+}
+
+void UNeshamaClient::Remember(const FString& NpcId, const FString& EntityType,
+	const FString& EntityName, const FString& Relation, const FString& Note)
+{
+	FNeshamaRememberResponseDelegate DummyCallback;
+	RememberWithCallback(NpcId, EntityType, EntityName, Relation, Note, DummyCallback);
+}
+
+void UNeshamaClient::GetRelations(const FString& NpcId)
+{
+	FNeshamaRelationGraphDelegate DummyCallback;
+	GetRelationsWithCallback(NpcId, DummyCallback);
+}
+
 
 #undef LOCTEXT_NAMESPACE

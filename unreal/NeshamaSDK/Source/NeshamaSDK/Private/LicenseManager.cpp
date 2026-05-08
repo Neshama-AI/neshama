@@ -124,7 +124,7 @@ FString ULicenseManager::ComputeSHA256(const FString& Input)
 void ULicenseManager::ValidateLicense(
     const FString& LicenseKey,
     const FString& MachineId,
-    const FOnLicenseValidated& OnComplete)
+    const FNeshamaLicenseValidated& OnComplete)
 {
     auto RequestBody = MakeShared<TJsonObject<>>();
     RequestBody->SetStringField(TEXT("license_key"), LicenseKey);
@@ -163,7 +163,7 @@ void ULicenseManager::ValidateLicense(
     );
 }
 
-void ULicenseManager::InitializeLicense(const FOnLicenseValidated& OnComplete)
+void ULicenseManager::InitializeLicenseWithCallback(const FNeshamaLicenseValidated& OnComplete)
 {
     FString StoredKey = GetStoredLicenseKey();
     if (StoredKey.IsEmpty())
@@ -176,7 +176,7 @@ void ULicenseManager::InitializeLicense(const FOnLicenseValidated& OnComplete)
     }
 
     FString MachineId = GetMachineId();
-    ValidateLicense(StoredKey, MachineId, FOnLicenseValidated::CreateLambda(
+    ValidateLicenseWithCallback(StoredKey, MachineId, FNeshamaLicenseValidated::CreateLambda(
         [this, OnComplete](bool bSuccess, const FString& Error)
         {
             bInitialized = true;
@@ -193,7 +193,7 @@ void ULicenseManager::InitializeLicense(const FOnLicenseValidated& OnComplete)
 void ULicenseManager::ActivateLicense(
     const FString& LicenseKey,
     const FString& MachineId,
-    const FOnLicenseActivated& OnComplete)
+    const FNeshamaLicenseActivated& OnComplete)
 {
     auto RequestBody = MakeShared<TJsonObject<>>();
     RequestBody->SetStringField(TEXT("license_key"), LicenseKey);
@@ -227,7 +227,7 @@ void ULicenseManager::ActivateLicense(
     );
 }
 
-void ULicenseManager::DeactivateLicense(const FOnLicenseActivated& OnComplete)
+void ULicenseManager::DeactivateLicenseWithCallback(const FNeshamaLicenseActivated& OnComplete)
 {
     FString StoredKey = GetStoredLicenseKey();
     if (StoredKey.IsEmpty())
@@ -542,3 +542,33 @@ FString ULicenseManager::SimpleDecrypt(const FString& CipherText) const
 
     return FString(UTF8_TO_TCHAR(Result.GetData()));
 }
+
+
+// ============================================================================
+// Blueprint友好的无回调方法实现
+// ============================================================================
+
+void ULicenseManager::ValidateLicense(const FString& LicenseKey, const FString& MachineId)
+{
+    FNeshamaLicenseValidated DummyCallback;
+    ValidateLicenseWithCallback(LicenseKey, MachineId, DummyCallback);
+}
+
+void ULicenseManager::InitializeLicense()
+{
+    FNeshamaLicenseValidated DummyCallback;
+    InitializeLicenseWithCallback(DummyCallback);
+}
+
+void ULicenseManager::ActivateLicense(const FString& LicenseKey, const FString& MachineId)
+{
+    FNeshamaLicenseActivated DummyCallback;
+    ActivateLicenseWithCallback(LicenseKey, MachineId, DummyCallback);
+}
+
+void ULicenseManager::DeactivateLicense()
+{
+    FNeshamaLicenseActivated DummyCallback;
+    DeactivateLicenseWithCallback(DummyCallback);
+}
+
