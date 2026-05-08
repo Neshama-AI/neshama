@@ -113,7 +113,7 @@ public:
 	 * @param Context 上下文数据（可选）
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama|Event",
-		meta = (DisplayName = "Send Game Event", ToolTip = "发送游戏事件到服务器"))
+		meta = (DisplayName = "Send Game Event", ToolTip = "发送游戏事件到服务器", BlueprintInternalUseOnly = "true"))
 	void SendGameEvent(EGameEventType EventType, float Intensity = 1.0f, 
 		const TMap<FString, FString>& Context = TMap<FString, FString>());
 
@@ -256,6 +256,29 @@ public:
 	/** 获取行为建议列表 */
 	UFUNCTION(BlueprintPure, Category = "Neshama|Behavior")
 	TArray<FBehaviorHint> GetCurrentBehaviors() const { return CurrentBehaviors; }
+
+
+	// ============================================================================
+	// 内部回调处理
+	// ============================================================================
+
+	/**
+	 * 连接状态变化回调（由AddDynamic绑定）
+	 */
+	UFUNCTION()
+	void HandleConnectionStateChanged(bool bIsConnected);
+
+	/**
+	 * 错误回调（由AddDynamic绑定）
+	 */
+	UFUNCTION()
+	void HandleError(FString ErrorMessage);
+
+	/**
+	 * 日志回调（由AddDynamic绑定）
+	 */
+	UFUNCTION()
+	void HandleLog(FString LogMessage);
 
 protected:
 	// ============================================================================

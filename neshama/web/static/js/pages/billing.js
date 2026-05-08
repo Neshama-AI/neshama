@@ -24,8 +24,8 @@ const TIER_DETAILS = {
     indie: {
         name: 'Indie',
         price: 19,
-        emoji: '🎮',
-        color: '#22c55e',
+        emoji: 'Game',
+        color: '#00d4aa',
         limits: { npcs: 10, interactions: 50000, tts_chars: 50000, api_calls: 100000 },
         hosted_conversations: 10000,
         byok_enabled: true,
@@ -35,8 +35,8 @@ const TIER_DETAILS = {
     studio: {
         name: 'Studio',
         price: 79,
-        emoji: '🎬',
-        color: '#4b93ff',
+        emoji: 'Pro',
+        color: '#7c5cff',
         limits: { npcs: 50, interactions: 500000, tts_chars: 500000, api_calls: 1000000 },
         hosted_conversations: 100000,
         byok_enabled: true,
@@ -46,8 +46,8 @@ const TIER_DETAILS = {
     enterprise: {
         name: 'Enterprise',
         price: 299,
-        emoji: '🏢',
-        color: '#a855f7',
+        emoji: 'Enterprise',
+        color: '#7c5cff',
         limits: { npcs: -1, interactions: -1, tts_chars: -1, api_calls: -1 },
         hosted_conversations: -1,
         byok_enabled: true,
@@ -97,7 +97,7 @@ async function renderBilling() {
             <div class="card-header">
                 <span class="card-title">${t('billing.currentPlan')}</span>
                 <span class="tag ${currentMode === 'byok' ? 'tag-green' : 'tag-blue'}" style="margin-left:8px;">
-                    ${currentMode === 'byok' ? '🔑 BYOK' : '☁️ ' + t('billing.hostedMode')}
+                    ${currentMode === 'byok' ? 'BYOK' : t('billing.hostedMode')}
                 </span>
             </div>
             <div class="subscription-info">
@@ -181,11 +181,11 @@ function renderPlanCards(currentTier) {
                         <span class="limit-value">${details.limits.npcs === -1 ? '∞' : details.limits.npcs}</span>
                     </div>
                     <div class="plan-limit-item plan-limit-hosted">
-                        <span class="limit-label">☁️ ${t('billing.hostedConversations')}</span>
+                        <span class="limit-label">${t('billing.hostedConversations')}</span>
                         <span class="limit-value">${details.hosted_conversations === -1 ? '∞' : formatNumber(details.hosted_conversations)}</span>
                     </div>
                     <div class="plan-limit-item plan-limit-byok ${details.byok_highlight ? 'plan-byok-highlight' : ''}">
-                        <span class="limit-label">🔑 ${t('billing.byokConversations')}</span>
+                        <span class="limit-label">${t('billing.byokConversations')}</span>
                         <span class="limit-value">${t('billing.unlimited')}</span>
                     </div>
                     <div class="plan-limit-item">
@@ -195,7 +195,7 @@ function renderPlanCards(currentTier) {
                 </div>
                 ${details.byok_highlight ? `
                     <div class="plan-byok-callout">
-                        💡 ${t('billing.byokCallout')}
+                        ${t('billing.byokCallout')}
                     </div>
                 ` : ''}
                 <div class="plan-action">
@@ -219,38 +219,38 @@ function renderUsageMetrics(currentTier, currentMode) {
             label: t('billing.npcCount'),
             used: billingUsage.npc_count || billingUsage.npcs || 0,
             limit: tierLimits.npcs,
-            icon: '🎭',
-            color: '#4b93ff'
+            icon: 'NPC',
+            color: '#7c5cff'
         },
         {
             label: t('billing.hostedConversations'),
             used: billingUsage.hosted_conversation_count || billingUsage.hosted_conversations || 0,
             limit: isByok ? -1 : hostedLimit,  // BYOK = unlimited
-            icon: '☁️',
-            color: '#22c55e',
-            badge: isByok ? '🔑 BYOK' : null,
-            badgeColor: '#22c55e'
+            icon: 'Cloud',
+            color: '#00d4aa',
+            badge: isByok ? 'BYOK' : null,
+            badgeColor: '#00d4aa'
         },
         {
             label: t('billing.ttsUsage'),
             used: billingUsage.tts_chars || 0,
             limit: tierLimits.tts_chars,
-            icon: '🔊',
-            color: '#f59e0b'
+            icon: 'Voice',
+            color: '#ff6b35'
         },
         {
             label: t('billing.apiCalls'),
             used: billingUsage.api_calls || 0,
             limit: tierLimits.api_calls,
-            icon: '📡',
-            color: '#a855f7'
+            icon: 'API',
+            color: '#7c5cff'
         }
     ];
     
     return metrics.map(m => {
         const percentage = m.limit === -1 ? Math.min((m.used / 1000) * 100, 100) : Math.min((m.used / m.limit) * 100, 100);
         const displayLimit = m.limit === -1 ? (isByok && m.label === t('billing.hostedConversations') ? t('billing.byokUnlimited') : '∞') : formatNumber(m.limit);
-        const barColor = percentage > 90 ? '#ef4444' : percentage > 70 ? '#f59e0b' : m.color;
+        const barColor = percentage > 90 ? '#ff6b35' : percentage > 70 ? '#ff6b35' : m.color;
         
         return `
             <div class="usage-metric">

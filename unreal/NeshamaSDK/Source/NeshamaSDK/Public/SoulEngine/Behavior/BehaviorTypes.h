@@ -8,7 +8,7 @@
  * Ported from Python/C# BehaviorType enum.
  */
 UENUM(BlueprintType)
-enum class EBehaviorType : uint8
+enum class ESoulBehaviorType : uint8
 {
 	DialogueStyleChange,
 	QuestAvailabilityChange,

@@ -43,8 +43,8 @@ const DEMO_STEPS = [
         action: 'event',
         target: 'ella',
         event: 'attack',
-        hint_zh: '点击"⚔️ 攻击"按钮',
-        hint_en: 'Click the "⚔️ Attack" button'
+        hint_zh: '点击攻击按钮',
+        hint_en: 'Click the Attack button'
     },
     {
         title_zh: 'NPC记忆',
@@ -64,8 +64,8 @@ const DEMO_STEPS = [
         action: 'event',
         target: 'ella',
         event: 'gift',
-        hint_zh: '点击"🎁 送礼"按钮',
-        hint_en: 'Click the "🎁 Gift" button'
+        hint_zh: '点击送礼按钮',
+        hint_en: 'Click the Gift button'
     },
     {
         title_zh: 'NPC社交',
@@ -93,54 +93,54 @@ const DEMO_NPCS = {
         id: 'demo-ella',
         name_zh: '艾拉',
         name_en: 'Ella',
-        emoji: '🍺',
+        emoji: 'Tavern',
         occupation_zh: '酒馆老板娘',
         occupation_en: 'Tavern Keeper',
         personality: { openness: 0.4, conscientiousness: 0.5, extraversion: 0.8, agreeableness: 0.75, neuroticism: 0.4 },
         emotions: { joy: 0.4, trust: 0.3, anger: 0.1, fear: 0.0, sadness: 0.1, disgust: 0.0, surprise: 0.1, anticipation: 0.2 },
         relationship: 'friendly',
         preset: 'tavern_keeper',
-        color: '#f59e0b'
+        color: '#ff6b35'
     },
     kyle: {
         id: 'demo-kyle',
         name_zh: '凯尔',
         name_en: 'Kyle',
-        emoji: '🛡️',
+        emoji: 'Guard',
         occupation_zh: '守卫队长',
         occupation_en: 'Guard Captain',
         personality: { openness: 0.3, conscientiousness: 0.8, extraversion: 0.4, agreeableness: 0.5, neuroticism: 0.3 },
         emotions: { joy: 0.2, trust: 0.2, anger: 0.1, fear: 0.0, sadness: 0.1, disgust: 0.1, surprise: 0.1, anticipation: 0.1 },
         relationship: 'neutral',
         preset: 'guard_captain',
-        color: '#3b82f6'
+        color: '#7c5cff'
     },
     mira: {
         id: 'demo-mira',
         name_zh: '米拉',
         name_en: 'Mira',
-        emoji: '🔮',
+        emoji: 'Mystic',
         occupation_zh: '神秘旅人',
         occupation_en: 'Mystic Traveler',
         personality: { openness: 0.85, conscientiousness: 0.5, extraversion: 0.25, agreeableness: 0.55, neuroticism: 0.65 },
         emotions: { joy: 0.1, trust: 0.2, anger: 0.0, fear: 0.1, sadness: 0.1, disgust: 0.0, surprise: 0.3, anticipation: 0.4 },
         relationship: 'neutral',
         preset: 'mystic_traveler',
-        color: '#a855f7'
+        color: '#7c5cff'
     }
 };
 
 // Emotion Labels and Colors
 const EMOTIONS = {
-    joy: { emoji: '😊', color: '#22c55e', label_zh: '喜悦', label_en: 'Joy' },
-    trust: { emoji: '🤝', color: '#3b82f6', label_zh: '信任', label_en: 'Trust' },
-    anger: { emoji: '😠', color: '#ef4444', label_zh: '愤怒', label_en: 'Anger' },
-    fear: { emoji: '😨', color: '#8b5cf6', label_zh: '恐惧', label_en: 'Fear' },
-    sadness: { emoji: '😢', color: '#6366f1', label_zh: '悲伤', label_en: 'Sadness' },
-    disgust: { emoji: '🤢', color: '#84cc16', label_zh: '厌恶', label_en: 'Disgust' },
-    surprise: { emoji: '😲', color: '#f97316', label_zh: '惊讶', label_en: 'Surprise' },
-    anticipation: { emoji: '🤔', color: '#eab308', label_zh: '期待', label_en: 'Anticipation' },
-    calm: { emoji: '😌', color: '#06b6d4', label_zh: '平静', label_en: 'Calm' }
+    joy: { emoji: 'Joy', color: '#00d4aa', label_zh: '喜悦', label_en: 'Joy' },
+    trust: { emoji: 'Trust', color: '#7c5cff', label_zh: '信任', label_en: 'Trust' },
+    anger: { emoji: 'Anger', color: '#ff6b35', label_zh: '愤怒', label_en: 'Anger' },
+    fear: { emoji: 'Fear', color: '#7c5cff', label_zh: '恐惧', label_en: 'Fear' },
+    sadness: { emoji: 'Sad', color: '#7c5cff', label_zh: '悲伤', label_en: 'Sadness' },
+    disgust: { emoji: 'Disgust', color: '#00d4aa', label_zh: '厌恶', label_en: 'Disgust' },
+    surprise: { emoji: 'Surprise', color: '#ff6b35', label_zh: '惊讶', label_en: 'Surprise' },
+    anticipation: { emoji: 'Anticipation', color: '#00d4aa', label_zh: '期待', label_en: 'Anticipation' },
+    calm: { emoji: 'Calm', color: '#00d4aa', label_zh: '平静', label_en: 'Calm' }
 };
 
 // Event effects on emotions
@@ -244,21 +244,21 @@ const DIALOGUES = {
 
 // Relationship labels
 const RELATIONSHIP_LABELS = {
-    friendly: { label_zh: '友好', label_en: 'Friendly', color: '#22c55e' },
-    neutral: { label_zh: '中立', label_en: 'Neutral', color: '#eab308' },
-    hostile: { label_zh: '敌对', label_en: 'Hostile', color: '#ef4444' }
+    friendly: { label_zh: '友好', label_en: 'Friendly', color: '#00d4aa' },
+    neutral: { label_zh: '中立', label_en: 'Neutral', color: '#00d4aa' },
+    hostile: { label_zh: '敌对', label_en: 'Hostile', color: '#ff6b35' }
 };
 
 // Game Events
 const GAME_EVENTS = [
-    { id: 'gift', emoji: '🎁', label_zh: '送礼', label_en: 'Gift', type: 'gift_given' },
-    { id: 'attack', emoji: '⚔️', label_zh: '攻击', label_en: 'Attack', type: 'player_attacked' },
-    { id: 'help', emoji: '🤝', label_zh: '帮助', label_en: 'Help', type: 'player_helped' },
-    { id: 'compliment', emoji: '💬', label_zh: '夸赞', label_en: 'Compliment', type: 'npc_complimented' },
-    { id: 'insult', emoji: '😤', label_zh: '辱骂', label_en: 'Insult', type: 'npc_insulted' },
-    { id: 'trade', emoji: '📦', label_zh: '交易', label_en: 'Trade', type: 'item_received' },
-    { id: 'quest_complete', emoji: '⚡', label_zh: '任务完成', label_en: 'Quest Done', type: 'quest_completed' },
-    { id: 'quest_fail', emoji: '💀', label_zh: '任务失败', label_en: 'Quest Failed', type: 'quest_failed' }
+    { id: 'gift', emoji: 'Gift', label_zh: '送礼', label_en: 'Gift', type: 'gift_given' },
+    { id: 'attack', emoji: 'Attack', label_zh: '攻击', label_en: 'Attack', type: 'player_attacked' },
+    { id: 'help', emoji: 'Help', label_zh: '帮助', label_en: 'Help', type: 'player_helped' },
+    { id: 'compliment', emoji: 'Praise', label_zh: '夸赞', label_en: 'Compliment', type: 'npc_complimented' },
+    { id: 'insult', emoji: 'Insult', label_zh: '辱骂', label_en: 'Insult', type: 'npc_insulted' },
+    { id: 'trade', emoji: 'Trade', label_zh: '交易', label_en: 'Trade', type: 'item_received' },
+    { id: 'quest_complete', emoji: 'Quest', label_zh: '任务完成', label_en: 'Quest Done', type: 'quest_completed' },
+    { id: 'quest_fail', emoji: 'Fail', label_zh: '任务失败', label_en: 'Quest Failed', type: 'quest_failed' }
 ];
 
 // ============================================
@@ -277,7 +277,7 @@ function renderDemo() {
             <!-- Demo Header -->
             <header class="demo-header">
                 <div class="demo-brand">
-                    <span class="demo-logo">🔮</span>
+                    <span class="demo-logo" style="color:#7c5cff;font-size:20px;">Neshama</span>
                     <div class="demo-brand-text">
                         <h1 class="demo-title">Neshama</h1>
                         <p class="demo-tagline">${isZh ? '体验NPC灵魂' : 'Experience NPC Souls'}</p>
@@ -534,7 +534,7 @@ function renderComparison() {
             </div>
             <div class="comparison-grid">
                 <div class="comparison-col ${DemoState.neshamaEnabled ? 'active' : ''}">
-                    <h4>${isZh ? '🧠 有Neshama' : '🧠 With Neshama'}</h4>
+                    <h4>${isZh ? '有Neshama' : 'With Neshama'}</h4>
                     <ul>
                         <li>${isZh ? '✓ 对话随情绪变化' : '✓ Dialogues change with emotions'}</li>
                         <li>✓ ${isZh ? '情绪实时更新' : 'Real-time emotion updates'}</li>
@@ -544,7 +544,7 @@ function renderComparison() {
                     </ul>
                 </div>
                 <div class="comparison-col ${!DemoState.neshamaEnabled ? 'active' : ''}">
-                    <h4>${isZh ? '📦 无Neshama' : '📦 Without Neshama'}</h4>
+                    <h4>${isZh ? '无Neshama' : 'Without Neshama'}</h4>
                     <ul>
                         <li>${isZh ? '✗ 固定模板回复' : '✗ Fixed template responses'}</li>
                         <li>✗ ${isZh ? '情绪永远不变' : 'Emotions never change'}</li>
@@ -570,7 +570,7 @@ function renderFlowContent() {
         <div class="flow-modal-body">
             <h2 class="flow-modal-title">${isZh ? step.title_zh : step.title_en}</h2>
             <p class="flow-modal-desc">${isZh ? step.desc_zh : step.desc_en}</p>
-            ${step.hint_zh ? `<p class="flow-modal-hint">💡 ${isZh ? step.hint_zh : step.hint_en}</p>` : ''}
+            ${step.hint_zh ? `<p class="flow-modal-hint">${isZh ? step.hint_zh : step.hint_en}</p>` : ''}
         </div>
         <div class="flow-modal-footer">
             <button class="flow-modal-skip" id="flow-modal-skip">
@@ -998,7 +998,7 @@ function showNPCCommunication(fromNpc, eventType) {
 
     if (message) {
         // Show as toast notification
-        showToast(`💬 ${isZh ? message.text_zh : message.text_en}`, 'info');
+        showToast(`${isZh ? message.text_zh : message.text_en}`, 'info');
         
         // Add to NPC's message if panel is open
         if (DemoState.selectedNPC === targetNpc) {
@@ -1022,14 +1022,14 @@ function showStoryTrigger(storyId) {
 
     const stories = {
         gate_alert: {
-            title_zh: '🚨 剧情触发：城门戒严',
-            title_en: '🚨 Story Trigger: Gate on Alert',
+            title_zh: '剧情触发：城门戒严',
+            title_en: 'Story Trigger: Gate on Alert',
             desc_zh: '由于你对守卫队长的无礼行为，城门加强了戒备...',
             desc_en: 'Due to your disrespect to the Guard Captain, the gates are now on high alert...'
         },
         secret_quest: {
-            title_zh: '🔮 剧情触发：秘密任务',
-            title_en: '🔮 Story Trigger: Secret Quest',
+            title_zh: '剧情触发：秘密任务',
+            title_en: 'Story Trigger: Secret Quest',
             desc_zh: '米拉决定向你透露一个古老的秘密...',
             desc_en: 'Mira has decided to reveal an ancient secret to you...'
         }

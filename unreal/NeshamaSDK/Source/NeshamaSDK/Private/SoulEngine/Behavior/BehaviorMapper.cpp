@@ -18,28 +18,28 @@ const TArray<UBehaviorMapper::FThresholdConfig>& UBehaviorMapper::GetDefaultThre
 	if (Configs.Num() > 0) return Configs;
 
 	// High anger thresholds
-	Configs.Add({TEXT("anger"), 0.7f, EBehaviorType::InteractionAllowed, -0.3f});
-	Configs.Add({TEXT("anger"), 0.8f, EBehaviorType::InfoSharing, -1.0f});
+	Configs.Add({TEXT("anger"), 0.7f, ESoulBehaviorType::InteractionAllowed, -0.3f});
+	Configs.Add({TEXT("anger"), 0.8f, ESoulBehaviorType::InfoSharing, -1.0f});
 	// High fear thresholds
-	Configs.Add({TEXT("fear"), 0.6f, EBehaviorType::MovementPatternChange, 0.0f}); // fleeing
-	Configs.Add({TEXT("fear"), 0.7f, EBehaviorType::InteractionAllowed, -0.4f});
-	Configs.Add({TEXT("fear"), 0.8f, EBehaviorType::DialogueStyleChange, -0.5f}); // submissive
+	Configs.Add({TEXT("fear"), 0.6f, ESoulBehaviorType::MovementPatternChange, 0.0f}); // fleeing
+	Configs.Add({TEXT("fear"), 0.7f, ESoulBehaviorType::InteractionAllowed, -0.4f});
+	Configs.Add({TEXT("fear"), 0.8f, ESoulBehaviorType::DialogueStyleChange, -0.5f}); // submissive
 	// High joy thresholds
-	Configs.Add({TEXT("joy"), 0.6f, EBehaviorType::QuestAvailabilityChange, 0.3f});
-	Configs.Add({TEXT("joy"), 0.7f, EBehaviorType::ShopPriceChange, -0.1f}); // 10% discount
-	Configs.Add({TEXT("joy"), 0.8f, EBehaviorType::InfoSharing, 0.5f});
+	Configs.Add({TEXT("joy"), 0.6f, ESoulBehaviorType::QuestAvailabilityChange, 0.3f});
+	Configs.Add({TEXT("joy"), 0.7f, ESoulBehaviorType::ShopPriceChange, -0.1f}); // 10% discount
+	Configs.Add({TEXT("joy"), 0.8f, ESoulBehaviorType::InfoSharing, 0.5f});
 	// High trust thresholds
-	Configs.Add({TEXT("trust"), 0.6f, EBehaviorType::InfoSharing, 0.4f});
-	Configs.Add({TEXT("trust"), 0.8f, EBehaviorType::QuestAvailabilityChange, 0.5f});
-	Configs.Add({TEXT("trust"), 0.8f, EBehaviorType::GiftReaction, 0.5f});
+	Configs.Add({TEXT("trust"), 0.6f, ESoulBehaviorType::InfoSharing, 0.4f});
+	Configs.Add({TEXT("trust"), 0.8f, ESoulBehaviorType::QuestAvailabilityChange, 0.5f});
+	Configs.Add({TEXT("trust"), 0.8f, ESoulBehaviorType::GiftReaction, 0.5f});
 	// High sadness thresholds
-	Configs.Add({TEXT("sadness"), 0.5f, EBehaviorType::DialogueStyleChange, -0.3f});
-	Configs.Add({TEXT("sadness"), 0.7f, EBehaviorType::QuestAvailabilityChange, -0.2f});
-	Configs.Add({TEXT("sadness"), 0.8f, EBehaviorType::MovementPatternChange, 0.0f}); // hiding
+	Configs.Add({TEXT("sadness"), 0.5f, ESoulBehaviorType::DialogueStyleChange, -0.3f});
+	Configs.Add({TEXT("sadness"), 0.7f, ESoulBehaviorType::QuestAvailabilityChange, -0.2f});
+	Configs.Add({TEXT("sadness"), 0.8f, ESoulBehaviorType::MovementPatternChange, 0.0f}); // hiding
 	// High disgust thresholds
-	Configs.Add({TEXT("disgust"), 0.5f, EBehaviorType::InteractionAllowed, -0.3f});
-	Configs.Add({TEXT("disgust"), 0.7f, EBehaviorType::ShopPriceChange, 0.2f}); // 20% markup
-	Configs.Add({TEXT("disgust"), 0.8f, EBehaviorType::InfoSharing, -0.8f});
+	Configs.Add({TEXT("disgust"), 0.5f, ESoulBehaviorType::InteractionAllowed, -0.3f});
+	Configs.Add({TEXT("disgust"), 0.7f, ESoulBehaviorType::ShopPriceChange, 0.2f}); // 20% markup
+	Configs.Add({TEXT("disgust"), 0.8f, ESoulBehaviorType::InfoSharing, -0.8f});
 
 	return Configs;
 }
@@ -53,8 +53,8 @@ TArray<UBehaviorMapper::FThresholdConfig> UBehaviorMapper::ApplyPersonalityModif
 		float ThresholdMod = Config.Threshold;
 
 		// High agreeableness = lower thresholds for positive behaviors
-		if (Config.BehaviorType == EBehaviorType::InfoSharing ||
-			Config.BehaviorType == EBehaviorType::QuestAvailabilityChange)
+		if (Config.BehaviorType == ESoulBehaviorType::InfoSharing ||
+			Config.BehaviorType == ESoulBehaviorType::QuestAvailabilityChange)
 		{
 			if (Personality)
 			{
@@ -65,8 +65,8 @@ TArray<UBehaviorMapper::FThresholdConfig> UBehaviorMapper::ApplyPersonalityModif
 		}
 
 		// High neuroticism = lower thresholds for fear/anger responses
-		if (Config.BehaviorType == EBehaviorType::MovementPatternChange ||
-			Config.BehaviorType == EBehaviorType::InteractionAllowed)
+		if (Config.BehaviorType == ESoulBehaviorType::MovementPatternChange ||
+			Config.BehaviorType == ESoulBehaviorType::InteractionAllowed)
 		{
 			if (Personality)
 			{

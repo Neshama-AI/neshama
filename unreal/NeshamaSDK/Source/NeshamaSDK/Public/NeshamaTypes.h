@@ -97,7 +97,10 @@ enum class EEmotionType : uint8
 	Anticipation UMETA(DisplayName = "Anticipation"),
 	
 	/** 羞愧 - 尴尬、自责的情绪 */
-	Shame		UMETA(DisplayName = "Shame")
+	Shame		UMETA(DisplayName = "Shame"),
+	
+	/** 中性 - 无明显情绪 */
+	Neutral		UMETA(DisplayName = "Neutral", Hidden)
 };
 
 /**

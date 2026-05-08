@@ -90,7 +90,7 @@ async function renderEmotion() {
     } catch (error) {
         container.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">❤️</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#ff6b35;">Emotion</div>
                 <div class="empty-state-text">${t('emotion.failedLoad')}</div>
                 <button class="btn btn-primary mt-4" onclick="renderEmotion()">${t('common.retry')}</button>
             </div>
@@ -212,7 +212,7 @@ function drawEmotionTimeline(history) {
     
     // Draw intensity line
     ctx.beginPath();
-    ctx.strokeStyle = '#4F46E5';
+    ctx.strokeStyle = '#7c5cff';
     ctx.lineWidth = 2;
     
     sampledData.forEach((point, i) => {
@@ -238,7 +238,7 @@ function drawEmotionTimeline(history) {
         
         ctx.beginPath();
         ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = point.color || '#F59E0B';
+        ctx.fillStyle = point.color || '#00d4aa';
         ctx.fill();
     });
     
@@ -276,14 +276,14 @@ function drawEmotionDistribution(history) {
     });
     
     const colors = {
-        'joy': '#FFD700', 'sadness': '#4A90D9', 'anger': '#FF4444', 
-        'fear': '#9B59B6', 'surprise': '#E67E22', 'disgust': '#27AE60',
-        'trust': '#3498DB', 'anticipation': '#F39C12'
+        'joy': '#00d4aa', 'sadness': '#7c5cff', 'anger': '#ff6b35', 
+        'fear': '#7c5cff', 'surprise': '#ff6b35', 'disgust': '#00d4aa',
+        'trust': '#7c5cff', 'anticipation': '#00d4aa'
     };
     
     const emojis = {
-        'joy': '😊', 'sadness': '😢', 'anger': '😠', 'fear': '😨',
-        'surprise': '😲', 'disgust': '😒', 'trust': '🤝', 'anticipation': '🤔'
+        'joy': 'Joy', 'sadness': 'Sad', 'anger': 'Anger', 'fear': 'Fear',
+        'surprise': 'Surprise', 'disgust': 'Disgust', 'trust': 'Trust', 'anticipation': 'Anticipation'
     };
     
     const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
@@ -305,7 +305,7 @@ function drawEmotionDistribution(history) {
         ctx.fillRect(60, y, maxWidth, barHeight);
         
         // Fill bar
-        ctx.fillStyle = colors[category] || '#4F46E5';
+        ctx.fillStyle = colors[category] || '#7c5cff';
         ctx.fillRect(60, y, barWidth, barHeight);
         
         // Label

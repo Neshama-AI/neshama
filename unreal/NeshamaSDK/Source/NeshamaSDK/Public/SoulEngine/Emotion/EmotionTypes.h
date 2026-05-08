@@ -8,7 +8,7 @@
  * Ported from Python/C# EmotionType enum.
  */
 UENUM(BlueprintType)
-enum class EEmotionType : uint8
+enum class ESoulEmotionType : uint8
 {
 	Joy,
 	Sadness,
@@ -18,6 +18,7 @@ enum class EEmotionType : uint8
 	Disgust,
 	Trust,
 	Anticipation,
+	Shame UMETA(DisplayName = "Shame"),
 	Neutral UMETA(Hidden)
 };
 
@@ -26,7 +27,7 @@ enum class EEmotionType : uint8
  * Ported from Python/C# GameEventType enum.
  */
 UENUM(BlueprintType)
-enum class EGameEventType : uint8
+enum class ESoulEventType : uint8
 {
 	PlayerAttacked UMETA(DisplayName = "Player Attacked"),
 	PlayerHelped UMETA(DisplayName = "Player Helped"),
@@ -103,7 +104,7 @@ enum class ESuggestedAction : uint8
  * Ported from C# EmotionState.
  */
 USTRUCT(BlueprintType)
-struct FEmotionState
+struct FSoulEmotionState
 {
 	GENERATED_BODY()
 
@@ -132,16 +133,16 @@ struct FEmotionState
 	float Anticipation = 0.0f;
 
 	/** Get emotion value by EEmotionType. */
-	float GetValue(EEmotionType Type) const;
+	float GetValue(ESoulEmotionType Type) const;
 
 	/** Set emotion value by EEmotionType, clamped to [0,1]. */
-	void SetValue(EEmotionType Type, float Value);
+	void SetValue(ESoulEmotionType Type, float Value);
 
 	/** Adjust emotion by delta, clamped to [0,1]. */
-	void AdjustValue(EEmotionType Type, float Delta);
+	void AdjustValue(ESoulEmotionType Type, float Delta);
 
 	/** Get the dominant emotion type and its value. */
-	void GetDominant(EEmotionType& OutDominantType, float& OutDominantValue) const;
+	void GetDominant(ESoulEmotionType& OutDominantType, float& OutDominantValue) const;
 
 	/** Clear all emotions to 0. */
 	void Clear();
@@ -156,7 +157,7 @@ struct FEmotionDelta
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EEmotionType Emotion = EEmotionType::Neutral;
+	ESoulEmotionType Emotion = ESoulEmotionType::Neutral;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	float BaseDelta = 0.0f;
@@ -165,7 +166,7 @@ struct FEmotionDelta
 	float ScaledDelta = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EGameEventType SourceEvent = EGameEventType::TimePassed;
+	ESoulEventType SourceEvent = ESoulEventType::TimePassed;
 };
 
 /**
@@ -214,12 +215,12 @@ struct FResponseHint
  * A game event with type and intensity.
  */
 USTRUCT(BlueprintType)
-struct FGameEvent
+struct FSoulGameEvent
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EGameEventType EventType = EGameEventType::TimePassed;
+	ESoulEventType EventType = ESoulEventType::TimePassed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	float Intensity = 1.0f;
@@ -227,8 +228,8 @@ struct FGameEvent
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	FString SourceId;
 
-	FGameEvent() = default;
-	FGameEvent(EGameEventType InType, float InIntensity = 1.0f, const FString& InSourceId = TEXT(""))
+	FSoulGameEvent() = default;
+	FSoulGameEvent(ESoulEventType InType, float InIntensity = 1.0f, const FString& InSourceId = TEXT(""))
 		: EventType(InType), Intensity(FMath::Clamp(InIntensity, 0.0f, 1.0f)), SourceId(InSourceId) {}
 };
 
@@ -247,7 +248,7 @@ struct FEventChainResult
 	TArray<FEmotionDelta> TotalDeltas;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EEmotionType DominantEmotion = EEmotionType::Neutral;
+	ESoulEmotionType DominantEmotion = ESoulEmotionType::Neutral;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	float DominantIntensity = 0.0f;
@@ -262,50 +263,50 @@ struct FEventChainResult
 namespace EmotionTypeHelpers
 {
 	/** Get all base emotions (8 primary). */
-	inline const TArray<EEmotionType>& GetBaseEmotions()
+	inline const TArray<ESoulEmotionType>& GetBaseEmotions()
 	{
-		static const TArray<EEmotionType> BaseEmotions = {
-			EEmotionType::Joy, EEmotionType::Sadness, EEmotionType::Anger,
-			EEmotionType::Fear, EEmotionType::Surprise, EEmotionType::Disgust,
-			EEmotionType::Trust, EEmotionType::Anticipation
+		static const TArray<ESoulEmotionType> BaseEmotions = {
+			ESoulEmotionType::Joy, ESoulEmotionType::Sadness, ESoulEmotionType::Anger,
+			ESoulEmotionType::Fear, ESoulEmotionType::Surprise, ESoulEmotionType::Disgust,
+			ESoulEmotionType::Trust, ESoulEmotionType::Anticipation
 		};
 		return BaseEmotions;
 	}
 
-	/** Convert EEmotionType to name string. */
-	inline FString ToName(EEmotionType Type)
+	/** Convert ESoulEmotionType to name string. */
+	inline FString ToName(ESoulEmotionType Type)
 	{
 		switch (Type)
 		{
-		case EEmotionType::Joy: return TEXT("joy");
-		case EEmotionType::Sadness: return TEXT("sadness");
-		case EEmotionType::Anger: return TEXT("anger");
-		case EEmotionType::Fear: return TEXT("fear");
-		case EEmotionType::Surprise: return TEXT("surprise");
-		case EEmotionType::Disgust: return TEXT("disgust");
-		case EEmotionType::Trust: return TEXT("trust");
-		case EEmotionType::Anticipation: return TEXT("anticipation");
+		case ESoulEmotionType::Joy: return TEXT("joy");
+		case ESoulEmotionType::Sadness: return TEXT("sadness");
+		case ESoulEmotionType::Anger: return TEXT("anger");
+		case ESoulEmotionType::Fear: return TEXT("fear");
+		case ESoulEmotionType::Surprise: return TEXT("surprise");
+		case ESoulEmotionType::Disgust: return TEXT("disgust");
+		case ESoulEmotionType::Trust: return TEXT("trust");
+		case ESoulEmotionType::Anticipation: return TEXT("anticipation");
 		default: return TEXT("neutral");
 		}
 	}
 
 	/** Parse name string to EEmotionType. */
-	inline EEmotionType FromName(const FString& Name)
+	inline ESoulEmotionType FromName(const FString& Name)
 	{
-		if (Name == TEXT("joy")) return EEmotionType::Joy;
-		if (Name == TEXT("sadness")) return EEmotionType::Sadness;
-		if (Name == TEXT("anger")) return EEmotionType::Anger;
-		if (Name == TEXT("fear")) return EEmotionType::Fear;
-		if (Name == TEXT("surprise")) return EEmotionType::Surprise;
-		if (Name == TEXT("disgust")) return EEmotionType::Disgust;
-		if (Name == TEXT("trust")) return EEmotionType::Trust;
-		if (Name == TEXT("anticipation")) return EEmotionType::Anticipation;
-		return EEmotionType::Neutral;
+		if (Name == TEXT("joy")) return ESoulEmotionType::Joy;
+		if (Name == TEXT("sadness")) return ESoulEmotionType::Sadness;
+		if (Name == TEXT("anger")) return ESoulEmotionType::Anger;
+		if (Name == TEXT("fear")) return ESoulEmotionType::Fear;
+		if (Name == TEXT("surprise")) return ESoulEmotionType::Surprise;
+		if (Name == TEXT("disgust")) return ESoulEmotionType::Disgust;
+		if (Name == TEXT("trust")) return ESoulEmotionType::Trust;
+		if (Name == TEXT("anticipation")) return ESoulEmotionType::Anticipation;
+		return ESoulEmotionType::Neutral;
 	}
 
 	/** Check if emotion is "positive" for grudge factor purposes. */
-	inline bool IsPositiveEmotion(EEmotionType Type)
+	inline bool IsPositiveEmotion(ESoulEmotionType Type)
 	{
-		return Type == EEmotionType::Joy || Type == EEmotionType::Trust;
+		return Type == ESoulEmotionType::Joy || Type == ESoulEmotionType::Trust;
 	}
 }

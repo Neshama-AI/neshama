@@ -13,13 +13,13 @@ struct FCompositeRecipeComponent
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EEmotionType Emotion = EEmotionType::Neutral;
+	ESoulEmotionType Emotion = ESoulEmotionType::Neutral;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	float Weight = 0.0f;
 
 	FCompositeRecipeComponent() = default;
-	FCompositeRecipeComponent(EEmotionType InEmotion, float InWeight)
+	FCompositeRecipeComponent(ESoulEmotionType InEmotion, float InWeight)
 		: Emotion(InEmotion), Weight(InWeight) {}
 };
 

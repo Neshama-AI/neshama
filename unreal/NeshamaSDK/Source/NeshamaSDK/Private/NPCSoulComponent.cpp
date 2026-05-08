@@ -5,6 +5,7 @@
 #include "NeshamaClient.h"
 #include "NeshamaConfig.h"
 #include "GameFramework/Actor.h"
+#include "Engine/DrawDebugUtils.h"
 
 #define LOCTEXT_NAMESPACE "NPCSoulComponent"
 
@@ -97,7 +98,7 @@ void UNPCSoulComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 			TEXT("[%s]\nEmotion: %s\nState: %s"),
 			*NpcName,
 			*CurrentEmotion.Dominant,
-			*bIsConnected() ? TEXT("Connected") : TEXT("Disconnected")
+			*IsConnected() ? TEXT("Connected") : TEXT("Disconnected")
 		);
 
 		DrawDebugString(

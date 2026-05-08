@@ -16,7 +16,7 @@ struct FBehaviorModifier
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EBehaviorType BehaviorType = EBehaviorType::DialogueStyleChange;
+	ESoulBehaviorType BehaviorType = ESoulBehaviorType::DialogueStyleChange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	float ModifierValue = 0.0f;
@@ -95,7 +95,7 @@ private:
 	{
 		FString Emotion;
 		float Threshold;
-		EBehaviorType BehaviorType;
+		ESoulBehaviorType BehaviorType;
 		float BaseModifier;
 	};
 

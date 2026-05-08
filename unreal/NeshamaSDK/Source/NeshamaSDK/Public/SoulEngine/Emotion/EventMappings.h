@@ -13,13 +13,13 @@ struct FEventEmotionMapping
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
-	EEmotionType Emotion = EEmotionType::Neutral;
+	ESoulEmotionType Emotion = ESoulEmotionType::Neutral;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neshama")
 	float BaseDelta = 0.0f;
 
 	FEventEmotionMapping() = default;
-	FEventEmotionMapping(EEmotionType InEmotion, float InBaseDelta)
+	FEventEmotionMapping(ESoulEmotionType InEmotion, float InBaseDelta)
 		: Emotion(InEmotion), BaseDelta(InBaseDelta) {}
 };
 
@@ -53,13 +53,13 @@ class NESHAMASDK_API FEventMappings
 {
 public:
 	/** Maps game event type to emotion deltas. */
-	static const TMap<EGameEventType, TArray<FEventEmotionMapping>>& GetEmotionMappings();
+	static const TMap<ESoulEventType, TArray<FEventEmotionMapping>>& GetEmotionMappings();
 
 	/** OCEAN personality modifiers per event type. */
-	static const TMap<EGameEventType, TArray<FPersonalityModifier>>& GetPersonalityModifiers();
+	static const TMap<ESoulEventType, TArray<FPersonalityModifier>>& GetPersonalityModifiers();
 
 	/** Positive emotion types for grudge factor reduction. */
-	static const TSet<EEmotionType>& GetPositiveEmotions();
+	static const TSet<ESoulEmotionType>& GetPositiveEmotions();
 
 	/** Positive emotion names for grudge factor reduction. */
 	static const TSet<FString>& GetPositiveEmotionNames();

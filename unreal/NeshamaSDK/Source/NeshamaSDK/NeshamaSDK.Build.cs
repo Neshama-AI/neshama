@@ -18,7 +18,8 @@ public class NeshamaSDK : ModuleRules
 				"Engine",
 				"HTTP",
 				"Json",
-				"JsonUtilities"
+				"JsonUtilities",
+				"WebSockets"
 			}
 		);
 
@@ -31,7 +32,7 @@ public class NeshamaSDK : ModuleRules
 		);
 
 		// 动态加载的模块
-		DynamicallyLoadedModuleNames.Add("HTTP");
+		// HTTP is already in PublicDependencyModuleNames, no need to dynamically load
 
 		// C++标准设置
 		CppStandard = CppStandardVersion.Cpp17;

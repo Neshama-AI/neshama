@@ -13,13 +13,50 @@
 class IHttpRequest;
 class IHttpResponse;
 
+
+// ============================================================================
+// Blueprint 委托声明（额外的回调类型）
+// ============================================================================
+
 /**
- * HTTP请求完成回调委托（内部使用）
+ * 创建NPC响应委托
  */
-DECLARE_DELEGATE_ThreeParams(FHttpRequestCompleteDelegate, 
-	IHttpRequest* /* Request */, 
-	bool /* bSuccess */, 
-	FHttpResponsePtr /* Response */);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnCreateNPCResponseDelegate, FCreateNPCResponse, Response);
+
+/**
+ * NPC档案委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnNPCProfileDelegate, FNPCProfile, Profile);
+
+/**
+ * 情绪状态委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnEmotionStateDelegate, FEmotionState, EmotionState);
+
+/**
+ * 行为响应委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnBehaviorResponseDelegate, FBehaviorResponse, Response);
+
+/**
+ * 记忆列表响应委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnMemoryListResponseDelegate, FMemoryListResponse, Response);
+
+/**
+ * 记忆响应委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnRememberResponseDelegate, FMemoryListResponse, Response);
+
+/**
+ * 关系图谱委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnRelationGraphDelegate, FRelationGraph, RelationGraph);
+
+/**
+ * 事件响应委托
+ */
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnEventResponseDelegate, FEventResponse, Response);
 
 /**
  * Neshama SDK 核心HTTP客户端
@@ -40,7 +77,6 @@ public:
 	 * 创建Neshama客户端
 	 * @param Config 配置对象，如果为nullptr则使用默认配置
 	 */
-	UFUNCTION(BlueprintConstructor, Category = "Neshama|Client")
 	UNeshamaClient(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	/**
@@ -127,7 +163,7 @@ public:
 	 * @param Context 上下文数据
 	 * @param OnComplete 完成回调
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Neshama|Client|Event")
+	UFUNCTION(BlueprintCallable, Category = "Neshama|Client|Event", meta = (BlueprintInternalUseOnly = "true"))
 	void SendGameEvent(const FString& NpcId, EGameEventType EventType, 
 		float Intensity, const TMap<FString, FString>& Context,
 		const FOnEventResponseDelegate& OnComplete);
@@ -334,46 +370,3 @@ private:
 	bool bInitialized;
 };
 
-// ============================================================================
-// Blueprint 委托声明（额外的回调类型）
-// ============================================================================
-
-/**
- * 创建NPC响应委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnCreateNPCResponseDelegate, FCreateNPCResponse, Response);
-
-/**
- * NPC档案委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnNPCProfileDelegate, FNPCProfile, Profile);
-
-/**
- * 情绪状态委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnEmotionStateDelegate, FEmotionState, EmotionState);
-
-/**
- * 行为响应委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnBehaviorResponseDelegate, FBehaviorResponse, Response);
-
-/**
- * 记忆列表响应委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnMemoryListResponseDelegate, FMemoryListResponse, Response);
-
-/**
- * 记忆响应委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnRememberResponseDelegate, FMemoryListResponse, Response);
-
-/**
- * 关系图谱委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnRelationGraphDelegate, FRelationGraph, RelationGraph);
-
-/**
- * 事件响应委托
- */
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnEventResponseDelegate, FEventResponse, Response);

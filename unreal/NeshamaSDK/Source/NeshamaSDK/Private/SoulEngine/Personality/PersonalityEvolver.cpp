@@ -10,7 +10,7 @@ void UPersonalityEvolver::RecordInteraction()
 	TotalInteractions++;
 }
 
-void UPersonalityEvolver::Evolve(UOCEANPersonality* Personality, const FEmotionState& EmotionalState)
+void UPersonalityEvolver::Evolve(UOCEANPersonality* Personality, const FSoulEmotionState& EmotionalState)
 {
 	if (!Personality) return;
 	if (TotalInteractions < MinInteractionsForEvolution) return;

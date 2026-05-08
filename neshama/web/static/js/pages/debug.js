@@ -16,10 +16,10 @@ const DebugState = {
 
 // Tab definitions
 const DEBUG_TABS = [
-    { id: 'emotion', label_zh: '情绪', label_en: 'Emotion', icon: '❤️' },
-    { id: 'memory', label_zh: '记忆', label_en: 'Memory', icon: '🧠' },
-    { id: 'relations', label_zh: '关系图谱', label_en: 'Relations', icon: '🕸️' },
-    { id: 'evolution', label_zh: '演化', label_en: 'Evolution', icon: '📈' }
+    { id: 'emotion', label_zh: '情绪', label_en: 'Emotion', icon: 'Emotion' },
+    { id: 'memory', label_zh: '记忆', label_en: 'Memory', icon: 'Memory' },
+    { id: 'relations', label_zh: '关系图谱', label_en: 'Relations', icon: 'Relations' },
+    { id: 'evolution', label_zh: '演化', label_en: 'Evolution', icon: 'Evolution' }
 ];
 
 // Render Debug Page
@@ -59,7 +59,7 @@ async function renderDebug() {
         <!-- Tab Content -->
         <div id="debug-tab-content">
             <div class="empty-state">
-                <div class="empty-state-icon">🔬</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Debug</div>
                 <div class="empty-state-text">${t('debug.selectTarget')}</div>
             </div>
         </div>
@@ -122,7 +122,7 @@ async function renderActiveTab() {
     if (!DebugState.targetId) {
         content.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">🔬</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Debug</div>
                 <div class="empty-state-text">${t('debug.selectTarget')}</div>
             </div>
         `;
@@ -215,14 +215,14 @@ async function renderDebugEmotion(container) {
 // Render 9-grid emotion display
 function renderEmotionGrid(emotions) {
     const emotionList = [
-        { key: 'joy', label: t('emotion.joy'), emoji: '😊' },
-        { key: 'trust', label: t('emotion.trust'), emoji: '🤝' },
-        { key: 'fear', label: t('emotion.fear'), emoji: '😨' },
-        { key: 'surprise', label: t('emotion.surprise'), emoji: '😮' },
-        { key: 'anticipation', label: t('emotion.anticipation'), emoji: '🤔' },
-        { key: 'sadness', label: t('emotion.sadness'), emoji: '😢' },
-        { key: 'anger', label: t('emotion.anger'), emoji: '😠' },
-        { key: 'disgust', label: t('emotion.disgust'), emoji: '🤢' },
+        { key: 'joy', label: t('emotion.joy'), emoji: 'Joy' },
+        { key: 'trust', label: t('emotion.trust'), emoji: 'Trust' },
+        { key: 'fear', label: t('emotion.fear'), emoji: 'Fear' },
+        { key: 'surprise', label: t('emotion.surprise'), emoji: 'Surprise' },
+        { key: 'anticipation', label: t('emotion.anticipation'), emoji: 'Anticipation' },
+        { key: 'sadness', label: t('emotion.sadness'), emoji: 'Sad' },
+        { key: 'anger', label: t('emotion.anger'), emoji: 'Anger' },
+        { key: 'disgust', label: t('emotion.disgust'), emoji: 'Disgust' },
     ];
     
     return emotionList.map(e => {
@@ -315,9 +315,9 @@ function drawOceanRadar(ocean) {
         else ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.fillStyle = 'rgba(75, 147, 255, 0.2)';
+    ctx.fillStyle = 'rgba(124,92,255,0.2)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(75, 147, 255, 0.8)';
+    ctx.strokeStyle = 'rgba(124,92,255,0.8)';
     ctx.lineWidth = 2;
     ctx.stroke();
     
@@ -330,7 +330,7 @@ function drawOceanRadar(ocean) {
         
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(75, 147, 255, 1)';
+        ctx.fillStyle = 'rgba(124,92,255,1)';
         ctx.fill();
         
         // Label
@@ -382,7 +382,7 @@ function drawEmotionHistoryCurve(history) {
     
     // Line
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(75, 147, 255, 0.8)';
+    ctx.strokeStyle = 'rgba(124,92,255,0.8)';
     ctx.lineWidth = 2;
     
     history.forEach((point, i) => {
@@ -399,7 +399,7 @@ function drawEmotionHistoryCurve(history) {
     ctx.lineTo(lastX, padding + chartH);
     ctx.lineTo(padding, padding + chartH);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(75, 147, 255, 0.1)';
+    ctx.fillStyle = 'rgba(124,92,255,0.1)';
     ctx.fill();
 }
 
@@ -578,8 +578,8 @@ async function renderDebugRelations(container) {
 }
 
 function getEntityTypeEmoji(type) {
-    const map = { concept: '💡', person: '👤', place: '📍', event: '📅', object: '📦', organization: '🏢' };
-    return map[type] || '📌';
+    const map = { concept: 'Concept', person: 'Person', place: 'Place', event: 'Event', object: 'Object', organization: 'Org' };
+    return map[type] || 'Item';
 }
 
 
@@ -704,7 +704,7 @@ function drawEvolutionChart(history) {
     const padding = 40;
     const chartW = w - padding * 2;
     const chartH = h - padding * 2;
-    const colors = ['#6366f1', '#22c55e', '#f59e0b', '#ec4899', '#ef4444'];
+    const colors = ['#7c5cff', '#00d4aa', '#ff6b35', '#e879a0', '#ff6b35'];
     const traits = ['openness', 'conscientiousness', 'extraversion', 'agreeableness', 'neuroticism'];
     
     // Grid

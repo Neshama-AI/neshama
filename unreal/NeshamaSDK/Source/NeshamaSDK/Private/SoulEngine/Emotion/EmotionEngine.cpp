@@ -18,12 +18,12 @@ void UEmotionEngine::Initialize(UOCEANPersonality* InPersonality)
 
 // ── Core Methods ─────────────────────────────────────────────────────────────
 
-void UEmotionEngine::SetEmotion(EEmotionType Type, float Intensity)
+void UEmotionEngine::SetEmotion(ESoulEmotionType Type, float Intensity)
 {
 	Emotions.SetValue(Type, Intensity);
 }
 
-void UEmotionEngine::AdjustEmotion(EEmotionType Type, float Delta)
+void UEmotionEngine::AdjustEmotion(ESoulEmotionType Type, float Delta)
 {
 	// BUG FIX: baseline is 0, not current. When emotion doesn't exist, start from 0.
 	// This ensures PlayerAttacked → anger = 0 + 0.3*intensity = 0.24 (not 0.74)
@@ -31,20 +31,20 @@ void UEmotionEngine::AdjustEmotion(EEmotionType Type, float Delta)
 	Emotions.SetValue(Type, Current + Delta);
 }
 
-float UEmotionEngine::GetEmotionValue(EEmotionType Type) const
+float UEmotionEngine::GetEmotionValue(ESoulEmotionType Type) const
 {
 	return Emotions.GetValue(Type);
 }
 
-EEmotionType UEmotionEngine::GetDominantEmotion() const
+ESoulEmotionType UEmotionEngine::GetDominantEmotion() const
 {
-	EEmotionType DomType;
+	ESoulEmotionType DomType;
 	float DomValue;
 	Emotions.GetDominant(DomType, DomValue);
 	return DomType;
 }
 
-void UEmotionEngine::ProcessEvent(EGameEventType EventType, float Intensity, const FString& SourceId)
+void UEmotionEngine::ProcessEvent(ESoulEventType EventType, float Intensity, const FString& SourceId)
 {
 	TArray<FEmotionDelta> Deltas = FGameEventProcessor::ProcessEvent(EventType, Intensity, Personality, SourceId);
 	for (const FEmotionDelta& Delta : Deltas)
@@ -59,7 +59,7 @@ void UEmotionEngine::Tick(float DeltaTime)
 
 	float DecayModifier = Personality ? Personality->GetDecayModifier() : 1.0f;
 
-	for (EEmotionType Type : EmotionTypeHelpers::GetBaseEmotions())
+	for (ESoulEmotionType Type : EmotionTypeHelpers::GetBaseEmotions())
 	{
 		float Current = Emotions.GetValue(Type);
 		if (Current < EmotionDropThreshold)
@@ -156,7 +156,7 @@ void UEmotionEngine::SetPersonality(UOCEANPersonality* InPersonality)
 	Personality = InPersonality ? InPersonality : nullptr;
 }
 
-float UEmotionEngine::ApplyGrudgeFactor(EGameEventType Type, float Delta, const FString& SourceId) const
+float UEmotionEngine::ApplyGrudgeFactor(ESoulEventType Type, float Delta, const FString& SourceId) const
 {
 	// Grudge factor is now handled in GameEventProcessor
 	return Delta;
@@ -164,30 +164,30 @@ float UEmotionEngine::ApplyGrudgeFactor(EGameEventType Type, float Delta, const 
 
 // ── Private Methods ──────────────────────────────────────────────────────────
 
-const TMap<EEmotionType, float>& UEmotionEngine::GetDefaultHalfLives()
+const TMap<ESoulEmotionType, float>& UEmotionEngine::GetDefaultHalfLives()
 {
-	static TMap<EEmotionType, float> HalfLives;
+	static TMap<ESoulEmotionType, float> HalfLives;
 	if (HalfLives.Num() > 0) return HalfLives;
 
-	HalfLives.Add(EEmotionType::Joy, 120.0f);
-	HalfLives.Add(EEmotionType::Sadness, 180.0f);
-	HalfLives.Add(EEmotionType::Anger, 90.0f);
-	HalfLives.Add(EEmotionType::Fear, 60.0f);
-	HalfLives.Add(EEmotionType::Surprise, 30.0f);
-	HalfLives.Add(EEmotionType::Disgust, 90.0f);
-	HalfLives.Add(EEmotionType::Trust, 240.0f);
-	HalfLives.Add(EEmotionType::Anticipation, 120.0f);
+	HalfLives.Add(ESoulEmotionType::Joy, 120.0f);
+	HalfLives.Add(ESoulEmotionType::Sadness, 180.0f);
+	HalfLives.Add(ESoulEmotionType::Anger, 90.0f);
+	HalfLives.Add(ESoulEmotionType::Fear, 60.0f);
+	HalfLives.Add(ESoulEmotionType::Surprise, 30.0f);
+	HalfLives.Add(ESoulEmotionType::Disgust, 90.0f);
+	HalfLives.Add(ESoulEmotionType::Trust, 240.0f);
+	HalfLives.Add(ESoulEmotionType::Anticipation, 120.0f);
 
 	return HalfLives;
 }
 
-const TArray<TPair<EEmotionType, EEmotionType>>& UEmotionEngine::GetOpposingPairs()
+const TArray<TPair<ESoulEmotionType, EEmotionType>>& UEmotionEngine::GetOpposingPairs()
 {
-	static TArray<TPair<EEmotionType, EEmotionType>> Pairs = {
-		TPair<EEmotionType, EEmotionType>(EEmotionType::Joy, EEmotionType::Sadness),
-		TPair<EEmotionType, EEmotionType>(EEmotionType::Trust, EEmotionType::Disgust),
-		TPair<EEmotionType, EEmotionType>(EEmotionType::Fear, EEmotionType::Anger),
-		TPair<EEmotionType, EEmotionType>(EEmotionType::Anticipation, EEmotionType::Surprise)
+	static TArray<TPair<ESoulEmotionType, EEmotionType>> Pairs = {
+		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Joy, ESoulEmotionType::Sadness),
+		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Trust, ESoulEmotionType::Disgust),
+		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Fear, ESoulEmotionType::Anger),
+		TPair<ESoulEmotionType, EEmotionType>(ESoulEmotionType::Anticipation, ESoulEmotionType::Surprise)
 	};
 	return Pairs;
 }

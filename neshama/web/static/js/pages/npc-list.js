@@ -80,7 +80,7 @@ function renderNPCCards(npcs) {
     
     return npcs.map(npc => {
         const emotion = npc.emotion || {};
-        const emotionEmoji = emotion.primary?.emoji || '😐';
+        const emotionLabel = emotion.primary?.category || 'Neutral';
         const emotionName = emotion.primary?.category || 'Neutral';
         const isOnline = npc.online || false;
         
@@ -99,7 +99,7 @@ function renderNPCCards(npcs) {
                     <h3 class="npc-name">${escapeHtml(npc.name)}</h3>
                     <div class="npc-preset">${t(`npcList.preset.${npc.preset || 'custom'}`) || npc.preset}</div>
                     <div class="npc-emotion">
-                        <span class="emotion-emoji">${emotionEmoji}</span>
+                        <span class="emotion-dot" style="background:${EMOTION_COLORS[emotionLabel] || '#94a3b8'}"></span><span class="emotion-label">${emotionLabel}</span>
                         <span class="emotion-name">${emotionName}</span>
                     </div>
                 </div>

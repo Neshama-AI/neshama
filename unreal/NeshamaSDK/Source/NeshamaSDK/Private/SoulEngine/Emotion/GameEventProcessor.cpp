@@ -4,7 +4,7 @@
 #include "SoulEngine/Utils/SoulMathUtils.h"
 
 TArray<FEmotionDelta> FGameEventProcessor::ProcessEvent(
-	EGameEventType EventType,
+	ESoulEventType EventType,
 	float Intensity,
 	const UOCEANPersonality* Personality,
 	const FString& SourceId,
@@ -62,14 +62,14 @@ TArray<FEmotionDelta> FGameEventProcessor::ProcessEvent(
 }
 
 FEventChainResult FGameEventProcessor::ProcessChain(
-	const TArray<FGameEvent>& Events,
+	const TArray<FSoulGameEvent>& Events,
 	const FString& ChainId,
 	const UOCEANPersonality* Personality)
 {
-	TMap<EEmotionType, float> EmotionSums;
+	TMap<ESoulEmotionType, float> EmotionSums;
 	TArray<FEmotionDelta> AllDeltas;
 
-	for (const FGameEvent& Evt : Events)
+	for (const FSoulGameEvent& Evt : Events)
 	{
 		TArray<FEmotionDelta> Deltas = ProcessEvent(Evt.EventType, Evt.Intensity, Personality, Evt.SourceId);
 		for (const FEmotionDelta& Delta : Deltas)
@@ -82,7 +82,7 @@ FEventChainResult FGameEventProcessor::ProcessChain(
 
 	// Create summed deltas
 	TArray<FEmotionDelta> TotalDeltas;
-	EEmotionType DominantEmotion = EEmotionType::Neutral;
+	ESoulEmotionType DominantEmotion = ESoulEmotionType::Neutral;
 	float DominantIntensity = 0.0f;
 
 	for (const auto& KV : EmotionSums)
@@ -90,7 +90,7 @@ FEventChainResult FGameEventProcessor::ProcessChain(
 		FEmotionDelta Delta;
 		Delta.Emotion = KV.Key;
 		Delta.ScaledDelta = NeshamaSoul::SoulMathUtils::Round(KV.Value);
-		Delta.SourceEvent = AllDeltas.Num() > 0 ? AllDeltas[0].SourceEvent : EGameEventType::TimePassed;
+		Delta.SourceEvent = AllDeltas.Num() > 0 ? AllDeltas[0].SourceEvent : ESoulEventType::TimePassed;
 		TotalDeltas.Add(Delta);
 
 		if (FMath::Abs(KV.Value) > DominantIntensity)

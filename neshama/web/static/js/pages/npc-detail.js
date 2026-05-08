@@ -29,7 +29,7 @@ async function renderNPCDetail() {
     if (!AppState.selectedNPC) {
         detailContainer.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">🎭</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">NPC</div>
                 <div class="empty-state-text">${t('npcDetail.notFound')}</div>
                 <button class="btn btn-primary mt-4" onclick="router.navigate('npc-list')">
                     ${t('npcDetail.backToList')}
@@ -72,7 +72,7 @@ async function renderNPCDetail() {
                             <span class="card-title">${t('npcDetail.profile')}</span>
                         </div>
                         <div class="npc-avatar-large">
-                            ${npc.avatar || '🎭'}
+                            <span class="avatar-initial">${(npc.name || "N").charAt(0).toUpperCase()}</span>
                         </div>
                         <div class="npc-ocean-chart-container">
                             <canvas id="ocean-radar-chart" width="200" height="200"></canvas>
@@ -117,7 +117,7 @@ async function renderNPCDetail() {
                             <span class="tag tag-amber">${t('dashboard.live')}</span>
                         </div>
                         <div class="emotion-state-display mb-3">
-                            <div class="current-emotion-emoji">${emotion.primary?.emoji || '😐'}</div>
+                            <div class="current-emotion-emoji">${emotion.primary?.category || 'Neutral'}</div>
                             <div class="current-emotion-name">${emotion.primary?.category || 'Neutral'}</div>
                             <div class="current-emotion-intensity">
                                 ${t('npcDetail.intensity')}: ${((emotion.primary?.intensity || 0) * 100).toFixed(0)}%
@@ -238,7 +238,7 @@ async function renderNPCDetail() {
                 </div>
             </div>
             <div class="empty-state">
-                <div class="empty-state-icon">🎭</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">NPC</div>
                 <div class="empty-state-text">${t('npcDetail.loadFailed')}</div>
                 <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                 <button class="btn btn-primary mt-4" onclick="renderNPCDetail()">${t('common.retry')}</button>
@@ -301,9 +301,9 @@ function drawOceanRadar(ocean) {
     }
     ctx.closePath();
     
-    ctx.fillStyle = 'rgba(75, 147, 255, 0.3)';
+    ctx.fillStyle = 'rgba(124,92,255,0.3)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(75, 147, 255, 0.8)';
+    ctx.strokeStyle = 'rgba(124,92,255,0.8)';
     ctx.lineWidth = 2;
     ctx.stroke();
     
@@ -384,7 +384,7 @@ function drawEmotionTimeline(emotion) {
     
     // Draw line
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(75, 147, 255, 0.8)';
+    ctx.strokeStyle = 'rgba(124,92,255,0.8)';
     ctx.lineWidth = 2;
     
     history.forEach((point, i) => {
@@ -403,7 +403,7 @@ function drawEmotionTimeline(emotion) {
         
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(75, 147, 255, 1)';
+        ctx.fillStyle = 'rgba(124,92,255,1)';
         ctx.fill();
     });
 }
@@ -420,7 +420,7 @@ function renderBehaviorSuggestions(behavior) {
     
     return suggestions.map(s => `
         <div class="suggestion-item">
-            <span class="suggestion-icon">${s.icon || '💡'}</span>
+            <span class="suggestion-icon">${s.icon || 'Tip'}</span>
             <span class="suggestion-text">${escapeHtml(s.text || '')}</span>
         </div>
     `).join('');
@@ -496,7 +496,7 @@ async function renderDialogueTab() {
                 </div>
                 <div class="dialogue-input-container">
                     <div class="emotion-badge">
-                        ${t('npcList.currentEmotion')}: ${AppState.npcDetail?.emotion?.primary?.emoji || '😐'}
+                        ${t('npcList.currentEmotion')}: ${AppState.npcDetail?.emotion?.primary?.category || 'Neutral'}
                     </div>
                     <div class="flex gap-2 mt-2">
                         <input type="text" id="dialogue-input" class="form-input" 

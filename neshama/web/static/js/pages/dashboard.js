@@ -35,28 +35,28 @@ async function renderDashboard() {
             <!-- Stats Cards -->
             <div class="grid-4">
                 <div class="card stat-card">
-                    <div class="stat-icon">🎭</div>
+                    <div class="stat-icon" style="color:#7c5cff;">NPC</div>
                     <div class="stat-info">
                         <div class="stat-value">${activeNPCs}</div>
                         <div class="stat-label">${t('dashboard.activeNPCs')}</div>
                     </div>
                 </div>
                 <div class="card stat-card">
-                    <div class="stat-icon">💬</div>
+                    <div class="stat-icon" style="color:#00d4aa;">Chat</div>
                     <div class="stat-info">
                         <div class="stat-value">${formatNumber(monthlyInteractions)}</div>
                         <div class="stat-label">${t('dashboard.monthlyInteractions')}</div>
                     </div>
                 </div>
                 <div class="card stat-card">
-                    <div class="stat-icon">📡</div>
+                    <div class="stat-icon" style="color:#7c5cff;">API</div>
                     <div class="stat-info">
                         <div class="stat-value">${formatNumber(apiCalls)}</div>
                         <div class="stat-label">${t('dashboard.apiCalls')}</div>
                     </div>
                 </div>
                 <div class="card stat-card">
-                    <div class="stat-icon">⭐</div>
+                    <div class="stat-icon" style="color:#ff6b35;">Pro</div>
                     <div class="stat-info">
                         <div class="stat-value">${tierLabel}</div>
                         <div class="stat-label">${t('dashboard.subscription')}</div>
@@ -71,19 +71,19 @@ async function renderDashboard() {
                 </div>
                 <div class="quick-actions-grid">
                     <button class="quick-action-btn" onclick="router.navigate('account')">
-                        <span class="action-icon">🔑</span>
+                        <span class="action-icon" style="color:#7c5cff;">Key</span>
                         <span class="action-text">${t('dashboard.createAPIKey')}</span>
                     </button>
                     <button class="quick-action-btn" onclick="router.navigate('templates')">
-                        <span class="action-icon">📚</span>
+                        <span class="action-icon" style="color:#00d4aa;">Lib</span>
                         <span class="action-text">${t('dashboard.browseTemplates')}</span>
                     </button>
                     <button class="quick-action-btn" onclick="router.navigate('billing')">
-                        <span class="action-icon">📊</span>
+                        <span class="action-icon" style="color:#7c5cff;">Stats</span>
                         <span class="action-text">${t('dashboard.viewUsage')}</span>
                     </button>
                     <button class="quick-action-btn" onclick="router.navigate('demo')">
-                        <span class="action-icon">🎮</span>
+                        <span class="action-icon" style="color:#ff6b35;">Demo</span>
                         <span class="action-text">${t('dashboard.tryDemo')}</span>
                     </button>
                 </div>
@@ -119,7 +119,7 @@ async function renderDashboard() {
                 <p class="page-subtitle">${t('dashboard.subtitle')}</p>
             </div>
             <div class="empty-state">
-                <div class="empty-state-icon">📊</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Dashboard</div>
                 <div class="empty-state-text">${t('dashboard.failedLoad')}</div>
                 <button class="btn btn-primary mt-4" onclick="renderDashboard()">${t('common.retry')}</button>
             </div>
@@ -146,7 +146,7 @@ async function renderRecentActivity(overview) {
         
         return events.map(e => `
             <div class="activity-item">
-                <span class="activity-emoji">${getEventEmoji(e.eventType)}</span>
+                <span class="activity-label tag tag-sm">${getEventLabel(e.eventType)}</span>
                 <span class="activity-text">${t('event.' + e.eventType) || e.eventType}</span>
                 <span class="activity-target">${escapeHtml(e.npcName || '')}</span>
                 <span class="activity-time">${e.timestamp ? formatDate(e.timestamp) : ''}</span>
@@ -157,15 +157,15 @@ async function renderRecentActivity(overview) {
     }
 }
 
-// Get event emoji
-function getEventEmoji(eventType) {
+// Get event label
+function getEventLabel(eventType) {
     const map = {
-        gift: '🎁', attack: '⚔️', help: '🤝', insult: '😤',
-        compliment: '🌟', trade: '💰', join_battle: '🗡️', leave_battle: '🏳️',
-        meet: '👋', depart: '👋', heal: '💚', steal: '🫣',
-        promise: '🤞', betray: '💀', discover: '🔍'
+        gift: 'Gift', attack: 'Attack', help: 'Help', insult: 'Insult',
+        compliment: 'Praise', trade: 'Trade', join_battle: 'Battle', leave_battle: 'Retreat',
+        meet: 'Meet', depart: 'Depart', heal: 'Heal', steal: 'Steal',
+        promise: 'Promise', betray: 'Betray', discover: 'Discover'
     };
-    return map[eventType] || '📌';
+    return map[eventType] || 'Event';
 }
 
 // Render NPC Overview (simplified)
@@ -178,9 +178,9 @@ function renderNPCOverview(npcs) {
         const emotion = npc.emotion || {};
         return `
             <div class="npc-overview-item">
-                <span class="npc-avatar-sm">${npc.avatar || '🎭'}</span>
+                <span class="npc-avatar-sm"><span class="avatar-initial">${(npc.name || "N").charAt(0).toUpperCase()}</span></span>
                 <span class="npc-name-sm">${escapeHtml(npc.name)}</span>
-                <span class="npc-emotion-sm">${emotion.primary?.emoji || '😐'}</span>
+                <span class="npc-emotion-sm">${emotion.primary?.category || 'Neutral'}</span>
             </div>
         `;
     }).join('');
@@ -202,12 +202,20 @@ async function refreshDashboardData() {
     }
 }
 
-// Get Emotion Emoji (shared utility)
-function getEmotionEmoji(emotion) {
+// Get Emotion Display (shared utility)
+function getEmotionDisplay(emotion) {
     const map = {
-        joy: '😊', sadness: '😢', anger: '😠', fear: '😨',
-        surprise: '😮', disgust: '🤢', trust: '🤝', anticipation: '🤔',
-        calm: '😌', curiosity: '🧐'
+        joy: { label: 'Joy', color: '#00d4aa' },
+        sadness: { label: 'Sad', color: '#7c5cff' },
+        anger: { label: 'Anger', color: '#ff6b35' },
+        fear: { label: 'Fear', color: '#7c5cff' },
+        surprise: { label: 'Surprise', color: '#00d4aa' },
+        disgust: { label: 'Disgust', color: '#ff6b35' },
+        trust: { label: 'Trust', color: '#7c5cff' },
+        anticipation: { label: 'Anticipation', color: '#00d4aa' },
+        calm: { label: 'Calm', color: '#00d4aa' },
+        curiosity: { label: 'Curiosity', color: '#7c5cff' }
     };
-    return map[emotion] || '😐';
+    const info = map[emotion] || { label: 'Neutral', color: '#94a3b8' };
+    return `<span class="emotion-dot" style="background:${info.color}"></span><span class="emotion-label">${info.label}</span>`;
 }

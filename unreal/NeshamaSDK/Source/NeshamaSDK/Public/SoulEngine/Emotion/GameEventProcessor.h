@@ -24,7 +24,7 @@ public:
 	 * Ported from C# GameEventProcessor.ProcessEvent().
 	 */
 	static TArray<FEmotionDelta> ProcessEvent(
-		EGameEventType EventType,
+		ESoulEventType EventType,
 		float Intensity,
 		const UOCEANPersonality* Personality,
 		const FString& SourceId = TEXT(""),
@@ -35,7 +35,7 @@ public:
 	 * Ported from C# GameEventProcessor.ProcessChain().
 	 */
 	static FEventChainResult ProcessChain(
-		const TArray<FGameEvent>& Events,
+		const TArray<FSoulGameEvent>& Events,
 		const FString& ChainId,
 		const UOCEANPersonality* Personality);
 };

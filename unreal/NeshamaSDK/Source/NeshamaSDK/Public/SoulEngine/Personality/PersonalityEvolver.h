@@ -41,7 +41,7 @@ public:
 	 * High emotions over time shift personality slightly.
 	 * Call this periodically (e.g., every 60 seconds of game time).
 	 */
-	void Evolve(UOCEANPersonality* Personality, const FEmotionState& EmotionalState);
+	void Evolve(UOCEANPersonality* Personality, const FSoulEmotionState& EmotionalState);
 
 	/** Reset the evolver state. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")

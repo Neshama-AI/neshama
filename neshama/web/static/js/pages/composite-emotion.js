@@ -10,14 +10,14 @@ let compositeEmotionData = {
 
 // Base emotion presets for synthesis
 const BASE_EMOTIONS = [
-    { id: 'joy', label_zh: '喜悦', label_en: 'Joy', emoji: '😊', color: '#FFD700' },
-    { id: 'sadness', label_zh: '悲伤', label_en: 'Sadness', emoji: '😢', color: '#4A90D9' },
-    { id: 'anger', label_zh: '愤怒', label_en: 'Anger', emoji: '😠', color: '#FF4444' },
-    { id: 'fear', label_zh: '恐惧', label_en: 'Fear', emoji: '😨', color: '#9B59B6' },
-    { id: 'surprise', label_zh: '惊讶', label_en: 'Surprise', emoji: '😮', color: '#E67E22' },
-    { id: 'disgust', label_zh: '厌恶', label_en: 'Disgust', emoji: '🤢', color: '#27AE60' },
-    { id: 'trust', label_zh: '信任', label_en: 'Trust', emoji: '🤝', color: '#3498DB' },
-    { id: 'anticipation', label_zh: '期待', label_en: 'Anticipation', emoji: '🤔', color: '#F39C12' }
+    { id: 'joy', label_zh: '喜悦', label_en: 'Joy', emoji: '😊', color: '#00d4aa' },
+    { id: 'sadness', label_zh: '悲伤', label_en: 'Sadness', emoji: '😢', color: '#7c5cff' },
+    { id: 'anger', label_zh: '愤怒', label_en: 'Anger', emoji: '😠', color: '#ff6b35' },
+    { id: 'fear', label_zh: '恐惧', label_en: 'Fear', emoji: '😨', color: '#7c5cff' },
+    { id: 'surprise', label_zh: '惊讶', label_en: 'Surprise', emoji: '😮', color: '#ff6b35' },
+    { id: 'disgust', label_zh: '厌恶', label_en: 'Disgust', emoji: '🤢', color: '#00d4aa' },
+    { id: 'trust', label_zh: '信任', label_en: 'Trust', emoji: '🤝', color: '#7c5cff' },
+    { id: 'anticipation', label_zh: '期待', label_en: 'Anticipation', emoji: '🤔', color: '#00d4aa' }
 ];
 
 // Get localized label for base emotion
@@ -143,7 +143,7 @@ async function renderCompositeEmotion() {
             </div>
             <div class="card">
                 <div class="empty-state">
-                    <div class="empty-state-icon">🎭</div>
+                    <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Emotion</div>
                     <div class="empty-state-text">${t('compositeEmotion.failedLoad')}</div>
                     <div class="text-muted mt-2" style="font-size: 12px;">${error.message || ''}</div>
                     <button class="btn btn-primary mt-4" onclick="renderCompositeEmotion()">${t('common.retry')}</button>
@@ -159,7 +159,7 @@ function renderCompositeDisplay() {
     if (!compositeEmotionData.composite) {
         return `
             <div class="empty-state" style="padding: 20px;">
-                <div class="empty-state-icon">🎭</div>
+                <div class="empty-state-icon" style="font-size:24px;color:#7c5cff;">Emotion</div>
                 <div class="empty-state-text">${t('compositeEmotion.noComposite')}</div>
             </div>
         `;
@@ -209,7 +209,7 @@ function renderEmotionsList() {
         return `
             <div class="flex items-center justify-between mb-2" style="padding: 10px; background: var(--bg-tertiary); border-radius: 8px;">
                 <div class="flex items-center gap-2">
-                    <span style="font-size: 20px;">${baseEmotion?.emoji || '💭'}</span>
+                    <span class="emotion-dot" style="background:${baseEmotion?.color || '#94a3b8'}"></span> <span>${baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion'}</span>
                     <span>${baseEmotion ? getBaseEmotionLabel(baseEmotion) : emotion}</span>
                 </div>
                 <div class="flex items-center gap-2">
@@ -439,7 +439,7 @@ function renderTriggeredList() {
         return `
             <div class="flex items-center justify-between mb-2" style="padding: 12px; background: var(--bg-tertiary); border-radius: 8px;">
                 <div class="flex items-center gap-3">
-                    <span style="font-size: 24px;">${baseEmotion?.emoji || '💭'}</span>
+                    <span class="emotion-dot" style="background:${baseEmotion?.color || '#94a3b8'};width:12px;height:12px;"></span> <span>${baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion'}</span>
                     <div>
                         <div style="font-weight: 500;">${item.behavior || item.emotion}</div>
                         <div class="text-muted" style="font-size: 12px;">${item.description || (baseEmotion ? getBaseEmotionLabel(baseEmotion) : item.emotion)}</div>
@@ -461,7 +461,7 @@ function renderRecipeGrid() {
                 return `
                     <button class="btn btn-secondary" style="padding: 8px 12px; font-size: 13px;" 
                             onclick="loadRecipe('${recipe.name}')">
-                        🎭 ${label}
+                        ${label}
                     </button>
                 `;
             }).join('')}
@@ -526,19 +526,19 @@ async function refreshTriggeredData() {
 // Get composite emoji based on name
 function getCompositeEmoji(name) {
     const emojiMap = {
-        'euphoria': '🥰', 'melancholy': '😔', 'rage': '😤', 'anxiety': '😰',
-        'serenity': '😌', 'confusion': '😕', 'contempt': '😏', 'hope': '🤞',
-        'grief': '😭', 'admiration': '🤩', 'interest': '🧐', 'envy': '😒',
-        'pride': '😎', 'remorse': '😞', 'amazement': '🤯', 'joy': '😊',
-        'sadness': '😢', 'anger': '😠', 'fear': '😨', 'surprise': '😮'
+        'euphoria': 'Euphoria', 'melancholy': 'Melancholy', 'rage': 'Rage', 'anxiety': 'Anxiety',
+        'serenity': 'Serenity', 'confusion': 'Confusion', 'contempt': 'Contempt', 'hope': 'Hope',
+        'grief': 'Grief', 'admiration': 'Admiration', 'interest': 'Interest', 'envy': 'Envy',
+        'pride': 'Pride', 'remorse': 'Remorse', 'amazement': 'Amazement', 'joy': 'Joy',
+        'sadness': 'Sad', 'anger': 'Anger', 'fear': 'Fear', 'surprise': 'Surprise'
     };
-    return emojiMap[name?.toLowerCase()] || '🎭';
+    return emojiMap[name?.toLowerCase()] || 'Emotion';
 }
 
 // Get emotion emoji
 function getEmotionEmoji(emotion) {
     const baseEmotion = BASE_EMOTIONS.find(e => e.id === emotion);
-    return baseEmotion?.emoji || '💭';
+    return baseEmotion?.label_en || baseEmotion?.label_zh || 'Emotion';
 }
 
 // Format date

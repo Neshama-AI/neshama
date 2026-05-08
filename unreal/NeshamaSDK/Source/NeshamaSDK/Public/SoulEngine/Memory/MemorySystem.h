@@ -28,7 +28,7 @@ public:
 
 	/** Process a game event and update entity relation + memory. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	void OnGameEvent(EGameEventType EventType, float Intensity,
+	void OnGameEvent(ESoulEventType EventType, float Intensity,
 		const FString& EntityId, const FString& EntityName,
 		const TMap<FString, float>& EmotionalContext);
 
@@ -87,6 +87,6 @@ private:
 		float TrustDelta;
 	};
 
-	static const TMap<EGameEventType, FRelationMapping>& GetEventRelationMappings();
-	static FString GenerateMemoryDescription(EGameEventType EventType, const FString& EntityName);
+	static const TMap<ESoulEventType, FRelationMapping>& GetEventRelationMappings();
+	static FString GenerateMemoryDescription(ESoulEventType EventType, const FString& EntityName);
 };

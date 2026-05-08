@@ -47,26 +47,26 @@ public:
 
 	/** Set a base emotion intensity (overwrites previous value). */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	void SetEmotion(EEmotionType Type, float Intensity);
+	void SetEmotion(ESoulEmotionType Type, float Intensity);
 
 	/**
 	 * Adjust an emotion by a delta. Starts from 0 (BUG FIX: 0+delta, not 0.5+delta).
 	 * This ensures PlayerAttacked → anger = 0 + 0.3*intensity = 0.24 (not 0.74)
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	void AdjustEmotion(EEmotionType Type, float Delta);
+	void AdjustEmotion(ESoulEmotionType Type, float Delta);
 
 	/** Get current value of a single emotion. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama", BlueprintPure)
-	float GetEmotionValue(EEmotionType Type) const;
+	float GetEmotionValue(ESoulEmotionType Type) const;
 
 	/** Get the dominant emotion type. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama", BlueprintPure)
-	EEmotionType GetDominantEmotion() const;
+	ESoulEmotionType GetDominantEmotion() const;
 
 	/** Process a game event: apply emotion deltas. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
-	void ProcessEvent(EGameEventType EventType, float Intensity, const FString& SourceId = TEXT(""));
+	void ProcessEvent(ESoulEventType EventType, float Intensity, const FString& SourceId = TEXT(""));
 
 	/** Apply emotion decay. Call every frame with DeltaTime. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
@@ -80,7 +80,7 @@ public:
 
 	/** Get current emotion state. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama", BlueprintPure)
-	FEmotionState GetCurrentState() const { return Emotions; }
+	FSoulEmotionState GetCurrentState() const { return Emotions; }
 
 	/** Clear all emotions to 0. */
 	UFUNCTION(BlueprintCallable, Category = "Neshama")
@@ -106,14 +106,14 @@ public:
 private:
 	/** Current emotion state. */
 	UPROPERTY()
-	FEmotionState Emotions;
+	FSoulEmotionState Emotions;
 
 	/** Personality reference. */
 	UPROPERTY()
 	UOCEANPersonality* Personality;
 
 	/** Default decay half-lives per emotion type. */
-	static const TMap<EEmotionType, float>& GetDefaultHalfLives();
+	static const TMap<ESoulEmotionType, float>& GetDefaultHalfLives();
 
 	/** Apply conflict resolution for opposing emotion pairs. */
 	TMap<FString, float> ResolveConflicts(const TMap<FString, float>& EmotionDict) const;
@@ -122,10 +122,10 @@ private:
 	FCompositeEmotionResult MatchRecipe(const TMap<FString, float>& EmotionDict) const;
 
 	/** Apply grudge factor from hostile relationships. */
-	float ApplyGrudgeFactor(EGameEventType Type, float Delta, const FString& SourceId) const;
+	float ApplyGrudgeFactor(ESoulEventType Type, float Delta, const FString& SourceId) const;
 
 	/** Opposing emotion pairs for conflict resolution. */
-	static const TArray<TPair<EEmotionType, EEmotionType>>& GetOpposingPairs();
+	static const TArray<TPair<ESoulEmotionType, EEmotionType>>& GetOpposingPairs();
 
 	/** Convert EmotionState to string→float map. */
 	TMap<FString, float> EmotionStateToMap() const;

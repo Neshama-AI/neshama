@@ -1,99 +1,99 @@
 #include "SoulEngine/Emotion/EventMappings.h"
 
-const TMap<EGameEventType, TArray<FEventEmotionMapping>>& FEventMappings::GetEmotionMappings()
+const TMap<ESoulEventType, TArray<FEventEmotionMapping>>& FEventMappings::GetEmotionMappings()
 {
-	static TMap<EGameEventType, TArray<FEventEmotionMapping>> Mappings;
+	static TMap<ESoulEventType, TArray<FEventEmotionMapping>> Mappings;
 	if (Mappings.Num() > 0) return Mappings;
 
-	Mappings.Add(EGameEventType::PlayerAttacked, {
-		FEventEmotionMapping(EEmotionType::Anger, 0.3f),
-		FEventEmotionMapping(EEmotionType::Fear, 0.2f)
+	Mappings.Add(ESoulEventType::PlayerAttacked, {
+		FEventEmotionMapping(ESoulEmotionType::Anger, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Fear, 0.2f)
 	});
-	Mappings.Add(EGameEventType::PlayerHelped, {
-		FEventEmotionMapping(EEmotionType::Trust, 0.4f),
-		FEventEmotionMapping(EEmotionType::Joy, 0.3f)
+	Mappings.Add(ESoulEventType::PlayerHelped, {
+		FEventEmotionMapping(ESoulEmotionType::Trust, 0.4f),
+		FEventEmotionMapping(ESoulEmotionType::Joy, 0.3f)
 	});
-	Mappings.Add(EGameEventType::ItemReceived, {
-		FEventEmotionMapping(EEmotionType::Joy, 0.3f),
-		FEventEmotionMapping(EEmotionType::Surprise, 0.2f)
+	Mappings.Add(ESoulEventType::ItemReceived, {
+		FEventEmotionMapping(ESoulEmotionType::Joy, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Surprise, 0.2f)
 	});
-	Mappings.Add(EGameEventType::ItemLost, {
-		FEventEmotionMapping(EEmotionType::Sadness, 0.3f),
-		FEventEmotionMapping(EEmotionType::Anger, 0.2f)
+	Mappings.Add(ESoulEventType::ItemLost, {
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Anger, 0.2f)
 	});
-	Mappings.Add(EGameEventType::QuestCompleted, {
-		FEventEmotionMapping(EEmotionType::Joy, 0.4f),
-		FEventEmotionMapping(EEmotionType::Anticipation, 0.2f)
+	Mappings.Add(ESoulEventType::QuestCompleted, {
+		FEventEmotionMapping(ESoulEmotionType::Joy, 0.4f),
+		FEventEmotionMapping(ESoulEmotionType::Anticipation, 0.2f)
 	});
-	Mappings.Add(EGameEventType::QuestFailed, {
-		FEventEmotionMapping(EEmotionType::Sadness, 0.3f),
-		FEventEmotionMapping(EEmotionType::Anger, 0.2f),
-		FEventEmotionMapping(EEmotionType::Fear, 0.15f)
+	Mappings.Add(ESoulEventType::QuestFailed, {
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Anger, 0.2f),
+		FEventEmotionMapping(ESoulEmotionType::Fear, 0.15f)
 	});
-	Mappings.Add(EGameEventType::NpcInsulted, {
-		FEventEmotionMapping(EEmotionType::Anger, 0.4f),
-		FEventEmotionMapping(EEmotionType::Sadness, 0.2f),
-		FEventEmotionMapping(EEmotionType::Disgust, 0.2f)
+	Mappings.Add(ESoulEventType::NpcInsulted, {
+		FEventEmotionMapping(ESoulEmotionType::Anger, 0.4f),
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.2f),
+		FEventEmotionMapping(ESoulEmotionType::Disgust, 0.2f)
 	});
-	Mappings.Add(EGameEventType::NpcComplimented, {
-		FEventEmotionMapping(EEmotionType::Joy, 0.3f),
-		FEventEmotionMapping(EEmotionType::Trust, 0.3f),
-		FEventEmotionMapping(EEmotionType::Surprise, 0.1f)
+	Mappings.Add(ESoulEventType::NpcComplimented, {
+		FEventEmotionMapping(ESoulEmotionType::Joy, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Trust, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Surprise, 0.1f)
 	});
-	Mappings.Add(EGameEventType::EnvironmentChanged, {
-		FEventEmotionMapping(EEmotionType::Fear, 0.2f),
-		FEventEmotionMapping(EEmotionType::Surprise, 0.25f),
-		FEventEmotionMapping(EEmotionType::Anticipation, 0.15f)
+	Mappings.Add(ESoulEventType::EnvironmentChanged, {
+		FEventEmotionMapping(ESoulEmotionType::Fear, 0.2f),
+		FEventEmotionMapping(ESoulEmotionType::Surprise, 0.25f),
+		FEventEmotionMapping(ESoulEmotionType::Anticipation, 0.15f)
 	});
-	Mappings.Add(EGameEventType::RelationshipChanged, {
-		FEventEmotionMapping(EEmotionType::Trust, 0.3f),
-		FEventEmotionMapping(EEmotionType::Sadness, 0.2f)
+	Mappings.Add(ESoulEventType::RelationshipChanged, {
+		FEventEmotionMapping(ESoulEmotionType::Trust, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.2f)
 	});
-	Mappings.Add(EGameEventType::TimePassed, {
-		FEventEmotionMapping(EEmotionType::Sadness, 0.05f)
+	Mappings.Add(ESoulEventType::TimePassed, {
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.05f)
 	});
-	Mappings.Add(EGameEventType::CombatStarted, {
-		FEventEmotionMapping(EEmotionType::Fear, 0.35f),
-		FEventEmotionMapping(EEmotionType::Anger, 0.25f),
-		FEventEmotionMapping(EEmotionType::Surprise, 0.15f)
+	Mappings.Add(ESoulEventType::CombatStarted, {
+		FEventEmotionMapping(ESoulEmotionType::Fear, 0.35f),
+		FEventEmotionMapping(ESoulEmotionType::Anger, 0.25f),
+		FEventEmotionMapping(ESoulEmotionType::Surprise, 0.15f)
 	});
-	Mappings.Add(EGameEventType::CombatEnded, {
-		FEventEmotionMapping(EEmotionType::Joy, 0.2f),
-		FEventEmotionMapping(EEmotionType::Fear, 0.1f),
-		FEventEmotionMapping(EEmotionType::Sadness, 0.1f)
+	Mappings.Add(ESoulEventType::CombatEnded, {
+		FEventEmotionMapping(ESoulEmotionType::Joy, 0.2f),
+		FEventEmotionMapping(ESoulEmotionType::Fear, 0.1f),
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.1f)
 	});
-	Mappings.Add(EGameEventType::DeathWitnessed, {
-		FEventEmotionMapping(EEmotionType::Sadness, 0.4f),
-		FEventEmotionMapping(EEmotionType::Fear, 0.3f),
-		FEventEmotionMapping(EEmotionType::Surprise, 0.2f)
+	Mappings.Add(ESoulEventType::DeathWitnessed, {
+		FEventEmotionMapping(ESoulEmotionType::Sadness, 0.4f),
+		FEventEmotionMapping(ESoulEmotionType::Fear, 0.3f),
+		FEventEmotionMapping(ESoulEmotionType::Surprise, 0.2f)
 	});
-	Mappings.Add(EGameEventType::GiftGiven, {
-		FEventEmotionMapping(EEmotionType::Joy, 0.35f),
-		FEventEmotionMapping(EEmotionType::Trust, 0.35f),
-		FEventEmotionMapping(EEmotionType::Surprise, 0.15f)
+	Mappings.Add(ESoulEventType::GiftGiven, {
+		FEventEmotionMapping(ESoulEmotionType::Joy, 0.35f),
+		FEventEmotionMapping(ESoulEmotionType::Trust, 0.35f),
+		FEventEmotionMapping(ESoulEmotionType::Surprise, 0.15f)
 	});
 
 	return Mappings;
 }
 
-const TMap<EGameEventType, TArray<FPersonalityModifier>>& FEventMappings::GetPersonalityModifiers()
+const TMap<ESoulEventType, TArray<FPersonalityModifier>>& FEventMappings::GetPersonalityModifiers()
 {
-	static TMap<EGameEventType, TArray<FPersonalityModifier>> Modifiers;
+	static TMap<ESoulEventType, TArray<FPersonalityModifier>> Modifiers;
 	if (Modifiers.Num() > 0) return Modifiers;
 
-	Modifiers.Add(EGameEventType::PlayerHelped, {
+	Modifiers.Add(ESoulEventType::PlayerHelped, {
 		FPersonalityModifier(TEXT("extraversion"), 0.7f, 1.3f),
 		FPersonalityModifier(TEXT("agreeableness"), 0.7f, 1.2f)
 	});
-	Modifiers.Add(EGameEventType::NpcInsulted, {
+	Modifiers.Add(ESoulEventType::NpcInsulted, {
 		FPersonalityModifier(TEXT("neuroticism"), 0.7f, 1.5f),
 		FPersonalityModifier(TEXT("agreeableness"), 0.7f, 0.5f)
 	});
-	Modifiers.Add(EGameEventType::QuestCompleted, {
+	Modifiers.Add(ESoulEventType::QuestCompleted, {
 		FPersonalityModifier(TEXT("extraversion"), 0.6f, 1.2f),
 		FPersonalityModifier(TEXT("conscientiousness"), 0.6f, 1.3f)
 	});
-	Modifiers.Add(EGameEventType::DeathWitnessed, {
+	Modifiers.Add(ESoulEventType::DeathWitnessed, {
 		FPersonalityModifier(TEXT("neuroticism"), 0.7f, 1.4f),
 		FPersonalityModifier(TEXT("agreeableness"), 0.6f, 0.6f)
 	});
@@ -101,9 +101,9 @@ const TMap<EGameEventType, TArray<FPersonalityModifier>>& FEventMappings::GetPer
 	return Modifiers;
 }
 
-const TSet<EEmotionType>& FEventMappings::GetPositiveEmotions()
+const TSet<ESoulEmotionType>& FEventMappings::GetPositiveEmotions()
 {
-	static TSet<EEmotionType> Positive = { EEmotionType::Joy, EEmotionType::Trust };
+	static TSet<ESoulEmotionType> Positive = { ESoulEmotionType::Joy, ESoulEmotionType::Trust };
 	return Positive;
 }
 

@@ -30,11 +30,11 @@ async function renderChat() {
                         ${npcs.map(npc => `
                             <div class="chat-npc-item ${selectedChatNPC === npc.id ? 'active' : ''}" 
                                 onclick="selectChatNPC('${npc.id}')">
-                                <span class="npc-avatar-chat">${npc.avatar || '🎭'}</span>
+                                <span class="npc-avatar-chat"><span class="avatar-initial">${(npc.name || "N").charAt(0).toUpperCase()}</span></span>
                                 <div class="npc-info">
                                     <span class="npc-name">${escapeHtml(npc.name)}</span>
                                     <span class="npc-emotion-tag">
-                                        ${npc.emotion?.primary?.emoji || '😐'}
+                                        ${npc.emotion?.primary?.category || 'Neutral'}
                                         ${npc.emotion?.primary?.category || ''}
                                     </span>
                                 </div>
@@ -62,7 +62,7 @@ async function renderChat() {
                 <h1 class="page-title">${t('chat.title')}</h1>
             </div>
             <div class="empty-state">
-                <div class="empty-state-icon">💬</div>
+                <div class="empty-state-icon" style="font-size:18px;color:#00d4aa;">No Chat</div>
                 <div class="empty-state-text">${t('chat.loadFailed')}</div>
                 <button class="btn btn-primary mt-4" onclick="renderChat()">${t('common.retry')}</button>
             </div>
@@ -74,7 +74,7 @@ async function renderChat() {
 function renderChatPlaceholder() {
     return `
         <div class="chat-placeholder">
-            <div class="placeholder-icon">💬</div>
+            <div class="placeholder-icon" style="font-size:18px;color:#7c5cff;">Chat</div>
             <div class="placeholder-text">${t('chat.startConversation')}</div>
             <div class="placeholder-hint">${t('chat.selectNPC') || 'Select an NPC from the list to start chatting'}</div>
         </div>
@@ -100,10 +100,10 @@ function renderChatArea() {
             <div id="chat-event-panel" class="chat-event-panel">
                 <span class="panel-label">${t('npcDetail.sendGameEvent')}</span>
                 <div class="event-quick-btns">
-                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('gift')">🎁</button>
-                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('compliment')">✨</button>
-                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('attack')">⚔️</button>
-                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('help')">🤝</button>
+                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('gift')">Gift</button>
+                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('compliment')">Praise</button>
+                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('attack')">Attack</button>
+                    <button class="btn btn-sm btn-secondary" onclick="quickSendEvent('help')">Help</button>
                 </div>
             </div>
             
@@ -146,7 +146,7 @@ function renderChatHistory() {
     if (chatHistory.length === 0) {
         messagesContainer.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">💬</div>
+                <div class="empty-state-icon" style="font-size:18px;color:#00d4aa;">No Chat</div>
                 <div class="empty-state-text">${t('chat.startConversation')}</div>
             </div>
         `;
