@@ -278,6 +278,11 @@ void UNPCSoulComponent::SendGameEvent(EGameEventType EventType, float Intensity,
 	Client->SendGameEvent(NpcId, EventType, Intensity, Context, OnComplete);
 }
 
+void UNPCSoulComponent::SendGameEvent(EGameEventType EventType, float Intensity)
+{
+	SendGameEvent(EventType, Intensity, TMap<FString, FString>());
+}
+
 void UNPCSoulComponent::Chat(const FString& Message, const FString& PlayerId)
 {
 	if (!Client || !Client->IsConnected())

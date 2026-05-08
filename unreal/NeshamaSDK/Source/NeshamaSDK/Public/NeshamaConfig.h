@@ -40,10 +40,10 @@ UENUM(BlueprintType)
 enum class ENeshamaServerMode : uint8
 {
 	/** 云端托管模式（默认，免部署） */
-	Cloud		UMETA(DisplayName = "Cloud", ToolTip = "云端托管模式，无需自己部署"),
+	Cloud		UMETA(DisplayName = "Cloud"),
 	
 	/** 本地部署模式（需要自己启动后端） */
-	Local		UMETA(DisplayName = "Local", ToolTip = "本地部署模式，需要运行后端服务")
+	Local		UMETA(DisplayName = "Local")
 };
 
 /**

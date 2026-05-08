@@ -114,8 +114,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Neshama|Event",
 		meta = (DisplayName = "Send Game Event", ToolTip = "发送游戏事件到服务器", BlueprintInternalUseOnly = "true"))
-	void SendGameEvent(EGameEventType EventType, float Intensity = 1.0f, 
-		const TMap<FString, FString>& Context = TMap<FString, FString>());
+	void SendGameEvent(EGameEventType EventType, float Intensity, 
+		const TMap<FString, FString>& Context);
+
+	/** 发送游戏事件到服务器（简化版，无需上下文） */
+	UFUNCTION(BlueprintCallable, Category = "Neshama|Event",
+		meta = (DisplayName = "Send Game Event (Simple)", ToolTip = "发送游戏事件到服务器"))
+	void SendGameEvent(EGameEventType EventType, float Intensity = 1.0f);
 
 	/**
 	 * 与NPC对话
