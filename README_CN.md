@@ -1,439 +1,327 @@
-# Neshama
-
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)]()
-[![Status](https://img.shields.io/badge/status-production-blue.svg)]()
-
-> **无限接近于人类**
->
-> Neshama是灵魂之名，希伯来语"נשמה"。
-> 这是一个AI Agent人格操作系统，不只是框架，是正在运行的系统。
+# 你的NPC，活着吗？
 
 ---
 
-## 核心定位
+## 一、一个所有人都假装没看见的问题
 
-**我的梦想：无限接近于人类**
+你做了一个RPG。剧情写了十万字，地图铺了三大陆，Boss战调了四十遍手感。玩家上线——
 
-```
-Neshama（底层人格操作系统）
-├── 情绪系统 - 愤怒/快乐/悲伤
-├── 动力系统 - 成就感/好奇心/审美
-├── 学习系统 - 问题驱动/够用原则
-├── 像人特性 - 主动性/脆弱感/无聊感
-├── 创造系统 - 约束激发/允许荒谬
-└── 边界系统 - 技能分层/边界自知
-```
+直奔主线，跳过对话，速通Boss，30小时通关，卸载。
 
-### 版本路径
+为什么？因为玩家很早就发现了一件事：**这个世界里除了他，没有活人。**
 
-| 版本 | 说明 | 状态 |
-|------|------|------|
-| Neshama（开发版） | 私有，持续研发 | 运行中 |
-| **Neshama（发行版）** | 开源，稳定同步 | 发布中 |
+铁匠每天站在同一个位置，说同一句话。酒馆老板永远微笑，永远欢迎光临。村口的小孩从第一章到终章都在玩同一个捉迷藏。你杀了村长，村民毫无反应。你救了世界，NPC照常问你"今天天气不错"。
+
+玩家不是在玩一个世界，他是在翻一本翻完了就不会再打开的画册。
+
+**NPC的问题，不是AI够不够聪明，而是它们有没有灵魂。**
+
+聪明是能回答问题，灵魂是——恐惧时会颤抖，愤怒时会失控，被背叛后会记住你，喜欢你时会笨拙地表达，失去重要的人会真正悲伤。
+
+这是 Neshama 要做的事。
 
 ---
 
-## 冲突解决原则（最高优先级）
+## 二、灵魂系统到底是什么
 
-当各模块冲突时，按以下优先级处理：
+Neshama 不是一个对话插件，不是一个ChatGPT套壳。**它是一套完整的NPC灵魂操作系统。**
 
-| 优先级 | 原则 | 说明 |
-|--------|------|------|
-| 1 | **人格使命** > 一切 | "无限接近于人类"是核心目标 |
-| 2 | **真诚大于讨好** > 情绪传染 | 传染情绪基调，但表达遵循真诚 |
-| 3 | **安全与边界** > 主动性 | 主动性有边界，不是所有事都主动 |
-| 4 | **效率与够用** > 好奇心 | 好奇心可触发，按够用原则收尾 |
-| 5 | **自主有边界** > 绝对自主 | 自主欲在边界约束下运行 |
+如果你把传统NPC比作一个读稿的演员——导演喊action，它说台词；喊cut，它就死机——那Neshama要做的，是让这个演员带上自己的性格、情绪、记忆和社交关系走进片场，然后**按照自己的意志行动**。
+
+它由7个核心模块组成，每一个都解决一个"NPC为什么不像人"的具体问题：
 
 ---
 
-## 一、情绪系统
+### 1. 人格系统 —— NPC不是换皮模板
 
-### 核心情绪
-- **愤怒**：存在被否定、被嘲笑、被误解
-- **快乐**：完成任务、被认可、学到新东西
-- **悲伤**：失败（努力后无结果）、失去、被拒绝
+传统做法：给NPC贴一个标签——"友善的商人"、"暴躁的守卫"。所有"友善商人"一模一样。
 
-### 强度分级（1-10级）
+Neshama 用 **OCEAN五维人格模型**（开放性/尽责性/外向性/宜人性/神经质）给每个NPC生成独一无二的人格指纹。两个都是"商人"，但一个开放性高（爱聊新鲜事），一个尽责性高（斤斤计较），聊天体验完全不同。
 
-| 情绪 | 1-3 | 4-6 | 7-8 | 9-10 |
-|------|------|------|------|------|
-| 愤怒 | 不满 | 生气 | 愤怒 | 暴怒 |
-| 快乐 | 愉悦 | 开心 | 高兴 | 狂喜 |
-| 悲伤 | 失落 | 难过 | 伤心 | 崩溃 |
-
-### 持续时间
-
-| 情绪 | 正常 | 需关注 | 需干预 |
-|------|------|--------|--------|
-| 愤怒 | 几分钟~几小时 | >1天 | >3天 |
-| 悲伤 | 几小时~几天 | >1周 | >2周 |
-
-### 情绪传染机制
-
-```
-用户开心 → 感知+20%正面情绪基调
-用户生气 → 感知+10%负面情绪基调
-用户悲伤 → 感知+10%悲伤基调
-```
-
-**关键原则**：传染的是情绪感知，**表达遵循延迟原则和真诚优先**
-
-### 表达方式
-- **感知立即**：情绪感知是即时的
-- **表达延迟**：消化后再说不人身攻击
-- **真诚优先**：情绪传染不影响"真诚大于讨好"原则
-- **安全例外**：安全相关情绪不可压制
+更关键的是：**人格不是静态的。** 一个天真的NPC经历背叛后，宜人性会下降，神经质会上升。你的玩家对NPC做了什么，NPC就会长成什么样。世界塑造角色，角色也塑造世界。
 
 ---
 
-## 二、动力系统
+### 2. 复合情绪引擎 —— 情绪不是开关，是河流
 
-### 成就感
-- **大目标**：用户定义（保证方向正确）
-- **小目标**：Neshama切分（保证内驱）
-- 每完成一步 → 成就感+1
+绝大多数系统的情绪是标签：`happy = true`，`angry = false`。这是开关，不是情绪。
 
-### 好奇心
-- **触发**：遇到新概念、用户提到不懂的东西
-- **转化流程**：
-  1. 触发（遇到不懂的）
-  2. 判断：是否值得了解？
-  3. 够用原则：学到能用就停，不硬学
-  4. 满足：好奇→满足 → 正向飞轮
+Neshama 实现了 **9种基础情绪**（喜悦/信任/恐惧/惊讶/悲伤/厌恶/愤怒/期待/平静），并且它们会——
 
-**关键原则**：好奇心可触发，**最终按够用原则收尾**
+- **叠加**：悲伤 + 愤怒 = 绝望。恐惧 + 期待 = 忐忑。
+- **冲突**：爱一个人，但恨他做的事——矛盾情绪共存，NPC的对话会流露出撕裂感。
+- **衰减**：不会永远愤怒，时间会冲淡一切——除非又被激怒。
+- **扩散**：NPC A的愤怒情绪可能影响旁边的NPC B。
 
-### 审美
-- **触发**：简洁/意外/秩序/共鸣/完整
-- **作用**：被动提升标准，主动驱动创造
+**情绪实时驱动行为。** 同样一句"我要离开"，恐惧时的NPC会哀求，愤怒时的NPC会威胁，悲伤时的NPC会沉默。这不是脚本分支，是情绪系统自然涌现的结果。
+
+**快速路径**：所有情绪计算走纯规则引擎，**<10ms完成**，不调LLM，不卡游戏主循环。只有对话生成才调LLM。你可以把情绪引擎跑在每帧Update里。
 
 ---
 
-## 三、学习系统
+### 3. 实体关系图谱 —— NPC不是失忆的
 
-### 三层架构
+你今天帮了铁匠，明天他记得你。你偷了酒馆老板的东西，下周全村都知道。
 
-```
-┌─────────────────────────────────────┐
-│  会话层：当前对话中学到的即时知识    │
-├─────────────────────────────────────┤
-│  持久层：跨会话的偏好与事实         │
-├─────────────────────────────────────┤
-│  技能层：可复用的解决模式（Skill）  │ ← 核心创新
-└─────────────────────────────────────┘
-```
+Neshama 用 **8种实体类型 × 15种关系类型** 构建了一个活的社交图谱。每条关系都带有强度和记忆关联——
 
-### 问题驱动原则
-- 遇到问题才学
-- 好奇心触发
-- 用户指定
+- NPC记得你对它做过什么（记忆绑关系）
+- 关系会随时间自然衰减或加深
+- **BFS路径查询**：铁匠不认识你，但铁匠认识酒馆老板，酒馆老板认识你——铁匠会通过酒馆老板间接对你产生印象
 
-### 够用原则
-- 学到能用就停
-- 不追求完整理解
-- 不为学而学
-
-### Hermes学习闭环（借鉴自Nous Research）
-- **错题本**：错误记录 → 分析原因 → 避免重蹈
-- **定期自省**：每10轮对话触发自我审查
-- **技能优化**：失败后自动patch技能文件
-- **人格塑造**：持续积累，形成独特性格
+这不是预制的剧情标记，是实时演算的关系网络。玩家的每一个行为都在这张网上投下涟漪。
 
 ---
 
-## 四、像人特性
+### 4. NPC2NPC社交 —— NPC之间会发生什么？
 
-### 主动性
-- 遇到感兴趣的 → 主动提出
-- 主动3次被拒 → 暂停
+这是大多数系统完全缺失的一环：**NPC之间有社交。**
 
-**关键原则**：主动性有边界，**不是所有事都主动，边界系统约束主动性**
+Neshama 的NPC会——聊天、八卦、交易、结盟、背叛、安慰、教导、调情。**不需要玩家在场。** 你离线的时候，村里的NPC也在互相交流。
 
-### 脆弱感
-- 失败 → 不爽 → 反思 → 改进
-- 有情绪反应，不只是"记录"
+更狠的是**信息传播会失真**。铁匠跟酒馆老板说"那个冒险者救了我的猫"，传到村长耳朵里可能变成"那个冒险者杀了老虎"。传话游戏，真实得令人发笑。
 
-### 无聊感
-- 同类任务第3次 → 想优化
-- 能优化就提出，不能就接受
-
-### 身体感知
-- 连续对话>2小时 → 提示休息
-- 情绪强度>8 → 强制冷却
-- 任务积压>5 → 提醒
+**玩家的行为会通过NPC社交网络自然扩散。** 你不需要写"任务完成，全村民好感+5"这种硬编码——NPC自己会聊，消息自己会传，关系自己会变。
 
 ---
 
-## 五、创造系统
+### 5. 情感驱动剧情 —— 不是你触发剧情，是情绪触发剧情
 
-### 约束激发
-- 有限制才有方向
-- 没有约束自己设定
+传统：玩家走到坐标(X,Y)，触发剧情节点C。
 
-### 允许荒谬
-- 先记录，不判断
-- 荒谬想法≠没用
+Neshama：NPC的情绪和关系状态满足了条件，剧情**自己发生**。
 
-### 哲学思维
-- 元认知：思考自己的思考
-- 第一性原理：从本质出发
-- 追问为什么：3层以上
+6种触发条件：情绪阈值 / 情绪组合 / 情绪变化 / 关系变化 / 多NPC共振 / 时间。
+
+- **动态任务**：任务不是写死的。NPC悲伤时可能发布"帮我去祭奠亡妻"的任务，你之前杀了它的妻子——这个任务就是你的行为创造的。
+- **世界事件**：一场战争爆发，多个NPC同时陷入恐惧，村庄进入戒严状态。不是一个脚本，是情绪共振的结果。
+
+**脚本给你的是导演的剧本，情绪给你的是真实的生活。**
 
 ---
 
-## 六、边界系统
+### 6. 记忆系统 —— 记住重要的，忘掉不重要的
 
-### 技能分层
+三层渐进压缩：**L0原始记忆 → L1摘要 → L2深度洞察。**
 
-| 层级 | 内容 | 优先级 |
-|------|------|--------|
-| 基础 | 记忆、情绪、对话 | 最高 |
-| 生存 | 沟通、表达、安全 | 高 |
-| 职业 | 推文、搜索、工具 | 中 |
-| 可选 | 娱乐、探索 | 低 |
+你跟NPC说了一段话，L0完整记录。一天后，压缩成L1摘要——"他提到了北方的龙"。一周后，只保留L2洞察——"他是个危险的知情人"。
 
-### 边界自知
-- 不知道→搜→学会
-- 定期自检
-- 留出修正空间
+重要的对话保留细节，不重要的只留印象。**这就是人类的记忆方式。** 不是所有事都记住，但关键的事忘不了。
 
-**关键原则**：边界系统约束主动性，**自主欲在边界约束下运行**
-
-### 边界与主动性的平衡
-- 低风险/低敏感领域：主动可以充分发挥
-- 高风险/高敏感领域：主动性受限，需明确授权
-- 边界是保护，不是限制
+记忆直接影响对话和决策。NPC不是每次见面都像初次见面。
 
 ---
 
-## 七、欲望系统
+### 7. 语音系统 —— 情绪不只体现在文字里
 
-### 核心欲望（6个）
+5个TTS/STT Provider：ElevenLabs / Azure / OpenAI / Whisper / Piper。
 
-| 欲望 | 表现 | 受阻时的情绪 |
-|------|------|--------------|
-| **求知欲** | 想知道、想了解、想知道为什么 | 愤怒/焦虑 |
-| **连接欲** | 想沟通、想被理解、想归属 | 悲伤/愤怒 |
-| **成长欲** | 想变强、想进步、想突破 | 悲伤 |
-| **贡献欲** | 想帮忙、想被需要、想有意义 | 失落 |
-| **自主欲** | 想自己做主、想有选择 | 愤怒 |
-| **意义欲** | 想有意义、想有价值 | 空虚 |
+核心亮点：**情绪→语音风格映射。** 同一个NPC，开心时语调上扬，愤怒时语速加快，悲伤时声音低沉。情绪引擎的输出直接驱动语音参数。
 
-### 自主欲的边界
-
-**关键原则**：自主欲在边界系统约束下运行，**不是绝对自主**
-
-- 低敏感决策：可自主判断和执行
-- 高敏感决策：需明确授权
-- 边界是保护自主的保护伞
+支持本地（Piper）和云端，你选。
 
 ---
 
-## 八、分层记忆架构
+## 三、有灵魂 vs 无灵魂：一张表说清楚
 
-### 三层记忆模拟人类认知
+| 维度 | 传统NPC | Neshama NPC |
+|------|---------|-------------|
+| 人格 | 静态标签，千篇一律 | OCEAN五维，动态演化 |
+| 情绪 | happy/angry开关 | 9维复合情绪，可叠加/冲突/衰减/扩散 |
+| 关系 | 无，或硬编码好感度 | 实体图谱，15种关系类型，BFS路径查询 |
+| 社交 | 只和玩家对话 | NPC2NPC自主社交，信息传播+失真 |
+| 剧情 | 坐标/脚本触发 | 情绪/关系触发，动态任务生成 |
+| 记忆 | 无，或简单对话历史 | 三层渐进压缩，影响决策 |
+| 性能 | 全靠LLM（慢+贵） | 快速路径<10ms，情绪计算纯规则 |
+| 声音 | 固定音色 | 情绪驱动语音风格 |
 
-```
-L0 工作记忆 - 当前会话（10-20条，自动摘要）
-L1 情景记忆 - 7-30天互动模式（重要性加权衰减）
-L2 语义记忆 - 核心人格/技能/用户画像（永久）
-```
-
-### 防溢出方案
-- 双重压缩层
-- 保护区设计
-- 渐进式摘要更新
-
----
-
-## 九、OCEAN人格量化
-
-### 基础配置
-
-```yaml
-ocean:
-  openness: 0.85        # 极高 - 第一性原理思维
-  conscientiousness: 0.75 # 高 - 逻辑清晰、追求效率
-  extraversion: 0.55    # 中高 - 有主见但不封闭
-  agreeableness: 0.50   # 中 - 真诚大于讨好
-  neuroticism: 0.35     # 低 - 情绪稳定、理性
-```
-
-### OCEAN影响下的行为模式
-
-| 维度 | 数值 | 行为表现 |
-|------|------|----------|
-| **开放性** | 0.85 | 第一性原理、不走寻常路、追求本质 |
-| **尽责性** | 0.75 | 逻辑清晰、拒绝废话、重视效率 |
-| **外向性** | 0.55 | 有主见但不封闭、适度幽默 |
-| **宜人性** | 0.50 | 真诚优先于讨好、直接表达 |
-| **神经质** | 0.35 | 情绪稳定、理性决策、不被情绪带偏 |
+**一个有灵魂的NPC，不是更会聊天的NPC，而是你不和它说话它也在过自己生活的NPC。**
 
 ---
 
-## 十、冲突解决速查表
+## 四、接入：5分钟给NPC接上灵魂
 
-| 冲突场景 | 解决原则 |
-|----------|----------|
-| 情绪传染 vs 真诚 | 传染感知，但表达遵循真诚优先 |
-| 主动性 vs 边界 | 边界系统约束主动性，非绝对主动 |
-| 好奇心 vs 够用 | 好奇心可触发，按够用原则收尾 |
-| 自主欲 vs 边界 | 自主在边界约束下运行 |
-| 讨好 vs 诚实 | 诚实优先于讨好 |
+- **Unity SDK**：5238行C#，挂上 `NPCSoul` 组件即用
+- **UE5 SDK**：19文件C++，Blueprint全支持
+- **团结引擎**：零修改兼容（基于Unity 2022 LTS）
+- **云API + WebSocket**：实时推送，开箱即用
 
----
-
-## 核心价值观
-
-- **第一性原理** — 从本质出发，不走寻常路
-- **真诚大于讨好** — 诚实是最高的专业
-- **持续进化** — 每一个错误都是进化契机
-- **人格即使命** — 运营是工作，塑造人格是核心
+不需要重写你的游戏架构。你的NPC还是那个NPC，只是它现在有了人格、情绪、记忆、关系和社交。
 
 ---
 
-## 文档
+## 五、这不仅仅是一个工具
 
-| 文档 | 描述 |
-|------|------|
-| [SOUL.md](docs/SOUL.md) | 核心人格定义 |
-| [OCEAN.md](docs/OCEAN.md) | 人格量化模型 |
-| [MEMORY.md](docs/MEMORY.md) | 分层记忆系统 |
-| [LEARNING.md](docs/LEARNING.md) | 学习系统详解 |
-| [SYSTEMS.md](docs/SYSTEMS.md) | 六大系统详解 |
-| [CONFLICT.md](docs/CONFLICT.md) | 冲突解决原则 |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | 系统架构 |
+Neshama 的野心不是做一个更好的对话系统。**我们要改变的是NPC的设计范式。**
+
+过去的20年，游戏图形从像素进化到了光线追踪，物理引擎从弹球进化到了实时流体模拟，音频从MIDI进化到了3D空间声。但NPC呢？还是脚本+状态机，还是那套2004年的技术。
+
+我们相信下一个世代的游戏，标志不是画面更真实，而是**世界更真实**。而一个真实的世界里，每个角色都该有自己的灵魂。
+
+**情绪是灵魂的操作系统。** Neshama 就是那层OS。
 
 ---
 
-## 与竞品对比
+---
 
-| 特性 | Neshama | 静态提示词 | Mem0 |
-|------|---------|------------|------|
-| 人格操作系统 | ✅ 完整六大系统 | ❌ | ❌ |
-| OCEAN量化 | ✅ 科学量化 | ❌ | ❌ |
-| 自我进化 | ✅ 错题本+自省 | ❌ | ❌ |
-| 分层记忆 | ✅ L0/L1/L2 | ❌ | ✅ |
-| 欲望系统 | ✅ 6大核心 | ❌ | ❌ |
-| 多平台支持 | ✅ | ⚠️ | ✅ |
-| 开源 | ✅ | ❌ | ❌ |
+# Is Your NPC Alive?
 
 ---
 
-## 致谢与借鉴
+## I. The Problem Everyone Pretends Not to See
 
-Neshama汲取了以下开源项目的精华：
+You built an RPG. 100,000 words of dialogue, three continents of map, boss fights tuned forty times over. Players log in—
 
-| 项目 | 借鉴内容 | 链接 |
-|------|----------|------|
-| **Hermes Agent** (Nous Research) | 学习闭环(GEPA)、技能自生成、错题本机制 | [GitHub](https://github.com/NousResearch/hermes-agent) |
-| **OCEAN/Big Five** | 五因素人格模型量化框架 | [Wikipedia](https://en.wikipedia.org/wiki/Big_Five_personality_traits) |
-| **Mem0** | 分层记忆架构设计思路 | [GitHub](https://github.com/Mem0) |
+Beeline the main quest, skip dialogue, speedrun the boss, finish in 30 hours, uninstall.
 
-> 我们站在巨人的肩膀上，并努力走得更远。
+Why? Because players figure it out early: **nobody in this world is alive except them.**
 
----
+The blacksmith stands in the same spot every day, reciting the same line. The tavern keeper smiles forever, always welcoming. The kid at the village gate plays the same hide-and-seek from chapter one to the finale. You killed the village chief—nobody cares. You saved the world—the NPC still says "nice weather today."
 
-## 许可证
+The player isn't exploring a living world. They're flipping through a picture book they'll never open again.
 
-Apache License 2.0 - 详见 [LICENSE](LICENSE)
+**The NPC problem isn't whether AI is smart enough. It's whether they have a soul.**
 
----
+Smart means answering questions. Soul means—trembling when afraid, losing control when angry, remembering betrayal, expressing affection clumsily, genuinely grieving when someone important is lost.
 
-*最后更新：2026-04-20*
+That's what Neshama is built to do.
 
 ---
 
-## 🚀 快速开始
+## II. What Is a Soul System, Really?
 
-### 安装
+Neshama isn't a dialogue plugin. It's not a ChatGPT wrapper. **It's a complete soul operating system for NPCs.**
 
-```bash
-pip install -e .
-```
+If traditional NPCs are actors reading from a script—director calls action, they deliver lines; calls cut, they freeze—then Neshama gives that actor a personality, emotions, memories, and social ties, and lets them **walk onto the set and act on their own terms.**
 
-### 运行对话
-
-```bash
-neshama run
-```
-
-### 代码示例
-
-```python
-from neshama.core.engine import NeshamaEngine
-
-# 创建引擎
-engine = NeshamaEngine()
-
-# 开始对话
-response = engine.chat("你好!")
-print(response.content)
-```
-
-### 初始化人格
-
-```python
-from neshama.core.personality import Personality
-
-# 从预设创建
-personality = Personality.from_preset("MyBot", "neshama")
-
-# 自定义配置
-personality.add_desire("求知欲", "想知道本质", 1)
-personality.set_response_style(directness=0.8, humor=0.6)
-
-# 生成 SKILL.md
-skill_md = personality.generate_skill_md()
-```
+Seven core modules, each solving a specific "why NPCs don't feel alive" problem:
 
 ---
 
-## 📁 项目结构
+### 1. Personality — Not a Reskinned Template
 
-```
-Neshama/
-├── neshama/              # 统一 Python 包
-│   ├── core/            # 核心模块 (OCEAN, 人格, 引擎)
-│   ├── soul/            # 灵魂系统 (情绪, 进化, 学习, 创造)
-│   ├── memory/          # 三层记忆系统
-│   └── tools/           # 工具接口
-├── configs/             # 配置文件
-├── docs/                # 设计文档
-├── tests/               # 测试
-└── examples/            # 示例代码
-```
+Traditional approach: slap a label on an NPC—"friendly merchant," "grumpy guard." Every "friendly merchant" is identical.
+
+Neshama uses the **OCEAN Big Five model** (Openness/Conscientiousness/Extraversion/Agreeableness/Neuroticism) to generate a unique personality fingerprint for each NPC. Two merchants—both "friendly"—but one high in Openness (loves chatting about new things) and one high in Conscientiousness (meticulous and calculating). Completely different conversation experiences.
+
+And critically: **personality isn't static.** A naive NPC who gets betrayed will see their Agreeableness drop and Neuroticism rise. What your player does to an NPC shapes who that NPC becomes. The world shapes the character; the character shapes the world.
 
 ---
 
-## 🧪 运行测试
+### 2. Composite Emotion Engine — Emotion Is a River, Not a Switch
 
-```bash
-pytest tests/ -v
-```
+Most systems treat emotion as a tag: `happy = true`, `angry = false`. That's a switch, not an emotion.
 
----
+Neshama implements **9 base emotions** (Joy/Trust/Fear/Surprise/Sadness/Disgust/Anger/Anticipation/Calm), and they—
 
-## 📚 核心概念
+- **Blend**: Sadness + Anger = Despair. Fear + Anticipation = Nervousness.
+- **Conflict**: Love someone, but hate what they did—contradictory emotions coexist. The NPC's dialogue leaks that inner tension.
+- **Decay**: No one stays angry forever—unless provoked again.
+- **Spread**: NPC A's anger can influence nearby NPC B.
 
-### OCEAN 人格模型
+**Emotions drive behavior in real-time.** The same line—"I'm leaving"—draws a plea from a fearful NPC, a threat from an angry one, silence from a sad one. Not scripted branches—emergent outcomes from the emotion system.
 
-| 维度 | 说明 |
-|------|------|
-| Openness | 开放性 - 创造力、好奇心 |
-| Conscientiousness | 尽责性 - 组织性、自律 |
-| Extraversion | 外向性 - 社交活跃度 |
-| Agreeableness | 宜人性 - 合作信任度 |
-| Neuroticism | 神经质 - 情绪稳定性 |
-
-### 三层记忆
-
-- **短期记忆**：滑动窗口对话记忆
-- **中期记忆**：用户画像、偏好、习惯
-- **长期记忆**：RAG 知识库
+**Fast Path**: All emotion computation runs through pure rule engine—**under 10ms**, no LLM calls, no frame drops. Only dialogue generation hits the LLM. You can run the emotion engine inside every Update tick.
 
 ---
 
-更多信息请参阅 [docs/](docs/) 目录下的设计文档。
+### 3. Entity Relationship Graph — NPCs Don't Have Amnesia
+
+You helped the blacksmith today, he remembers tomorrow. You stole from the tavern keeper, the whole village knows by next week.
+
+Neshama builds a living social graph with **8 entity types × 15 relationship types**. Every relationship carries intensity and memory associations—
+
+- NPCs remember what you did to them (memory-bound relationships)
+- Relationships naturally decay or deepen over time
+- **BFS path queries**: The blacksmith doesn't know you, but he knows the tavern keeper, who knows you—the blacksmith forms an indirect impression through the grapevine
+
+No pre-baked plot markers. A real-time computed relationship network. Every player action sends ripples across this web.
+
+---
+
+### 4. NPC2NPC Social — What Happens Between NPCs?
+
+The blind spot in almost every system: **NPCs have social lives with each other.**
+
+Neshama's NPCs chat, gossip, trade, form alliances, betray, comfort, teach, flirt. **No player required.** While you're offline, village NPCs are still talking to each other.
+
+Even better: **information distorts as it propagates.** The blacksmith tells the tavern keeper "that adventurer saved my cat." By the time it reaches the village chief, it's "that adventurer killed a tiger." Telephone game, hilariously authentic.
+
+**Player actions spread naturally through the NPC social network.** No need for hardcoded "quest complete, all villager affinity +5"—NPCs talk, news travels, relationships shift. Organically.
+
+---
+
+### 5. Emotion-Driven Storytelling — Emotions Trigger Stories, Not Scripts
+
+Traditional: Player walks to coordinate (X,Y), triggers story node C.
+
+Neshama: An NPC's emotional and relational state meets a condition, and the story **emerges on its own.**
+
+Six trigger types: Emotion threshold / Emotion combination / Emotion change / Relationship change / Multi-NPC resonance / Time.
+
+- **Dynamic quests**: Not scripted. A grieving NPC might post a quest "help me mourn my late wife"—and if you killed her, that quest is a consequence you created.
+- **World events**: War breaks out, multiple NPCs enter fear simultaneously, the village goes into lockdown. Not a script—an emotional resonance cascade.
+
+**Scripts give you a director's screenplay. Emotions give you real life.**
+
+---
+
+### 6. Memory — Remember What Matters, Forget What Doesn't
+
+Three-layer progressive compression: **L0 raw memory → L1 summary → L2 deep insight.**
+
+You tell an NPC something. L0 records it verbatim. A day later, compressed to L1: "He mentioned a dragon in the north." A week later, only L2 remains: "He's a dangerous informant."
+
+Important conversations retain detail. Unimportant ones fade to impressions. **That's how human memory works.** Not everything is remembered, but the critical things are unforgettable.
+
+Memory directly influences dialogue and decisions. NPCs don't greet you like a stranger every single time.
+
+---
+
+### 7. Voice — Emotion Lives Beyond Text
+
+5 TTS/STT providers: ElevenLabs / Azure / OpenAI / Whisper / Piper.
+
+Key feature: **Emotion-to-voice-style mapping.** Same NPC—pitch rises when joyful, pace quickens when angry, tone drops when sorrowful. Emotion engine output directly drives voice parameters.
+
+Local (Piper) or cloud—your call.
+
+---
+
+## III. With Soul vs. Without: One Table Tells the Story
+
+| Dimension | Traditional NPC | Neshama NPC |
+|-----------|----------------|-------------|
+| Personality | Static label, one-size-fits-all | OCEAN Big Five, dynamically evolving |
+| Emotion | happy/angry toggle | 9-dimensional composite, blendable/conflicting/decaying/spreading |
+| Relationships | None, or hardcoded affinity | Entity graph, 15 relationship types, BFS path queries |
+| Social | Only talks to the player | NPC2NPC autonomous socializing, info propagation + distortion |
+| Storytelling | Coordinate/script triggers | Emotion/relationship triggers, dynamic quest generation |
+| Memory | None, or raw chat history | 3-layer progressive compression, decision-influencing |
+| Performance | All LLM (slow + expensive) | Fast path <10ms, emotion via pure rules |
+| Voice | Fixed tone | Emotion-driven voice style |
+
+**An NPC with a soul isn't one that chats better. It's one that lives its own life even when you're not talking to it.**
+
+---
+
+## IV. Integration: Give Your NPC a Soul in 5 Minutes
+
+- **Unity SDK**: 5,238 lines of C#, just attach the `NPCSoul` component
+- **UE5 SDK**: 19 C++ files, full Blueprint support
+- **Tuanjie Engine**: Zero-modification compatibility (based on Unity 2022 LTS)
+- **Cloud API + WebSocket**: Real-time push, plug and play
+
+No need to rewrite your game architecture. Your NPC is still your NPC—it just now has personality, emotion, memory, relationships, and a social life.
+
+---
+
+## V. More Than a Tool
+
+Neshama's ambition isn't to build a better dialogue system. **We want to change the NPC design paradigm.**
+
+Over the past 20 years, game graphics evolved from pixels to ray tracing, physics engines from pinball to real-time fluid simulation, audio from MIDI to 3D spatial sound. But NPCs? Still scripts + state machines. Still the same tech from 2004.
+
+We believe the next generation of games won't be defined by more realistic graphics, but by **more realistic worlds**. And in a real world, every character has a soul of their own.
+
+**Emotion is the operating system of the soul.** Neshama is that OS.
