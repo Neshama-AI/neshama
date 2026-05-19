@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Neshama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #10B981;
+      --accent-hover: #059669;
+      --accent-dim: #D1FAE5;
+      --accent-text: #065F46;
+      --bg: #F8F9FA;
+      --card: #FFFFFF;
+      --text: #212529;
+      --text-secondary: #6C757D;
+      --border: #E9ECEF;
+      --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #FFF;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s var(--ease);
+    }
+
+    .lang-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .profile-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 28px;
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .profile-avatar:hover .avatar-overlay { opacity: 1; }
+
+    .avatar-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.15s var(--ease);
+      color: #FFF;
+    }
+
+    .profile-info { flex: 1; }
+
+    .profile-nickname {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .profile-email {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .profile-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .profile-edit-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s var(--ease);
+    }
+
+    .profile-edit-btn:hover { background: var(--accent); color: #FFF; }
+
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover { color: var(--text); }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #FFF;
+    }
+
+    .tab-content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      display: none;
+    }
+
+    .tab-content.active { display: block; }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 15px;
+      font-family: var(--font-sans);
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.15s var(--ease);
+    }
+
+    .form-input:focus { border-color: var(--accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: #FFF;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s var(--ease);
+    }
+
+    .btn:hover { background: var(--accent-hover); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn--secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn--secondary:hover { background: var(--accent); color: #FFF; }
+
+    .btn--danger {
+      background: #DC2626;
+    }
+
+    .btn--danger:hover { background: #B91C1C; }
+
+    .license-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    .license-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .license-plan {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .license-status {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--accent-dim);
+      color: var(--accent-text);
+    }
+
+    .license-key {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .license-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 16px;
+    }
+
+    .upgrade-section {
+      text-align: center;
+      padding: 32px 20px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .upgrade-section h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .upgrade-section p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .asset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .asset-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .asset-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .asset-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .session-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .session-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .session-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+    }
+
+    .session-info { flex: 1; }
+
+    .session-device {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .session-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .session-time {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    .danger-zone {
+      border: 1px solid #FEE2E2;
+      background: #FEF2F2;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+
+    .danger-zone h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #DC2626;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .danger-zone p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 28px;
+      width: 100%;
+      max-width: 420px;
+      margin: 24px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    .modal-close:hover { background: var(--bg); }
+
+    .avatar-upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s var(--ease);
+    }
+
+    .avatar-upload-area:hover { border-color: var(--accent); }
+
+    .avatar-upload-area input { display: none; }
+
+    .upload-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      color: var(--text-secondary);
+    }
+
+    .upload-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .preview-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      overflow: hidden;
+      background: var(--bg);
+      display: none;
+    }
+
+    .preview-avatar.has-image {
+      display: block;
+    }
+
+    .preview-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .modal-actions .btn { flex: 1; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text);
+      color: #FFF;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 2000;
+      transition: transform 0.3s var(--ease);
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.error { background: #DC2626; }
+
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #FFF;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 480px) {
+      .profile-header { flex-direction: column; text-align: center; }
+      .tab-btn span { display: none; }
+      .asset-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <a href="/" class="logo">
+        <span class="logo-mark">N</span>
+        Neshama
+      </a>
+      <div class="header-actions">
+        <button class="lang-btn" id="langBtn" onclick="toggleLang()">
+          <i data-lucide="globe" style="width:16px;height:16px;"></i>
+          <span id="langLabel">中文</span>
+        </button>
+        <div class="user-avatar" id="headerAvatar" onclick="goToProfile()">?</div>
+      </div>
+    </header>
+
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar" onclick="openAvatarModal()">
+          <span id="avatarInitial">?</span>
+          <div class="avatar-overlay">
+            <i data-lucide="camera" style="width:20px;height:20px;"></i>
+          </div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-nickname" id="nickname">-</div>
+          <div class="profile-email" id="email">-</div>
+          <div class="profile-id" id="userId">ID: -</div>
+        </div>
+        <button class="profile-edit-btn" onclick="openEditModal()">
+          <i data-lucide="edit-2" style="width:14px;height:14px;"></i>
+          <span id="editBtnText">编辑资料</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="account" onclick="switchTab('account')">
+        <i data-lucide="user" style="width:16px;height:16px;"></i>
+        <span id="tabAccount">账户</span>
+      </button>
+      <button class="tab-btn" data-tab="subscription" onclick="switchTab('subscription')">
+        <i data-lucide="credit-card" style="width:16px;height:16px;"></i>
+        <span id="tabSubscription">订阅</span>
+      </button>
+      <button class="tab-btn" data-tab="assets" onclick="switchTab('assets')">
+        <i data-lucide="package" style="width:16px;height:16px;"></i>
+        <span id="tabAssets">资产</span>
+      </button>
+      <button class="tab-btn" data-tab="security" onclick="switchTab('security')">
+        <i data-lucide="shield" style="width:16px;height:16px;"></i>
+        <span id="tabSecurity">安全</span>
+      </button>
+    </nav>
+
+    <div class="tab-content active" id="accountTab">
+      <h3 class="section-title">
+        <i data-lucide="user" style="width:18px;height:18px;color:var(--accent);"></i>
+        <span id="accountTitle">账户信息</span>
+      </h3>
+      <div class="form-group">
+        <label class="form-label" id="labelNickname">昵称</label>
+        <input type="text" class="form-input" id="inputNickname" placeholder="请输入昵称">
+      </div>
+      <div class="form-group">
+        <label class="form-label" id="labelEmail">邮箱</label>
+        <input type="email" class="form-input" id="inputEmail" disabled>
+      </div>
+      <div class="form-group">
+        <label class="form-label" id="labelUserId">用户 ID</label>
+        <input type="text" class="form-input" id="inputUserId" disabled style="font-family:var(--font-mono);">
+      </div>
+      <button class="btn" id="saveProfileBtn" onclick="saveProfile()">
+        <i data-lucide="save" style="width:16px;height:16px;"></i>
+        <span id="saveBtnText">保存修改</span>
+      </button>
+    </div>
+
+    <div class="tab-content" id="subscriptionTab">
+      <h3 class="section-title">
+        <i data-lucide="credit-card" style="width:18px;height:18px;color:var(--accent);"></i>
+        <span id="subTitle">订阅计划</span>
+      </h3>
+      <div id="licenseList"></div>
+      <div class="upgrade-section">
+        <h4 id="upgradeTitle">升级到 Pro</h4>
+        <p id="upgradeDesc">解锁更多功能和高级支持</p>
+        <button class="btn" onclick="window.open('/upgrade.html', '_blank')">
+          <i data-lucide="zap" style="width:16px;height:16px;"></i>
+          <span id="upgradeBtnText">立即升级</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="tab-content" id="assetsTab">
+      <h3 class="section-title">
+        <i data-lucide="package" style="width:18px;height:18px;color:var(--accent);"></i>
+        <span id="assetsTitle">我的资产</span>
+      </h3>
+      <div class="asset-grid">
+        <div class="asset-card">
+          <div class="asset-title" id="assetAgents">Agent</div>
+          <div class="asset-desc" id="assetAgentsDesc">0 台设备已绑定</div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-title" id="assetEngines">游戏引擎</div>
+          <div class="asset-desc" id="assetEnginesDesc">0 个引擎已绑定</div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-title" id="assetPresets">预设包</div>
+          <div class="asset-desc" id="assetPresetsDesc">0 个预设可用</div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-title" id="assetProducts">Neshop</div>
+          <div class="asset-desc" id="assetProductsDesc">0 件商品</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="securityTab">
+      <h3 class="section-title">
+        <i data-lucide="shield" style="width:18px;height:18px;color:var(--accent);"></i>
+        <span id="securityTitle">登录历史</span>
+      </h3>
+      <div class="session-list" id="sessionList"></div>
+      <div class="danger-zone">
+        <h4>
+          <i data-lucide="alert-triangle" style="width:16px;height:16px;"></i>
+          <span id="dangerTitle">危险区域</span>
+        </h4>
+        <p id="dangerDesc">登出所有设备后将强制关闭所有登录状态</p>
+        <button class="btn btn--danger" id="logoutAllBtn" onclick="logoutAll()">
+          <i data-lucide="log-out" style="width:16px;height:16px;"></i>
+          <span id="logoutAllText">登出所有设备</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">编辑资料</h3>
+        <button class="modal-close" onclick="closeEditModal()">
+          <i data-lucide="x" style="width:20px;height:20px;"></i>
+        </button>
+      </div>
+      <div class="form-group">
+        <label class="form-label" id="modalLabelNickname">昵称</label>
+        <input type="text" class="form-input" id="editNickname" placeholder="请输入昵称">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn--secondary" onclick="closeEditModal()">
+          <span id="cancelBtnText">取消</span>
+        </button>
+        <button class="btn" id="confirmSaveBtn" onclick="confirmSaveProfile()">
+          <i data-lucide="check" style="width:16px;height:16px;"></i>
+          <span id="confirmBtnText">保存</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="avatarModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="avatarModalTitle">更换头像</h3>
+        <button class="modal-close" onclick="closeAvatarModal()">
+          <i data-lucide="x" style="width:20px;height:20px;"></i>
+        </button>
+      </div>
+      <label class="avatar-upload-area" id="uploadArea">
+        <input type="file" id="avatarInput" accept="image/png,image/jpeg,image/gif">
+        <div class="preview-avatar" id="previewAvatar">
+          <img id="previewImg" alt="Preview">
+        </div>
+        <i data-lucide="upload" class="upload-icon" id="uploadIcon"></i>
+        <p class="upload-text" id="uploadText">点击上传图片</p>
+        <p class="upload-hint" id="uploadHint">支持 PNG、JPG，最大 2MB</p>
+      </label>
+      <div class="modal-actions">
+        <button class="btn btn--secondary" onclick="closeAvatarModal()">
+          <span id="avatarCancelText">取消</span>
+        </button>
+        <button class="btn" id="uploadAvatarBtn" onclick="uploadAvatar()" disabled>
+          <i data-lucide="upload" style="width:16px;height:16px;"></i>
+          <span id="uploadAvatarText">上传</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/i18n.js"></script>
+  <script>
+    var translations = {
+      zh: {
+        nav: { features: '功能', compare: '对比', docs: '文档', soulcraft: 'SoulCraft', neshop: 'Neshop' },
+        profile: { title: '个人资料', edit: '编辑资料', account: '账户', subscription: '订阅', assets: '资产', security: '安全', accountInfo: '账户信息', nickname: '昵称', email: '邮箱', userId: '用户 ID', saveChanges: '保存修改', editProfile: '编辑资料', cancel: '取消', save: '保存', upgradePro: '升级到 Pro', unlockMore: '解锁更多功能和高级支持', upgradeNow: '立即升级', myAssets: '我的资产', agent: 'Agent', engines: '游戏引擎', presets: '预设包', products: 'Neshop', devices: '台设备已绑定', bound: '个引擎已绑定', available: '个预设可用', items: '件商品', loginHistory: '登录历史', dangerZone: '危险区域', logoutAllDesc: '登出所有设备后将强制关闭所有登录状态', logoutAll: '登出所有设备', changeAvatar: '更换头像', uploadImage: '点击上传图片', uploadHint: '支持 PNG、JPG，最大 2MB', uploadAvatar: '上传', devicesBound: '台设备已绑定' },
+        toast: { profileSaved: '资料已保存', avatarSaved: '头像已更新', error: '操作失败，请重试', logoutSuccess: '已登出所有设备' },
+        loading: '加载中...',
+        lang: { toggle: 'EN' }
+      },
+      en: {
+        nav: { features: 'Features', compare: 'Compare', docs: 'Docs', soulcraft: 'SoulCraft', neshop: 'Neshop' },
+        profile: { title: 'Profile', edit: 'Edit Profile', account: 'Account', subscription: 'Subscription', assets: 'Assets', security: 'Security', accountInfo: 'Account Info', nickname: 'Nickname', email: 'Email', userId: 'User ID', saveChanges: 'Save Changes', editProfile: 'Edit Profile', cancel: 'Cancel', save: 'Save', upgradePro: 'Upgrade to Pro', unlockMore: 'Unlock more features and premium support', upgradeNow: 'Upgrade Now', myAssets: 'My Assets', agent: 'Agent', engines: 'Game Engines', presets: 'Presets', products: 'Neshop', devices: 'devices bound', bound: 'engines bound', available: 'presets available', items: 'items', loginHistory: 'Login History', dangerZone: 'Danger Zone', logoutAllDesc: 'Logging out all devices will force close all login sessions', logoutAll: 'Logout All Devices', changeAvatar: 'Change Avatar', uploadImage: 'Click to upload image', uploadHint: 'Supports PNG, JPG, max 2MB', uploadAvatar: 'Upload', devicesBound: 'devices bound' },
+        toast: { profileSaved: 'Profile saved', avatarSaved: 'Avatar updated', error: 'Operation failed, please retry', logoutSuccess: 'All devices logged out' },
+        loading: 'Loading...',
+        lang: { toggle: '中文' }
+      }
+    };
+
+    var lang = localStorage.getItem('neshama_lang') || 'zh';
+    var userData = null;
+
+    function t(key) {
+      var keys = key.split('.');
+      var value = translations[lang];
+      for (var k of keys) {
+        if (value && value[k]) value = value[k];
+        else return key;
+      }
+      return value;
+    }
+
+    function toggleLang() {
+      lang = lang === 'zh' ? 'en' : 'zh';
+      localStorage.setItem('neshama_lang', lang);
+      applyTranslations();
+    }
+
+    function applyTranslations() {
+      document.getElementById('langLabel').textContent = t('lang.toggle');
+      document.getElementById('tabAccount').textContent = t('profile.account');
+      document.getElementById('tabSubscription').textContent = t('profile.subscription');
+      document.getElementById('tabAssets').textContent = t('profile.assets');
+      document.getElementById('tabSecurity').textContent = t('profile.security');
+      document.getElementById('editBtnText').textContent = t('profile.edit');
+      document.getElementById('accountTitle').textContent = t('profile.accountInfo');
+      document.getElementById('labelNickname').textContent = t('profile.nickname');
+      document.getElementById('labelEmail').textContent = t('profile.email');
+      document.getElementById('labelUserId').textContent = t('profile.userId');
+      document.getElementById('saveBtnText').textContent = t('profile.saveChanges');
+      document.getElementById('modalTitle').textContent = t('profile.editProfile');
+      document.getElementById('modalLabelNickname').textContent = t('profile.nickname');
+      document.getElementById('cancelBtnText').textContent = t('profile.cancel');
+      document.getElementById('confirmBtnText').textContent = t('profile.save');
+      document.getElementById('subTitle').textContent = t('profile.subscription');
+      document.getElementById('upgradeTitle').textContent = t('profile.upgradePro');
+      document.getElementById('upgradeDesc').textContent = t('profile.unlockMore');
+      document.getElementById('upgradeBtnText').textContent = t('profile.upgradeNow');
+      document.getElementById('assetsTitle').textContent = t('profile.myAssets');
+      document.getElementById('assetAgents').textContent = t('profile.agent');
+      document.getElementById('assetEngines').textContent = t('profile.engines');
+      document.getElementById('assetPresets').textContent = t('profile.presets');
+      document.getElementById('assetProducts').textContent = t('profile.products');
+      document.getElementById('securityTitle').textContent = t('profile.loginHistory');
+      document.getElementById('dangerTitle').textContent = t('profile.dangerZone');
+      document.getElementById('dangerDesc').textContent = t('profile.logoutAllDesc');
+      document.getElementById('logoutAllText').textContent = t('profile.logoutAll');
+      document.getElementById('avatarModalTitle').textContent = t('profile.changeAvatar');
+      document.getElementById('uploadText').textContent = t('profile.uploadImage');
+      document.getElementById('uploadHint').textContent = t('profile.uploadHint');
+      document.getElementById('uploadAvatarText').textContent = t('profile.uploadAvatar');
+      document.getElementById('avatarCancelText').textContent = t('profile.cancel');
+      document.title = t('profile.title') + ' - Neshama';
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+      });
+      document.querySelectorAll('.tab-content').forEach(function(content) {
+        content.classList.toggle('active', content.id === tab + 'Tab');
+      });
+    }
+
+    function goToProfile() {
+      window.location.href = '/profile.html';
+    }
+
+    function showToast(message, isError) {
+      var toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast' + (isError ? ' error' : '');
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+
+    var API_BASE = (function() {
+      var host = window.location.hostname;
+      if (host === 'neshama.cn' || host.endsWith('.neshama.cn')) return 'https://api.neshama.cn';
+      return 'https://api.neshama.pw';
+    })();
+
+    // Security: Safe URL validation (prevent javascript: XSS)
+    function isSafeUrl(url) {
+      return url && (url.startsWith('http://') || url.startsWith('https://'));
+    }
+
+    // Security: Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      if (!text) return '';
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function getAccessToken() {
+      return localStorage.getItem('neshama_access_token') || '';
+    }
+
+    async function loadProfile() {
+      var token = getAccessToken();
+      if (!token) {
+        window.location.href = '/login.html';
+        return;
+      }
+
+      try {
+        var resp = await fetch(API_BASE + '/v1/user/profile', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        var data = await resp.json();
+
+        if (!resp.ok) throw new Error(data.detail || 'Failed to load profile');
+
+        userData = data;
+        renderProfile();
+        loadSubscriptions();
+        loadSessions();
+      } catch (e) {
+        showToast(t('toast.error'), true);
+      }
+    }
+
+    function renderProfile() {
+      if (!userData) return;
+
+      var nickname = userData.nickname || userData.email.split('@')[0];
+      var initial = nickname.charAt(0).toUpperCase();
+
+      document.getElementById('nickname').textContent = nickname;
+      document.getElementById('email').textContent = userData.email;
+      document.getElementById('userId').textContent = 'ID: ' + userData.id;
+      document.getElementById('avatarInitial').textContent = initial;
+      document.getElementById('headerAvatar').textContent = initial;
+      document.getElementById('inputNickname').value = nickname;
+      document.getElementById('inputEmail').value = userData.email;
+      document.getElementById('inputUserId').value = userData.id;
+      document.getElementById('editNickname').value = nickname;
+
+      // Security: Validate avatar URL before rendering
+      if (userData.avatar_url && isSafeUrl(userData.avatar_url)) {
+        document.getElementById('profileAvatar').innerHTML = '<img src="' + userData.avatar_url + '" alt="Avatar"><div class="avatar-overlay"><i data-lucide="camera" style="width:20px;height:20px;"></i></div>';
+        document.getElementById('headerAvatar').innerHTML = '<img src="' + userData.avatar_url + '" alt="Avatar">';
+        lucide.createIcons();
+      } else {
+        // Clear avatar container if URL is invalid
+        document.getElementById('profileAvatar').innerHTML = '';
+        document.getElementById('profileAvatar').innerHTML = '<span id="avatarInitial">' + initial + '</span><div class="avatar-overlay"><i data-lucide="camera" style="width:20px;height:20px;"></i></div>';
+        document.getElementById('headerAvatar').textContent = initial;
+        lucide.createIcons();
+      }
+    }
+
+    async function loadSubscriptions() {
+      try {
+        var resp = await fetch(API_BASE + '/v1/license/list', {
+          headers: { 'Authorization': 'Bearer ' + getAccessToken() }
+        });
+        var data = await resp.json();
+
+        if (!resp.ok) throw new Error();
+
+        var html = '';
+        data.licenses.forEach(function(lic) {
+          // Security: Escape all user data before rendering
+          html += '<div class="license-card">';
+          html += '<div class="license-header">';
+          html += '<span class="license-plan">' + escapeHtml(lic.plan) + '</span>';
+          html += '<span class="license-status">' + escapeHtml(lic.status) + '</span>';
+          html += '</div>';
+          html += '<div class="license-key">' + escapeHtml(lic.key) + '</div>';
+          html += '<div class="license-meta">';
+          html += '<span>Seats: ' + escapeHtml(lic.used_seats) + '/' + escapeHtml(lic.seats) + '</span>';
+          html += '</div>';
+          html += '</div>';
+        });
+        document.getElementById('licenseList').innerHTML = html;
+      } catch (e) {
+        document.getElementById('licenseList').innerHTML = '<p style="color:var(--text-secondary);">Failed to load licenses</p>';
+      }
+    }
+
+    async function loadSessions() {
+      try {
+        var resp = await fetch(API_BASE + '/v1/user/sessions', {
+          headers: { 'Authorization': 'Bearer ' + getAccessToken() }
+        });
+        var data = await resp.json();
+
+        if (!resp.ok) throw new Error();
+
+        var html = '';
+        data.sessions.forEach(function(sess) {
+          // Security: Escape all user data before rendering
+          var device = sess.user_agent || 'Unknown Device';
+          var time = sess.last_active_at || sess.created_at;
+          html += '<div class="session-item">';
+          html += '<div class="session-icon"><i data-lucide="monitor" style="width:20px;height:20px;"></i></div>';
+          html += '<div class="session-info">';
+          html += '<div class="session-device">' + escapeHtml(device.substring(0, 40)) + '</div>';
+          html += '<div class="session-meta">' + escapeHtml(sess.ip_address || '-') + '</div>';
+          html += '</div>';
+          html += '<div class="session-time">' + escapeHtml(time ? time.substring(0, 16).replace('T', ' ') : '-') + '</div>';
+          html += '</div>';
+        });
+
+        if (!html) html = '<p style="color:var(--text-secondary);text-align:center;padding:20px;">No sessions found</p>';
+        document.getElementById('sessionList').innerHTML = html;
+        lucide.createIcons();
+      } catch (e) {
+        document.getElementById('sessionList').innerHTML = '<p style="color:var(--text-secondary);">Failed to load sessions</p>';
+      }
+    }
+
+    function openEditModal() {
+      document.getElementById('editModal').classList.add('active');
+      document.getElementById('editNickname').value = userData?.nickname || '';
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').classList.remove('active');
+    }
+
+    async function confirmSaveProfile() {
+      var nickname = document.getElementById('editNickname').value.trim();
+      if (!nickname) return;
+
+      try {
+        var resp = await fetch(API_BASE + '/v1/user/profile', {
+          method: 'PATCH',
+          headers: {
+            'Authorization': 'Bearer ' + getAccessToken(),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nickname: nickname })
+        });
+
+        if (!resp.ok) throw new Error();
+
+        closeEditModal();
+        showToast(t('toast.profileSaved'), false);
+        loadProfile();
+      } catch (e) {
+        showToast(t('toast.error'), true);
+      }
+    }
+
+    async function saveProfile() {
+      var nickname = document.getElementById('inputNickname').value.trim();
+      if (!nickname) return;
+
+      try {
+        var resp = await fetch(API_BASE + '/v1/user/profile', {
+          method: 'PATCH',
+          headers: {
+            'Authorization': 'Bearer ' + getAccessToken(),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nickname: nickname })
+        });
+
+        if (!resp.ok) throw new Error();
+
+        showToast(t('toast.profileSaved'), false);
+        loadProfile();
+      } catch (e) {
+        showToast(t('toast.error'), true);
+      }
+    }
+
+    function openAvatarModal() {
+      document.getElementById('avatarModal').classList.add('active');
+    }
+
+    function closeAvatarModal() {
+      document.getElementById('avatarModal').classList.remove('active');
+      document.getElementById('avatarInput').value = '';
+      document.getElementById('previewAvatar').classList.remove('has-image');
+      document.getElementById('uploadAvatarBtn').disabled = true;
+      document.getElementById('uploadIcon').style.display = '';
+      document.getElementById('uploadText').style.display = '';
+      document.getElementById('uploadHint').style.display = '';
+    }
+
+    document.getElementById('avatarInput').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+
+      if (file.size > 2 * 1024 * 1024) {
+        showToast('图片大小不能超过 2MB', true);
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('previewImg').src = e.target.result;
+        document.getElementById('previewAvatar').classList.add('has-image');
+        document.getElementById('uploadIcon').style.display = 'none';
+        document.getElementById('uploadText').style.display = 'none';
+        document.getElementById('uploadHint').style.display = 'none';
+        document.getElementById('uploadAvatarBtn').disabled = false;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    async function uploadAvatar() {
+      var file = document.getElementById('avatarInput').files[0];
+      if (!file) return;
+
+      var btn = document.getElementById('uploadAvatarBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"><span class="spinner"></span>' + t('loading') + '</span>';
+
+      try {
+        var formData = new FormData();
+        formData.append('avatar', file);
+
+        var resp = await fetch(API_BASE + '/v1/user/avatar', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + getAccessToken() },
+          body: formData
+        });
+
+        if (!resp.ok) throw new Error();
+
+        closeAvatarModal();
+        showToast(t('toast.avatarSaved'), false);
+        loadProfile();
+      } catch (e) {
+        showToast(t('toast.error'), true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="upload" style="width:16px;height:16px;"></i><span>' + t('profile.uploadAvatar') + '</span>';
+        lucide.createIcons();
+      }
+    }
+
+    async function logoutAll() {
+      if (!confirm(lang === 'zh' ? '确定要登出所有设备吗？' : 'Are you sure you want to logout all devices?')) return;
+
+      try {
+        var resp = await fetch(API_BASE + '/v1/auth/logout-all', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + getAccessToken() }
+        });
+
+        if (!resp.ok) throw new Error();
+
+        showToast(t('toast.logoutSuccess'), false);
+        localStorage.removeItem('neshama_access_token');
+        localStorage.removeItem('neshama_refresh_token');
+        setTimeout(function() { window.location.href = '/login.html'; }, 1500);
+      } catch (e) {
+        showToast(t('toast.error'), true);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+      applyTranslations();
+      loadProfile();
+    });
+  </script>
+</body>
+</html>
